@@ -23,6 +23,8 @@
         setTimeout(() => {
             current.classList.remove('page--exit');
             next.classList.add('page--active');
+            // Scroll to top for case study pages
+            next.scrollTop = 0;
             currentPage = pageId;
             updateNav();
             animatePageContent(next);
@@ -32,8 +34,14 @@
     }
 
     function updateNav() {
+        // Highlight "Projects" nav link when on a project detail page
+        const isProjectPage = currentPage.startsWith('project-');
         document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.toggle('active', link.dataset.page === currentPage);
+            if (isProjectPage && link.dataset.page === 'projects') {
+                link.classList.add('active');
+            } else {
+                link.classList.toggle('active', link.dataset.page === currentPage);
+            }
         });
     }
 
@@ -41,7 +49,11 @@
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            navigateTo(link.dataset.page);
+            const target = link.dataset.page;
+            if (target) {
+                location.hash = target;
+                navigateTo(target);
+            }
         });
     });
 
@@ -57,7 +69,6 @@
     if (location.hash) {
         const hash = location.hash.slice(1);
         if (document.getElementById(hash) && hash !== 'landing') {
-            // Quick switch without animation on load
             document.querySelector('.page--active')?.classList.remove('page--active');
             document.getElementById(hash)?.classList.add('page--active');
             currentPage = hash;
@@ -80,6 +91,20 @@
         projectCards.forEach((card, i) => {
             card.classList.remove('visible');
             setTimeout(() => card.classList.add('visible'), 200 + i * 80);
+        });
+
+        // Case study sections
+        const caseSections = page.querySelectorAll('.case-section');
+        caseSections.forEach((section, i) => {
+            section.classList.remove('visible');
+            setTimeout(() => section.classList.add('visible'), 300 + i * 150);
+        });
+
+        // Case study metrics
+        const caseMetrics = page.querySelectorAll('.case-metric');
+        caseMetrics.forEach((metric, i) => {
+            metric.classList.remove('visible');
+            setTimeout(() => metric.classList.add('visible'), 500 + i * 100);
         });
     }
 
@@ -106,6 +131,10 @@
         if (e.key === '1') navigateTo('landing');
         if (e.key === '2') navigateTo('who');
         if (e.key === '3') navigateTo('projects');
+        // Escape goes back to projects list from a case study
+        if (e.key === 'Escape' && currentPage.startsWith('project-')) {
+            navigateTo('projects');
+        }
     });
 
     // --- Initial page content animation ---
