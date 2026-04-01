@@ -648,6 +648,43 @@ body:hover .cursor-glow {
     border-bottom: 1px solid var(--border);
 }
 
+.case-image {
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 48px;
+}
+
+.case-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius);
+}
+
+.case-image figcaption {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-top: 12px;
+    text-align: center;
+}
+
+.case-image--cover {
+    margin-bottom: 56px;
+}
+
+.case-image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 48px 0;
+}
+
+@media (max-width: 768px) {
+    .case-image-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .case-section p {
     font-size: 1rem;
     line-height: 1.8;
