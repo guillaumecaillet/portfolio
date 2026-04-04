@@ -34,6 +34,9 @@
     }
 
     function updateNav() {
+        // Toggle body class for landing-specific styles (cursor glow, etc.)
+        document.body.classList.toggle('landing-active', currentPage === 'landing');
+
         // Highlight "Projects" nav link when on a project detail page
         const isProjectPage = currentPage.startsWith('project-');
         document.querySelectorAll('.nav-link').forEach(link => {
@@ -145,7 +148,8 @@
         });
     });
 
-    // --- Initial page content animation ---
+    // --- Initial state ---
+    document.body.classList.toggle('landing-active', currentPage === 'landing');
     setTimeout(() => {
         animatePageContent(document.querySelector('.page--active'));
     }, 100);

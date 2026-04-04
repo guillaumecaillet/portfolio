@@ -49,7 +49,7 @@ a {
 }
 
 ::selection {
-    background: rgba(245, 240, 235, 0.15);
+    background: rgba(20, 0, 160, 0.15);
     color: var(--text);
 }
 
@@ -154,6 +154,11 @@ a {
     align-items: center;
     background-color: #ffffff;
     color: #1a1a1a;
+    --text: #1a1a1a;
+    --text-muted: rgba(26, 26, 26, 0.45);
+    --text-dim: rgba(26, 26, 26, 0.2);
+    --border: rgba(26, 26, 26, 0.08);
+    --border-hover: rgba(26, 26, 26, 0.15);
 }
 
 #landing .nav-logo svg circle {
@@ -161,11 +166,20 @@ a {
 }
 
 #landing .nav-link {
+    color: rgba(26, 26, 26, 0.45);
+}
+
+#landing .nav-link:hover,
+#landing .nav-link.active {
     color: #1a1a1a;
 }
 
-#landing .nav-link.active {
-    color: #1a1a1a;
+#landing .nav-link::after {
+    background: #1a1a1a;
+}
+
+body.landing-active .cursor-glow {
+    opacity: 0 !important;
 }
 
 .landing-company {
