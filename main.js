@@ -137,6 +137,14 @@
         }
     });
 
+    // --- Collapsible Experience Entries ---
+    document.querySelectorAll('.experience-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const entry = header.parentElement;
+            entry.classList.toggle('open');
+        });
+    });
+
     // --- Initial page content animation ---
     setTimeout(() => {
         animatePageContent(document.querySelector('.page--active'));
