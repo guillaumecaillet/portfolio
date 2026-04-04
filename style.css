@@ -181,7 +181,7 @@ body.landing-active .nav-link::after {
 }
 
 body.landing-active .cursor-trail span {
-    color: rgba(26, 26, 26, 0.15);
+    color: rgba(26, 26, 26, 0.4);
 }
 
 .landing-company {
