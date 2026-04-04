@@ -185,11 +185,15 @@ body.landing-active .cursor-glow {
 .landing-company {
     color: var(--accent);
     text-decoration: none;
+<<<<<<< HEAD
     transition: opacity var(--transition-fast);
 }
 
 .landing-company:hover {
     opacity: 0.6;
+=======
+    display: inline-block;
+>>>>>>> 59b5c4aa681791c8e55b86ae584d148b73eae871
 }
 
 /* --- Landing Page --- */
