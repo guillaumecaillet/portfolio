@@ -184,6 +184,8 @@ body.landing-active .cursor-glow {
 
 .landing-company {
     color: var(--accent);
+    text-decoration: none;
+    display: inline-block;
 }
 
 /* --- Landing Page --- */

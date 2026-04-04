@@ -53,6 +53,38 @@
         '#FFE8C1', '#D1C1FF', '#C1FFF4', '#FFC1C1',
     ];
 
+    // --- Split-flap scramble effect on Oplit link ---
+    const scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const oplitLink = document.querySelector('.landing-company');
+    if (oplitLink) {
+        const originalText = oplitLink.textContent;
+        let scrambleInterval = null;
+
+        oplitLink.addEventListener('mouseenter', () => {
+            let iteration = 0;
+            clearInterval(scrambleInterval);
+            scrambleInterval = setInterval(() => {
+                oplitLink.textContent = originalText
+                    .split('')
+                    .map((char, i) => {
+                        if (i < iteration) return originalText[i];
+                        return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+                    })
+                    .join('');
+                iteration += 1 / 3;
+                if (iteration >= originalText.length) {
+                    clearInterval(scrambleInterval);
+                    oplitLink.textContent = originalText;
+                }
+            }, 30);
+        });
+
+        oplitLink.addEventListener('mouseleave', () => {
+            clearInterval(scrambleInterval);
+            oplitLink.textContent = originalText;
+        });
+    }
+
     document.querySelectorAll('.landing-link-card, .who-link-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
             const color = pastels[Math.floor(Math.random() * pastels.length)];
