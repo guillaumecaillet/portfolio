@@ -53,7 +53,7 @@
         '#FFE8C1', '#D1C1FF', '#C1FFF4', '#FFC1C1',
     ];
 
-    document.querySelectorAll('.landing-link-card').forEach(card => {
+    document.querySelectorAll('.landing-link-card, .who-link-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
             const color = pastels[Math.floor(Math.random() * pastels.length)];
             card.style.backgroundColor = color;
