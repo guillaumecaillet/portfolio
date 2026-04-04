@@ -120,6 +120,17 @@
         card.addEventListener('mouseleave', () => {
             card.style.backgroundColor = '';
         });
+        // Force link navigation (fix click being swallowed)
+        card.addEventListener('click', (e) => {
+            const href = card.getAttribute('href');
+            if (!href) return;
+            e.preventDefault();
+            if (href.startsWith('mailto:')) {
+                window.location.href = href;
+            } else {
+                window.open(href, '_blank', 'noopener');
+            }
+        });
     });
 
     // --- Page Navigation ---
