@@ -1,6 +1,68 @@
 (() => {
     'use strict';
 
+    // --- ASCII Art Loader ---
+    const loader = document.getElementById('loader');
+    const loaderAscii = document.getElementById('loader-ascii');
+
+    const asciiFrames = [];
+    const chars = '.:-=+*#%@';
+    const w = 48, h = 24;
+
+    // Generate frames of a morphing circle/blob
+    for (let f = 0; f <= 40; f++) {
+        const progress = f / 40;
+        let frame = '';
+        for (let y = 0; y < h; y++) {
+            for (let x = 0; x < w; x++) {
+                const nx = (x - w / 2) / (w / 2);
+                const ny = (y - h / 2) / (h / 2) * 1.8;
+                const dist = Math.sqrt(nx * nx + ny * ny);
+                const radius = 0.7 + 0.15 * Math.sin(progress * Math.PI * 4 + Math.atan2(ny, nx) * 3);
+                const filled = dist < radius * progress;
+                if (filled) {
+                    const intensity = Math.floor((1 - dist / radius) * (chars.length - 1) * progress);
+                    frame += chars[Math.min(Math.max(intensity, 0), chars.length - 1)];
+                } else {
+                    frame += ' ';
+                }
+            }
+            frame += '\n';
+        }
+        asciiFrames.push(frame);
+    }
+
+    let frameIndex = 0;
+    const loaderInterval = setInterval(() => {
+        if (frameIndex < asciiFrames.length) {
+            loaderAscii.textContent = asciiFrames[frameIndex];
+            frameIndex++;
+        } else {
+            clearInterval(loaderInterval);
+            setTimeout(() => {
+                loader.classList.add('done');
+                setTimeout(() => loader.remove(), 600);
+            }, 300);
+        }
+    }, 65);
+
+    // --- Pastel Hover on Landing Link Cards ---
+    const pastels = [
+        '#FFD1DC', '#FFDAC1', '#FFF1C1', '#D4F0C0',
+        '#C1E1FF', '#E1C1FF', '#FFE1F0', '#C1FFE1',
+        '#FFE8C1', '#D1C1FF', '#C1FFF4', '#FFC1C1',
+    ];
+
+    document.querySelectorAll('.landing-link-card, .who-link-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            const color = pastels[Math.floor(Math.random() * pastels.length)];
+            card.style.backgroundColor = color;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.backgroundColor = '';
+        });
+    });
+
     // --- Page Navigation ---
     const pages = document.querySelectorAll('.page');
     const navLinks = document.querySelectorAll('[data-page]');
@@ -34,6 +96,9 @@
     }
 
     function updateNav() {
+        // Toggle body class for landing-specific styles (cursor glow, etc.)
+        document.body.classList.toggle('landing-active', currentPage === 'landing');
+
         // Highlight "Projects" nav link when on a project detail page
         const isProjectPage = currentPage.startsWith('project-');
         document.querySelectorAll('.nav-link').forEach(link => {
@@ -137,7 +202,16 @@
         }
     });
 
-    // --- Initial page content animation ---
+    // --- Collapsible Experience Entries ---
+    document.querySelectorAll('.experience-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const entry = header.parentElement;
+            entry.classList.toggle('open');
+        });
+    });
+
+    // --- Initial state ---
+    document.body.classList.toggle('landing-active', currentPage === 'landing');
     setTimeout(() => {
         animatePageContent(document.querySelector('.page--active'));
     }, 100);

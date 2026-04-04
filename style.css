@@ -20,6 +20,7 @@
     --border: rgba(245, 240, 235, 0.08);
     --border-hover: rgba(245, 240, 235, 0.15);
     --glow: rgba(245, 240, 235, 0.04);
+    --accent: #1400a0;
     --radius: 12px;
     --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     --transition-fast: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -33,7 +34,7 @@ html {
 }
 
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'IBM Plex Mono', monospace;
     font-weight: 400;
     background-color: var(--bg);
     color: var(--text);
@@ -48,7 +49,7 @@ a {
 }
 
 ::selection {
-    background: rgba(245, 240, 235, 0.15);
+    background: rgba(20, 0, 160, 0.15);
     color: var(--text);
 }
 
@@ -124,7 +125,7 @@ a {
     position: fixed;
     inset: 0;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     opacity: 0;
     visibility: hidden;
@@ -147,6 +148,42 @@ a {
     opacity: 0;
     transform: translateY(-20px);
     visibility: hidden;
+}
+
+#landing {
+    align-items: center;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    --text: #1a1a1a;
+    --text-muted: rgba(26, 26, 26, 0.45);
+    --text-dim: rgba(26, 26, 26, 0.2);
+    --border: rgba(26, 26, 26, 0.08);
+    --border-hover: rgba(26, 26, 26, 0.15);
+}
+
+#landing .nav-logo svg circle {
+    fill: var(--accent);
+}
+
+body.landing-active .nav-link {
+    color: #1a1a1a;
+}
+
+body.landing-active .nav-link:hover,
+body.landing-active .nav-link.active {
+    color: #1a1a1a;
+}
+
+body.landing-active .nav-link::after {
+    background: #1a1a1a;
+}
+
+body.landing-active .cursor-glow {
+    opacity: 0 !important;
+}
+
+.landing-company {
+    color: var(--accent);
 }
 
 /* --- Landing Page --- */
@@ -188,7 +225,7 @@ a {
 .landing-sub {
     margin-top: 24px;
     font-size: 0.875rem;
-    color: var(--text-muted);
+    color: rgba(26, 26, 26, 0.5);
     letter-spacing: 0.02em;
     opacity: 0;
     animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
@@ -214,20 +251,20 @@ a {
     align-items: center;
     gap: 32px;
     padding: 20px 0;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid rgba(26, 26, 26, 0.1);
     transition: all var(--transition-fast);
     position: relative;
 }
 
 .contact-link:last-child {
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(26, 26, 26, 0.1);
 }
 
 .contact-link::before {
     content: '';
     position: absolute;
     inset: 0 -16px;
-    background: var(--glow);
+    background: rgba(26, 26, 26, 0.03);
     border-radius: 8px;
     opacity: 0;
     transition: opacity var(--transition-fast);
@@ -238,12 +275,12 @@ a {
 }
 
 .contact-link:hover {
-    border-color: var(--border-hover);
+    border-color: rgba(26, 26, 26, 0.2);
     padding-left: 8px;
 }
 
 .contact-link:hover + .contact-link {
-    border-top-color: var(--border-hover);
+    border-top-color: rgba(26, 26, 26, 0.2);
 }
 
 .contact-label {
@@ -251,7 +288,7 @@ a {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--text-muted);
+    color: rgba(26, 26, 26, 0.4);
     min-width: 80px;
     transition: color var(--transition-fast);
     position: relative;
@@ -259,12 +296,12 @@ a {
 }
 
 .contact-link:hover .contact-label {
-    color: var(--text);
+    color: #1a1a1a;
 }
 
 .contact-value {
     font-size: 0.9375rem;
-    color: var(--text-muted);
+    color: rgba(26, 26, 26, 0.5);
     transition: color var(--transition-fast);
     position: relative;
     z-index: 1;
@@ -272,6 +309,84 @@ a {
 
 .contact-link:hover .contact-value {
     color: var(--text);
+}
+
+/* --- Landing Link Cards --- */
+.landing-links {
+    opacity: 0;
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
+}
+
+.landing-links-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.landing-link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    background: #f5f5f5;
+    border: 1px solid rgba(26, 26, 26, 0.08);
+    border-radius: var(--radius);
+    transition: all var(--transition-fast);
+}
+
+.landing-link-card:hover {
+    border-color: transparent;
+    transform: translateY(-2px);
+}
+
+.landing-link-card-label {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #1a1a1a;
+}
+
+.landing-link-card-arrow {
+    font-size: 1.125rem;
+    color: rgba(26, 26, 26, 0.3);
+    transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.landing-link-card:hover .landing-link-card-arrow {
+    transform: translateX(4px);
+    color: #1a1a1a;
+}
+
+@media (max-width: 768px) {
+    .landing-links-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Loader --- */
+.loader {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.loader.done {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader-ascii {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    line-height: 1.1;
+    color: #1a1a1a;
+    text-align: center;
+    white-space: pre;
+    letter-spacing: 0.05em;
 }
 
 /* --- Page Title (shared) --- */
@@ -347,15 +462,36 @@ a {
 
 /* Experience entries */
 .experience-entry {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 32px;
-    padding: 24px 0;
     border-bottom: 1px solid var(--border);
 }
 
 .experience-entry:first-of-type {
     border-top: 1px solid var(--border);
+}
+
+.experience-header {
+    display: grid;
+    grid-template-columns: 160px 1fr auto;
+    gap: 32px;
+    padding: 24px 0;
+    cursor: pointer;
+    align-items: center;
+    transition: opacity var(--transition-fast);
+}
+
+.experience-header:hover {
+    opacity: 0.7;
+}
+
+.experience-toggle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    transition: transform var(--transition-fast);
+    user-select: none;
+}
+
+.experience-entry.open .experience-toggle {
+    transform: rotate(45deg);
 }
 
 .experience-date {
@@ -393,7 +529,15 @@ a {
 }
 
 .experience-desc {
-    margin-top: 12px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0 0 0 192px;
+}
+
+.experience-entry.open .experience-desc {
+    max-height: 600px;
+    padding: 0 0 24px 192px;
 }
 
 .experience-desc p {
@@ -476,8 +620,8 @@ a {
 }
 
 .who-link-card:hover {
-    border-color: var(--border-hover);
-    background: var(--bg-elevated);
+    border-color: transparent;
+    transform: translateY(-2px);
 }
 
 .who-link-card-label {
@@ -497,9 +641,21 @@ a {
 }
 
 @media (max-width: 768px) {
-    .experience-entry {
-        grid-template-columns: 1fr;
-        gap: 8px;
+    .experience-header {
+        grid-template-columns: 1fr auto;
+        gap: 16px;
+    }
+
+    .experience-header .experience-date {
+        grid-column: 1 / -1;
+    }
+
+    .experience-desc {
+        padding: 0;
+    }
+
+    .experience-entry.open .experience-desc {
+        padding: 0 0 24px 0;
     }
 
     .who-links-grid {

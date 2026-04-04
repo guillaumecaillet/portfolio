@@ -8,6 +8,9 @@
     <meta property="og:description" content="Sr. Product Designer with 7+ years of experience designing digital products that are useful, consistent, and scalable.">
     <title>Guillaume Caillet — Sr. Product Designer</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%231400a0'/%3E%3Ctext x='50' y='56' text-anchor='middle' font-family='system-ui,sans-serif' font-size='28' font-weight='600' fill='white'%3EGC%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -26,30 +29,30 @@
         </div>
     </nav>
 
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <pre class="loader-ascii" id="loader-ascii"></pre>
+    </div>
+
     <!-- Page: Landing -->
     <section class="page page--active" id="landing" data-page="landing">
         <div class="landing">
             <div class="landing-content">
                 <h1 class="landing-title">
-                    <span class="line" data-delay="0">Sr. Product Designer,</span>
-                    <span class="line" data-delay="1">designing products that are</span>
-                    <span class="line" data-delay="2">useful, consistent & scalable.</span>
+                    <span class="line" data-delay="0">Senior Product Designer</span>
+                    <span class="line" data-delay="1">currently working at <a href="https://www.oplit.com" target="_blank" rel="noopener" class="landing-company">Oplit</a></span>
                 </h1>
                 <p class="landing-sub">Guillaume Caillet — 7+ years of experience — Based in France</p>
             </div>
-            <div class="landing-contact">
-                <div class="contact-links">
-                    <a href="mailto:guillaume.caillet1@gmail.com" class="contact-link">
-                        <span class="contact-label">Email</span>
-                        <span class="contact-value">guillaume.caillet1@gmail.com</span>
+            <div class="landing-links">
+                <div class="landing-links-grid">
+                    <a href="mailto:guillaume.caillet1@gmail.com" class="landing-link-card">
+                        <span class="landing-link-card-label">Email me</span>
+                        <span class="landing-link-card-arrow">&rarr;</span>
                     </a>
-                    <a href="https://www.linkedin.com/in/guillaume-caillet/" target="_blank" rel="noopener" class="contact-link">
-                        <span class="contact-label">LinkedIn</span>
-                        <span class="contact-value">Guillaume Caillet</span>
-                    </a>
-                    <a href="https://www.malt.fr/profile/guillaumecaillet" target="_blank" rel="noopener" class="contact-link">
-                        <span class="contact-label">Malt</span>
-                        <span class="contact-value">Guillaume Caillet</span>
+                    <a href="https://www.linkedin.com/in/guillaume-caillet/" target="_blank" rel="noopener" class="landing-link-card">
+                        <span class="landing-link-card-label">LinkedIn Profile</span>
+                        <span class="landing-link-card-arrow">&rarr;</span>
                     </a>
                 </div>
             </div>
@@ -77,76 +80,110 @@
                 <h3 class="who-section-title">Professional Experiences</h3>
 
                 <div class="experience-entry">
-                    <div class="experience-date">June 2022 — Now</div>
-                    <div class="experience-details">
-                        <span class="experience-role">Product Designer</span>
-                        <span class="experience-company">PrestaShop</span>
-                        <div class="experience-desc">
-                            <p><strong>Sr Product Designer & Design System Lead (2024)</strong></p>
-                            <p>Progressively structures and deploys the research system across PrestaShop. Responsible for structuring and making the tools, templates, and user data operationally available so product teams can access them quickly and efficiently. The aim is to provide efficient access to user search when designing PrestaShop products for our 300k+ merchants.</p>
-                            <p>Also working on structuring the Design System to make it robust, flexible and scalable. Proposing areas for development, structuring the team around the project and giving visibility to what we're doing.</p>
-                            <p><strong>Design System contributor (2023)</strong></p>
-                            <p>Involved in structuring and implementing the PrestaShop Design System. Working on the monitoring, implementation, and use of components and design tokens by everyone who uses the design system, as well as the components designed by the Product Designers.</p>
-                            <p><strong>Product Designer (2022)</strong></p>
-                            <p>Within the Customer Platform team, working on the design and improvement of the user experience through the user account and, more generally, the login experience.</p>
+                    <div class="experience-header">
+                        <div class="experience-date">Sept. 2025 — Now</div>
+                        <div class="experience-details">
+                            <span class="experience-role">Senior Product Designer</span>
+                            <span class="experience-company">Oplit</span>
                         </div>
+                        <span class="experience-toggle">+</span>
+                    </div>
+                    <div class="experience-desc">
+                        <p>Oplit is an Industry 4.0 scale-up helping transform industrial planning and scheduling through product design.</p>
+                        <p>Structuring and evolving the Design System to ensure consistency, scalability, and cross-team adoption. Designing experiences that make industrial complexity simple, intuitive, and efficient. Strengthening collaboration between Design, Product, Tech, and Operations to accelerate decision-making and innovation.</p>
+                        <p>Impact: Improved product scalability, better leverage of user insights, and direct contribution to Oplit's growth in the Industry 4.0 market.</p>
                     </div>
                 </div>
 
                 <div class="experience-entry">
-                    <div class="experience-date">June 2021 — June 2022</div>
-                    <div class="experience-details">
-                        <span class="experience-role">UX/UI Designer</span>
-                        <span class="experience-company">BeApp</span>
-                        <div class="experience-desc">
-                            <p>In charge of UX at Beapp, working mainly with the UI designer and in contact with all the people involved in the various customer projects (PO, Business, Tech).</p>
-                            <p>Designing experiences for different types of clients in the healthcare, automotive, food, institutional, and other sectors. Running creativity, immersion, and co-creation workshops. In charge of user research and testing.</p>
+                    <div class="experience-header">
+                        <div class="experience-date">June 2022 — Aug. 2025</div>
+                        <div class="experience-details">
+                            <span class="experience-role">Product Designer</span>
+                            <span class="experience-company">PrestaShop</span>
                         </div>
+                        <span class="experience-toggle">+</span>
+                    </div>
+                    <div class="experience-desc">
+                        <p><strong>Sr Product Designer & Design System Lead (2024)</strong></p>
+                        <p>Progressively structures and deploys the research system across PrestaShop. Responsible for structuring and making the tools, templates, and user data operationally available so product teams can access them quickly and efficiently. The aim is to provide efficient access to user search when designing PrestaShop products for our 300k+ merchants.</p>
+                        <p>Also working on structuring the Design System to make it robust, flexible and scalable. Proposing areas for development, structuring the team around the project and giving visibility to what we're doing.</p>
+                        <p><strong>Design System contributor (2023)</strong></p>
+                        <p>Involved in structuring and implementing the PrestaShop Design System. Working on the monitoring, implementation, and use of components and design tokens by everyone who uses the design system, as well as the components designed by the Product Designers.</p>
+                        <p><strong>Product Designer (2022)</strong></p>
+                        <p>Within the Customer Platform team, working on the design and improvement of the user experience through the user account and, more generally, the login experience.</p>
                     </div>
                 </div>
 
                 <div class="experience-entry">
-                    <div class="experience-date">Oct. 2020 — June 2021</div>
-                    <div class="experience-details">
-                        <span class="experience-role">UX Designer Consultant</span>
-                        <span class="experience-company">La Capsule</span>
-                        <div class="experience-desc">
-                            <p>Work as a UX consultant for companies looking to improve their user experience.</p>
+                    <div class="experience-header">
+                        <div class="experience-date">June 2021 — June 2022</div>
+                        <div class="experience-details">
+                            <span class="experience-role">UX/UI Designer</span>
+                            <span class="experience-company">BeApp</span>
                         </div>
+                        <span class="experience-toggle">+</span>
+                    </div>
+                    <div class="experience-desc">
+                        <p>In charge of UX at Beapp, working mainly with the UI designer and in contact with all the people involved in the various customer projects (PO, Business, Tech).</p>
+                        <p>Designing experiences for different types of clients in the healthcare, automotive, food, institutional, and other sectors. Running creativity, immersion, and co-creation workshops. In charge of user research and testing.</p>
                     </div>
                 </div>
 
                 <div class="experience-entry">
-                    <div class="experience-date">Sept. 2018 — June 2020</div>
-                    <div class="experience-details">
-                        <span class="experience-role">UX Designer</span>
-                        <span class="experience-company">Airbus Atlantique</span>
-                        <div class="experience-desc">
-                            <p>Joined the team of UX/UI designers (UXiD) as part of a process to digitalize the Airbus Group. The team designs and redesigns processes as well as business applications and HMIs, putting people back at the heart of their design.</p>
-                            <p>Responsible for disseminating UX guidelines and best practices throughout the group. Collecting user requirements, participating in the design of business applications, organising information architecture, and working in collaboration with IT and other departments.</p>
+                    <div class="experience-header">
+                        <div class="experience-date">Oct. 2020 — June 2021</div>
+                        <div class="experience-details">
+                            <span class="experience-role">UX Designer Consultant</span>
+                            <span class="experience-company">La Capsule</span>
                         </div>
+                        <span class="experience-toggle">+</span>
+                    </div>
+                    <div class="experience-desc">
+                        <p>Work as a UX consultant for companies looking to improve their user experience.</p>
                     </div>
                 </div>
 
                 <div class="experience-entry">
-                    <div class="experience-date">March 2018 — Aug. 2018</div>
-                    <div class="experience-details">
-                        <span class="experience-role">UX Designer — Stage</span>
-                        <span class="experience-company">SNCF</span>
-                        <div class="experience-desc">
-                            <p>Working as a UX designer in section 574 (innovation) at the SNCF in Nantes. In charge of designing personas, user paths, and screen ergonomics for different applications.</p>
+                    <div class="experience-header">
+                        <div class="experience-date">Sept. 2018 — June 2020</div>
+                        <div class="experience-details">
+                            <span class="experience-role">UX Designer</span>
+                            <span class="experience-company">Airbus Atlantique</span>
                         </div>
+                        <span class="experience-toggle">+</span>
+                    </div>
+                    <div class="experience-desc">
+                        <p>Joined the team of UX/UI designers (UXiD) as part of a process to digitalize the Airbus Group. The team designs and redesigns processes as well as business applications and HMIs, putting people back at the heart of their design.</p>
+                        <p>Responsible for disseminating UX guidelines and best practices throughout the group. Collecting user requirements, participating in the design of business applications, organising information architecture, and working in collaboration with IT and other departments.</p>
                     </div>
                 </div>
 
                 <div class="experience-entry">
-                    <div class="experience-date">Aug. 2015 — Sept. 2017</div>
-                    <div class="experience-details">
-                        <span class="experience-role">UX Designer — Work-study</span>
-                        <span class="experience-company">StéreoSuper</span>
-                        <div class="experience-desc">
-                            <p>An apprentice for 2 years and trained as a web designer with a specialization in UX design, working on several projects and building up solid experience in a field I'm passionate about.</p>
+                    <div class="experience-header">
+                        <div class="experience-date">March 2018 — Aug. 2018</div>
+                        <div class="experience-details">
+                            <span class="experience-role">UX Designer — Stage</span>
+                            <span class="experience-company">SNCF</span>
                         </div>
+                        <span class="experience-toggle">+</span>
+                    </div>
+                    <div class="experience-desc">
+                        <p>Working as a UX designer in section 574 (innovation) at the SNCF in Nantes. In charge of designing personas, user paths, and screen ergonomics for different applications.</p>
+                    </div>
+                </div>
+
+                <div class="experience-entry">
+                    <div class="experience-header">
+                        <div class="experience-date">Aug. 2015 — Sept. 2017</div>
+                        <div class="experience-details">
+                            <span class="experience-role">UX Designer — Work-study</span>
+                            <span class="experience-company">StéreoSuper</span>
+                        </div>
+                        <span class="experience-toggle">+</span>
+                    </div>
+                    <div class="experience-desc">
+                        <p>An apprentice for 2 years and trained as a web designer with a specialization in UX design, working on several projects and building up solid experience in a field I'm passionate about.</p>
                     </div>
                 </div>
             </div>
@@ -156,46 +193,58 @@
                 <h3 class="who-section-title">Other experiences</h3>
 
                 <div class="experience-entry">
-                    <div class="experience-date">2025 — Now</div>
-                    <div class="experience-details">
-                        <span class="experience-role">Teacher</span>
-                        <span class="experience-company">Ecole de design Nantes Atlantique</span>
-                        <div class="experience-desc">
-                            <p>Teaching the basics of UI Design to young designers.</p>
+                    <div class="experience-header">
+                        <div class="experience-date">2025 — Now</div>
+                        <div class="experience-details">
+                            <span class="experience-role">Teacher</span>
+                            <span class="experience-company">Ecole de design Nantes Atlantique</span>
                         </div>
+                        <span class="experience-toggle">+</span>
+                    </div>
+                    <div class="experience-desc">
+                        <p>Teaching the basics of UI Design to young designers.</p>
                     </div>
                 </div>
 
                 <div class="experience-entry">
-                    <div class="experience-date">2024 — Now</div>
-                    <div class="experience-details">
-                        <span class="experience-role">Mentor</span>
-                        <span class="experience-company"><a href="https://adplist.org/mentors/guillaume-caillet" target="_blank" rel="noopener">ADPList</a></span>
-                        <div class="experience-desc">
-                            <p>Helping designers, no matter their seniority, to grow and giving them feedbacks about their projects or career perspectives.</p>
+                    <div class="experience-header">
+                        <div class="experience-date">2024 — Now</div>
+                        <div class="experience-details">
+                            <span class="experience-role">Mentor</span>
+                            <span class="experience-company"><a href="https://adplist.org/mentors/guillaume-caillet" target="_blank" rel="noopener">ADPList</a></span>
                         </div>
+                        <span class="experience-toggle">+</span>
+                    </div>
+                    <div class="experience-desc">
+                        <p>Helping designers, no matter their seniority, to grow and giving them feedbacks about their projects or career perspectives.</p>
                     </div>
                 </div>
 
                 <div class="experience-entry">
-                    <div class="experience-date">2021 — Now</div>
-                    <div class="experience-details">
-                        <span class="experience-role">Speaker</span>
-                        <span class="experience-company">ECV Nantes (Master 2 UX Design)</span>
-                        <div class="experience-desc">
-                            <ul>
-                                <li>Eco-design & Design System 2023, 2024, 2025 (Speaker)</li>
-                                <li>Design System '22-'23 (Annual project) — 100% students graduated</li>
-                                <li>User Research Methods '21-'22 (Lecturer)</li>
-                            </ul>
+                    <div class="experience-header">
+                        <div class="experience-date">2021 — Now</div>
+                        <div class="experience-details">
+                            <span class="experience-role">Speaker</span>
+                            <span class="experience-company">ECV Nantes (Master 2 UX Design)</span>
                         </div>
+                        <span class="experience-toggle">+</span>
+                    </div>
+                    <div class="experience-desc">
+                        <ul>
+                            <li>Eco-design & Design System 2023, 2024, 2025 (Speaker)</li>
+                            <li>Design System '22-'23 (Annual project) — 100% students graduated</li>
+                            <li>User Research Methods '21-'22 (Lecturer)</li>
+                        </ul>
                     </div>
                 </div>
 
                 <div class="experience-entry">
-                    <div class="experience-date">2020 — Now</div>
-                    <div class="experience-details">
-                        <span class="experience-role">Freelancing</span>
+                    <div class="experience-header">
+                        <div class="experience-date">2020 — Now</div>
+                        <div class="experience-details">
+                            <span class="experience-role">Freelancing</span>
+                        </div>
+                        <span class="experience-toggle">+</span>
                     </div>
                 </div>
             </div>
@@ -205,22 +254,28 @@
                 <h3 class="who-section-title">Studies</h3>
 
                 <div class="experience-entry">
-                    <div class="experience-date">2017 — 2020</div>
-                    <div class="experience-details">
-                        <span class="experience-company">ECV Nantes</span>
-                        <div class="experience-desc">
-                            <p>Master 2 — UX Design<br>Bachelor — Design (L3)</p>
+                    <div class="experience-header">
+                        <div class="experience-date">2017 — 2020</div>
+                        <div class="experience-details">
+                            <span class="experience-company">ECV Nantes</span>
                         </div>
+                        <span class="experience-toggle">+</span>
+                    </div>
+                    <div class="experience-desc">
+                        <p>Master 2 — UX Design<br>Bachelor — Design (L3)</p>
                     </div>
                 </div>
 
                 <div class="experience-entry">
-                    <div class="experience-date">2015 — 2017</div>
-                    <div class="experience-details">
-                        <span class="experience-company">CESI Nantes</span>
-                        <div class="experience-desc">
-                            <p>Web-Concepteur</p>
+                    <div class="experience-header">
+                        <div class="experience-date">2015 — 2017</div>
+                        <div class="experience-details">
+                            <span class="experience-company">CESI Nantes</span>
                         </div>
+                        <span class="experience-toggle">+</span>
+                    </div>
+                    <div class="experience-desc">
+                        <p>Web-Concepteur</p>
                     </div>
                 </div>
             </div>
@@ -269,10 +324,6 @@
                     </a>
                     <a href="https://www.linkedin.com/in/guillaume-caillet/" target="_blank" rel="noopener" class="who-link-card">
                         <span class="who-link-card-label">LinkedIn Profile</span>
-                        <span class="who-link-card-arrow">&rarr;</span>
-                    </a>
-                    <a href="https://www.malt.fr/profile/guillaumecaillet" target="_blank" rel="noopener" class="who-link-card">
-                        <span class="who-link-card-label">Malt Profile</span>
                         <span class="who-link-card-arrow">&rarr;</span>
                     </a>
                 </div>
@@ -400,7 +451,24 @@
                     <span class="case-tag">UI Design</span>
                     <span class="case-tag">UX Design</span>
                 </div>
+                <div class="case-metrics">
+                    <div class="case-metric">
+                        <span class="case-metric-value">100%</span>
+                        <span class="case-metric-label">of product squads use the DS in design</span>
+                    </div>
+                    <div class="case-metric">
+                        <span class="case-metric-value">80%</span>
+                        <span class="case-metric-label">adoption in tech teams</span>
+                    </div>
+                    <div class="case-metric">
+                        <span class="case-metric-value">-50%</span>
+                        <span class="case-metric-label">reduction in development time</span>
+                    </div>
+                </div>
             </header>
+            <div class="case-image case-image--cover">
+                <img src="src/img/PrestaShop Design System/Projet_cover.png" alt="PrestaShop Design System — Project cover">
+            </div>
             <div class="case-section">
                 <h3 class="case-section-title">Situation</h3>
                 <p>When I joined in June 2022, the PrestaShop "design system" was a set of advanced UI kits in Figma, not shared as a true library. Product designers worked with their own components, tech teams used a separate framework, and interface consistency was weak.</p>
@@ -418,21 +486,7 @@
                 </ul>
             </div>
             <div class="case-section">
-                <h3 class="case-section-title">Results & KPIs</h3>
-                <div class="case-metrics">
-                    <div class="case-metric">
-                        <span class="case-metric-value">100%</span>
-                        <span class="case-metric-label">of product squads use the DS in design</span>
-                    </div>
-                    <div class="case-metric">
-                        <span class="case-metric-value">80%</span>
-                        <span class="case-metric-label">adoption in tech teams</span>
-                    </div>
-                    <div class="case-metric">
-                        <span class="case-metric-value">-50%</span>
-                        <span class="case-metric-label">reduction in development time</span>
-                    </div>
-                </div>
+                <h3 class="case-section-title">Results</h3>
                 <ul class="case-list">
                     <li>Implementation of design/tech contribution processes, documentation, comprehensive auditing, governance, and shared Kanban.</li>
                     <li>Initial implementation of design tokens on test projects (inspired by Nathan Curtis).</li>
@@ -467,9 +521,19 @@
                     <span class="case-tag">Research</span>
                     <span class="case-tag">UI Design</span>
                 </div>
+                <div class="case-metrics">
+                    <div class="case-metric">
+                        <span class="case-metric-value">3 &rarr; 1</span>
+                        <span class="case-metric-label">accounts unified into a single customer account</span>
+                    </div>
+                    <div class="case-metric">
+                        <span class="case-metric-value">0</span>
+                        <span class="case-metric-label">support requests needed for basic account updates</span>
+                    </div>
+                </div>
             </header>
             <div class="case-image case-image--cover">
-                <img src="src/img/customer-account/cover.png" alt="PrestaShop Customer Account — Project cover">
+                <img src="src/img/PrestaShop Customer Account/project_cover.png" alt="PrestaShop Customer Account — Project cover">
             </div>
             <div class="case-section">
                 <h3 class="case-section-title">Situation</h3>
@@ -478,11 +542,11 @@
             </div>
             <div class="case-image-grid">
                 <figure class="case-image">
-                    <img src="src/img/customer-account/backoffice.png" alt="Back Office employee profile page">
+                    <img src="src/img/PrestaShop Customer Account/Screenshot_2022-01-21_at_11.43.14.png" alt="Back Office — Employee profile page">
                     <figcaption>Back Office — Employee profile (before)</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/customer-account/marketplace.png" alt="Marketplace Addons account page">
+                    <img src="src/img/PrestaShop Customer Account/Screenshot_2022-01-21_at_11.50.10.png" alt="Marketplace Addons — Account page">
                     <figcaption>Marketplace Addons — Account (before)</figcaption>
                 </figure>
             </div>
@@ -498,26 +562,22 @@
             </div>
             <div class="case-image-grid">
                 <figure class="case-image">
-                    <img src="src/img/customer-account/personal-info.png" alt="Unified account — Personal information">
+                    <img src="src/img/PrestaShop Customer Account/Capture_decran_2024-02-22_a_15.51.32.png" alt="Unified account — Personal information">
                     <figcaption>Unified account — Personal information</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/customer-account/business-info.png" alt="Unified account — Business information">
+                    <img src="src/img/PrestaShop Customer Account/Capture_decran_2024-02-22_a_15.53.18.png" alt="Unified account — Business information">
                     <figcaption>Unified account — Business information</figcaption>
                 </figure>
             </div>
+            <div class="case-image case-image--cover">
+                <figure>
+                    <img src="src/img/PrestaShop Customer Account/UnifiedAccount-Account_Settings-Ecommercant.png" alt="Unified Account — Final design">
+                    <figcaption>Unified Customer Account — Final design</figcaption>
+                </figure>
+            </div>
             <div class="case-section">
-                <h3 class="case-section-title">Results & KPIs</h3>
-                <div class="case-metrics">
-                    <div class="case-metric">
-                        <span class="case-metric-value">3 &rarr; 1</span>
-                        <span class="case-metric-label">accounts unified into a single customer account</span>
-                    </div>
-                    <div class="case-metric">
-                        <span class="case-metric-value">0</span>
-                        <span class="case-metric-label">support requests needed for basic account updates</span>
-                    </div>
-                </div>
+                <h3 class="case-section-title">Results</h3>
                 <ul class="case-list">
                     <li>Full user autonomy over data, eliminating dependency on support for updates.</li>
                     <li>Data consistently synchronized across all PrestaShop services.</li>
@@ -545,7 +605,24 @@
                     <span class="case-tag">Research</span>
                     <span class="case-tag">UI Design</span>
                 </div>
+                <div class="case-metrics">
+                    <div class="case-metric">
+                        <span class="case-metric-value">-50%</span>
+                        <span class="case-metric-label">authentication errors (7k avg vs 15k before)</span>
+                    </div>
+                    <div class="case-metric">
+                        <span class="case-metric-value">-50%</span>
+                        <span class="case-metric-label">flow length reduction</span>
+                    </div>
+                    <div class="case-metric">
+                        <span class="case-metric-value">50%</span>
+                        <span class="case-metric-label">of logins via Google SSO within 6 months</span>
+                    </div>
+                </div>
             </header>
+            <div class="case-image case-image--cover">
+                <img src="src/img/PrestaShop Sign in Sign up flow/Projet_cover.png" alt="PrestaShop Sign in/Sign up Flow — Project cover">
+            </div>
             <div class="case-section">
                 <h3 class="case-section-title">Situation</h3>
                 <p>PrestaShop users faced multiple points of authentication (product, marketplace, help center, back office), with no consistent flows or shared data. The lack of synchronization between databases resulted in duplicate accounts and authentication failures.</p>
@@ -561,22 +638,30 @@
                     <li>Introduced clear error messaging and education around the new account structure.</li>
                 </ul>
             </div>
+            <div class="case-image-grid">
+                <figure class="case-image">
+                    <img src="src/img/PrestaShop Sign in Sign up flow/connexion.png" alt="Sign in — New login page">
+                    <figcaption>New sign in page with Google SSO</figcaption>
+                </figure>
+                <figure class="case-image">
+                    <img src="src/img/PrestaShop Sign in Sign up flow/creation_de_compte.png" alt="Sign up — New account creation page">
+                    <figcaption>New account creation page</figcaption>
+                </figure>
+            </div>
+            <div class="case-image case-image--cover">
+                <figure>
+                    <img src="src/img/PrestaShop Sign in Sign up flow/Capture_decran_2024-02-22_a_16.08.34.png" alt="Sign in/Sign up — Full flow overview">
+                    <figcaption>Full sign up flow — from account creation to account settings</figcaption>
+                </figure>
+            </div>
+            <div class="case-image case-image--cover">
+                <figure>
+                    <img src="src/img/PrestaShop Sign in Sign up flow/Capture_decran_2024-02-22_a_15.58.36.png" alt="Sign in/Sign up — Research and user flows">
+                    <figcaption>Research — User flows and integration mapping</figcaption>
+                </figure>
+            </div>
             <div class="case-section">
-                <h3 class="case-section-title">Results & KPIs</h3>
-                <div class="case-metrics">
-                    <div class="case-metric">
-                        <span class="case-metric-value">-50%</span>
-                        <span class="case-metric-label">authentication errors (7k avg vs 15k before)</span>
-                    </div>
-                    <div class="case-metric">
-                        <span class="case-metric-value">-50%</span>
-                        <span class="case-metric-label">flow length reduction</span>
-                    </div>
-                    <div class="case-metric">
-                        <span class="case-metric-value">50%</span>
-                        <span class="case-metric-label">of logins via Google SSO within 6 months</span>
-                    </div>
-                </div>
+                <h3 class="case-section-title">Results</h3>
                 <ul class="case-list">
                     <li>One unified interface across the product for account creation and connection.</li>
                     <li>Support requests related to authentication dropped significantly.</li>
@@ -603,7 +688,20 @@
                     <span class="case-tag">Research</span>
                     <span class="case-tag">UI Design</span>
                 </div>
+                <div class="case-metrics">
+                    <div class="case-metric">
+                        <span class="case-metric-value">600+</span>
+                        <span class="case-metric-label">successful associations per day</span>
+                    </div>
+                    <div class="case-metric">
+                        <span class="case-metric-value">&darr;</span>
+                        <span class="case-metric-label">marked decrease in abandonment due to errors</span>
+                    </div>
+                </div>
             </header>
+            <div class="case-image case-image--cover">
+                <img src="src/img/PrestaShop Store Association flow/Projet_cover.png" alt="PrestaShop Store Association Flow — Project cover">
+            </div>
             <div class="case-section">
                 <h3 class="case-section-title">Situation</h3>
                 <p>The shop association process, particularly for open-source installations, was a major source of confusion. Merchants didn't understand why association was required and abandoned the process — especially when errors occurred.</p>
@@ -618,18 +716,24 @@
                     <li>Prototyped the new flow (including a demonstrative video) and validated improvements with stakeholders.</li>
                 </ul>
             </div>
+            <div class="case-image case-image--cover">
+                <figure>
+                    <img src="src/img/PrestaShop Store Association flow/Screenshot_2024-08-01_at_14.15.50.png" alt="Store Association — Research and flow mapping">
+                    <figcaption>Research — Flow mapping and wireframes</figcaption>
+                </figure>
+            </div>
+            <div class="case-image-grid">
+                <figure class="case-image">
+                    <img src="src/img/PrestaShop Store Association flow/Screenshot_2024-08-01_at_14.06.29.png" alt="Store Association — Current production flow">
+                    <figcaption>Current production flow — Association success path</figcaption>
+                </figure>
+                <figure class="case-image">
+                    <img src="src/img/PrestaShop Store Association flow/Screenshot_2024-08-01_at_14.07.23.png" alt="Store Association — New workflow">
+                    <figcaption>New association workflow — Simplified steps</figcaption>
+                </figure>
+            </div>
             <div class="case-section">
-                <h3 class="case-section-title">Results & KPIs</h3>
-                <div class="case-metrics">
-                    <div class="case-metric">
-                        <span class="case-metric-value">600+</span>
-                        <span class="case-metric-label">successful associations per day</span>
-                    </div>
-                    <div class="case-metric">
-                        <span class="case-metric-value">&darr;</span>
-                        <span class="case-metric-label">marked decrease in abandonment due to errors</span>
-                    </div>
-                </div>
+                <h3 class="case-section-title">Results</h3>
                 <ul class="case-list">
                     <li>Major improvement in user comprehension and reduced frustration.</li>
                     <li>Most shop traffic now flows through the updated payment platform and onboarding.</li>
