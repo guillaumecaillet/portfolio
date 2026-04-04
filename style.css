@@ -887,6 +887,7 @@ body:hover .cursor-glow {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    margin-bottom: 32px;
 }
 
 .case-tag {
