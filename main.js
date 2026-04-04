@@ -10,8 +10,8 @@
     const w = 48, h = 24;
 
     // Generate frames of a morphing circle/blob
-    for (let f = 0; f <= 20; f++) {
-        const progress = f / 20;
+    for (let f = 0; f <= 40; f++) {
+        const progress = f / 40;
         let frame = '';
         for (let y = 0; y < h; y++) {
             for (let x = 0; x < w; x++) {
@@ -44,7 +44,7 @@
                 setTimeout(() => loader.remove(), 600);
             }, 300);
         }
-    }, 60);
+    }, 65);
 
     // --- Pastel Hover on Landing Link Cards ---
     const pastels = [
