@@ -180,8 +180,8 @@ body.landing-active .nav-link::after {
     background: #1a1a1a;
 }
 
-body.landing-active .cursor-glow {
-    opacity: 0 !important;
+body.landing-active .cursor-trail span {
+    color: rgba(26, 26, 26, 0.15);
 }
 
 .landing-company {
@@ -798,22 +798,33 @@ body.landing-active .cursor-glow {
     transform: translateY(0);
 }
 
-/* --- Cursor Glow --- */
-.cursor-glow {
+/* --- Cursor ASCII Trail --- */
+.cursor-trail {
     position: fixed;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(245, 240, 235, 0.025) 0%, transparent 70%);
+    inset: 0;
     pointer-events: none;
     z-index: 0;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.3s;
-    opacity: 0;
+    overflow: hidden;
 }
 
-body:hover .cursor-glow {
-    opacity: 1;
+.cursor-trail span {
+    position: absolute;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    color: var(--text-muted);
+    pointer-events: none;
+    animation: trailFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes trailFade {
+    0% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3) rotate(45deg);
+    }
 }
 
 /* --- Page title animation --- */
