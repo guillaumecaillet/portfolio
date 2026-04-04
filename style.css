@@ -184,6 +184,12 @@ body.landing-active .cursor-glow {
 
 .landing-company {
     color: var(--accent);
+    text-decoration: none;
+    transition: opacity var(--transition-fast);
+}
+
+.landing-company:hover {
+    opacity: 0.6;
 }
 
 /* --- Landing Page --- */
