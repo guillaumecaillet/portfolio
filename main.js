@@ -260,6 +260,22 @@
         }
     });
 
+    // --- External links handler (safety net) ---
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        // Skip internal SPA navigation links
+        if (link.hasAttribute('data-page')) return;
+        if (href.startsWith('#')) return;
+        // Handle external links
+        if (href.startsWith('mailto:') || href.startsWith('tel:')) {
+            window.location.href = href;
+        } else if (href.startsWith('http') || href.startsWith('//')) {
+            window.open(href, '_blank', 'noopener');
+        }
+    });
+
     // --- Collapsible Experience Entries ---
     document.querySelectorAll('.experience-header').forEach(header => {
         header.addEventListener('click', () => {
