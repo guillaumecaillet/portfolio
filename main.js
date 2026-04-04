@@ -53,37 +53,64 @@
         '#FFE8C1', '#D1C1FF', '#C1FFF4', '#FFC1C1',
     ];
 
-    // --- Split-flap scramble effect on Oplit link ---
+    // --- Split-flap scramble effect ---
     const scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const oplitLink = document.querySelector('.landing-company');
-    if (oplitLink) {
-        const originalText = oplitLink.textContent;
+
+    function addScramble(el, textEl) {
+        const target = textEl || el;
+        const originalText = target.textContent;
         let scrambleInterval = null;
 
-        oplitLink.addEventListener('mouseenter', () => {
+        el.addEventListener('mouseenter', () => {
             let iteration = 0;
             clearInterval(scrambleInterval);
             scrambleInterval = setInterval(() => {
-                oplitLink.textContent = originalText
+                target.textContent = originalText
                     .split('')
                     .map((char, i) => {
+                        if (char === ' ') return ' ';
                         if (i < iteration) return originalText[i];
                         return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
                     })
                     .join('');
-                iteration += 1 / 3;
+                iteration += 1 / 2;
                 if (iteration >= originalText.length) {
                     clearInterval(scrambleInterval);
-                    oplitLink.textContent = originalText;
+                    target.textContent = originalText;
                 }
             }, 30);
         });
 
-        oplitLink.addEventListener('mouseleave', () => {
+        el.addEventListener('mouseleave', () => {
             clearInterval(scrambleInterval);
-            oplitLink.textContent = originalText;
+            target.textContent = originalText;
         });
     }
+
+    // Oplit link
+    const oplitLink = document.querySelector('.landing-company');
+    if (oplitLink) addScramble(oplitLink);
+
+    // Nav links
+    document.querySelectorAll('.nav-link').forEach(el => addScramble(el));
+
+    // Landing link cards & who-link-cards (scramble the label)
+    document.querySelectorAll('.landing-link-card, .who-link-card').forEach(card => {
+        const label = card.querySelector('.landing-link-card-label, .who-link-card-label');
+        if (label) addScramble(card, label);
+    });
+
+    // Who links
+    document.querySelectorAll('.who-link').forEach(el => addScramble(el));
+
+    // Project cards (scramble the project name)
+    document.querySelectorAll('.project-card').forEach(card => {
+        const name = card.querySelector('.project-name');
+        if (name) addScramble(card, name);
+    });
+
+    // Case back links
+    document.querySelectorAll('.case-back').forEach(el => addScramble(el));
 
     document.querySelectorAll('.landing-link-card, .who-link-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
