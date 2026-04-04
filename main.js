@@ -235,7 +235,7 @@
     const trail = document.getElementById('cursor-trail');
     const trailChars = '.:*+=#@%&$~^!?/\\|<>{}[]()';
     let lastTrailTime = 0;
-    const trailInterval = 40;
+    const trailInterval = 20;
 
     document.addEventListener('mousemove', (e) => {
         const now = Date.now();
@@ -248,7 +248,7 @@
         span.style.top = e.clientY + 'px';
         trail.appendChild(span);
 
-        setTimeout(() => span.remove(), 800);
+        setTimeout(() => span.remove(), 1500);
     });
 
     // --- Keyboard Navigation ---
