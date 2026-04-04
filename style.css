@@ -165,16 +165,16 @@ a {
     fill: var(--accent);
 }
 
-#landing .nav-link {
+body.landing-active .nav-link {
     color: #1a1a1a;
 }
 
-#landing .nav-link:hover,
-#landing .nav-link.active {
+body.landing-active .nav-link:hover,
+body.landing-active .nav-link.active {
     color: #1a1a1a;
 }
 
-#landing .nav-link::after {
+body.landing-active .nav-link::after {
     background: #1a1a1a;
 }
 
