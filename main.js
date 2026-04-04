@@ -231,23 +231,25 @@
         });
     }
 
-    // --- Cursor Glow ---
-    const glow = document.querySelector('.cursor-glow');
-    let glowX = 0, glowY = 0, currentX = 0, currentY = 0;
+    // --- Cursor ASCII Trail ---
+    const trail = document.getElementById('cursor-trail');
+    const trailChars = '.:*+=#@%&$~^!?/\\|<>{}[]()';
+    let lastTrailTime = 0;
+    const trailInterval = 20;
 
     document.addEventListener('mousemove', (e) => {
-        glowX = e.clientX;
-        glowY = e.clientY;
-    });
+        const now = Date.now();
+        if (now - lastTrailTime < trailInterval) return;
+        lastTrailTime = now;
 
-    function updateGlow() {
-        currentX += (glowX - currentX) * 0.08;
-        currentY += (glowY - currentY) * 0.08;
-        glow.style.left = currentX + 'px';
-        glow.style.top = currentY + 'px';
-        requestAnimationFrame(updateGlow);
-    }
-    requestAnimationFrame(updateGlow);
+        const span = document.createElement('span');
+        span.textContent = trailChars[Math.floor(Math.random() * trailChars.length)];
+        span.style.left = e.clientX + 'px';
+        span.style.top = e.clientY + 'px';
+        trail.appendChild(span);
+
+        setTimeout(() => span.remove(), 1500);
+    });
 
     // --- Keyboard Navigation ---
     document.addEventListener('keydown', (e) => {
