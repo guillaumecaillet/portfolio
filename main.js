@@ -172,12 +172,11 @@
     // Navigation click handlers
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
             const target = link.dataset.page;
-            if (target) {
-                location.hash = target;
-                navigateTo(target);
-            }
+            if (!target) return; // Let external links work normally
+            e.preventDefault();
+            location.hash = target;
+            navigateTo(target);
         });
     });
 
