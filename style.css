@@ -208,15 +208,12 @@ body.landing-active .cursor-trail span {
 
 .landing-title .line {
     display: block;
-    opacity: 0;
-    transform: translateY(30px);
-    filter: blur(8px);
-    animation: lineReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    visibility: hidden;
 }
 
-.landing-title .line[data-delay="0"] { animation-delay: 0.2s; }
-.landing-title .line[data-delay="1"] { animation-delay: 0.4s; }
-.landing-title .line[data-delay="2"] { animation-delay: 0.6s; }
+.landing-title .line.revealed {
+    visibility: visible;
+}
 
 @keyframes lineReveal {
     to {

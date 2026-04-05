@@ -41,10 +41,80 @@
             clearInterval(loaderInterval);
             setTimeout(() => {
                 loader.classList.add('done');
-                setTimeout(() => loader.remove(), 600);
+                setTimeout(() => {
+                    loader.remove();
+                    revealTitle();
+                }, 600);
             }, 300);
         }
     }, 65);
+
+    // --- Split-flap title reveal ---
+    function revealTitle() {
+        const lines = document.querySelectorAll('.landing-title .line');
+        const scramblePool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*';
+
+        lines.forEach((line, lineIndex) => {
+            const delay = lineIndex * 600;
+
+            setTimeout(() => {
+                line.classList.add('revealed');
+
+                // Get all text nodes and preserve child elements (like the Oplit link)
+                const nodes = [];
+                line.childNodes.forEach(node => {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        nodes.push({ type: 'text', node, original: node.textContent });
+                    } else if (node.nodeType === Node.ELEMENT_NODE) {
+                        nodes.push({ type: 'element', node, original: node.textContent });
+                    }
+                });
+
+                const totalLength = nodes.reduce((sum, n) => sum + n.original.length, 0);
+                let iteration = 0;
+
+                const interval = setInterval(() => {
+                    let charIndex = 0;
+
+                    nodes.forEach(n => {
+                        const target = n.type === 'element' ? n.node : n.node;
+                        const text = n.original;
+                        let result = '';
+
+                        for (let i = 0; i < text.length; i++) {
+                            if (text[i] === ' ') {
+                                result += ' ';
+                            } else if (charIndex < iteration) {
+                                result += text[i];
+                            } else {
+                                result += scramblePool[Math.floor(Math.random() * scramblePool.length)];
+                            }
+                            charIndex++;
+                        }
+
+                        if (n.type === 'text') {
+                            n.node.textContent = result;
+                        } else {
+                            n.node.textContent = result;
+                        }
+                    });
+
+                    iteration += 0.5;
+                    if (iteration >= totalLength) {
+                        clearInterval(interval);
+                        // Restore original text
+                        nodes.forEach(n => {
+                            if (n.type === 'text') {
+                                n.node.textContent = n.original;
+                            } else {
+                                n.node.textContent = n.original;
+                            }
+                        });
+                    }
+                }, 30);
+            }, delay);
+        });
+    }
 
     // --- Pastel Hover on Landing Link Cards ---
     const pastels = [
