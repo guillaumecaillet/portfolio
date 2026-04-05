@@ -41,10 +41,75 @@
             clearInterval(loaderInterval);
             setTimeout(() => {
                 loader.classList.add('done');
-                setTimeout(() => loader.remove(), 600);
-            }, 300);
+                // Start title reveal while loader is still fading
+                setTimeout(() => revealTitle(), 400);
+                setTimeout(() => loader.remove(), 1000);
+            }, 200);
         }
     }, 65);
+
+    // --- Split-flap title reveal ---
+    function revealTitle() {
+        const lines = document.querySelectorAll('.landing-title .line');
+        const scramblePool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*';
+
+        function revealLine(lineIndex) {
+            if (lineIndex >= lines.length) {
+                // All lines done — fade in subtitle and links
+                const sub = document.querySelector('.landing-sub');
+                const links = document.querySelector('.landing-links');
+                if (sub) setTimeout(() => sub.classList.add('visible'), 200);
+                if (links) setTimeout(() => links.classList.add('visible'), 400);
+                return;
+            }
+            const line = lines[lineIndex];
+            line.classList.add('revealed');
+
+            const nodes = [];
+            line.childNodes.forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    nodes.push({ type: 'text', node, original: node.textContent });
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    nodes.push({ type: 'element', node, original: node.textContent });
+                }
+            });
+
+            const totalLength = nodes.reduce((sum, n) => sum + n.original.length, 0);
+            let iteration = 0;
+
+            const interval = setInterval(() => {
+                let charIndex = 0;
+
+                nodes.forEach(n => {
+                    const text = n.original;
+                    let result = '';
+
+                    for (let i = 0; i < text.length; i++) {
+                        if (text[i] === ' ') {
+                            result += ' ';
+                        } else if (charIndex < iteration) {
+                            result += text[i];
+                        } else {
+                            result += scramblePool[Math.floor(Math.random() * scramblePool.length)];
+                        }
+                        charIndex++;
+                    }
+
+                    n.node.textContent = result;
+                });
+
+                iteration += 0.5;
+                if (iteration >= totalLength) {
+                    clearInterval(interval);
+                    nodes.forEach(n => { n.node.textContent = n.original; });
+                    // Next line once this one is done
+                    revealLine(lineIndex + 1);
+                }
+            }, 30);
+        }
+
+        revealLine(0);
+    }
 
     // --- Pastel Hover on Landing Link Cards ---
     const pastels = [
@@ -282,7 +347,27 @@
     document.querySelectorAll('.experience-header').forEach(header => {
         header.addEventListener('click', () => {
             const entry = header.parentElement;
-            entry.classList.toggle('open');
+            const desc = entry.querySelector('.experience-desc');
+            if (!desc) return;
+
+            if (entry.classList.contains('open')) {
+                // Collapse: set current height first, then animate to 0
+                desc.style.maxHeight = desc.scrollHeight + 'px';
+                requestAnimationFrame(() => {
+                    desc.style.maxHeight = '0';
+                });
+                entry.classList.remove('open');
+            } else {
+                // Expand: animate to scrollHeight, then remove inline style
+                entry.classList.add('open');
+                desc.style.maxHeight = desc.scrollHeight + 'px';
+                desc.addEventListener('transitionend', function handler() {
+                    if (entry.classList.contains('open')) {
+                        desc.style.maxHeight = 'none';
+                    }
+                    desc.removeEventListener('transitionend', handler);
+                });
+            }
         });
     });
 

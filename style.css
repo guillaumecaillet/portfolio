@@ -208,15 +208,12 @@ body.landing-active .cursor-trail span {
 
 .landing-title .line {
     display: block;
-    opacity: 0;
-    transform: translateY(30px);
-    filter: blur(8px);
-    animation: lineReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    visibility: hidden;
 }
 
-.landing-title .line[data-delay="0"] { animation-delay: 0.2s; }
-.landing-title .line[data-delay="1"] { animation-delay: 0.4s; }
-.landing-title .line[data-delay="2"] { animation-delay: 0.6s; }
+.landing-title .line.revealed {
+    visibility: visible;
+}
 
 @keyframes lineReveal {
     to {
@@ -232,7 +229,13 @@ body.landing-active .cursor-trail span {
     color: rgba(26, 26, 26, 0.5);
     letter-spacing: 0.02em;
     opacity: 0;
-    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+    transform: translateY(10px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-sub.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 @keyframes fadeIn {
@@ -318,7 +321,13 @@ body.landing-active .cursor-trail span {
 /* --- Landing Link Cards --- */
 .landing-links {
     opacity: 0;
-    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
+    transform: translateY(10px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-links.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .landing-links-grid {
@@ -378,7 +387,7 @@ body.landing-active .cursor-trail span {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .loader.done {
@@ -538,12 +547,11 @@ body.landing-active .cursor-trail span {
 .experience-desc {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 0 0 0 192px;
 }
 
 .experience-entry.open .experience-desc {
-    max-height: 600px;
     padding: 0 0 24px 192px;
 }
 
