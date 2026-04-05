@@ -41,11 +41,10 @@
             clearInterval(loaderInterval);
             setTimeout(() => {
                 loader.classList.add('done');
-                setTimeout(() => {
-                    loader.remove();
-                    revealTitle();
-                }, 600);
-            }, 300);
+                // Start title reveal while loader is still fading
+                setTimeout(() => revealTitle(), 400);
+                setTimeout(() => loader.remove(), 1000);
+            }, 200);
         }
     }, 65);
 
@@ -55,7 +54,14 @@
         const scramblePool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*';
 
         function revealLine(lineIndex) {
-            if (lineIndex >= lines.length) return;
+            if (lineIndex >= lines.length) {
+                // All lines done — fade in subtitle and links
+                const sub = document.querySelector('.landing-sub');
+                const links = document.querySelector('.landing-links');
+                if (sub) setTimeout(() => sub.classList.add('visible'), 200);
+                if (links) setTimeout(() => links.classList.add('visible'), 400);
+                return;
+            }
             const line = lines[lineIndex];
             line.classList.add('revealed');
 
