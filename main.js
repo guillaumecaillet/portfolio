@@ -282,7 +282,27 @@
     document.querySelectorAll('.experience-header').forEach(header => {
         header.addEventListener('click', () => {
             const entry = header.parentElement;
-            entry.classList.toggle('open');
+            const desc = entry.querySelector('.experience-desc');
+            if (!desc) return;
+
+            if (entry.classList.contains('open')) {
+                // Collapse: set current height first, then animate to 0
+                desc.style.maxHeight = desc.scrollHeight + 'px';
+                requestAnimationFrame(() => {
+                    desc.style.maxHeight = '0';
+                });
+                entry.classList.remove('open');
+            } else {
+                // Expand: animate to scrollHeight, then remove inline style
+                entry.classList.add('open');
+                desc.style.maxHeight = desc.scrollHeight + 'px';
+                desc.addEventListener('transitionend', function handler() {
+                    if (entry.classList.contains('open')) {
+                        desc.style.maxHeight = 'none';
+                    }
+                    desc.removeEventListener('transitionend', handler);
+                });
+            }
         });
     });
 
