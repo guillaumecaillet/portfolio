@@ -256,15 +256,13 @@
         if (pageId === currentPage || isTransitioning) return;
         isTransitioning = true;
 
-        const current = document.querySelector(`.page--active`);
+        const current = document.querySelector('.page--active');
         const next = document.getElementById(pageId);
         if (!current || !next) { isTransitioning = false; return; }
 
-        // Exit current page
         current.classList.add('page--exit');
         current.classList.remove('page--active');
 
-        // Enter new page after brief delay
         setTimeout(() => {
             current.classList.remove('page--exit');
             next.classList.add('page--active');
@@ -272,8 +270,6 @@
             currentPage = pageId;
             updateNav();
             animatePageContent(next);
-            if (pageId === 'landing') startSphere(); else stopSphere();
-
             setTimeout(() => { isTransitioning = false; }, 400);
         }, 300);
     }
@@ -293,7 +289,6 @@
         });
     }
 
-    // Navigation click handlers
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const target = link.dataset.page;
@@ -304,7 +299,6 @@
         });
     });
 
-    // Handle browser back/forward
     window.addEventListener('hashchange', () => {
         const hash = location.hash.slice(1);
         if (hash && document.getElementById(hash)) {
@@ -312,7 +306,6 @@
         }
     });
 
-    // Initial hash navigation
     if (location.hash) {
         const hash = location.hash.slice(1);
         if (document.getElementById(hash) && hash !== 'landing') {
@@ -326,28 +319,24 @@
 
     // --- Staggered Content Animations ---
     function animatePageContent(page) {
-        // Who am I blocks
         const whoBlocks = page.querySelectorAll('.who-block');
         whoBlocks.forEach((block, i) => {
             block.classList.remove('visible');
             setTimeout(() => block.classList.add('visible'), 200 + i * 120);
         });
 
-        // Project cards
         const projectCards = page.querySelectorAll('.project-card');
         projectCards.forEach((card, i) => {
             card.classList.remove('visible');
             setTimeout(() => card.classList.add('visible'), 200 + i * 80);
         });
 
-        // Case study sections
         const caseSections = page.querySelectorAll('.case-section');
         caseSections.forEach((section, i) => {
             section.classList.remove('visible');
             setTimeout(() => section.classList.add('visible'), 300 + i * 150);
         });
 
-        // Case study metrics
         const caseMetrics = page.querySelectorAll('.case-metric');
         caseMetrics.forEach((metric, i) => {
             metric.classList.remove('visible');
@@ -380,7 +369,6 @@
         if (e.key === '1') navigateTo('landing');
         if (e.key === '2') navigateTo('who');
         if (e.key === '3') navigateTo('projects');
-        // Escape goes back to projects list from a case study
         if (e.key === 'Escape' && currentPage.startsWith('project-')) {
             navigateTo('projects');
         }
@@ -429,6 +417,61 @@
             }
         });
     });
+
+    // --- Rotating ASCII Sphere Background ---
+    const sphereEl = document.getElementById('ascii-sphere');
+    if (sphereEl) {
+        const sW = 60, sH = 30;
+        const R = 12;
+        let angle = 0;
+
+        function renderSphere() {
+            const output = [];
+            for (let j = 0; j < sH; j++) {
+                let row = '';
+                for (let i = 0; i < sW; i++) {
+                    const x = (i - sW / 2) * 0.5;
+                    const y = (j - sH / 2);
+                    const d = Math.sqrt(x * x + y * y);
+
+                    if (d < R) {
+                        const z = Math.sqrt(R * R - x * x - y * y);
+                        const rx = x * Math.cos(angle) + z * Math.sin(angle);
+                        const rz = -x * Math.sin(angle) + z * Math.cos(angle);
+
+                        const lon = Math.atan2(rz, rx);
+                        const lat = Math.asin(y / R);
+
+                        const gridLon = Math.abs(lon % 0.6) < 0.08;
+                        const gridLat = Math.abs(lat % 0.5) < 0.06;
+
+                        if (gridLon || gridLat) {
+                            const light = (rz / R + 1) * 0.5;
+                            if (light > 0.5) {
+                                row += '[ ]';
+                            } else if (light > 0.2) {
+                                row += ' . ';
+                            } else {
+                                row += ' · ';
+                            }
+                        } else {
+                            row += '   ';
+                        }
+                    } else if (Math.abs(d - R) < 0.8) {
+                        row += ' . ';
+                    } else {
+                        row += '   ';
+                    }
+                }
+                output.push(row);
+            }
+            sphereEl.textContent = output.join('\n');
+            angle += 0.008;
+            requestAnimationFrame(renderSphere);
+        }
+
+        renderSphere();
+    }
 
     // --- Initial state ---
     document.body.classList.toggle('landing-active', currentPage === 'landing');
