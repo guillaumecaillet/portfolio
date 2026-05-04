@@ -9,6 +9,7 @@
     const chars = '.:-=+*#%@';
     const w = 48, h = 24;
 
+    // Generate frames of a morphing circle/blob
     for (let f = 0; f <= 40; f++) {
         const progress = f / 40;
         let frame = '';
@@ -40,6 +41,7 @@
             clearInterval(loaderInterval);
             setTimeout(() => {
                 loader.classList.add('done');
+                // Start title reveal while loader is still fading
                 setTimeout(() => revealTitle(), 400);
                 setTimeout(() => loader.remove(), 1000);
             }, 200);
@@ -53,6 +55,7 @@
 
         function revealLine(lineIndex) {
             if (lineIndex >= lines.length) {
+                // All lines done — fade in subtitle and links
                 const sub = document.querySelector('.landing-sub');
                 const links = document.querySelector('.landing-links');
                 if (sub) setTimeout(() => sub.classList.add('visible'), 200);
@@ -76,9 +79,11 @@
 
             const interval = setInterval(() => {
                 let charIndex = 0;
+
                 nodes.forEach(n => {
                     const text = n.original;
                     let result = '';
+
                     for (let i = 0; i < text.length; i++) {
                         if (text[i] === ' ') {
                             result += ' ';
@@ -89,12 +94,15 @@
                         }
                         charIndex++;
                     }
+
                     n.node.textContent = result;
                 });
+
                 iteration += 0.5;
                 if (iteration >= totalLength) {
                     clearInterval(interval);
                     nodes.forEach(n => { n.node.textContent = n.original; });
+                    // Next line once this one is done
                     revealLine(lineIndex + 1);
                 }
             }, 30);
@@ -103,7 +111,14 @@
         revealLine(0);
     }
 
-    // --- Split-flap scramble on hover ---
+    // --- Pastel Hover on Landing Link Cards ---
+    const pastels = [
+        '#FFD1DC', '#FFDAC1', '#FFF1C1', '#D4F0C0',
+        '#C1E1FF', '#E1C1FF', '#FFE1F0', '#C1FFE1',
+        '#FFE8C1', '#D1C1FF', '#C1FFF4', '#FFC1C1',
+    ];
+
+    // --- Split-flap scramble effect ---
     const scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
     function addScramble(el, textEl) {
@@ -123,7 +138,7 @@
                         return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
                     })
                     .join('');
-                iteration += 0.5;
+                iteration += 1 / 2;
                 if (iteration >= originalText.length) {
                     clearInterval(scrambleInterval);
                     target.textContent = originalText;
@@ -137,26 +152,30 @@
         });
     }
 
+    // Oplit link
     const oplitLink = document.querySelector('.landing-company');
     if (oplitLink) addScramble(oplitLink);
+
+    // Nav links
     document.querySelectorAll('.nav-link').forEach(el => addScramble(el));
+
+    // Landing link cards & who-link-cards (scramble the label)
     document.querySelectorAll('.landing-link-card, .who-link-card').forEach(card => {
         const label = card.querySelector('.landing-link-card-label, .who-link-card-label');
         if (label) addScramble(card, label);
     });
+
+    // Who links
     document.querySelectorAll('.who-link').forEach(el => addScramble(el));
+
+    // Project cards (scramble the project name)
     document.querySelectorAll('.project-card').forEach(card => {
         const name = card.querySelector('.project-name');
         if (name) addScramble(card, name);
     });
-    document.querySelectorAll('.case-back').forEach(el => addScramble(el));
 
-    // --- Pastel hover on link cards ---
-    const pastels = [
-        '#FFD1DC', '#FFDAC1', '#FFF1C1', '#D4F0C0',
-        '#C1E1FF', '#E1C1FF', '#FFE1F0', '#C1FFE1',
-        '#FFE8C1', '#D1C1FF', '#C1FFF4', '#FFC1C1',
-    ];
+    // Case back links
+    document.querySelectorAll('.case-back').forEach(el => addScramble(el));
 
     document.querySelectorAll('.landing-link-card, .who-link-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
@@ -167,61 +186,6 @@
             card.style.backgroundColor = '';
         });
     });
-
-    // --- Rotating ASCII Sphere Background ---
-    const sphereEl = document.getElementById('ascii-sphere');
-    if (sphereEl) {
-        const sW = 60, sH = 30;
-        const R = 12;
-        let angle = 0;
-
-        function renderSphere() {
-            const output = [];
-            for (let j = 0; j < sH; j++) {
-                let row = '';
-                for (let i = 0; i < sW; i++) {
-                    const x = (i - sW / 2) * 0.5;
-                    const y = (j - sH / 2);
-                    const d = Math.sqrt(x * x + y * y);
-
-                    if (d < R) {
-                        const z = Math.sqrt(R * R - x * x - y * y);
-                        const rx = x * Math.cos(angle) + z * Math.sin(angle);
-                        const rz = -x * Math.sin(angle) + z * Math.cos(angle);
-
-                        const lon = Math.atan2(rz, rx);
-                        const lat = Math.asin(y / R);
-
-                        const gridLon = Math.abs(lon % 0.6) < 0.08;
-                        const gridLat = Math.abs(lat % 0.5) < 0.06;
-
-                        if (gridLon || gridLat) {
-                            const light = (rz / R + 1) * 0.5;
-                            if (light > 0.5) {
-                                row += '[ ]';
-                            } else if (light > 0.2) {
-                                row += ' . ';
-                            } else {
-                                row += ' · ';
-                            }
-                        } else {
-                            row += '   ';
-                        }
-                    } else if (Math.abs(d - R) < 0.8) {
-                        row += ' . ';
-                    } else {
-                        row += '   ';
-                    }
-                }
-                output.push(row);
-            }
-            sphereEl.textContent = output.join('\n');
-            angle += 0.008;
-            requestAnimationFrame(renderSphere);
-        }
-
-        renderSphere();
-    }
 
     // --- Page Navigation ---
     const pages = document.querySelectorAll('.page');
@@ -252,7 +216,10 @@
     }
 
     function updateNav() {
+        // Toggle body class for landing-specific styles (cursor glow, etc.)
         document.body.classList.toggle('landing-active', currentPage === 'landing');
+
+        // Highlight "Projects" nav link when on a project detail page
         const isProjectPage = currentPage.startsWith('project-');
         document.querySelectorAll('.nav-link').forEach(link => {
             if (isProjectPage && link.dataset.page === 'projects') {
@@ -266,7 +233,7 @@
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const target = link.dataset.page;
-            if (!target) return;
+            if (!target) return; // Let external links work normally
             e.preventDefault();
             location.hash = target;
             navigateTo(target);
@@ -320,24 +287,23 @@
 
     // --- Cursor ASCII Trail ---
     const trail = document.getElementById('cursor-trail');
-    if (trail) {
-        const trailChars = '.:*+=#@%&$~^!?/\\|<>{}[]()';
-        let lastTrailTime = 0;
-        const trailInterval = 20;
+    const trailChars = '.:*+=#@%&$~^!?/\\|<>{}[]()';
+    let lastTrailTime = 0;
+    const trailInterval = 20;
 
-        document.addEventListener('mousemove', (e) => {
-            const now = Date.now();
-            if (now - lastTrailTime < trailInterval) return;
-            lastTrailTime = now;
+    document.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        if (now - lastTrailTime < trailInterval) return;
+        lastTrailTime = now;
 
-            const span = document.createElement('span');
-            span.textContent = trailChars[Math.floor(Math.random() * trailChars.length)];
-            span.style.left = e.clientX + 'px';
-            span.style.top = e.clientY + 'px';
-            trail.appendChild(span);
-            setTimeout(() => span.remove(), 1500);
-        });
-    }
+        const span = document.createElement('span');
+        span.textContent = trailChars[Math.floor(Math.random() * trailChars.length)];
+        span.style.left = e.clientX + 'px';
+        span.style.top = e.clientY + 'px';
+        trail.appendChild(span);
+
+        setTimeout(() => span.remove(), 1500);
+    });
 
     // --- Keyboard Navigation ---
     document.addEventListener('keydown', (e) => {
@@ -349,13 +315,15 @@
         }
     });
 
-    // --- External links handler ---
+    // --- External links handler (safety net) ---
     document.addEventListener('click', (e) => {
         const link = e.target.closest('a[href]');
         if (!link) return;
         const href = link.getAttribute('href');
+        // Skip internal SPA navigation links
         if (link.hasAttribute('data-page')) return;
         if (href.startsWith('#')) return;
+        // Handle external links
         if (href.startsWith('mailto:') || href.startsWith('tel:')) {
             window.location.href = href;
         } else if (href.startsWith('http') || href.startsWith('//')) {
@@ -371,10 +339,14 @@
             if (!desc) return;
 
             if (entry.classList.contains('open')) {
+                // Collapse: set current height first, then animate to 0
                 desc.style.maxHeight = desc.scrollHeight + 'px';
-                requestAnimationFrame(() => { desc.style.maxHeight = '0'; });
+                requestAnimationFrame(() => {
+                    desc.style.maxHeight = '0';
+                });
                 entry.classList.remove('open');
             } else {
+                // Expand: animate to scrollHeight, then remove inline style
                 entry.classList.add('open');
                 desc.style.maxHeight = desc.scrollHeight + 'px';
                 desc.addEventListener('transitionend', function handler() {
