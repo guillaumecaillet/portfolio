@@ -359,6 +359,61 @@
         });
     });
 
+    // --- Rotating ASCII Sphere Background ---
+    const sphereEl = document.getElementById('ascii-sphere');
+    if (sphereEl) {
+        const sW = 60, sH = 30;
+        const R = 12;
+        let angle = 0;
+
+        function renderSphere() {
+            const output = [];
+            for (let j = 0; j < sH; j++) {
+                let row = '';
+                for (let i = 0; i < sW; i++) {
+                    const x = (i - sW / 2) * 0.5;
+                    const y = (j - sH / 2);
+                    const d = Math.sqrt(x * x + y * y);
+
+                    if (d < R) {
+                        const z = Math.sqrt(R * R - x * x - y * y);
+                        const rx = x * Math.cos(angle) + z * Math.sin(angle);
+                        const rz = -x * Math.sin(angle) + z * Math.cos(angle);
+
+                        const lon = Math.atan2(rz, rx);
+                        const lat = Math.asin(y / R);
+
+                        const gridLon = Math.abs(lon % 0.6) < 0.08;
+                        const gridLat = Math.abs(lat % 0.5) < 0.06;
+
+                        if (gridLon || gridLat) {
+                            const light = (rz / R + 1) * 0.5;
+                            if (light > 0.5) {
+                                row += '[ ]';
+                            } else if (light > 0.2) {
+                                row += ' . ';
+                            } else {
+                                row += ' · ';
+                            }
+                        } else {
+                            row += '   ';
+                        }
+                    } else if (Math.abs(d - R) < 0.8) {
+                        row += ' . ';
+                    } else {
+                        row += '   ';
+                    }
+                }
+                output.push(row);
+            }
+            sphereEl.textContent = output.join('\n');
+            angle += 0.008;
+            requestAnimationFrame(renderSphere);
+        }
+
+        renderSphere();
+    }
+
     // --- Initial state ---
     document.body.classList.toggle('landing-active', currentPage === 'landing');
     setTimeout(() => {
