@@ -197,24 +197,20 @@
         if (pageId === currentPage || isTransitioning) return;
         isTransitioning = true;
 
-        const current = document.querySelector(`.page--active`);
+        const current = document.querySelector('.page--active');
         const next = document.getElementById(pageId);
         if (!current || !next) { isTransitioning = false; return; }
 
-        // Exit current page
         current.classList.add('page--exit');
         current.classList.remove('page--active');
 
-        // Enter new page after brief delay
         setTimeout(() => {
             current.classList.remove('page--exit');
             next.classList.add('page--active');
-            // Scroll to top for case study pages
             next.scrollTop = 0;
             currentPage = pageId;
             updateNav();
             animatePageContent(next);
-
             setTimeout(() => { isTransitioning = false; }, 400);
         }, 300);
     }
@@ -234,7 +230,6 @@
         });
     }
 
-    // Navigation click handlers
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const target = link.dataset.page;
@@ -245,7 +240,6 @@
         });
     });
 
-    // Handle browser back/forward
     window.addEventListener('hashchange', () => {
         const hash = location.hash.slice(1);
         if (hash && document.getElementById(hash)) {
@@ -253,7 +247,6 @@
         }
     });
 
-    // Initial hash navigation
     if (location.hash) {
         const hash = location.hash.slice(1);
         if (document.getElementById(hash) && hash !== 'landing') {
@@ -267,28 +260,24 @@
 
     // --- Staggered Content Animations ---
     function animatePageContent(page) {
-        // Who am I blocks
         const whoBlocks = page.querySelectorAll('.who-block');
         whoBlocks.forEach((block, i) => {
             block.classList.remove('visible');
             setTimeout(() => block.classList.add('visible'), 200 + i * 120);
         });
 
-        // Project cards
         const projectCards = page.querySelectorAll('.project-card');
         projectCards.forEach((card, i) => {
             card.classList.remove('visible');
             setTimeout(() => card.classList.add('visible'), 200 + i * 80);
         });
 
-        // Case study sections
         const caseSections = page.querySelectorAll('.case-section');
         caseSections.forEach((section, i) => {
             section.classList.remove('visible');
             setTimeout(() => section.classList.add('visible'), 300 + i * 150);
         });
 
-        // Case study metrics
         const caseMetrics = page.querySelectorAll('.case-metric');
         caseMetrics.forEach((metric, i) => {
             metric.classList.remove('visible');
@@ -321,7 +310,6 @@
         if (e.key === '1') navigateTo('landing');
         if (e.key === '2') navigateTo('who');
         if (e.key === '3') navigateTo('projects');
-        // Escape goes back to projects list from a case study
         if (e.key === 'Escape' && currentPage.startsWith('project-')) {
             navigateTo('projects');
         }
