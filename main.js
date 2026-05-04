@@ -40,10 +40,15 @@
         } else {
             clearInterval(loaderInterval);
             setTimeout(() => {
-                loader.classList.add('done');
-                // Start title reveal while loader is still fading
-                setTimeout(() => revealTitle(), 400);
-                setTimeout(() => loader.remove(), 1000);
+                // Char blur: blur ASCII chars before fading loader
+                loaderAscii.style.filter = 'blur(18px)';
+                // Fade out loader after blur is underway
+                setTimeout(() => {
+                    loader.classList.add('done');
+                    startSphere();
+                    setTimeout(() => revealTitle(), 400);
+                    setTimeout(() => loader.remove(), 1000);
+                }, 250);
             }, 200);
         }
     }, 65);
@@ -109,6 +114,60 @@
         }
 
         revealLine(0);
+    }
+
+    // --- ASCII Sphere Background ---
+    const sphereEl = document.getElementById('ascii-sphere');
+    const sW = 56, sH = 28;
+    const sAspect = (sW / sH) / 2.15;
+    const sR = 0.82;
+    const sChars = ' ..,,::;;!!**##%%@@';
+    const sLx = 0.57, sLy = -0.40, sLz = 0.72;
+    const sLLen = Math.sqrt(sLx*sLx + sLy*sLy + sLz*sLz);
+    let sAngle = 0;
+    let sRunning = false;
+    let sTimer = null;
+
+    function renderSphereFrame() {
+        const cosA = Math.cos(sAngle), sinA = Math.sin(sAngle);
+        let result = '';
+        for (let row = 0; row < sH; row++) {
+            for (let col = 0; col < sW; col++) {
+                const sx = (col / sW * 2 - 1) * sAspect;
+                const sy = (row / sH * 2 - 1);
+                const r2 = sx*sx + sy*sy;
+                if (r2 > sR*sR) { result += ' '; continue; }
+                const sz = Math.sqrt(sR*sR - r2);
+                const nx = sx*cosA + sz*sinA;
+                const ny = sy;
+                const nz = -sx*sinA + sz*cosA;
+                let L = (nx*sLx + ny*sLy + nz*sLz) / sLLen;
+                L = Math.max(0.05, L);
+                const lon = Math.atan2(nx, nz);
+                const lat = Math.asin(Math.max(-1, Math.min(1, ny / sR)));
+                const isGrid = Math.abs(Math.sin(lon * 6)) < 0.10 || Math.abs(Math.sin(lat * 4)) < 0.10;
+                if (isGrid) L = Math.max(0.03, L * 0.25);
+                result += sChars[Math.floor(L * (sChars.length - 1))];
+            }
+            result += '\n';
+        }
+        return result;
+    }
+
+    function startSphere() {
+        if (sRunning || !sphereEl) return;
+        sRunning = true;
+        (function tick() {
+            if (!sRunning) return;
+            sphereEl.textContent = renderSphereFrame();
+            sAngle += 0.009;
+            sTimer = setTimeout(tick, 80);
+        })();
+    }
+
+    function stopSphere() {
+        sRunning = false;
+        clearTimeout(sTimer);
     }
 
     // --- Pastel Hover on Landing Link Cards ---

@@ -481,6 +481,23 @@ body.landing-active .cursor-trail span {
     }
 }
 
+/* --- ASCII Sphere Background --- */
+.ascii-sphere {
+    position: absolute;
+    top: 50%;
+    right: -2%;
+    transform: translateY(-50%);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.48rem;
+    line-height: 1.1;
+    color: rgba(26, 26, 26, 0.09);
+    white-space: pre;
+    letter-spacing: 0.06em;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}
+
 /* --- Loader --- */
 .loader {
     position: fixed;
@@ -506,6 +523,7 @@ body.landing-active .cursor-trail span {
     text-align: center;
     white-space: pre;
     letter-spacing: 0.05em;
+    transition: filter 0.5s ease;
 }
 
 /* --- Page Title (shared) --- */
