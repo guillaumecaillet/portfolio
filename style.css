@@ -2415,16 +2415,10 @@ body:not(.landing-active) .lang-divider {
     color: rgba(245, 240, 235, 0.95);
 }
 
-/* On landing (white bg), invert to a light footer */
-body.landing-active .site-footer {
-    background: rgba(255, 255, 255, 0.85);
-    border-top-color: rgba(26, 26, 26, 0.08);
-    color: rgba(26, 26, 26, 0.55);
+/* Hide footer on landing — full-screen splash, footer visible on all other pages */
+#landing .site-footer {
+    display: none;
 }
-body.landing-active .footer-name { color: rgba(26, 26, 26, 0.95); }
-body.landing-active .footer-link { color: rgba(26, 26, 26, 0.65); }
-body.landing-active .footer-link:hover { color: rgba(26, 26, 26, 0.95); }
-body.landing-active .footer-sep { color: rgba(26, 26, 26, 0.25); }
 
 @media (max-width: 768px) {
     .site-footer { padding: 16px 24px; font-size: 0.72rem; }
