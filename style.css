@@ -96,10 +96,16 @@ body.loading .nav {
     pointer-events: none;
 }
 
-body.landing-active .nav {
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(16px) saturate(140%);
-    -webkit-backdrop-filter: blur(16px) saturate(140%);
+.nav::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    bottom: -24px;
+    z-index: -1;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
 }
 
 .nav-logo {
@@ -2409,9 +2415,11 @@ body:not(.landing-active) .lang-divider {
     color: rgba(245, 240, 235, 0.95);
 }
 
-/* On landing, hide footer — it's a full-screen splash */
-#landing .site-footer {
-    display: none;
+/* On landing (white bg), invert to a light footer */
+body.landing-active .site-footer {
+    background: rgba(255, 255, 255, 0.85);
+    border-top-color: rgba(26, 26, 26, 0.08);
+    color: rgba(26, 26, 26, 0.55);
 }
 body.landing-active .footer-name { color: rgba(26, 26, 26, 0.95); }
 body.landing-active .footer-link { color: rgba(26, 26, 26, 0.65); }
