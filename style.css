@@ -157,8 +157,8 @@ body.landing-active .nav {
     position: fixed;
     inset: 0;
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    flex-direction: column;       /* stack content + page-footer vertically */
+    align-items: center;          /* horizontal centring */
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
@@ -166,7 +166,7 @@ body.landing-active .nav {
         opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
         transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
         visibility 0.6s;
-    padding: 100px 48px 48px;
+    padding: 100px 48px 0;        /* no bottom padding: footer lives inside .page */
     overflow-y: auto;
 }
 
@@ -185,7 +185,6 @@ body.landing-active .nav {
 }
 
 #landing {
-    align-items: center;
     background-color: #ffffff;
     color: #1a1a1a;
     --text: #1a1a1a;
@@ -193,7 +192,8 @@ body.landing-active .nav {
     --text-dim: rgba(26, 26, 26, 0.2);
     --border: rgba(26, 26, 26, 0.08);
     --border-hover: rgba(26, 26, 26, 0.15);
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #landing .nav-logo svg circle {
@@ -223,15 +223,34 @@ body.landing-active .cursor-trail span {
     display: inline-block;
 }
 
-/* --- Landing Page --- */
+/* --- Landing Page ---
+   3-row grid: spacer · hero · spacer ; with the bottom context anchored to the
+   end of row 3 so the hero stays at the geometric centre of the page.
+*/
 .landing {
     width: 100%;
     max-width: 900px;
-    display: flex;
-    flex-direction: column;
-    gap: 80px;
+    display: grid;
+    grid-template-rows: 1fr auto 1fr;
+    align-items: stretch;
+    min-height: 100%;
     position: relative;
     z-index: 1;
+}
+
+.landing-hero {
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.landing-context {
+    grid-row: 3;
+    align-self: end;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-bottom: 24px;
 }
 
 .landing-title {
@@ -260,6 +279,11 @@ body.landing-active .cursor-trail span {
 
 .landing-sub {
     margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
     font-size: 0.875rem;
     color: rgba(26, 26, 26, 0.5);
     letter-spacing: 0.02em;
@@ -272,10 +296,58 @@ body.landing-active .cursor-trail span {
         transform 1s cubic-bezier(0.01, 0.73, 0.42, 0.99);
 }
 
+.landing-sub-sep {
+    color: rgba(26, 26, 26, 0.3);
+    line-height: 1;
+}
+
+.landing-sub-loc {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    line-height: 1;
+}
+
+.landing-sub-loc .pin-icon {
+    flex-shrink: 0;
+    color: rgba(20, 0, 160, 0.85);
+    transform: translateY(-0.5px);
+}
+
+body.landing-active .landing-sub-sep { color: rgba(255, 255, 255, 0.3); }
+body.landing-active .landing-sub-loc .pin-icon { color: rgba(255, 255, 255, 0.85); }
+
 .landing-sub.visible {
     opacity: 1;
     filter: blur(0);
     transform: translateY(0);
+}
+
+.landing-pitch {
+    margin-top: 24px;
+    max-width: 620px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(26, 26, 26, 0.75);
+    letter-spacing: 0.005em;
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(8px);
+    transition:
+        opacity 1s cubic-bezier(0.01, 0.73, 0.42, 0.99),
+        filter  1s cubic-bezier(0.01, 0.73, 0.42, 0.99),
+        transform 1s cubic-bezier(0.01, 0.73, 0.42, 0.99);
+}
+
+.landing-pitch.visible {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}
+
+.landing-pitch strong {
+    color: rgba(26, 26, 26, 0.95);
+    font-weight: 500;
 }
 
 @keyframes fadeIn {
@@ -848,53 +920,26 @@ body:not(.landing-active) .cursor-follower {
 .projects-list {
     display: flex;
     flex-direction: column;
+    gap: 14px;
 }
 
 .project-card {
     display: block;
-    border-top: 1px solid var(--border);
-    transition: all var(--transition-fast);
+    transition: border-color var(--transition-fast);
     position: relative;
 }
 
-.project-card:last-child {
-    border-bottom: 1px solid var(--border);
-}
-
-.project-card::before {
-    content: '';
-    position: absolute;
-    inset: 0 -20px;
-    background: var(--glow);
-    border-radius: var(--radius);
-    opacity: 0;
-    transition: opacity var(--transition-fast);
-}
-
-.project-card:hover::before {
-    opacity: 1;
-}
-
-.project-card:hover {
-    border-color: var(--border-hover);
-}
-
-.project-card:hover + .project-card {
-    border-top-color: var(--border-hover);
-}
+/* Halo / shift-on-hover removed per design feedback */
+.project-card::before { content: none; }
+.project-card:hover::before { opacity: 0; }
 
 .project-card-inner {
     display: flex;
     align-items: center;
     gap: 24px;
-    padding: 28px 0;
+    padding: 6px 0;
     position: relative;
     z-index: 1;
-    transition: padding var(--transition-fast);
-}
-
-.project-card:hover .project-card-inner {
-    padding-left: 8px;
 }
 
 .project-index {
@@ -1151,6 +1196,74 @@ body:not(.landing-active) .cursor-follower {
 
 .case-section p:last-child {
     margin-bottom: 0;
+}
+
+/* ===================================
+   Readable surfaces — semi-opaque dark backgrounds for text blocks
+   so the galaxy canvas doesn't distract from reading.
+   Default = dark anthracite (used on every page with galaxy bg).
+   Landing page overrides below (clean white page, no boxes needed).
+   =================================== */
+.who-intro,
+.who-section,
+.case-section,
+.case-header,
+.project-card,
+.project-other-list {
+    position: relative;
+    background: rgba(26, 26, 28, 0.72);
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 28px 32px;
+}
+
+/* Project cards — clean surface, no hover halo per design feedback */
+.project-card {
+    background: rgba(26, 26, 28, 0.62);
+    padding: 18px 24px;
+}
+
+/* Other-projects list as one surface */
+.project-other-list {
+    padding: 20px 28px;
+}
+
+/* Landing pitch — masked on landing (white page) so the galaxy doesn't bleed */
+.landing-pitch {
+    background: rgba(0, 0, 0, 0.025);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    padding: 22px 26px;
+    margin-top: 32px;
+}
+
+/* On case study pages, the header & sections breathe a bit more */
+.case-header {
+    padding: 32px 36px;
+    margin-bottom: 24px;
+}
+.case-section {
+    margin-bottom: 20px;
+}
+
+/* Caption — meta commentary under code/diff blocks */
+.case-section .case-caption {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: rgba(230, 195, 74, 0.85);
+    margin-top: 16px;
+    padding-left: 12px;
+    border-left: 2px solid rgba(230, 195, 74, 0.35);
+}
+
+.case-section .case-caption em {
+    color: #e6c34a;
+    font-style: normal;
+    font-weight: 500;
 }
 
 .case-list {
@@ -1599,6 +1712,138 @@ body:not(.landing-active) .lang-divider {
 }
 
 /* ===================================
+   Case study image — graceful fallback
+   =================================== */
+.case-image--missing {
+    background: var(--bg-elevated);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+    padding: 32px 24px;
+}
+.case-image--missing img,
+.case-image--missing figcaption {
+    display: none;
+}
+.case-image--missing::before {
+    content: 'Image — pending upload';
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+.case-image--missing::after {
+    content: attr(data-placeholder);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    text-align: center;
+    max-width: 460px;
+}
+
+/* ===================================
+   Other projects — simple list (non-clickable)
+   =================================== */
+.project-other-list {
+    list-style: none;
+    padding: 8px 0 0;
+    margin: 0;
+}
+
+.project-other-item {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+}
+
+.project-other-item:last-child {
+    border-bottom: none;
+}
+
+.project-other-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text);
+    flex-shrink: 0;
+}
+
+.project-other-type {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.02em;
+}
+
+@media (max-width: 600px) {
+    .project-other-item {
+        flex-direction: column;
+        gap: 4px;
+    }
+}
+
+/* ===================================
+   Project company tag (above name)
+   =================================== */
+.project-company {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 8px;
+    transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1.3;
+}
+
+.project-card:hover .project-company {
+    color: var(--text);
+    border-color: var(--border-hover);
+}
+
+/* Subtle accent per company — optional */
+.project-company--oplit {
+    color: rgba(99, 132, 255, 0.85);
+    border-color: rgba(99, 132, 255, 0.25);
+}
+.project-card:hover .project-company--oplit {
+    color: #8ea6ff;
+    border-color: rgba(99, 132, 255, 0.45);
+}
+
+.project-company--prestashop {
+    color: rgba(165, 132, 230, 0.8);
+    border-color: rgba(165, 132, 230, 0.22);
+}
+.project-card:hover .project-company--prestashop {
+    color: #c2a8ee;
+    border-color: rgba(165, 132, 230, 0.4);
+}
+
+.project-company--perso {
+    color: rgba(245, 240, 235, 0.5);
+    border-color: var(--border);
+    border-style: dashed;
+}
+.project-card:hover .project-company--perso {
+    color: var(--text);
+    border-color: var(--border-hover);
+}
+
+/* ===================================
    Inline Prototypes — Shared
    =================================== */
 .proto-table-wrapper {
@@ -2018,95 +2263,176 @@ body:not(.landing-active) .lang-divider {
 }
 
 /* ===================================
-   Sticky Bar Before/After
+   Sticky Action Bar Prototype
    =================================== */
-.proto-sticky-compare {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
+.proto-stickybar-wrapper {
     margin-top: 24px;
+}
+
+.proto-stickybar {
+    background: #3f3fb5;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    font-family: 'IBM Plex Mono', monospace;
+    max-width: 720px;
+}
+
+.proto-stickybar-capa {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: -4px;
+}
+.proto-stickybar-capa-pill {
+    background: #5252d6;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.62rem;
+    font-weight: 600;
+    color: white;
+}
+
+.proto-stickybar-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.proto-stickybar-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: white;
+    cursor: default;
+}
+
+.proto-stickybar-checkbox {
+    font-size: 0.85rem;
+    line-height: 1;
+}
+
+.proto-stickybar-summary {
+    flex: 1;
+    text-align: right;
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+}
+
+.proto-stickybar-close {
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.85rem;
+    cursor: default;
+    padding: 0 4px;
+}
+
+.proto-stickybar-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
     flex-wrap: wrap;
 }
 
-.proto-sticky-side {
-    flex: 1;
-    min-width: 180px;
-}
-
-.proto-sticky-label-tag {
-    font-size: 0.62rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 10px;
-    padding: 2px 8px;
-    border-radius: 3px;
-    display: inline-block;
-}
-.proto-sticky-label-tag--before { background: rgba(232,80,80,0.15);  color: #e85050; }
-.proto-sticky-label-tag--after  { background: rgba(76,175,110,0.15); color: #4caf6e; }
-
-.proto-sticky-gantt {
-    background: var(--bg-elevated);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    position: relative;
-}
-
-.proto-sticky-row {
-    height: 24px;
-    position: relative;
-}
-
-.proto-sticky-bar {
-    position: absolute;
-    height: 20px;
-    border-radius: 3px;
-    background: #3f64ff;
+.proto-stickybar-actions {
     display: flex;
     align-items: center;
-    overflow: visible;
+    gap: 6px;
+    flex-wrap: wrap;
 }
 
-.proto-sticky-bar--scrolled { left: -10px; width: calc(100% + 10px); }
-.proto-sticky-bar--2 { background: #5577ff; opacity: 0.7; }
-
-.proto-sticky-fixed-label {
-    position: sticky;
-    left: 0;
-    background: #3f64ff;
-    padding: 0 6px;
-    font-size: 0.6rem;
-    font-family: 'IBM Plex Mono', monospace;
+.proto-stickybar-chip {
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.18);
     color: white;
-    font-weight: 600;
-    border-radius: 3px 0 0 3px;
-    white-space: nowrap;
-    z-index: 1;
-}
-
-.proto-sticky-bar-content {
-    flex: 1;
-}
-
-.proto-sticky-question {
-    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
     font-size: 0.65rem;
-    color: #e85050;
     font-family: 'IBM Plex Mono', monospace;
-    margin-top: 4px;
+    font-weight: 500;
+    cursor: default;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
 }
 
-.proto-sticky-vs {
-    color: var(--text-muted);
-    font-size: 0.75rem;
-    align-self: center;
+.proto-stickybar-chip--more {
+    padding: 5px 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.proto-stickybar-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 6px;
+    padding: 2px;
+}
+
+.proto-stickybar-navbtn {
+    background: transparent;
+    border: none;
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    font-size: 0.65rem;
     font-family: 'IBM Plex Mono', monospace;
-    flex-shrink: 0;
+    cursor: default;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.proto-stickybar-caption {
+    margin-top: 8px;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-style: italic;
+}
+
+.proto-stickybar-caption--menu {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.proto-stickybar-menu {
+    margin-top: 16px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 220px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+.proto-stickybar-menu-item {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 /* ===================================
@@ -2119,4 +2445,235 @@ body:not(.landing-active) .lang-divider {
     .proto-workflow-step { min-width: 80px; padding: 8px 8px; }
     .proto-sticky-compare { flex-direction: column; }
     .proto-gantt-wrapper { padding: 8px; }
+}
+
+/* ===================================
+   Site footer
+   Lives inside each .page (cloned via JS) so it sits at the end of the
+   page's scroll area. The user scrolls down to reveal it.
+   The original template at body level is hidden.
+   =================================== */
+.site-footer.footer-template {
+    display: none;
+}
+
+.site-footer {
+    /* Normal flow at the end of .page (flex-column). */
+    width: calc(100% + 96px);     /* span across .page horizontal padding */
+    margin-left: -48px;
+    margin-right: -48px;
+    margin-top: auto;             /* push to the very bottom of the flex column */
+    padding: 16px 48px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(20, 20, 22, 0.85);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    font-size: 0.78rem;
+    color: rgba(245, 240, 235, 0.65);
+    letter-spacing: 0.02em;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footer-left,
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.footer-name {
+    color: rgba(245, 240, 235, 0.9);
+    font-weight: 500;
+}
+
+.footer-sep {
+    color: rgba(245, 240, 235, 0.25);
+}
+
+.footer-link {
+    color: rgba(245, 240, 235, 0.65);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.footer-link:hover {
+    color: rgba(245, 240, 235, 0.95);
+}
+
+/* On landing (white bg), invert to a light footer */
+body.landing-active .site-footer {
+    background: rgba(255, 255, 255, 0.85);
+    border-top-color: rgba(26, 26, 26, 0.08);
+    color: rgba(26, 26, 26, 0.55);
+}
+body.landing-active .footer-name { color: rgba(26, 26, 26, 0.95); }
+body.landing-active .footer-link { color: rgba(26, 26, 26, 0.65); }
+body.landing-active .footer-link:hover { color: rgba(26, 26, 26, 0.95); }
+body.landing-active .footer-sep { color: rgba(26, 26, 26, 0.25); }
+
+@media (max-width: 768px) {
+    .site-footer { padding: 16px 24px; font-size: 0.72rem; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+/* ===================================
+   Projects minimap (thematic compass)
+   =================================== */
+.projects {
+    position: relative;
+}
+
+.minimap {
+    position: fixed;
+    top: 110px;
+    right: 32px;
+    width: 240px;
+    z-index: 5;
+    padding: 16px 16px 14px;
+    background: rgba(26, 26, 28, 0.78);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    color: rgba(245, 240, 235, 0.9);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+}
+
+body[data-page="projects"] .minimap {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.minimap-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(245, 240, 235, 0.45);
+    margin-bottom: 10px;
+}
+
+.minimap-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+/* Thematic wedges — subtle, lit up when their projects are hovered */
+.minimap-wedge {
+    fill: rgba(255, 255, 255, 0.025);
+    transition: fill 0.4s ease;
+    pointer-events: none;
+}
+.minimap-wedge.is-active {
+    fill: rgba(20, 80, 220, 0.16);
+}
+
+/* Cardinal labels — text rotates with the dial */
+.minimap-cardinal {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 6px;
+    letter-spacing: 0.15em;
+    fill: rgba(245, 240, 235, 0.4);
+    text-transform: uppercase;
+    transition: fill 0.35s ease, font-weight 0.35s ease;
+    pointer-events: none;
+}
+.minimap-cardinal.is-active {
+    fill: rgba(245, 240, 235, 0.95);
+    font-weight: 600;
+}
+
+.minimap-star {
+    fill: rgba(245, 240, 235, 0.5);
+    transition: fill 0.25s ease, r 0.25s ease;
+    cursor: default;
+}
+.minimap-star.is-active {
+    fill: #ffffff;
+    r: 2.4;
+}
+
+.minimap-line,
+.minimap-pointer {
+    transition: all 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.minimap-pointer {
+    opacity: 0;
+}
+.minimap-pointer circle:first-child {
+    stroke: rgba(255, 255, 255, 0.95);
+}
+.minimap-pointer circle:last-child {
+    fill: #ffffff;
+}
+
+.minimap.is-pointing .minimap-pointer {
+    opacity: 1;
+}
+
+.minimap-caption {
+    margin-top: 12px;
+    font-size: 0.72rem;
+    line-height: 1.45;
+    color: rgba(245, 240, 235, 0.65);
+    min-height: 2.8em;
+}
+
+.minimap-caption .caption-theme {
+    display: inline-block;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(245, 240, 235, 0.4);
+    margin-right: 6px;
+}
+
+/* Hide on smaller screens — list remains the primary affordance */
+@media (max-width: 1100px) {
+    .minimap { display: none; }
+}
+
+/* ===================================
+   Fallback toast (soft 404)
+   =================================== */
+.fallback-toast {
+    position: fixed;
+    bottom: 96px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    z-index: 100;
+    padding: 12px 20px;
+    background: rgba(20, 0, 160, 0.96);
+    color: white;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    letter-spacing: 0.01em;
+    box-shadow: 0 10px 30px rgba(20, 0, 160, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fallback-toast.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
