@@ -256,6 +256,7 @@ body.landing-active .cursor-trail span {
     flex-direction: column;
     gap: 28px;
     margin-top: 32px;
+    padding-bottom: 120px;
 }
 
 .landing-title {
