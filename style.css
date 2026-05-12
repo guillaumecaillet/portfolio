@@ -270,6 +270,7 @@ body.landing-active .cursor-trail span {
 
 .landing-title .line {
     display: block;
+    text-wrap: balance;
     opacity: 0;
     filter: blur(14px);
     transform: translateY(10px);
