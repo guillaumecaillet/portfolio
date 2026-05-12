@@ -240,8 +240,8 @@ body.landing-active .cursor-trail span {
     max-width: 1100px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    min-height: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
     position: relative;
     z-index: 1;
 }
