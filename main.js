@@ -690,7 +690,8 @@
             'who.date.stereosuper': 'Aug. 2015 — Sept. 2017',
             'who.date.teacher':     '2025 — Present',
             'who.date.mentor':      '2024 — Present',
-            'who.date.speaker':     '2021 — Present',
+            'who.date.ecv':         '2021 — Present',
+            'who.date.designschool': '2025',
             'who.date.freelance':   '2020 — Present',
 
             'who.role.oplit':       'Senior Product Designer',
@@ -701,7 +702,9 @@
             'who.role.sncf':        'UX Designer — Internship',
             'who.role.stereosuper': 'UX Designer — Work-study',
             'who.role.teacher':     'Teacher',
-            'who.role.speaker':     'Speaker',
+            'who.role.ecv':         'Speaker & Jury',
+            'who.role.designschool': 'Lecturer',
+            'who.company.designschool': 'École de Design Nantes',
             'who.role.freelance':   'Freelancing',
 
             'who.desc.oplit':       '<p><strong>Industrial scheduling &amp; capacity planning SaaS.</strong> My users — schedulers, planners, shop-floor operators — work in luxury watchmaking, automotive, aerospace, and precision engineering. 3 years of accumulated research, 9+ clients interviewed.</p><p><strong>Opal Design System ownership:</strong> full audit (CRITICAL / WARNING / INFO grading), 44 components rebuilt, 2,634 token bindings applied (from 92), 3 icon libraries → 1, 100% component compliance (from 9%). Dev-alignment workflow: Figma → Notion doc → Storybook/Chromatic → Linear closed. 11 components in dev review. Estimated gain: +20–30% per feature.</p><p><strong>Automation:</strong> 1,755 token bindings applied in a single session using Claude Code with the Figma MCP (Model Context Protocol) — 45k nodes analysed, 879 auto-corrections.</p><p><strong>Frameworks:</strong> FOCUSED spec template (a 7-step structure for product specs in Notion), FUC (Functional Use Cases), Discovery Client, Internal Audit. Specs written as "when X → then Y" in Linear.</p><p><strong>Figma plugin:</strong> built <em>Local Components Collector</em> in JavaScript (Figma Plugin API) — reduces DS audit from days to hours.</p>',
@@ -713,7 +716,8 @@
             'who.desc.stereosuper': '<p>An apprentice for 2 years and trained as a web designer with a specialization in UX design, working on several projects and building up solid experience in a field I\'m passionate about.</p>',
             'who.desc.teacher':     '<p>Teaching the basics of UI Design to young designers.</p>',
             'who.desc.mentor':      '<p>Helping designers, no matter their seniority, to grow and giving them feedbacks about their projects or career perspectives.</p>',
-            'who.desc.speaker':     '<ul><li>Eco-design &amp; Design System 2023, 2024, 2025 (Speaker)</li><li>Design System \'22-\'23 (Annual project) — 100% students graduated</li><li>User Research Methods \'21-\'22 (Lecturer)</li></ul>',
+            'who.desc.ecv':         '<ul><li>Design System workshop with M1 UX — building a foundation &amp; understanding the need for a design system (2026)</li><li>Jury M2 UX — end-of-study projects (2026)</li><li>Eco-design &amp; Design System 2023, 2024, 2025 (Speaker)</li><li>Design System \'22-\'23 (Annual project) — 100% students graduated</li><li>User Research Methods \'21-\'22 (Lecturer)</li></ul>',
+            'who.desc.designschool': '<ul><li>1st year — Design &amp; UX/UI fundamentals</li><li>2nd year — Figma training</li></ul>',
 
             'who.mentoring.link':  'Book a mentoring session with Guillaume Caillet on ADPList →',
             'who.articles.text':   'I write about <strong>design</strong>, <strong>design systems</strong>, and <strong>user research</strong> — pragmatic notes from the field.',
@@ -947,7 +951,8 @@
             'who.date.stereosuper': 'Août 2015 — Sept. 2017',
             'who.date.teacher':     '2025 — Aujourd\'hui',
             'who.date.mentor':      '2024 — Aujourd\'hui',
-            'who.date.speaker':     '2021 — Aujourd\'hui',
+            'who.date.ecv':         '2021 — Aujourd\'hui',
+            'who.date.designschool': '2025',
             'who.date.freelance':   '2020 — Aujourd\'hui',
 
             'who.role.oplit':       'Senior Product Designer',
@@ -958,7 +963,9 @@
             'who.role.sncf':        'UX Designer — Stage',
             'who.role.stereosuper': 'UX Designer — Alternance',
             'who.role.teacher':     'Enseignant',
-            'who.role.speaker':     'Intervenant',
+            'who.role.ecv':         'Intervenant & Jury',
+            'who.role.designschool': 'Chargé de cours',
+            'who.company.designschool': 'École de Design Nantes',
             'who.role.freelance':   'Freelance',
 
             'who.desc.oplit':       '<p><strong>SaaS d\'ordonnancement industriel &amp; planification capacitaire.</strong> Mes utilisateurs — planificateurs, ordonnanceurs, opérateurs atelier — travaillent dans l\'horlogerie de luxe, l\'automobile, l\'aéronautique et la mécanique fine. 3 ans de recherche capitalisée, 9+ clients interviewés.</p><p><strong>Ownership Design System Opal :</strong> audit complet (CRITICAL / WARNING / INFO), 44 composants reconstruits, 2 634 token bindings appliqués (contre 92 initiaux), 3 librairies d\'icônes → 1, 100% de conformité composants (contre 9%). Workflow dev-alignment : Figma → doc Notion → Storybook/Chromatic → ticket Linear fermé. 11 composants en revue dev. Gain estimé : +20–30% par fonctionnalité.</p><p><strong>Automatisation :</strong> 1 755 bindings appliqués en une session avec Claude Code et le MCP Figma (Model Context Protocol — permet aux agents IA de piloter Figma directement) — 45k nœuds analysés, 879 corrections automatiques.</p><p><strong>Frameworks :</strong> template de spec FOCUSED (structure en 7 étapes pour les specs produit dans Notion), FUC (Functional Use Cases), Discovery Client, Audit Interne. Specs rédigées en "when X → then Y" dans Linear.</p><p><strong>Plugin Figma :</strong> développé <em>Local Components Collector</em> en JavaScript (Figma Plugin API) — passe l\'audit DS de plusieurs jours à quelques heures.</p>',
@@ -970,7 +977,8 @@
             'who.desc.stereosuper': '<p>Apprenti pendant 2 ans, formé en tant que web designer avec une spécialisation en UX design, travaillant sur plusieurs projets et développant une solide expérience dans un domaine qui me passionne.</p>',
             'who.desc.teacher':     '<p>Enseignement des bases du design UI à de jeunes designers.</p>',
             'who.desc.mentor':      '<p>Accompagnement de designers, quel que soit leur niveau de séniorité, dans leur développement et dans leurs retours sur leurs projets ou perspectives de carrière.</p>',
-            'who.desc.speaker':     '<ul><li>Éco-design &amp; Design System 2023, 2024, 2025 (Intervenant)</li><li>Design System \'22-\'23 (Projet annuel) — 100% d\'étudiants diplômés</li><li>Méthodes de Recherche Utilisateur \'21-\'22 (Chargé de cours)</li></ul>',
+            'who.desc.ecv':         '<ul><li>Workshop Design System avec les M1 UX — construction d\'une base et compréhension de l\'intérêt d\'un design system (2026)</li><li>Jury M2 UX — sujets de fin d\'étude (2026)</li><li>Éco-design &amp; Design System 2023, 2024, 2025 (Intervenant)</li><li>Design System \'22-\'23 (Projet annuel) — 100% d\'étudiants diplômés</li><li>Méthodes de Recherche Utilisateur \'21-\'22 (Chargé de cours)</li></ul>',
+            'who.desc.designschool': '<ul><li>1ère année — Bases du design et UX/UI</li><li>2ème année — Formation Figma</li></ul>',
 
             'who.mentoring.link':  'Réserver une session de mentorat avec Guillaume Caillet sur ADPList →',
             'who.articles.text':   'J\'écris sur le <strong>design</strong>, les <strong>design systems</strong> et la <strong>recherche utilisateur</strong> — des notes de terrain, pragmatiques.',
