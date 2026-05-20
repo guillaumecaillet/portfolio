@@ -1272,4 +1272,30 @@
         btn.addEventListener('click', () => setLang(btn.dataset.lang));
     });
 
+    // --- Lightbox ---
+    const lbOverlay = document.createElement('div');
+    lbOverlay.className = 'lightbox-overlay';
+    const lbImg = document.createElement('img');
+    lbOverlay.appendChild(lbImg);
+    document.body.appendChild(lbOverlay);
+
+    function closeLightbox() {
+        lbOverlay.classList.remove('active');
+    }
+
+    lbOverlay.addEventListener('click', closeLightbox);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLightbox();
+    });
+
+    document.addEventListener('click', (e) => {
+        const img = e.target.closest('.case-image img, .case-image--cover img');
+        if (!img) return;
+        e.preventDefault();
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        requestAnimationFrame(() => lbOverlay.classList.add('active'));
+    });
+
 })();
