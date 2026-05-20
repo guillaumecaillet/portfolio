@@ -36,6 +36,7 @@ html {
 body {
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 400;
+    letter-spacing: -0.03em;
     background-color: var(--bg);
     color: var(--text);
     overflow: hidden;
@@ -247,8 +248,10 @@ body.landing-active .cursor-trail span {
 }
 
 .landing-hero {
+    min-height: calc(100vh - 100px);
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .landing-context {
@@ -1065,6 +1068,48 @@ body:not(.landing-active) .cursor-follower {
     height: auto;
     display: block;
     border-radius: var(--radius);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: zoom-in;
+}
+
+.case-image img:hover {
+    transform: scale(1.02);
+}
+
+/* --- Lightbox --- */
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    cursor: zoom-out;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-overlay img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox-overlay.active img {
+    transform: scale(1);
 }
 
 .case-image figcaption {
@@ -1076,6 +1121,17 @@ body:not(.landing-active) .cursor-follower {
 
 .case-image--cover {
     margin-bottom: 56px;
+    overflow: hidden;
+    border-radius: var(--radius);
+}
+
+.case-image--cover img {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: zoom-in;
+}
+
+.case-image--cover img:hover {
+    transform: scale(1.02);
 }
 
 .case-image-grid {
@@ -1252,11 +1308,18 @@ body:not(.landing-active) .cursor-follower {
     }
 
     .landing {
-        gap: 56px;
+        gap: 0;
         justify-content: flex-start;
         min-height: auto;
-        margin-top: auto;
-        margin-bottom: auto;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .landing-hero {
+        min-height: calc(100vh - 88px - 32px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .landing-context {
