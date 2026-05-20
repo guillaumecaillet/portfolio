@@ -374,6 +374,24 @@
         });
     });
 
+    // Burger menu toggle
+    const burgerBtn = document.getElementById('burger-btn');
+    const navLinksEl = document.querySelector('.nav-links');
+    if (burgerBtn && navLinksEl) {
+        burgerBtn.addEventListener('click', () => {
+            const isOpen = burgerBtn.getAttribute('aria-expanded') === 'true';
+            burgerBtn.setAttribute('aria-expanded', !isOpen);
+            navLinksEl.classList.toggle('open', !isOpen);
+        });
+        // Close menu on nav link click
+        navLinksEl.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                burgerBtn.setAttribute('aria-expanded', 'false');
+                navLinksEl.classList.remove('open');
+            });
+        });
+    }
+
     // Handle browser back/forward
     window.addEventListener('hashchange', () => {
         const hash = location.hash.slice(1);
