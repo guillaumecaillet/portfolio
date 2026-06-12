@@ -3,6 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#1a1a1a">
+    <script>
+        // Theme boot — runs before first paint to avoid a flash of wrong theme.
+        (function () {
+            var stored = null;
+            try { stored = localStorage.getItem('folio-theme'); } catch (e) {}
+            var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            document.documentElement.dataset.theme = theme;
+        })();
+    </script>
     <meta name="description" content="Guillaume Caillet, Senior Product Designer · 7+ years building B2B SaaS products and design systems · Industry 4.0 · France.">
     <meta name="keywords" content="Senior Product Designer, Design System, B2B SaaS, Industry 4.0, Design Ops, Product Design, Oplit, PrestaShop">
     <meta property="og:title" content="Guillaume Caillet, Senior Product Designer">
@@ -59,6 +69,10 @@
                 <span class="lang-divider" aria-hidden="true">·</span>
                 <button class="lang-btn" data-lang="fr">FR</button>
             </div>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark theme">
+                <svg class="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                <svg class="icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            </button>
         </div>
     </nav>
 
@@ -85,16 +99,92 @@
                         <span data-i18n="landing.sub_loc">France</span>
                     </span>
                 </p>
+                <div class="landing-stats">
+                    <div class="landing-stat">
+                        <span class="landing-stat-value">+74%</span>
+                        <span class="landing-stat-label" data-i18n="landing.stat1">active users at Oplit</span>
+                    </div>
+                    <div class="landing-stat">
+                        <span class="landing-stat-value">-50%</span>
+                        <span class="landing-stat-label" data-i18n="landing.stat2">auth errors at PrestaShop (300k+ merchants)</span>
+                    </div>
+                    <div class="landing-stat">
+                        <span class="landing-stat-value">44</span>
+                        <span class="landing-stat-label" data-i18n="landing.stat3">design system components rebuilt</span>
+                    </div>
+                </div>
+                <div class="landing-scroll-cue" aria-hidden="true"><span data-i18n="landing.scroll">Scroll</span></div>
             </div>
+
+            <!-- Marquee: ambient strip of clients & disciplines -->
+            <div class="landing-marquee" aria-hidden="true">
+                <div class="marquee-track">
+                    <span>Oplit <span class="mq-accent">·</span> PrestaShop <span class="mq-accent">·</span> Airbus <span class="mq-accent">·</span> SNCF <span class="mq-accent">·</span> Design Systems <span class="mq-accent">·</span> Product Discovery <span class="mq-accent">·</span> Industrial SaaS <span class="mq-accent">·</span> User Research <span class="mq-accent">·</span> Design Tokens <span class="mq-accent">·</span> Figma <span class="mq-accent">·</span> </span>
+                    <span>Oplit <span class="mq-accent">·</span> PrestaShop <span class="mq-accent">·</span> Airbus <span class="mq-accent">·</span> SNCF <span class="mq-accent">·</span> Design Systems <span class="mq-accent">·</span> Product Discovery <span class="mq-accent">·</span> Industrial SaaS <span class="mq-accent">·</span> User Research <span class="mq-accent">·</span> Design Tokens <span class="mq-accent">·</span> Figma <span class="mq-accent">·</span> </span>
+                </div>
+            </div>
+
+            <!-- Key projects: 3 proofs, 3 different angles -->
+            <section class="key-projects">
+                <div class="kp-head">
+                    <span class="kp-label" data-i18n="kp.label">Key projects</span>
+                    <a href="#projects" class="kp-all" data-page="projects" data-i18n="kp.all">All projects →</a>
+                </div>
+                <div class="kp-grid">
+                    <a href="#project-transfer" class="kp-card kp-card--wide reveal" data-page="project-transfer">
+                        <div class="kp-cover">
+                            <img src="src/img/oplit-capacity-transfer/four1-overloaded.png" alt="Capacity Transfer, sector at 200% load rate before transfer" loading="lazy">
+                        </div>
+                        <div class="kp-meta">
+                            <span class="kp-num">01</span>
+                            <span class="kp-tag">Oplit</span>
+                            <span class="kp-metric" data-i18n="kp.transfer.metric">10+ sites unblocked · shipped in 3.5 months</span>
+                        </div>
+                        <h3 class="kp-title"><span data-i18n="kp.transfer.title">Capacity Transfer Between Sectors</span><span class="kp-arrow" aria-hidden="true">→</span></h3>
+                        <p class="kp-desc" data-i18n="kp.transfer.desc">From 8 manual Excel steps to 1 traceable action. Co-created with a major automotive manufacturer, deployed on their production lines.</p>
+                    </a>
+                    <a href="#project-ds-execution" class="kp-card reveal" data-page="project-ds-execution">
+                        <div class="kp-cover kp-cover--ds" aria-hidden="true">
+                            <span class="ds-line ds-del">fill: #6B4EFF</span>
+                            <span class="ds-line ds-add">fill: {color.accent.500}</span>
+                            <span class="ds-line ds-big">92 → 2,634</span>
+                            <span class="ds-line">token bindings · 44 components</span>
+                        </div>
+                        <div class="kp-meta">
+                            <span class="kp-num">02</span>
+                            <span class="kp-tag">Oplit</span>
+                            <span class="kp-metric" data-i18n="kp.ds.metric">9% → 100% compliance</span>
+                        </div>
+                        <h3 class="kp-title"><span data-i18n="kp.ds.title">Opal Design System Overhaul</span><span class="kp-arrow" aria-hidden="true">→</span></h3>
+                        <p class="kp-desc" data-i18n="kp.ds.desc">Audited against 4 industry frameworks, then rebuilt: 44 components, 2,634 token bindings, a dev-alignment workflow.</p>
+                    </a>
+                    <a href="#project-signin" class="kp-card reveal" data-page="project-signin">
+                        <div class="kp-cover">
+                            <img src="src/img/prestashop-signin-signup/connexion 1.png" alt="PrestaShop unified sign-in page with Google SSO" loading="lazy">
+                        </div>
+                        <div class="kp-meta">
+                            <span class="kp-num">03</span>
+                            <span class="kp-tag">PrestaShop</span>
+                            <span class="kp-metric" data-i18n="kp.si.metric">-50% auth errors · 300k+ merchants</span>
+                        </div>
+                        <h3 class="kp-title"><span data-i18n="kp.si.title">Sign in / Sign up Flow</span><span class="kp-arrow" aria-hidden="true">→</span></h3>
+                        <p class="kp-desc" data-i18n="kp.si.desc">One account for an entire ecosystem: authentication errors cut in half, flow reduced from 5 steps to 3.</p>
+                    </a>
+                </div>
+            </section>
 
             <!-- Context: pitch + CTA, sitting at the bottom of the page -->
             <div class="landing-context">
-                <p class="landing-pitch" data-i18n-html="landing.pitch">Over the last 7 years, I've contributed to the design and improvement of B2B SaaS products, alongside teams at <strong>Oplit</strong> (industrial schedulers), <strong>PrestaShop</strong> (300k+ merchants), <strong>Airbus</strong> and <strong>SNCF</strong>. I've led design systems, run audits, and shipped infrastructure that teams build on.<br><br>What I'm looking for: high-stakes products where design co-pilots strategy, not a service function.</p>
+                <p class="landing-pitch reveal" data-i18n-html="landing.pitch">Over the last 7 years, I've contributed to the design and improvement of B2B SaaS products, alongside teams at <strong>Oplit</strong> (industrial schedulers), <strong>PrestaShop</strong> (300k+ merchants), <strong>Airbus</strong> and <strong>SNCF</strong>. I've led design systems, run audits, and shipped infrastructure that teams build on.<br><br>What I'm looking for: high-stakes products where design co-pilots strategy, not a service function.</p>
                 <div class="landing-links">
                     <div class="landing-btn-row">
-                        <a href="#who" class="landing-link-card" data-page="who">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                        <a href="#projects" class="landing-link-card" data-page="projects">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                             <span class="landing-link-card-label" data-i18n="landing.discover">Discover my work →</span>
+                        </a>
+                        <a href="#who" class="landing-link-card" data-page="who">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            <span class="landing-link-card-label" data-i18n="landing.about">About me</span>
                         </a>
                     </div>
                 </div>
@@ -390,7 +480,7 @@
                     <div class="project-card-inner">
                         <span class="project-index">01</span>
                         <div class="project-info">
-                            <span class="project-company project-company--oplit" data-i18n="project.tag.oplit">Oplit</span>
+                            <span class="project-company project-company--oplit" data-i18n="project.tag.oplit">Oplit</span><span class="project-key-badge" aria-label="Key project">KEY</span>
                             <h3 class="project-name" data-i18n="case.dsexec.title">Opal DS · Corrective Actions</h3>
                             <p class="project-type">Design System · Design Ops · Automation</p>
                         </div>
@@ -436,7 +526,7 @@
                     <div class="project-card-inner">
                         <span class="project-index">05</span>
                         <div class="project-info">
-                            <span class="project-company project-company--oplit" data-i18n="project.tag.oplit">Oplit</span>
+                            <span class="project-company project-company--oplit" data-i18n="project.tag.oplit">Oplit</span><span class="project-key-badge" aria-label="Key project">KEY</span>
                             <h3 class="project-name" data-i18n="case.transfer.title">Capacity Transfer Between Sectors</h3>
                             <p class="project-type">Product Design · Strategy · Sales Enablement</p>
                         </div>
@@ -471,7 +561,7 @@
                     <div class="project-card-inner">
                         <span class="project-index">08</span>
                         <div class="project-info">
-                            <span class="project-company project-company--prestashop" data-i18n="project.tag.prestashop">PrestaShop</span>
+                            <span class="project-company project-company--prestashop" data-i18n="project.tag.prestashop">PrestaShop</span><span class="project-key-badge" aria-label="Key project">KEY</span>
                             <h3 class="project-name" data-i18n="case.si.title">Sign in / Sign up Flow</h3>
                             <p class="project-type">Product Design · Research · UI Design</p>
                         </div>
@@ -1346,11 +1436,20 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
 
     <!-- Footer template — cloned into each .page by JS so it scrolls with content -->
     <footer class="site-footer footer-template" role="contentinfo" aria-hidden="true">
+        <div class="footer-cta">
+            <p class="footer-cta-kicker" data-i18n="footer.cta.kicker">A complex product to untangle? Let's talk.</p>
+            <a href="mailto:contact@guillaumecaillet.fr" class="footer-cta-mail">
+                <span>contact@guillaumecaillet.fr</span>
+                <span class="mail-arrow" aria-hidden="true">→</span>
+            </a>
+        </div>
         <div class="footer-inner">
             <div class="footer-left">
                 <span class="footer-name">Guillaume Caillet</span>
                 <span class="footer-sep" aria-hidden="true">·</span>
                 <span class="footer-role" data-i18n="footer.role">Senior Product Designer</span>
+                <span class="footer-sep" aria-hidden="true">·</span>
+                <span class="footer-status" data-i18n="footer.status">Open to opportunities</span>
             </div>
             <div class="footer-right">
                 <a href="mailto:contact@guillaumecaillet.fr" class="footer-link" data-i18n="footer.email">contact@guillaumecaillet.fr</a>
@@ -1358,6 +1457,8 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
                 <a href="https://www.linkedin.com/in/guillaume-caillet/" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
                 <span class="footer-sep" aria-hidden="true">·</span>
                 <a href="https://medium.com/@guillaumeclt" target="_blank" rel="noopener" class="footer-link">Medium</a>
+                <span class="footer-sep" aria-hidden="true">·</span>
+                <span class="footer-time">Paris</span>
                 <span class="footer-sep" aria-hidden="true">·</span>
                 <span class="footer-copy">© 2026</span>
             </div>

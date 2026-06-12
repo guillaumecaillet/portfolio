@@ -84,9 +84,11 @@
         const lines = document.querySelectorAll('.landing-title .line');
         lines.forEach((line, i) => setTimeout(() => line.classList.add('revealed'), i * 180));
         const sub = document.querySelector('.landing-sub');
+        const stats = document.querySelector('.landing-stats');
         const pitch = document.querySelector('.landing-pitch');
         const links = document.querySelector('.landing-links');
         if (sub)   setTimeout(() => sub.classList.add('visible'), 320);
+        if (stats) setTimeout(() => stats.classList.add('visible'), 460);
         if (pitch) setTimeout(() => pitch.classList.add('visible'), 460);
         if (links) setTimeout(() => links.classList.add('visible'), 620);
     }
@@ -275,34 +277,34 @@
 
     // Per-page document titles (used for browser tab + SEO).
     const PAGE_TITLES = {
-        'landing':                  'Guillaume Caillet , Sr. Product Designer',
-        'who':                      'About , Guillaume Caillet',
-        'projects':                 'Projects , Guillaume Caillet',
-        'project-ds-execution':     'Opal DS · Corrective Actions , Case Study',
-        'project-multiselect':      'Multi-select & Sticky Action Bar , Case Study',
-        'project-figma-plugin':     'Figma Plugin , Local Components Collector , Case Study',
-        'project-ds-audit':         'Opal DS · Audit , Case Study',
-        'project-transfer':         'Capacity Transfer Between Sectors , Case Study',
-        'project-design-system':    'PrestaShop Design System , Case Study',
-        'project-customer-account': 'PrestaShop Customer Account , Case Study',
-        'project-signin':           'PrestaShop Sign-in / Sign-up , Case Study',
-        'project-store-association':'PrestaShop Store Association , Case Study'
+        'landing':                  'Guillaume Caillet, Senior Product Designer',
+        'who':                      'About, Guillaume Caillet',
+        'projects':                 'Projects, Guillaume Caillet',
+        'project-ds-execution':     'Opal DS · Corrective Actions, Case Study',
+        'project-multiselect':      'Multi-select & Sticky Action Bar, Case Study',
+        'project-figma-plugin':     'Figma Plugin, Local Components Collector, Case Study',
+        'project-ds-audit':         'Opal DS · Audit, Case Study',
+        'project-transfer':         'Capacity Transfer Between Sectors, Case Study',
+        'project-design-system':    'PrestaShop Design System, Case Study',
+        'project-customer-account': 'PrestaShop Customer Account, Case Study',
+        'project-signin':           'PrestaShop Sign-in / Sign-up, Case Study',
+        'project-store-association':'PrestaShop Store Association, Case Study'
     };
 
     // Per-page meta description (used for SEO + social previews).
     const PAGE_META = {
         'landing':                  'Senior Product Designer · 7+ years building B2B SaaS products and design systems · Industry 4.0 · France.',
-        'who':                      'Guillaume Caillet , Senior Product Designer. 7+ years across Oplit, PrestaShop, Airbus and SNCF.',
-        'projects':                 'Selected case studies , design systems, B2B SaaS, industrial scheduling, and design-ops tooling.',
-        'project-ds-execution':     'Opal DS Corrective Actions , 44 components rebuilt, 2,634 token bindings applied, +20–30% gain per feature cycle.',
-        'project-multiselect':      'Multi-select + Sticky Action Bar , one coupled pattern letting schedulers update 50 work orders in one click.',
-        'project-figma-plugin':     'Local Components Collector , a Figma plugin that cuts DS audit time from days to hours.',
-        'project-ds-audit':         'Opal DS Audit , graded findings against Atomic Design, BEM, DTCG and WCAG, with a 3-horizon remediation plan.',
-        'project-transfer':         'Capacity Transfer Between Sectors , letting industrial schedulers reallocate production across workshops in seconds.',
-        'project-design-system':    'PrestaShop Design System , 100% squad adoption, 80% in tech, –50% development time.',
-        'project-customer-account': 'PrestaShop Customer Account , three accounts unified into one, eliminating support requests for basic updates.',
-        'project-signin':           'PrestaShop Sign-in / Sign-up , authentication errors cut in half across the entire ecosystem.',
-        'project-store-association':'PrestaShop Store Association , 600+ successful associations per day, –40% error-driven abandonment.'
+        'who':                      'Guillaume Caillet, Senior Product Designer. 7+ years across Oplit, PrestaShop, Airbus and SNCF.',
+        'projects':                 'Selected case studies, design systems, B2B SaaS, industrial scheduling, and design-ops tooling.',
+        'project-ds-execution':     'Opal DS Corrective Actions, 44 components rebuilt, 2,634 token bindings applied, +20–30% gain per feature cycle.',
+        'project-multiselect':      'Multi-select + Sticky Action Bar, one coupled pattern letting schedulers update 50 work orders in one click.',
+        'project-figma-plugin':     'Local Components Collector, a Figma plugin that cuts DS audit time from days to hours.',
+        'project-ds-audit':         'Opal DS Audit, graded findings against Atomic Design, BEM, DTCG and WCAG, with a 3-horizon remediation plan.',
+        'project-transfer':         'Capacity Transfer Between Sectors, letting industrial schedulers reallocate production across workshops in seconds.',
+        'project-design-system':    'PrestaShop Design System, 100% squad adoption, 80% in tech, –50% development time.',
+        'project-customer-account': 'PrestaShop Customer Account, three accounts unified into one, eliminating support requests for basic updates.',
+        'project-signin':           'PrestaShop Sign-in / Sign-up, authentication errors cut in half across the entire ecosystem.',
+        'project-store-association':'PrestaShop Store Association, 600+ successful associations per day, –40% error-driven abandonment.'
     };
 
     function updatePageTitle(pageId) {
@@ -680,8 +682,26 @@
             'landing.sub_loc':  'France',
             'landing.pitch':    'Over the last 7 years, I\'ve contributed to the design and improvement of B2B SaaS products, alongside teams at <strong>Oplit</strong> (industrial schedulers), <strong>PrestaShop</strong> (300k+ merchants), <strong>Airbus</strong> and <strong>SNCF</strong>. I\'ve led design systems, run audits, and shipped infrastructure that teams build on.<br><br>What I\'m looking for: high-stakes products where design co-pilots strategy, not a service function.',
             'landing.discover': 'Discover my work →',
+            'landing.about':    'About me',
             'landing.email':    'Email me',
             'landing.linkedin': 'Connect on LinkedIn',
+            'landing.scroll':   'Scroll',
+            'landing.stat1':    'active users at Oplit',
+            'landing.stat2':    'auth errors at PrestaShop (300k+ merchants)',
+            'landing.stat3':    'design system components rebuilt',
+
+            // Key projects (landing)
+            'kp.label':           'Key projects',
+            'kp.all':             'All projects →',
+            'kp.transfer.metric': '10+ sites unblocked · shipped in 3.5 months',
+            'kp.transfer.title':  'Capacity Transfer Between Sectors',
+            'kp.transfer.desc':   'From 8 manual Excel steps to 1 traceable action. Co-created with a major automotive manufacturer, deployed on their production lines.',
+            'kp.ds.metric':       '9% → 100% compliance',
+            'kp.ds.title':        'Opal Design System Overhaul',
+            'kp.ds.desc':         'Audited against 4 industry frameworks, then rebuilt: 44 components, 2,634 token bindings, a dev-alignment workflow.',
+            'kp.si.metric':       '-50% auth errors · 300k+ merchants',
+            'kp.si.title':        'Sign in / Sign up Flow',
+            'kp.si.desc':         'One account for an entire ecosystem: authentication errors cut in half, flow reduced from 5 steps to 3.',
 
             // Who page
             'who.title': 'Who am I?',
@@ -763,6 +783,8 @@
             // Footer
             'footer.role':    'Senior Product Designer',
             'footer.email':   'contact@guillaumecaillet.fr',
+            'footer.status':  'Open to opportunities',
+            'footer.cta.kicker': 'A complex product to untangle? Let\'s talk.',
 
             // Case studies — shared
             'case.back':             '← Back to projects',
@@ -960,8 +982,26 @@
             'landing.sub_loc':  'France',
             'landing.pitch':    'Sur les 7 dernières années, j\'ai participé à la conception et à l\'amélioration de produits SaaS B2B, aux côtés des équipes de <strong>Oplit</strong> (planification industrielle), <strong>PrestaShop</strong> (300k+ marchands), <strong>Airbus</strong> et <strong>SNCF</strong>. J\'ai piloté des design systems, mené des audits, et livré des chantiers d\'infrastructure sur lesquels les équipes s\'appuient.<br><br>Ce que je cherche : des produits exigeants où le design co-pilote la stratégie, pas une fonction support.',
             'landing.discover': 'Découvrir mon travail →',
+            'landing.about':    'À propos de moi',
             'landing.email':    'M\'écrire',
             'landing.linkedin': 'Me suivre sur LinkedIn',
+            'landing.scroll':   'Scroll',
+            'landing.stat1':    'd\'utilisateurs actifs chez Oplit',
+            'landing.stat2':    'd\'erreurs d\'auth chez PrestaShop (300k+ marchands)',
+            'landing.stat3':    'composants de design system reconstruits',
+
+            // Key projects (landing)
+            'kp.label':           'Projets clés',
+            'kp.all':             'Tous les projets →',
+            'kp.transfer.metric': '10+ sites débloqués · livré en 3,5 mois',
+            'kp.transfer.title':  'Transfert de charge entre secteurs',
+            'kp.transfer.desc':   'De 8 étapes manuelles dans Excel à 1 action traçable. Co-créé avec un grand constructeur automobile, déployé sur ses lignes de production.',
+            'kp.ds.metric':       '9% → 100% de conformité',
+            'kp.ds.title':        'Refonte du Design System Opal',
+            'kp.ds.desc':         'Audité contre 4 frameworks de référence, puis reconstruit : 44 composants, 2 634 token bindings, un workflow d\'alignement dev.',
+            'kp.si.metric':       '-50% d\'erreurs d\'auth · 300k+ marchands',
+            'kp.si.title':        'Sign in / Sign up Flow',
+            'kp.si.desc':         'Un seul compte pour tout un écosystème : erreurs d\'authentification divisées par deux, flow réduit de 5 étapes à 3.',
 
             // Who page
             'who.title': 'Qui suis-je ?',
@@ -1043,6 +1083,8 @@
             // Footer
             'footer.role':    'Senior Product Designer',
             'footer.email':   'contact@guillaumecaillet.fr',
+            'footer.status':  'Ouvert aux opportunités',
+            'footer.cta.kicker': 'Un produit complexe à démêler ? Parlons-en.',
 
             // Case studies — shared
             'case.back':             '← Retour aux projets',
@@ -1297,5 +1339,142 @@
         lbImg.alt = img.alt;
         requestAnimationFrame(() => lbOverlay.classList.add('active'));
     });
+
+    // ===================================
+    // Theme switch — light / dark
+    // ===================================
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+    function applyTheme(theme) {
+        document.documentElement.dataset.theme = theme;
+        localStorage.setItem('folio-theme', theme);
+        if (themeMeta) themeMeta.setAttribute('content', theme === 'light' ? '#ffffff' : '#1a1a1a');
+    }
+
+    // Sync meta color with the theme the boot script picked
+    if (themeMeta) {
+        themeMeta.setAttribute('content',
+            document.documentElement.dataset.theme === 'light' ? '#ffffff' : '#1a1a1a');
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            applyTheme(next);
+        });
+    }
+
+    // Follow system changes only when the user hasn't chosen explicitly
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('folio-theme')) {
+            document.documentElement.dataset.theme = e.matches ? 'light' : 'dark';
+        }
+    });
+
+    // ===================================
+    // Scroll reveals — .reveal → .in
+    // ===================================
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealEls = document.querySelectorAll('.reveal');
+
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+        revealEls.forEach(el => el.classList.add('in'));
+    } else {
+        const revealIO = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in');
+                    revealIO.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach(el => revealIO.observe(el));
+    }
+
+    // ===================================
+    // Footer clock — local time in Paris
+    // ===================================
+    function tickFooterClock() {
+        const els = document.querySelectorAll('.footer-time');
+        if (!els.length) return;
+        const time = new Intl.DateTimeFormat('fr-FR', {
+            timeZone: 'Europe/Paris', hour: '2-digit', minute: '2-digit'
+        }).format(new Date());
+        els.forEach(el => { el.textContent = `Paris ${time}`; });
+    }
+    tickFooterClock();
+    setInterval(tickFooterClock, 30000);
+
+    // ===================================
+    // Projects list — floating cover preview (desktop pointers only)
+    // ===================================
+    const PREVIEWS = {
+        'project-transfer':         { img: 'src/img/oplit-capacity-transfer/four1-overloaded.png' },
+        'project-multiselect':      { img: 'src/img/oplit-multiselect-stickybar/Stickybar.png' },
+        'project-signin':           { img: 'src/img/prestashop-signin-signup/connexion 1.png' },
+        'project-design-system':    { img: 'src/img/prestashop-design-system/Projet_cover.png' },
+        'project-customer-account': { img: 'src/img/prestashop-customer-account/project_cover.png' },
+        'project-store-association':{ img: 'src/img/prestashop-store-association/Projet_cover.png' },
+        'project-ds-execution':     { label: 'OPAL DS · 92 → 2,634 TOKEN BINDINGS' },
+        'project-ds-audit':         { label: 'OPAL DS · AUDIT · 4 FRAMEWORKS' },
+        'project-figma-plugin':     { label: 'FIGMA PLUGIN · DAYS → HOURS' }
+    };
+
+    const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+    if (finePointer && !reduceMotion) {
+        const preview = document.createElement('div');
+        preview.className = 'project-preview';
+        const previewImg = document.createElement('img');
+        previewImg.alt = '';
+        const previewLabel = document.createElement('span');
+        previewLabel.className = 'pp-label';
+        preview.appendChild(previewImg);
+        preview.appendChild(previewLabel);
+        document.body.appendChild(preview);
+
+        let pvX = 0, pvY = 0, pvTX = 0, pvTY = 0;
+        let pvActive = false;
+
+        document.addEventListener('mousemove', (e) => {
+            pvTX = e.clientX + 28;
+            pvTY = e.clientY - 90;
+        });
+
+        (function animPreview() {
+            pvX += (pvTX - pvX) * 0.14;
+            pvY += (pvTY - pvY) * 0.14;
+            if (pvActive) {
+                const maxX = window.innerWidth - 360;
+                const maxY = window.innerHeight - 240;
+                preview.style.transform =
+                    `translate(${Math.min(pvX, maxX)}px, ${Math.max(12, Math.min(pvY, maxY))}px) scale(${pvActive ? 1 : 0.94})`;
+            }
+            requestAnimationFrame(animPreview);
+        })();
+
+        document.querySelectorAll('#projects .project-card').forEach(card => {
+            const data = PREVIEWS[card.dataset.page];
+            if (!data) return;
+            card.addEventListener('mouseenter', () => {
+                if (data.img) {
+                    previewImg.src = data.img;
+                    previewImg.style.display = 'block';
+                    previewLabel.style.display = 'none';
+                } else {
+                    previewImg.style.display = 'none';
+                    previewLabel.style.display = 'flex';
+                    previewLabel.textContent = data.label;
+                }
+                pvActive = true;
+                preview.classList.add('on');
+            });
+            card.addEventListener('mouseleave', () => {
+                pvActive = false;
+                preview.classList.remove('on');
+            });
+        });
+    }
 
 })();
