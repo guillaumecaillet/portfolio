@@ -674,7 +674,7 @@
             'nav.star':     'Save',
 
             // Landing
-            'landing.line1':    'I design complex products with high standards.',
+            'landing.line1':    'I design complex, demanding products.',
             'landing.line2_pre':'Currently at ',
             'landing.sub':      'Guillaume Caillet · Senior Product Designer · France',
             'landing.sub_name': 'Guillaume Caillet',
@@ -688,20 +688,12 @@
             'landing.scroll':   'Scroll',
             'landing.stat1':    'active users at Oplit',
             'landing.stat2':    'auth errors at PrestaShop (300k+ merchants)',
-            'landing.stat3':    'design system components rebuilt',
+            'landing.stat3':    'faster design execution with the rebuilt design system',
+            'landing.stat.go':  'see the work →',
 
-            // Key projects (landing)
-            'kp.label':           'Key projects',
-            'kp.all':             'All projects →',
-            'kp.transfer.metric': '10+ sites unblocked · shipped in 3.5 months',
-            'kp.transfer.title':  'Capacity Transfer Between Sectors',
-            'kp.transfer.desc':   'From 8 manual Excel steps to 1 traceable action. Co-created with a major automotive manufacturer, deployed on their production lines.',
-            'kp.ds.metric':       '9% → 100% compliance',
-            'kp.ds.title':        'Opal Design System Overhaul',
-            'kp.ds.desc':         'Audited against 4 industry frameworks, then rebuilt: 44 components, 2,634 token bindings, a dev-alignment workflow.',
-            'kp.si.metric':       '-50% auth errors · 300k+ merchants',
-            'kp.si.title':        'Sign in / Sign up Flow',
-            'kp.si.desc':         'One account for an entire ecosystem: authentication errors cut in half, flow reduced from 5 steps to 3.',
+            // Marquee labels
+            'mq.clients': 'Clients',
+            'mq.skills':  'Skills',
 
             // Who page
             'who.title': 'Who am I?',
@@ -974,7 +966,7 @@
             'nav.star':     'Sauvegarder',
 
             // Landing
-            'landing.line1':    'Je conçois des produits complexes à haute exigence.',
+            'landing.line1':    'Je conçois des produits complexes et exigeants.',
             'landing.line2_pre':'Actuellement chez ',
             'landing.sub':      'Guillaume Caillet · Senior Product Designer · France',
             'landing.sub_name': 'Guillaume Caillet',
@@ -988,20 +980,12 @@
             'landing.scroll':   'Scroll',
             'landing.stat1':    'd\'utilisateurs actifs chez Oplit',
             'landing.stat2':    'd\'erreurs d\'auth chez PrestaShop (300k+ marchands)',
-            'landing.stat3':    'composants de design system reconstruits',
+            'landing.stat3':    'd\'exécution design plus rapide avec le design system reconstruit',
+            'landing.stat.go':  'voir le projet →',
 
-            // Key projects (landing)
-            'kp.label':           'Projets clés',
-            'kp.all':             'Tous les projets →',
-            'kp.transfer.metric': '10+ sites débloqués · livré en 3,5 mois',
-            'kp.transfer.title':  'Transfert de charge entre secteurs',
-            'kp.transfer.desc':   'De 8 étapes manuelles dans Excel à 1 action traçable. Co-créé avec un grand constructeur automobile, déployé sur ses lignes de production.',
-            'kp.ds.metric':       '9% → 100% de conformité',
-            'kp.ds.title':        'Refonte du Design System Opal',
-            'kp.ds.desc':         'Audité contre 4 frameworks de référence, puis reconstruit : 44 composants, 2 634 token bindings, un workflow d\'alignement dev.',
-            'kp.si.metric':       '-50% d\'erreurs d\'auth · 300k+ marchands',
-            'kp.si.title':        'Sign in / Sign up Flow',
-            'kp.si.desc':         'Un seul compte pour tout un écosystème : erreurs d\'authentification divisées par deux, flow réduit de 5 étapes à 3.',
+            // Marquee labels
+            'mq.clients': 'Clients',
+            'mq.skills':  'Compétences',
 
             // Who page
             'who.title': 'Qui suis-je ?',
@@ -1407,32 +1391,57 @@
     setInterval(tickFooterClock, 30000);
 
     // ===================================
-    // Projects list — floating cover preview (desktop pointers only)
+    // Projects list — floating "memory card" cover on hover.
+    // One generated template per project: same structure, deterministic
+    // ASCII motif seeded by the project slug. Desktop pointers only.
     // ===================================
-    const PREVIEWS = {
-        'project-transfer':         { img: 'src/img/oplit-capacity-transfer/four1-overloaded.png' },
-        'project-multiselect':      { img: 'src/img/oplit-multiselect-stickybar/Stickybar.png' },
-        'project-signin':           { img: 'src/img/prestashop-signin-signup/connexion 1.png' },
-        'project-design-system':    { img: 'src/img/prestashop-design-system/Projet_cover.png' },
-        'project-customer-account': { img: 'src/img/prestashop-customer-account/project_cover.png' },
-        'project-store-association':{ img: 'src/img/prestashop-store-association/Projet_cover.png' },
-        'project-ds-execution':     { label: 'OPAL DS · 92 → 2,634 TOKEN BINDINGS' },
-        'project-ds-audit':         { label: 'OPAL DS · AUDIT · 4 FRAMEWORKS' },
-        'project-figma-plugin':     { label: 'FIGMA PLUGIN · DAYS → HOURS' }
+    const COVER_DATA = {
+        'project-ds-execution':     { metricKey: 'case.dsexec.metric2.value' },
+        'project-multiselect':      { metricKey: 'case.multi.metric1.value', suffix: ' actions' },
+        'project-figma-plugin':     { metricKey: 'case.plugin.metric1.value' },
+        'project-ds-audit':         { metricKey: 'case.dsaudit.metric3.value' },
+        'project-transfer':         { metricKey: 'case.transfer.metric3.value' },
+        'project-design-system':    { metricKey: 'case.ds.metric3.value' },
+        'project-customer-account': { metricKey: 'case.ca.metric1.value' },
+        'project-signin':           { metricKey: 'case.si.metric1.value' },
+        'project-store-association':{ metricKey: 'case.sa.metric1.value' }
     };
+
+    // Deterministic ASCII motif from the project slug (reproducible covers)
+    function coverAscii(slug) {
+        const chars = '·░▒▓◆+';
+        let hash = 0;
+        for (let i = 0; i < slug.length; i++) hash = (hash * 31 + slug.charCodeAt(i)) >>> 0;
+        let out = '';
+        for (let r = 0; r < 3; r++) {
+            for (let c = 0; c < 16; c++) {
+                out += chars[(hash + (r + 1) * 7 * (c + 3)) % chars.length];
+            }
+            if (r < 2) out += '\n';
+        }
+        return out;
+    }
 
     const finePointer = window.matchMedia('(pointer: fine)').matches;
 
     if (finePointer && !reduceMotion) {
         const preview = document.createElement('div');
         preview.className = 'project-preview';
-        const previewImg = document.createElement('img');
-        previewImg.alt = '';
-        const previewLabel = document.createElement('span');
-        previewLabel.className = 'pp-label';
-        preview.appendChild(previewImg);
-        preview.appendChild(previewLabel);
+        preview.innerHTML =
+            '<div class="cover-card">' +
+                '<pre class="cover-ascii" aria-hidden="true"></pre>' +
+                '<div class="cover-code"></div>' +
+                '<div class="cover-metric"></div>' +
+                '<div class="cover-title"></div>' +
+                '<div class="cover-foot"><span>Case study</span><span class="cover-slot"></span></div>' +
+            '</div>';
         document.body.appendChild(preview);
+
+        const coverAsciiEl  = preview.querySelector('.cover-ascii');
+        const coverCodeEl   = preview.querySelector('.cover-code');
+        const coverMetricEl = preview.querySelector('.cover-metric');
+        const coverTitleEl  = preview.querySelector('.cover-title');
+        const coverSlotEl   = preview.querySelector('.cover-slot');
 
         let pvX = 0, pvY = 0, pvTX = 0, pvTY = 0;
         let pvActive = false;
@@ -1449,24 +1458,25 @@
                 const maxX = window.innerWidth - 360;
                 const maxY = window.innerHeight - 240;
                 preview.style.transform =
-                    `translate(${Math.min(pvX, maxX)}px, ${Math.max(12, Math.min(pvY, maxY))}px) scale(${pvActive ? 1 : 0.94})`;
+                    `translate(${Math.min(pvX, maxX)}px, ${Math.max(12, Math.min(pvY, maxY))}px)`;
             }
             requestAnimationFrame(animPreview);
         })();
 
         document.querySelectorAll('#projects .project-card').forEach(card => {
-            const data = PREVIEWS[card.dataset.page];
+            const slug = card.dataset.page;
+            const data = COVER_DATA[slug];
             if (!data) return;
             card.addEventListener('mouseenter', () => {
-                if (data.img) {
-                    previewImg.src = data.img;
-                    previewImg.style.display = 'block';
-                    previewLabel.style.display = 'none';
-                } else {
-                    previewImg.style.display = 'none';
-                    previewLabel.style.display = 'flex';
-                    previewLabel.textContent = data.label;
-                }
+                const t = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
+                const company = card.querySelector('.project-company')?.textContent || '';
+                const title = card.querySelector('.project-name')?.textContent || '';
+                const index = card.querySelector('.project-index')?.textContent || '00';
+                coverAsciiEl.textContent = coverAscii(slug);
+                coverCodeEl.textContent = `GC://${company.replace(/\s+/g, '-')}/${slug.replace('project-', '')}`.toUpperCase();
+                coverMetricEl.textContent = (t[data.metricKey] || '') + (data.suffix || '');
+                coverTitleEl.textContent = title;
+                coverSlotEl.textContent = `Slot ${index}`;
                 pvActive = true;
                 preview.classList.add('on');
             });
@@ -1475,6 +1485,16 @@
                 preview.classList.remove('on');
             });
         });
+
+        // Never leave a cover floating after a navigation or click
+        window.addEventListener('hashchange', () => {
+            pvActive = false;
+            preview.classList.remove('on');
+        });
+        document.addEventListener('click', () => {
+            pvActive = false;
+            preview.classList.remove('on');
+        }, true);
     }
 
 })();
