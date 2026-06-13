@@ -3154,16 +3154,16 @@ html[data-theme="light"] .cover-foot   { color: rgba(26, 26, 26, 0.45); border-t
 .footer-cta {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
-    max-width: 800px;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: nowrap;
     margin: 0 auto 14px;
-    padding: 16px 0;
+    padding: 18px 0;
     border-bottom: 1px solid var(--border);
 }
 
 .footer-cta-kicker {
+    margin: 0;
     font-size: 1.05rem;
     font-weight: 600;
     letter-spacing: -0.01em;
@@ -3173,7 +3173,7 @@ html[data-theme="light"] .cover-foot   { color: rgba(26, 26, 26, 0.45); border-t
 .footer-cta-actions {
     display: flex;
     gap: 10px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .footer-cta-mail {
@@ -3272,7 +3272,7 @@ body::after {
 
     .landing-scroll-cue { bottom: 12px; }
 
-    .footer-cta { padding: 18px 0 14px; }
+    .footer-cta { padding: 16px 0; flex-wrap: wrap; gap: 14px; text-align: center; }
     .footer-cta-kicker { font-size: 0.95rem; }
 
     .project-preview { display: none; }
