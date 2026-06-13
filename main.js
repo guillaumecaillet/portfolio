@@ -1378,7 +1378,6 @@
                 gridCells.push({ el: cell, x, y });
             }
         }
-        const GRID_OFF = 'rgba(122, 110, 180, 0.14)';
         function updateGrid(f) {
             for (let k = 0; k < gridCells.length; k++) {
                 const o = gridCells[k];
@@ -1391,7 +1390,7 @@
                     o.el.style.background = 'var(--cover-accent)';
                     o.el.style.opacity = '0.55';
                 } else {
-                    o.el.style.background = GRID_OFF;
+                    o.el.style.background = 'var(--cover-off)';
                     o.el.style.opacity = '0.4';
                 }
             }
@@ -1420,11 +1419,26 @@
             requestAnimationFrame(animPreview);
         })();
 
-        // Cover accent + highlight follow the company badge color
+        // Cover palette follows the company badge color, per theme.
+        // [accent, highlight, off-cell] — dark uses lighter highlights,
+        // light uses deeper accents so the grid reads on white.
         const COVER_ACCENTS = {
-            'project-company--oplit':      ['#6384ff', '#aec0ff'],
-            'project-company--prestashop': ['#a584e6', '#d6c4f2'],
-            'project-company--perso':      ['#9aa0a6', '#cfd2d6']
+            'project-company--oplit': {
+                dark:  ['#6384ff', '#aec0ff', 'rgba(122, 110, 180, 0.14)'],
+                light: ['#3a5bd9', '#1400a0', 'rgba(20, 0, 160, 0.10)']
+            },
+            'project-company--prestashop': {
+                dark:  ['#a584e6', '#d6c4f2', 'rgba(122, 110, 180, 0.14)'],
+                light: ['#7c5bc7', '#59359c', 'rgba(111, 66, 193, 0.10)']
+            },
+            'project-company--perso': {
+                dark:  ['#9aa0a6', '#cfd2d6', 'rgba(160, 160, 170, 0.16)'],
+                light: ['#6b7077', '#3f4247', 'rgba(26, 26, 26, 0.08)']
+            }
+        };
+        const COVER_DEFAULT = {
+            dark:  ['#4d34ff', '#a99cff', 'rgba(122, 110, 180, 0.14)'],
+            light: ['#4d34ff', '#1400a0', 'rgba(20, 0, 160, 0.10)']
         };
 
         document.querySelectorAll('#projects .project-card').forEach(card => {
@@ -1439,9 +1453,11 @@
                 const index = card.querySelector('.project-index')?.textContent || '00';
                 const accentClass = Object.keys(COVER_ACCENTS)
                     .find(cls => companyEl?.classList.contains(cls));
-                const [acc, hi] = COVER_ACCENTS[accentClass] || ['#4d34ff', '#a99cff'];
+                const theme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+                const [acc, hi, off] = (COVER_ACCENTS[accentClass] || COVER_DEFAULT)[theme];
                 preview.style.setProperty('--cover-accent', acc);
                 preview.style.setProperty('--cover-hi', hi);
+                preview.style.setProperty('--cover-off', off);
                 coverCodeEl.textContent = `GC://${company.replace(/\s+/g, '-')}/${slug.replace('project-', '')}`.toUpperCase();
                 coverMetricEl.textContent = (t[data.metricKey] || '') + (data.suffix || '');
                 coverTitleEl.textContent = title;

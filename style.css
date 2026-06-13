@@ -3106,6 +3106,37 @@ body.landing-active .galaxy-bg { opacity: 0; }
     text-shadow: 0 0 6px color-mix(in srgb, var(--cover-accent) 45%, transparent);
 }
 
+/* Light mode: the memory card flips to a white surface with dark text.
+   The grid accent/off colors are supplied per-theme from JS via the
+   --cover-* custom props. */
+html[data-theme="light"] .project-preview {
+    background:
+        radial-gradient(120% 90% at 20% 0%, color-mix(in srgb, var(--cover-accent) 13%, transparent), transparent 55%),
+        #ffffff;
+    border-color: color-mix(in srgb, var(--cover-accent) 32%, transparent);
+    box-shadow:
+        0 24px 64px rgba(26, 26, 26, 0.16),
+        0 0 22px color-mix(in srgb, var(--cover-accent) 12%, transparent);
+    color: #1a1a1a;
+}
+
+html[data-theme="light"] .project-preview::after {
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(26, 26, 26, 0.03) 0px,
+            rgba(26, 26, 26, 0.03) 1px,
+            transparent 1px,
+            transparent 3px
+        ),
+        radial-gradient(110% 110% at 50% 50%, transparent 62%, rgba(26, 26, 26, 0.08) 100%);
+}
+
+html[data-theme="light"] .cover-code   { color: rgba(26, 26, 26, 0.5); }
+html[data-theme="light"] .cover-metric { color: #1a1a1a; }
+html[data-theme="light"] .cover-title  { color: rgba(26, 26, 26, 0.72); }
+html[data-theme="light"] .cover-foot   { color: rgba(26, 26, 26, 0.45); border-top-color: rgba(26, 26, 26, 0.12); }
+
 /* --- Scroll reveals --- */
 .reveal {
     opacity: 0;
