@@ -1346,21 +1346,6 @@
         'project-store-association':{ metricKey: 'case.sa.metric1.value' }
     };
 
-    // Deterministic ASCII motif from the project slug (reproducible covers)
-    function coverAscii(slug) {
-        const chars = '·░▒▓◆+';
-        let hash = 0;
-        for (let i = 0; i < slug.length; i++) hash = (hash * 31 + slug.charCodeAt(i)) >>> 0;
-        let out = '';
-        for (let r = 0; r < 3; r++) {
-            for (let c = 0; c < 16; c++) {
-                out += chars[(hash + (r + 1) * 7 * (c + 3)) % chars.length];
-            }
-            if (r < 2) out += '\n';
-        }
-        return out;
-    }
-
     const finePointer = window.matchMedia('(pointer: fine)').matches;
 
     if (finePointer && !reduceMotion) {
@@ -1368,7 +1353,7 @@
         preview.className = 'project-preview';
         preview.innerHTML =
             '<div class="cover-card">' +
-                '<pre class="cover-ascii" aria-hidden="true"></pre>' +
+                '<div class="cover-grid" aria-hidden="true"></div>' +
                 '<div class="cover-code"></div>' +
                 '<div class="cover-metric"></div>' +
                 '<div class="cover-title"></div>' +
@@ -1376,14 +1361,45 @@
             '</div>';
         document.body.appendChild(preview);
 
-        const coverAsciiEl  = preview.querySelector('.cover-ascii');
         const coverCodeEl   = preview.querySelector('.cover-code');
         const coverMetricEl = preview.querySelector('.cover-metric');
         const coverTitleEl  = preview.querySelector('.cover-title');
         const coverSlotEl   = preview.querySelector('.cover-slot');
 
+        // Build the pixel "life grid" once
+        const gridEl = preview.querySelector('.cover-grid');
+        const COLS = 44, ROWS = 5;
+        const gridCells = [];
+        gridEl.style.setProperty('--cols', COLS);
+        for (let y = 0; y < ROWS; y++) {
+            for (let x = 0; x < COLS; x++) {
+                const cell = document.createElement('i');
+                gridEl.appendChild(cell);
+                gridCells.push({ el: cell, x, y });
+            }
+        }
+        const GRID_OFF = 'rgba(122, 110, 180, 0.14)';
+        function updateGrid(f) {
+            for (let k = 0; k < gridCells.length; k++) {
+                const o = gridCells[k];
+                const wave = ((o.x + o.y * 2 - f) % 9 + 9) % 9;
+                const spark = ((o.x * 7 + o.y * 13 + f * 5) % 37) < 2;
+                if (wave < 2) {
+                    o.el.style.background = wave < 1 ? 'var(--cover-hi)' : 'var(--cover-accent)';
+                    o.el.style.opacity = '0.95';
+                } else if (spark) {
+                    o.el.style.background = 'var(--cover-accent)';
+                    o.el.style.opacity = '0.55';
+                } else {
+                    o.el.style.background = GRID_OFF;
+                    o.el.style.opacity = '0.4';
+                }
+            }
+        }
+
         let pvX = 0, pvY = 0, pvTX = 0, pvTY = 0;
         let pvActive = false;
+        let rafCount = 0, gridFrame = 0;
 
         document.addEventListener('mousemove', (e) => {
             pvTX = e.clientX + 28;
@@ -1391,6 +1407,7 @@
         });
 
         (function animPreview() {
+            rafCount++;
             pvX += (pvTX - pvX) * 0.14;
             pvY += (pvTY - pvY) * 0.14;
             if (pvActive) {
@@ -1398,15 +1415,16 @@
                 const maxY = window.innerHeight - 240;
                 preview.style.transform =
                     `translate(${Math.min(pvX, maxX)}px, ${Math.max(12, Math.min(pvY, maxY))}px)`;
+                if (rafCount % 7 === 0) { gridFrame++; updateGrid(gridFrame); }
             }
             requestAnimationFrame(animPreview);
         })();
 
-        // Cover accent follows the company badge color
+        // Cover accent + highlight follow the company badge color
         const COVER_ACCENTS = {
-            'project-company--oplit':      '#6384ff',
-            'project-company--prestashop': '#a584e6',
-            'project-company--perso':      '#9aa0a6'
+            'project-company--oplit':      ['#6384ff', '#aec0ff'],
+            'project-company--prestashop': ['#a584e6', '#d6c4f2'],
+            'project-company--perso':      ['#9aa0a6', '#cfd2d6']
         };
 
         document.querySelectorAll('#projects .project-card').forEach(card => {
@@ -1421,8 +1439,9 @@
                 const index = card.querySelector('.project-index')?.textContent || '00';
                 const accentClass = Object.keys(COVER_ACCENTS)
                     .find(cls => companyEl?.classList.contains(cls));
-                preview.style.setProperty('--cover-accent', COVER_ACCENTS[accentClass] || '#4d34ff');
-                coverAsciiEl.textContent = coverAscii(slug);
+                const [acc, hi] = COVER_ACCENTS[accentClass] || ['#4d34ff', '#a99cff'];
+                preview.style.setProperty('--cover-accent', acc);
+                preview.style.setProperty('--cover-hi', hi);
                 coverCodeEl.textContent = `GC://${company.replace(/\s+/g, '-')}/${slug.replace('project-', '')}`.toUpperCase();
                 coverMetricEl.textContent = (t[data.metricKey] || '') + (data.suffix || '');
                 coverTitleEl.textContent = title;

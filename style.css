@@ -3044,36 +3044,23 @@ body.landing-active .galaxy-bg { opacity: 0; }
 
 /* ASCII motif animated like the ultracode bar: a brightness window
    sweeps across the dithered glyph matrix. */
-.cover-ascii {
-    font-size: 0.6rem;
-    line-height: 1.3;
-    letter-spacing: 0.18em;
-    white-space: pre;
-    margin-bottom: 12px;
-    user-select: none;
-    background: linear-gradient(90deg,
-        color-mix(in srgb, var(--cover-accent) 28%, transparent) 0%,
-        var(--cover-accent) 42%,
-        #ffffff 50%,
-        var(--cover-accent) 58%,
-        color-mix(in srgb, var(--cover-accent) 28%, transparent) 100%);
-    background-size: 260% 100%;
-    background-position: 130% 0;
-    -webkit-background-clip: text;
-            background-clip: text;
-    -webkit-text-fill-color: transparent;
-            color: transparent;
-    filter: drop-shadow(0 0 6px color-mix(in srgb, var(--cover-accent) 45%, transparent));
-    animation: coverScan 2.6s linear infinite;
+/* Pixel "life grid" motif — cells ripple diagonally + sparkle, full
+   width, kept at 50% opacity so it stays a discreet watermark. */
+.cover-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--cols, 44), 1fr);
+    grid-auto-rows: 1fr;
+    gap: 2px;
+    width: 100%;
+    height: 38px;
+    margin-bottom: 13px;
+    opacity: 0.5;
 }
 
-@keyframes coverScan {
-    from { background-position: 130% 0; }
-    to   { background-position: -130% 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .cover-ascii { animation: none; background-position: 50% 0; }
+.cover-grid i {
+    display: block;
+    border-radius: 1px;
+    background: rgba(122, 110, 180, 0.14);
 }
 
 .cover-code {
