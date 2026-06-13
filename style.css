@@ -826,24 +826,55 @@ body.landing-active .cursor-trail span {
 .projects-list {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 10px;
 }
 
 .project-card {
     display: block;
     transition: border-color var(--transition-fast);
     position: relative;
+    overflow: hidden;
 }
 
-/* Halo / shift-on-hover removed per design feedback */
+/* Subtle "ultracode bar" sweep along the bottom edge on hover —
+   a thin shimmering accent line, almost a watermark. */
 .project-card::before { content: none; }
-.project-card:hover::before { opacity: 0; }
+
+.project-card::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1.5px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        color-mix(in srgb, var(--accent) 30%, transparent) 30%,
+        var(--accent) 50%,
+        color-mix(in srgb, var(--accent) 30%, transparent) 70%,
+        transparent 100%);
+    background-size: 220% 100%;
+    background-position: 130% 0;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    pointer-events: none;
+}
+
+.project-card:hover::after {
+    opacity: 0.55;
+    animation: cardSweep 1.9s linear infinite;
+}
+
+@keyframes cardSweep {
+    from { background-position: 130% 0; }
+    to   { background-position: -130% 0; }
+}
 
 .project-card-inner {
     display: flex;
     align-items: center;
     gap: 24px;
-    padding: 6px 0;
+    padding: 2px 0;
     position: relative;
     z-index: 1;
 }
@@ -1181,7 +1212,7 @@ body.landing-active .cursor-trail span {
 /* Project cards — clean surface, no hover halo per design feedback */
 .project-card {
     background: var(--surface-light);
-    padding: 18px 24px;
+    padding: 12px 22px;
 }
 
 /* Other-projects list as one surface */
@@ -1776,7 +1807,7 @@ body.landing-active .cursor-trail span {
    =================================== */
 .project-other-list {
     list-style: none;
-    padding: 8px 0 0;
+    padding: 14px 28px 18px;
     margin: 0;
 }
 
@@ -2548,127 +2579,106 @@ body.landing-active .cursor-trail span {
 }
 
 /* ===================================
-   Projects minimap (thematic compass)
+   Projects filter + subtle hover sweep
    =================================== */
 .projects {
     position: relative;
 }
 
-.minimap {
-    position: fixed;
-    top: 110px;
-    right: 32px;
-    width: 240px;
-    z-index: 5;
-    padding: 16px 16px 14px;
-    background: rgba(26, 26, 28, 0.78);
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    color: rgba(245, 240, 235, 0.9);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
-    opacity: 0;
-    transform: translateY(-6px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    pointer-events: none;
+.projects-filter {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
 }
 
-body[data-page="projects"] .minimap {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-.minimap-label {
-    font-size: 0.62rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: rgba(245, 240, 235, 0.45);
-    margin-bottom: 10px;
-}
-
-.minimap-svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    overflow: visible;
-}
-
-/* Thematic wedges — subtle, lit up when their projects are hovered */
-.minimap-wedge {
-    fill: rgba(255, 255, 255, 0.025);
-    transition: fill 0.4s ease;
-    pointer-events: none;
-}
-.minimap-wedge.is-active {
-    fill: rgba(20, 80, 220, 0.16);
-}
-
-/* Cardinal labels — text rotates with the dial */
-.minimap-cardinal {
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 6px;
-    letter-spacing: 0.15em;
-    fill: rgba(245, 240, 235, 0.4);
-    text-transform: uppercase;
-    transition: fill 0.35s ease, font-weight 0.35s ease;
-    pointer-events: none;
-}
-.minimap-cardinal.is-active {
-    fill: rgba(245, 240, 235, 0.95);
-    font-weight: 600;
-}
-
-.minimap-star {
-    fill: rgba(245, 240, 235, 0.5);
-    transition: fill 0.25s ease, r 0.25s ease;
-    cursor: default;
-}
-.minimap-star.is-active {
-    fill: #ffffff;
-    r: 2.4;
-}
-
-.minimap-line,
-.minimap-pointer {
-    transition: all 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.minimap-pointer {
-    opacity: 0;
-}
-.minimap-pointer circle:first-child {
-    stroke: rgba(255, 255, 255, 0.95);
-}
-.minimap-pointer circle:last-child {
-    fill: #ffffff;
-}
-
-.minimap.is-pointing .minimap-pointer {
-    opacity: 1;
-}
-
-.minimap-caption {
-    margin-top: 12px;
+.filter-chip {
+    font-family: inherit;
     font-size: 0.72rem;
-    line-height: 1.45;
-    color: rgba(245, 240, 235, 0.65);
-    min-height: 2.8em;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
 }
 
-.minimap-caption .caption-theme {
-    display: inline-block;
-    font-size: 0.62rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: rgba(245, 240, 235, 0.4);
-    margin-right: 6px;
+.filter-chip:hover {
+    color: var(--text);
+    border-color: var(--text-dim);
+}
+
+.filter-chip.active {
+    color: var(--bg);
+    background: var(--text);
+    border-color: var(--text);
+}
+
+/* Special CTA — key projects */
+.filter-chip--key {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    background: var(--accent-soft);
+}
+
+.filter-chip--key .filter-chip-glyph {
+    font-size: 0.6rem;
+    line-height: 1;
+    transform: translateY(0.5px);
+}
+
+.filter-chip--key:hover {
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 65%, transparent);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.filter-chip--key.active {
+    color: #fff;
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 38%, transparent);
+}
+
+.filter-chip--key.active .filter-chip-glyph {
+    animation: keyPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes keyPulse {
+    0%, 100% { opacity: 0.55; }
+    50%      { opacity: 1; }
+}
+
+.filter-sep {
+    width: 1px;
+    align-self: stretch;
+    margin: 2px 4px;
+    background: var(--border);
+}
+
+/* Filtering: hide non-matching cards, year labels, earlier-projects block */
+.project-card.is-filtered-out,
+.project-year-label.is-filtered-out,
+.is-filtered-out {
+    display: none !important;
+}
+
+/* When a filter is active the list breathes a touch more between cards */
+.projects-list.is-filtering {
+    gap: 12px;
 }
 
 /* Hide on smaller screens — list remains the primary affordance */
-@media (max-width: 1100px) {
-    .minimap { display: none; }
+@media (max-width: 560px) {
+    .projects-filter { gap: 6px; }
+    .filter-chip { font-size: 0.68rem; padding: 5px 10px; }
 }
 
 /* ===================================
@@ -2776,7 +2786,6 @@ html[data-theme="light"] .case-section .case-caption {
 html[data-theme="light"] .case-section .case-caption em {
     color: #8a6d00;
 }
-html[data-theme="light"] .minimap-wedge.is-active { fill: rgba(20, 0, 160, 0.1); }
 
 /* Galaxy canvases stay visible on every page incl. landing */
 body:not(.loading) .galaxy-bg { opacity: 1; }
@@ -2975,6 +2984,7 @@ body.landing-active .galaxy-bg { opacity: 0; }
    data-driven per project — nerd / ASCII / PS2-era vibes. Always dark,
    electric-blue glow, CRT scanlines: deliberate in both themes. */
 .project-preview {
+    --cover-accent: #4d34ff;
     position: fixed;
     top: 0;
     left: 0;
@@ -2982,13 +2992,13 @@ body.landing-active .galaxy-bg { opacity: 0; }
     aspect-ratio: 16 / 10;
     border-radius: 10px;
     overflow: hidden;
-    border: 1px solid rgba(77, 52, 255, 0.35);
+    border: 1px solid color-mix(in srgb, var(--cover-accent) 40%, transparent);
     background:
-        radial-gradient(120% 90% at 20% 0%, rgba(77, 52, 255, 0.22), transparent 55%),
+        radial-gradient(120% 90% at 20% 0%, color-mix(in srgb, var(--cover-accent) 24%, transparent), transparent 55%),
         #0d0d12;
     box-shadow:
         0 24px 64px rgba(0, 0, 0, 0.45),
-        0 0 28px rgba(77, 52, 255, 0.18);
+        0 0 28px color-mix(in srgb, var(--cover-accent) 20%, transparent);
     pointer-events: none;
     z-index: 450;
     opacity: 0;
@@ -3032,8 +3042,8 @@ body.landing-active .galaxy-bg { opacity: 0; }
     font-size: 0.6rem;
     line-height: 1.3;
     letter-spacing: 0.18em;
-    color: rgba(77, 52, 255, 0.9);
-    text-shadow: 0 0 8px rgba(77, 52, 255, 0.5);
+    color: color-mix(in srgb, var(--cover-accent) 92%, transparent);
+    text-shadow: 0 0 8px color-mix(in srgb, var(--cover-accent) 55%, transparent);
     white-space: pre;
     margin-bottom: auto;
     user-select: none;
@@ -3078,8 +3088,8 @@ body.landing-active .galaxy-bg { opacity: 0; }
 }
 
 .cover-foot .cover-slot {
-    color: rgba(77, 52, 255, 0.95);
-    text-shadow: 0 0 6px rgba(77, 52, 255, 0.4);
+    color: var(--cover-accent);
+    text-shadow: 0 0 6px color-mix(in srgb, var(--cover-accent) 45%, transparent);
 }
 
 /* --- Scroll reveals --- */
@@ -3113,6 +3123,12 @@ body.landing-active .galaxy-bg { opacity: 0; }
     font-weight: 600;
     letter-spacing: -0.01em;
     color: var(--text);
+}
+
+.footer-cta-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .footer-cta-mail {
@@ -3198,8 +3214,7 @@ body::after {
     }
 }
 
-/* --- Hide the thematic compass (replaced by hover previews) --- */
-.minimap { display: none !important; }
+/* Thematic compass: restored — immersive companion to the hover covers */
 
 /* --- Mobile adjustments --- */
 @media (max-width: 768px) {

@@ -161,88 +161,39 @@
     document.querySelectorAll('.case-back').forEach(el => addScramble(el));
 
     // ===================================
-    // Projects minimap — thematic compass.
-    // Hovering a project lights up its star, its theme wedge, and shows a
-    // caption describing the theme.
+    // Projects filter — chips filter the list by theme or "key" projects.
+    // "All" restores the full timeline (year labels + earlier projects).
     // ===================================
-    (function setupMinimap() {
-        const minimap = document.querySelector('.minimap');
-        if (!minimap) return;
-        const pointer   = minimap.querySelector('.minimap-pointer');
-        const line      = minimap.querySelector('.minimap-line');
-        const caption   = minimap.querySelector('.minimap-caption');
-        const stars     = Array.from(minimap.querySelectorAll('.minimap-star'));
-        const wedges    = Array.from(minimap.querySelectorAll('.minimap-wedge'));
-        const cardinals = Array.from(minimap.querySelectorAll('.minimap-cardinal'));
-        const starById  = new Map(stars.map(s => [s.dataset.project, s]));
+    (function setupProjectFilter() {
+        const filterBar = document.querySelector('.projects-filter');
+        const projectsList = document.querySelector('.projects-list');
+        if (!filterBar || !projectsList) return;
 
-        function themeLabel(theme) {
-            const key = `projects.theme.label.${theme}`;
-            const fallback = {
-                ds: 'Design Systems',
-                product: 'Product Design',
-                research: 'User Research & Flows',
-                tooling: 'Tooling & Design Ops'
-            }[theme] || theme;
-            try {
-                if (typeof TRANSLATIONS !== 'undefined' && currentLang && TRANSLATIONS[currentLang]?.[key]) {
-                    return TRANSLATIONS[currentLang][key];
-                }
-            } catch (e) { /* noop */ }
-            return fallback;
+        const chips = Array.from(filterBar.querySelectorAll('.filter-chip'));
+        const cards = Array.from(projectsList.querySelectorAll('.project-card'));
+        const years = Array.from(projectsList.querySelectorAll('.project-year-label'));
+        const extras = Array.from(projectsList.querySelectorAll('.project-list-sep, .project-other-intro, .project-other-list'));
+
+        function apply(filter) {
+            const isAll = filter === 'all';
+            cards.forEach(card => {
+                const match = isAll
+                    || (filter === 'key' && card.dataset.key === 'true')
+                    || (card.dataset.theme === filter);
+                card.classList.toggle('is-filtered-out', !match);
+            });
+            // Year labels & the earlier-projects block only make sense in "All"
+            years.forEach(y => y.classList.toggle('is-filtered-out', !isAll));
+            extras.forEach(e => e.classList.toggle('is-filtered-out', !isAll));
+            projectsList.classList.toggle('is-filtering', !isAll);
         }
 
-        function projectLabel(card) {
-            const name = card.querySelector('.project-name')?.textContent?.trim() || '';
-            return name;
-        }
-
-        function moveTo(projectId, label, theme) {
-            const star = starById.get(projectId);
-            if (!star) return;
-            const cx = parseFloat(star.getAttribute('cx'));
-            const cy = parseFloat(star.getAttribute('cy'));
-            if (pointer) pointer.setAttribute('transform', `translate(${cx}, ${cy})`);
-            if (line) { line.setAttribute('x2', cx); line.setAttribute('y2', cy); }
-
-            stars.forEach(s => s.classList.toggle('is-active', s === star));
-            wedges.forEach(w => w.classList.toggle('is-active', w.dataset.theme === theme));
-            cardinals.forEach(c => c.classList.toggle('is-active', c.dataset.theme === theme));
-            minimap.classList.add('is-pointing');
-
-            if (caption && label) {
-                const tLabel = themeLabel(theme);
-                caption.innerHTML = `<span class="caption-theme">${tLabel}</span> ${label}`;
-            }
-        }
-
-        function reset() {
-            if (pointer) pointer.setAttribute('transform', 'translate(50, 50)');
-            if (line) { line.setAttribute('x2', '50'); line.setAttribute('y2', '50'); }
-            stars.forEach(s => s.classList.remove('is-active'));
-            wedges.forEach(w => w.classList.remove('is-active'));
-            cardinals.forEach(c => c.classList.remove('is-active'));
-            minimap.classList.remove('is-pointing');
-            if (caption) {
-                const idle = caption.dataset.idle || caption.textContent;
-                caption.dataset.idle = idle;
-                caption.textContent = idle;
-            }
-        }
-
-        document.querySelectorAll('#projects .project-card').forEach(card => {
-            const pid = card.dataset.page;
-            if (!pid) return;
-            const star = starById.get(pid);
-            const theme = star?.dataset.theme;
-            const label = projectLabel(card);
-            card.addEventListener('mouseenter', () => moveTo(pid, label, theme));
-            card.addEventListener('focus',      () => moveTo(pid, label, theme));
-            card.addEventListener('mouseleave', reset);
-            card.addEventListener('blur',       reset);
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => c.classList.toggle('active', c === chip));
+                apply(chip.dataset.filter);
+            });
         });
-
-        reset();
     })();
 
     document.querySelectorAll('.landing-link-card, .who-link-card').forEach(card => {
@@ -351,7 +302,7 @@
     function updateNav() {
         // Toggle body class for landing-specific styles (cursor glow, etc.)
         document.body.classList.toggle('landing-active', currentPage === 'landing');
-        // data-page is read by CSS to show page-scoped elements (e.g. the minimap)
+        // data-page is read by CSS to show page-scoped elements
         document.body.dataset.page = currentPage;
 
         // Highlight "Projects" nav link when on a project detail page
@@ -692,7 +643,6 @@
             'landing.stat.go':  'see the work →',
 
             // Marquee labels
-            'mq.clients': 'Clients',
             'mq.skills':  'Skills',
 
             // Who page
@@ -761,22 +711,19 @@
             // Projects
             'projects.title': 'Projects',
             'projects.other.intro': 'Earlier projects: concept work, prototypes and student projects I still find relevant.',
-            'projects.minimap.label': 'Thematic compass',
-            'projects.minimap.idle':  'Hover a project to see its theme.',
-            'projects.theme.ds':       'DESIGN SYSTEMS',
-            'projects.theme.product':  'PRODUCT',
-            'projects.theme.research': 'RESEARCH',
-            'projects.theme.tooling':  'TOOLING',
-            'projects.theme.label.ds':       'Design Systems',
-            'projects.theme.label.product':  'Product Design',
-            'projects.theme.label.research': 'User Research & Flows',
-            'projects.theme.label.tooling':  'Tooling & Design Ops',
+            'projects.filter.key':      'Key projects',
+            'projects.filter.all':      'All',
+            'projects.filter.ds':       'Design Systems',
+            'projects.filter.product':  'Product',
+            'projects.filter.research': 'Research',
+            'projects.filter.tooling':  'Tooling',
 
             // Footer
             'footer.role':    'Senior Product Designer',
             'footer.email':   'contact@guillaumecaillet.fr',
             'footer.status':  'Open to opportunities',
-            'footer.cta.kicker': 'A complex product to untangle? Let\'s talk.',
+            'footer.cta.kicker': 'Interested in my profile? Let\'s connect.',
+            'footer.cta.msg':    'Send me a message',
 
             // Case studies — shared
             'case.back':             '← Back to projects',
@@ -984,7 +931,6 @@
             'landing.stat.go':  'voir le projet →',
 
             // Marquee labels
-            'mq.clients': 'Clients',
             'mq.skills':  'Compétences',
 
             // Who page
@@ -1053,22 +999,19 @@
             // Projects
             'projects.title': 'Projets',
             'projects.other.intro': 'Projets antérieurs : concepts, prototypes et travaux étudiants que je trouve toujours pertinents.',
-            'projects.minimap.label': 'Boussole thématique',
-            'projects.minimap.idle':  'Survolez un projet pour voir son thème.',
-            'projects.theme.ds':       'DESIGN SYSTEMS',
-            'projects.theme.product':  'PRODUIT',
-            'projects.theme.research': 'RESEARCH',
-            'projects.theme.tooling':  'TOOLING',
-            'projects.theme.label.ds':       'Design Systems',
-            'projects.theme.label.product':  'Product Design',
-            'projects.theme.label.research': 'Recherche utilisateur & Flows',
-            'projects.theme.label.tooling':  'Tooling & Design Ops',
+            'projects.filter.key':      'Projets clés',
+            'projects.filter.all':      'Tous',
+            'projects.filter.ds':       'Design Systems',
+            'projects.filter.product':  'Produit',
+            'projects.filter.research': 'Research',
+            'projects.filter.tooling':  'Tooling',
 
             // Footer
             'footer.role':    'Senior Product Designer',
             'footer.email':   'contact@guillaumecaillet.fr',
             'footer.status':  'Ouvert aux opportunités',
-            'footer.cta.kicker': 'Un produit complexe à démêler ? Parlons-en.',
+            'footer.cta.kicker': 'Mon profil vous intéresse ? Connectons-nous.',
+            'footer.cta.msg':    'Envoyez-moi un message',
 
             // Case studies — shared
             'case.back':             '← Retour aux projets',
@@ -1284,10 +1227,6 @@
             if (isActive) btn.setAttribute('aria-current', 'true');
             else btn.removeAttribute('aria-current');
         });
-
-        // Refresh minimap idle caption cache so future hovers/resets use the new locale.
-        const mc = document.getElementById('minimap-caption');
-        if (mc) mc.dataset.idle = mc.textContent;
     }
 
     // Initialise language on load
@@ -1463,15 +1402,26 @@
             requestAnimationFrame(animPreview);
         })();
 
+        // Cover accent follows the company badge color
+        const COVER_ACCENTS = {
+            'project-company--oplit':      '#6384ff',
+            'project-company--prestashop': '#a584e6',
+            'project-company--perso':      '#9aa0a6'
+        };
+
         document.querySelectorAll('#projects .project-card').forEach(card => {
             const slug = card.dataset.page;
             const data = COVER_DATA[slug];
             if (!data) return;
             card.addEventListener('mouseenter', () => {
                 const t = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
-                const company = card.querySelector('.project-company')?.textContent || '';
+                const companyEl = card.querySelector('.project-company');
+                const company = companyEl?.textContent || '';
                 const title = card.querySelector('.project-name')?.textContent || '';
                 const index = card.querySelector('.project-index')?.textContent || '00';
+                const accentClass = Object.keys(COVER_ACCENTS)
+                    .find(cls => companyEl?.classList.contains(cls));
+                preview.style.setProperty('--cover-accent', COVER_ACCENTS[accentClass] || '#4d34ff');
                 coverAsciiEl.textContent = coverAscii(slug);
                 coverCodeEl.textContent = `GC://${company.replace(/\s+/g, '-')}/${slug.replace('project-', '')}`.toUpperCase();
                 coverMetricEl.textContent = (t[data.metricKey] || '') + (data.suffix || '');
