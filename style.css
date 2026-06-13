@@ -821,6 +821,7 @@ body.landing-active .cursor-trail span {
     width: 100%;
     max-width: 800px;
     padding-top: 20px;
+    padding-bottom: 56px;
 }
 
 .projects-list {
@@ -836,8 +837,9 @@ body.landing-active .cursor-trail span {
     overflow: hidden;
 }
 
-/* Subtle "ultracode bar" sweep along the bottom edge on hover —
-   a thin shimmering accent line, almost a watermark. */
+/* Subtle "ultracode bar" sweep on hover — a dithered dot matrix band
+   along the bottom edge, with a travelling highlight window. Almost a
+   watermark: nerd / PS2 dot-matrix, not a solid line. */
 .project-card::before { content: none; }
 
 .project-card::after {
@@ -846,28 +848,32 @@ body.landing-active .cursor-trail span {
     left: 0;
     right: 0;
     bottom: 0;
-    height: 1.5px;
-    background: linear-gradient(90deg,
-        transparent 0%,
-        color-mix(in srgb, var(--accent) 30%, transparent) 30%,
-        var(--accent) 50%,
-        color-mix(in srgb, var(--accent) 30%, transparent) 70%,
-        transparent 100%);
-    background-size: 220% 100%;
-    background-position: 130% 0;
+    height: 10px;
+    background-image: radial-gradient(circle, var(--accent) 0.7px, transparent 0.8px);
+    background-size: 5px 5px;
+    background-position: 0 100%;
     opacity: 0;
     transition: opacity 0.45s ease;
     pointer-events: none;
+    /* a soft highlight window slides across the dots */
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 50%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 50%, transparent 100%);
+    -webkit-mask-size: 60% 100%;
+            mask-size: 60% 100%;
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+    -webkit-mask-position: -60% 0;
+            mask-position: -60% 0;
 }
 
 .project-card:hover::after {
-    opacity: 0.55;
-    animation: cardSweep 1.9s linear infinite;
+    opacity: 0.5;
+    animation: cardDotSweep 2s linear infinite;
 }
 
-@keyframes cardSweep {
-    from { background-position: 130% 0; }
-    to   { background-position: -130% 0; }
+@keyframes cardDotSweep {
+    from { -webkit-mask-position: -60% 0;  mask-position: -60% 0; }
+    to   { -webkit-mask-position: 160% 0;  mask-position: 160% 0; }
 }
 
 .project-card-inner {
@@ -900,7 +906,7 @@ body.landing-active .cursor-trail span {
     font-size: 1.25rem;
     font-weight: 600;
     letter-spacing: -0.01em;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
     transition: transform var(--transition-fast);
 }
 
@@ -1212,7 +1218,7 @@ body.landing-active .cursor-trail span {
 /* Project cards — clean surface, no hover halo per design feedback */
 .project-card {
     background: var(--surface-light);
-    padding: 12px 22px;
+    padding: 9px 22px;
 }
 
 /* Other-projects list as one surface */
@@ -3112,10 +3118,9 @@ body.landing-active .galaxy-bg { opacity: 0; }
     gap: 24px;
     flex-wrap: wrap;
     max-width: 1400px;
-    margin: 0 auto;
-    padding: 22px 0 18px;
+    margin: 0 auto 14px;
+    padding: 16px 0;
     border-bottom: 1px solid var(--border);
-    margin-bottom: 14px;
 }
 
 .footer-cta-kicker {
