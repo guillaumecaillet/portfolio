@@ -1353,10 +1353,12 @@
         preview.className = 'project-preview';
         preview.innerHTML =
             '<div class="cover-card">' +
-                '<div class="cover-grid" aria-hidden="true"></div>' +
-                '<div class="cover-code"></div>' +
-                '<div class="cover-metric"></div>' +
-                '<div class="cover-title"></div>' +
+                '<div class="cover-body">' +
+                    '<div class="cover-code"></div>' +
+                    '<div class="cover-metric"></div>' +
+                    '<div class="cover-title"></div>' +
+                '</div>' +
+                '<div class="cover-icon" aria-hidden="true"></div>' +
                 '<div class="cover-foot"><span>Case study</span><span class="cover-slot"></span></div>' +
             '</div>';
         document.body.appendChild(preview);
@@ -1365,34 +1367,65 @@
         const coverMetricEl = preview.querySelector('.cover-metric');
         const coverTitleEl  = preview.querySelector('.cover-title');
         const coverSlotEl   = preview.querySelector('.cover-slot');
+        const coverIconEl   = preview.querySelector('.cover-icon');
 
-        // Build the pixel "life grid" once
-        const gridEl = preview.querySelector('.cover-grid');
-        const COLS = 44, ROWS = 5;
-        const gridCells = [];
-        gridEl.style.setProperty('--cols', COLS);
-        for (let y = 0; y < ROWS; y++) {
-            for (let x = 0; x < COLS; x++) {
-                const cell = document.createElement('i');
-                gridEl.appendChild(cell);
-                gridCells.push({ el: cell, x, y });
+        // Themed pixel-art sprites — 1 = accent, 2 = highlight, . = empty.
+        const ICONS = {
+            'project-customer-account': [   // person
+                '....22222....','...2222222...','...2222222...','....22222....',
+                '.............','...1111111...','..111111111..','.11111111111.','.11111111111.'],
+            'project-design-system': [      // CTA button + pointer
+                '.............','.11111111111.','.12222222221.','.12222222221.','.12222222221.',
+                '.11111111111.','.......2.....','.......22....','.......222...'],
+            'project-ds-execution': [       // design tokens / swatches
+                '.............','.22.11.22.11.','.22.11.22.11.','.............','.11.22.11.22.',
+                '.11.22.11.22.','.............','.............','.............'],
+            'project-ds-audit': [           // magnifier
+                '..2222.......','.2....2......','2......2.....','2......2.....','2......2.....',
+                '.2....2......','..2222.1.....','.......11....','........11...'],
+            'project-transfer': [           // two sectors + arrow
+                '.............','222.......222','222.......222','222....1..222','222.11111.222',
+                '222....1..222','222.......222','222.......222','.............'],
+            'project-signin': [             // key
+                '.............','.22..........','2..2.........','2..211111111.','2..2.....1.1.',
+                '.22..........','.............','.............','.............'],
+            'project-figma-plugin': [       // wrench
+                '.............','.........222.','.........2.2.','.........222.','........11...',
+                '......11.....','....11.......','..11.........','11...........'],
+            'project-multiselect': [        // checklist
+                '22.111111111.','22.111111111.','.............','22.111111111.','22.111111111.',
+                '.............','11.111111111.','11.111111111.','.............'],
+            'project-store-association': [  // storefront
+                '.............','.11111111111.','.22222222222.','..2.2.2.2.2..','.11111111111.',
+                '.1...111...1.','.1...111...1.','.1...111...1.','.11111111111.']
+        };
+        const ICON_FALLBACK = ICONS['project-customer-account'];
+
+        let iconCells = [];
+        function buildIcon(slug) {
+            const bmp = ICONS[slug] && ICONS[slug].length ? ICONS[slug] : ICON_FALLBACK;
+            const cols = bmp[0].length, rows = bmp.length;
+            coverIconEl.style.gridTemplateColumns = `repeat(${cols}, 5px)`;
+            coverIconEl.style.gridAutoRows = '5px';
+            coverIconEl.textContent = '';
+            iconCells = [];
+            for (let y = 0; y < rows; y++) {
+                for (let x = 0; x < cols; x++) {
+                    const ch = bmp[y][x];
+                    const cell = document.createElement('i');
+                    coverIconEl.appendChild(cell);
+                    if (ch !== '.') iconCells.push({ el: cell, x, y, base: ch });
+                }
             }
         }
-        function updateGrid(f) {
-            for (let k = 0; k < gridCells.length; k++) {
-                const o = gridCells[k];
-                const wave = ((o.x + o.y * 2 - f) % 9 + 9) % 9;
-                const spark = ((o.x * 7 + o.y * 13 + f * 5) % 37) < 2;
-                if (wave < 2) {
-                    o.el.style.background = wave < 1 ? 'var(--cover-hi)' : 'var(--cover-accent)';
-                    o.el.style.opacity = '0.95';
-                } else if (spark) {
-                    o.el.style.background = 'var(--cover-accent)';
-                    o.el.style.opacity = '0.55';
-                } else {
-                    o.el.style.background = 'var(--cover-off)';
-                    o.el.style.opacity = '0.4';
-                }
+
+        // Very light shimmer: a slow diagonal band lifts lit pixels to the
+        // highlight tone as it passes; otherwise they hold the accent.
+        function updateIcon(f) {
+            for (let k = 0; k < iconCells.length; k++) {
+                const o = iconCells[k];
+                const band = (((o.x - o.y) - f) % 16 + 16) % 16 < 2;
+                o.el.style.background = (o.base === '2' || band) ? 'var(--cover-hi)' : 'var(--cover-accent)';
             }
         }
 
@@ -1414,7 +1447,7 @@
                 const maxY = window.innerHeight - 240;
                 preview.style.transform =
                     `translate(${Math.min(pvX, maxX)}px, ${Math.max(12, Math.min(pvY, maxY))}px)`;
-                if (rafCount % 7 === 0) { gridFrame++; updateGrid(gridFrame); }
+                if (rafCount % 8 === 0) { gridFrame++; updateIcon(gridFrame); }
             }
             requestAnimationFrame(animPreview);
         })();
@@ -1454,14 +1487,15 @@
                 const accentClass = Object.keys(COVER_ACCENTS)
                     .find(cls => companyEl?.classList.contains(cls));
                 const theme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
-                const [acc, hi, off] = (COVER_ACCENTS[accentClass] || COVER_DEFAULT)[theme];
+                const [acc, hi] = (COVER_ACCENTS[accentClass] || COVER_DEFAULT)[theme];
                 preview.style.setProperty('--cover-accent', acc);
                 preview.style.setProperty('--cover-hi', hi);
-                preview.style.setProperty('--cover-off', off);
                 coverCodeEl.textContent = `GC://${company.replace(/\s+/g, '-')}/${slug.replace('project-', '')}`.toUpperCase();
                 coverMetricEl.textContent = (t[data.metricKey] || '') + (data.suffix || '');
                 coverTitleEl.textContent = title;
                 coverSlotEl.textContent = `Slot ${index}`;
+                buildIcon(slug);
+                updateIcon(gridFrame);
                 pvActive = true;
                 preview.classList.add('on');
             });

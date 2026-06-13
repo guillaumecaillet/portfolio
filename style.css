@@ -3034,33 +3034,32 @@ body.landing-active .galaxy-bg { opacity: 0; }
     opacity: 1;
 }
 
+/* Content on the left, a themed pixel-art sprite on the right —
+   keeps the card short. The sprite shimmers very lightly. */
 .cover-card {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    padding: 14px 18px 12px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "body icon" "foot foot";
+    column-gap: 14px;
+    align-items: center;
+    padding: 14px 16px 12px;
     font-family: 'IBM Plex Mono', monospace;
 }
 
-/* ASCII motif animated like the ultracode bar: a brightness window
-   sweeps across the dithered glyph matrix. */
-/* Pixel "life grid" motif — cells ripple diagonally + sparkle, full
-   width, kept at 50% opacity so it stays a discreet watermark. */
-.cover-grid {
+.cover-body { grid-area: body; min-width: 0; }
+
+.cover-icon {
+    grid-area: icon;
     display: grid;
-    grid-template-columns: repeat(var(--cols, 44), 1fr);
-    grid-auto-rows: 1fr;
-    gap: 2px;
-    width: 100%;
-    height: 38px;
-    margin-bottom: 13px;
-    opacity: 0.5;
+    gap: 1px;
+    align-self: center;
 }
 
-.cover-grid i {
+.cover-icon i {
     display: block;
     border-radius: 1px;
-    background: rgba(122, 110, 180, 0.14);
+    background: transparent;
 }
 
 .cover-code {
@@ -3086,13 +3085,15 @@ body.landing-active .galaxy-bg { opacity: 0; }
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: rgba(245, 240, 235, 0.75);
-    margin-bottom: 12px;
+    margin-bottom: 0;
 }
 
 .cover-foot {
+    grid-area: foot;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 11px;
     padding-top: 8px;
     border-top: 1px solid rgba(245, 240, 235, 0.12);
     font-size: 0.55rem;
