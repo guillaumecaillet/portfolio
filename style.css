@@ -3189,17 +3189,21 @@ html[data-theme="light"] .cover-foot   { color: rgba(26, 26, 26, 0.45); border-t
     flex-wrap: nowrap;
 }
 
+/* Same treatment as the .who-link-card buttons elsewhere on the site */
 .footer-cta-mail {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    font-size: 0.9rem;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid var(--border-hover);
+    border-radius: 6px;
+    font-size: 0.8125rem;
     font-weight: 500;
     color: var(--text);
-    border: 1px solid var(--border-hover);
-    border-radius: 8px;
-    padding: 10px 16px;
+    background: var(--bg-card);
+    cursor: pointer;
     transition: all var(--transition-fast);
+    white-space: nowrap;
 }
 
 .footer-cta-mail:hover {
@@ -3208,12 +3212,9 @@ html[data-theme="light"] .cover-foot   { color: rgba(26, 26, 26, 0.45); border-t
     transform: translateY(-1px);
 }
 
-.footer-cta-mail .mail-arrow {
-    transition: transform var(--transition-fast);
-}
-
-.footer-cta-mail:hover .mail-arrow {
-    transform: translateX(3px);
+.footer-cta-mail svg {
+    flex-shrink: 0;
+    opacity: 0.6;
 }
 
 .footer-time {
