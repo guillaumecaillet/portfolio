@@ -81,6 +81,17 @@ a {
     color: var(--text);
 }
 
+/* --- Keyboard focus: accent ring on keyboard nav only --- */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
 /* --- Navigation --- */
 /* --- Global galaxy background (dark pages) --- */
 .galaxy-bg {
