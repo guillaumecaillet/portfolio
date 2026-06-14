@@ -3160,7 +3160,7 @@ html[data-theme="light"] .cover-foot   { color: rgba(26, 26, 26, 0.45); border-t
     gap: 28px;
     flex-wrap: nowrap;
     margin: 0 auto 14px;
-    padding: 18px 0;
+    padding: 0 0 18px;
     border-bottom: 1px solid var(--border);
 }
 
@@ -3275,7 +3275,7 @@ body::after {
 
     .landing-scroll-cue { bottom: 12px; }
 
-    .footer-cta { padding: 16px 0; flex-wrap: wrap; gap: 14px; text-align: center; }
+    .footer-cta { padding: 0 0 16px; flex-wrap: wrap; gap: 14px; text-align: center; }
     .footer-cta-kicker { font-size: 0.95rem; }
 
     .project-preview { display: none; }
