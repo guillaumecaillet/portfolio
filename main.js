@@ -135,30 +135,8 @@
         });
     }
 
-    // Oplit link
-    const oplitLink = document.querySelector('.landing-company');
-    if (oplitLink) addScramble(oplitLink);
-
-    // Nav links
+    // Scramble effect — nav links only (About / Projects)
     document.querySelectorAll('.nav-link').forEach(el => addScramble(el));
-
-    // Landing link cards & who-link-cards (scramble the label)
-    document.querySelectorAll('.landing-link-card, .who-link-card').forEach(card => {
-        const label = card.querySelector('.landing-link-card-label, .who-link-card-label');
-        if (label) addScramble(card, label);
-    });
-
-    // Who links
-    document.querySelectorAll('.who-link').forEach(el => addScramble(el));
-
-    // Project cards (scramble the project name)
-    document.querySelectorAll('.project-card').forEach(card => {
-        const name = card.querySelector('.project-name');
-        if (name) addScramble(card, name);
-    });
-
-    // Case back links
-    document.querySelectorAll('.case-back').forEach(el => addScramble(el));
 
     // ===================================
     // Projects filter — chips filter the list by theme or "key" projects.
@@ -632,7 +610,7 @@
             'landing.sub_role': 'Senior Product Designer',
             'landing.sub_loc':  'France',
             'landing.pitch':    'Over the last 7 years, I\'ve contributed to the design and improvement of B2B SaaS products, alongside teams at <strong>Oplit</strong> (industrial schedulers), <strong>PrestaShop</strong> (300k+ merchants), <strong>Airbus</strong> and <strong>SNCF</strong>. I\'ve led design systems, run audits, and shipped infrastructure that teams build on.<br><br>What I\'m looking for: high-stakes products where design co-pilots strategy, not a service function.',
-            'landing.discover': 'Discover my work →',
+            'landing.discover': 'Discover my work',
             'landing.about':    'About me',
             'landing.email':    'Email me',
             'landing.linkedin': 'Connect on LinkedIn',
@@ -659,7 +637,6 @@
             'who.section.podcasts':     'Podcasts',
             'who.section.templates':    'Templates for Notion',
             'who.section.cv':           'Curriculum Vitae',
-            'who.section.links':        'Useful links',
 
             'who.date.oplit':       'Sept. 2025 – Present',
             'who.date.prestashop':  'June 2022 – Sept. 2025',
@@ -723,7 +700,6 @@
             'footer.email':   'contact@guillaumecaillet.fr',
             'footer.status':  'Open to opportunities',
             'footer.cta.kicker': 'Interested in my profile? Let\'s connect.',
-            'footer.cta.msg':    'Send me a message',
 
             // Case studies — shared
             'case.back':             '← Back to projects',
@@ -920,7 +896,7 @@
             'landing.sub_role': 'Senior Product Designer',
             'landing.sub_loc':  'France',
             'landing.pitch':    'Sur les 7 dernières années, j\'ai participé à la conception et à l\'amélioration de produits SaaS B2B, aux côtés des équipes de <strong>Oplit</strong> (planification industrielle), <strong>PrestaShop</strong> (300k+ marchands), <strong>Airbus</strong> et <strong>SNCF</strong>. J\'ai piloté des design systems, mené des audits, et livré des chantiers d\'infrastructure sur lesquels les équipes s\'appuient.<br><br>Ce que je cherche : des produits exigeants où le design co-pilote la stratégie, pas une fonction support.',
-            'landing.discover': 'Découvrir mon travail →',
+            'landing.discover': 'Découvrir mon travail',
             'landing.about':    'À propos de moi',
             'landing.email':    'M\'écrire',
             'landing.linkedin': 'Me suivre sur LinkedIn',
@@ -947,7 +923,6 @@
             'who.section.podcasts':     'Podcasts',
             'who.section.templates':    'Templates pour Notion',
             'who.section.cv':           'Curriculum Vitae',
-            'who.section.links':        'Liens utiles',
 
             'who.date.oplit':       'Sept. 2025 – Aujourd\'hui',
             'who.date.prestashop':  'Juin 2022 – Sept. 2025',
@@ -1011,7 +986,6 @@
             'footer.email':   'contact@guillaumecaillet.fr',
             'footer.status':  'Ouvert aux opportunités',
             'footer.cta.kicker': 'Mon profil vous intéresse ? Connectons-nous.',
-            'footer.cta.msg':    'Envoyez-moi un message',
 
             // Case studies — shared
             'case.back':             '← Retour aux projets',
