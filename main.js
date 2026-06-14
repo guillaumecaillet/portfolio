@@ -635,7 +635,7 @@
             'nav.star':     'Save',
 
             // Landing
-            'landing.line1':    'Making complex, demanding products simple to use.',
+            'landing.line1':    'Senior Product Designer.',
             'landing.line2_pre':'Currently at ',
             'landing.sub':      'Guillaume Caillet · Senior Product Designer · France',
             'landing.sub_name': 'Guillaume Caillet',
@@ -923,7 +923,7 @@
             'nav.star':     'Sauvegarder',
 
             // Landing
-            'landing.line1':    'Rendre simple d\'utilisation des produits complexes et exigeants.',
+            'landing.line1':    'Senior Product Designer.',
             'landing.line2_pre':'Actuellement chez ',
             'landing.sub':      'Guillaume Caillet · Senior Product Designer · France',
             'landing.sub_name': 'Guillaume Caillet',
