@@ -196,24 +196,15 @@
         });
     })();
 
-    // Signature folio hover: a random pastel fills the card. Pastels are
-    // always light, so force dark text for contrast in any theme.
-    function bindPastelHover(root) {
-        (root || document).querySelectorAll('.landing-link-card, .who-link-card, .footer-cta-mail').forEach(card => {
-            if (card.closest('.footer-template')) return;   // skip the hidden original; clones get bound after injection
-            if (card.dataset.pastelBound) return;
-            card.dataset.pastelBound = '1';
-            card.addEventListener('mouseenter', () => {
-                card.style.backgroundColor = pastels[Math.floor(Math.random() * pastels.length)];
-                card.style.color = '#1a1a1a';
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.backgroundColor = '';
-                card.style.color = '';
-            });
+    document.querySelectorAll('.landing-link-card, .who-link-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            const color = pastels[Math.floor(Math.random() * pastels.length)];
+            card.style.backgroundColor = color;
         });
-    }
-    bindPastelHover(document);
+        card.addEventListener('mouseleave', () => {
+            card.style.backgroundColor = '';
+        });
+    });
 
     // --- Page Navigation ---
     const pages = document.querySelectorAll('.page');
@@ -233,7 +224,6 @@
             return f;
         };
         pages.forEach(page => page.appendChild(clone()));
-        bindPastelHover(document);   // wire the cloned footer CTA buttons
     })();
 
     // Per-page document titles (used for browser tab + SEO).
