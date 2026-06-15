@@ -2547,18 +2547,20 @@ body.landing-active .cursor-trail span {
 
 .footer-inner {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap: 24px;
+    gap: 10px 24px;
     flex-wrap: wrap;
     max-width: 800px;
     margin: 0 auto;
+    text-align: center;
 }
 
 .footer-left,
 .footer-right {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
 }
