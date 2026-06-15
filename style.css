@@ -1774,7 +1774,14 @@ body.landing-active .cursor-trail span {
     user-select: none;
     opacity: 0;
     transform: translateY(8px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition:
+        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-year-label.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .project-list-sep {

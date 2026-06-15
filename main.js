@@ -164,6 +164,13 @@
             years.forEach(y => y.classList.toggle('is-filtered-out', !isAll));
             extras.forEach(e => e.classList.toggle('is-filtered-out', !isAll));
             projectsList.classList.toggle('is-filtering', !isAll);
+
+            // Filtering is a deliberate action: end the scroll-reveal intro and
+            // show everything that's currently visible.
+            const projPage = document.getElementById('projects');
+            if (projPage && projPage._projReveal) { projPage.removeEventListener('scroll', projPage._projReveal); projPage._projReveal = null; }
+            cards.forEach(c => { if (!c.classList.contains('is-filtered-out')) c.classList.add('visible'); });
+            years.forEach(y => { if (!y.classList.contains('is-filtered-out')) y.classList.add('visible'); });
         }
 
         chips.forEach(chip => {
@@ -373,6 +380,74 @@
     }
     updatePageTitle(currentPage);
 
+    // --- Projects: scroll-triggered reveal, year group by year group ---
+    // 2026 shows on arrival; each next year group (2025, 2024…) fades in
+    // with a soft cascade as the user scrolls down to it.
+    function revealGroup(group) {
+        group.forEach((el, i) => {
+            el.style.transitionDelay = (i * 70) + 'ms';
+            el.classList.add('visible');
+            const t = el;
+            setTimeout(() => { t.style.transitionDelay = ''; }, 650 + i * 70);
+        });
+    }
+
+    function setupProjectsReveal(page) {
+        const list = page.querySelector('.projects-list');
+        if (!list) return;                                  // not the projects page
+        const items = Array.from(list.querySelectorAll('.project-year-label, .project-card'));
+        if (!items.length) return;
+
+        // Clean up any previous scroll handler on this page.
+        if (page._projReveal) { page.removeEventListener('scroll', page._projReveal); page._projReveal = null; }
+
+        // Theme filter active → just show everything that isn't filtered out.
+        if (list.classList.contains('is-filtering')) {
+            items.forEach(el => { if (!el.classList.contains('is-filtered-out')) el.classList.add('visible'); });
+            return;
+        }
+
+        // Build year groups: each year label starts a new group.
+        const groups = [];
+        items.forEach(el => {
+            if (el.classList.contains('project-year-label') || groups.length === 0) groups.push([]);
+            groups[groups.length - 1].push(el);
+        });
+
+        // Reset hidden.
+        items.forEach(el => { el.classList.remove('visible'); el.style.transitionDelay = ''; });
+
+        // Reduced motion → reveal everything at once.
+        if (typeof reduceMotion !== 'undefined' && reduceMotion) { groups.forEach(revealGroup); return; }
+
+        // Scroll thresholds, strictly increasing so groups reveal in order and
+        // group 0 (2026) is the only one shown at scrollTop 0, any viewport.
+        function thresholds() {
+            const vh = page.clientHeight, th = [];
+            groups.forEach((g, i) => {
+                if (i === 0) { th.push(-1); return; }
+                const base = g[0].offsetTop - vh * 0.82;
+                const prev = th[i - 1] < 0 ? 0 : th[i - 1];
+                th.push(Math.max(prev + 60, base));
+            });
+            return th;
+        }
+        let th = thresholds();
+        let revealed = 0;
+        function check() {
+            const st = page.scrollTop;
+            for (let i = revealed; i < groups.length; i++) {
+                if (th[i] <= st) { revealGroup(groups[i]); revealed = i + 1; }
+                else break;
+            }
+            if (revealed >= groups.length) { page.removeEventListener('scroll', check); page._projReveal = null; }
+        }
+        page._projReveal = check;
+        page.addEventListener('scroll', check, { passive: true });
+        check();                                                        // reveal 2026 on arrival (sync)
+        requestAnimationFrame(() => { th = thresholds(); check(); });   // refine once laid out
+    }
+
     // --- Staggered Content Animations ---
     function animatePageContent(page) {
         // Who am I blocks
@@ -382,23 +457,9 @@
             setTimeout(() => block.classList.add('visible'), 200 + i * 120);
         });
 
-        // Year labels & project cards (animate together in DOM order).
-        // Short stagger + long ease => cards overlap into a smooth cascade.
-        const projectItems = page.querySelectorAll('.project-year-label, .project-card');
-        projectItems.forEach((item, i) => {
-            const delay = 90 + i * 38;
-            if (item.classList.contains('project-year-label')) {
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(6px)';
-                setTimeout(() => {
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
-                }, delay);
-            } else {
-                item.classList.remove('visible');
-                setTimeout(() => item.classList.add('visible'), delay);
-            }
-        });
+        // Year labels & project cards reveal on scroll (2026 on arrival,
+        // 2025 then 2024 as you scroll down). Handled by setupProjectsReveal.
+        setupProjectsReveal(page);
 
         // Case study sections
         const caseSections = page.querySelectorAll('.case-section');
