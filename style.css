@@ -949,15 +949,16 @@ body.landing-active .cursor-trail span {
     transform: translateX(6px);
 }
 
-/* Project card stagger animation */
+/* Project card stagger animation — gentle fade + tiny rise, GPU-only.
+   Small offset + overlapping timing keeps the cascade smooth, not jerky. */
 .project-card {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(6px);
+    will-change: opacity, transform;
     transition:
-        opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-        border-color var(--transition-fast),
-        padding var(--transition-fast);
+        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color var(--transition-fast);
 }
 
 .project-card.visible {
@@ -2102,12 +2103,12 @@ body.landing-active .cursor-trail span {
 
 .proto-code {
     background: #111;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 6px;
     padding: 12px 14px;
     font-size: 0.68rem;
     font-family: 'IBM Plex Mono', monospace;
-    color: var(--text);
+    color: rgba(245, 240, 235, 0.85);
     white-space: pre;
     overflow-x: auto;
     line-height: 1.6;

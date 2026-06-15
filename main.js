@@ -382,19 +382,21 @@
             setTimeout(() => block.classList.add('visible'), 200 + i * 120);
         });
 
-        // Year labels & project cards (animate together in DOM order)
+        // Year labels & project cards (animate together in DOM order).
+        // Short stagger + long ease => cards overlap into a smooth cascade.
         const projectItems = page.querySelectorAll('.project-year-label, .project-card');
         projectItems.forEach((item, i) => {
+            const delay = 90 + i * 38;
             if (item.classList.contains('project-year-label')) {
                 item.style.opacity = '0';
-                item.style.transform = 'translateY(8px)';
+                item.style.transform = 'translateY(6px)';
                 setTimeout(() => {
                     item.style.opacity = '1';
                     item.style.transform = 'translateY(0)';
-                }, 180 + i * 60);
+                }, delay);
             } else {
                 item.classList.remove('visible');
-                setTimeout(() => item.classList.add('visible'), 200 + i * 60);
+                setTimeout(() => item.classList.add('visible'), delay);
             }
         });
 
