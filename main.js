@@ -213,7 +213,7 @@
 
     // Per-page document titles (used for browser tab + SEO).
     const PAGE_TITLES = {
-        'landing':                  'Guillaume Caillet, Senior Product Designer',
+        'landing':                  'Guillaume Caillet · Senior Product Designer · Nantes',
         'who':                      'About, Guillaume Caillet',
         'projects':                 'Projects, Guillaume Caillet',
         'project-ds-execution':     'Opal DS · Corrective Actions, Case Study',
@@ -229,8 +229,8 @@
 
     // Per-page meta description (used for SEO + social previews).
     const PAGE_META = {
-        'landing':                  'Senior Product Designer · 7+ years building B2B SaaS products and design systems · Industry 4.0 · France.',
-        'who':                      'Guillaume Caillet, Senior Product Designer. 7+ years across Oplit, PrestaShop, Airbus and SNCF.',
+        'landing':                  'Guillaume Caillet, Senior Product Designer based in Nantes, France. 7+ years designing B2B SaaS products and design systems for Industry 4.0.',
+        'who':                      'Guillaume Caillet, Senior Product Designer based in Nantes. 7+ years across Oplit, PrestaShop, Airbus and SNCF.',
         'projects':                 'Selected case studies, design systems, B2B SaaS, industrial scheduling, and design-ops tooling.',
         'project-ds-execution':     'Opal DS Corrective Actions, 44 components rebuilt, 2,634 token bindings applied, +20–30% gain per feature cycle.',
         'project-multiselect':      'Multi-select + Sticky Action Bar, one coupled pattern letting schedulers update 50 work orders in one click.',
@@ -668,10 +668,10 @@
             // Landing
             'landing.line1':    'Senior Product Designer.',
             'landing.line2_pre':'Currently at ',
-            'landing.sub':      'Guillaume Caillet · Senior Product Designer · France',
+            'landing.sub':      'Guillaume Caillet · Senior Product Designer · Nantes, France',
             'landing.sub_name': 'Guillaume Caillet',
             'landing.sub_role': 'Senior Product Designer',
-            'landing.sub_loc':  'France',
+            'landing.sub_loc':  'Nantes, France',
             'landing.pitch':    'Over the last 7 years, I\'ve contributed to the design and improvement of B2B SaaS products, alongside teams at <strong>Oplit</strong> (industrial schedulers), <strong>PrestaShop</strong> (300k+ merchants), <strong>Airbus</strong> and <strong>SNCF</strong>. I\'ve led design systems, run audits, and shipped infrastructure that teams build on.<br><br>What I\'m looking for: high-stakes products where design co-pilots strategy, not a service function.',
             'landing.discover': 'Discover my work',
             'landing.about':    'About me',
@@ -954,10 +954,10 @@
             // Landing
             'landing.line1':    'Senior Product Designer.',
             'landing.line2_pre':'Actuellement chez ',
-            'landing.sub':      'Guillaume Caillet · Senior Product Designer · France',
+            'landing.sub':      'Guillaume Caillet · Senior Product Designer · Nantes, France',
             'landing.sub_name': 'Guillaume Caillet',
             'landing.sub_role': 'Senior Product Designer',
-            'landing.sub_loc':  'France',
+            'landing.sub_loc':  'Nantes, France',
             'landing.pitch':    'Sur les 7 dernières années, j\'ai participé à la conception et à l\'amélioration de produits SaaS B2B, aux côtés des équipes de <strong>Oplit</strong> (planification industrielle), <strong>PrestaShop</strong> (300k+ marchands), <strong>Airbus</strong> et <strong>SNCF</strong>. J\'ai piloté des design systems, mené des audits, et livré des chantiers d\'infrastructure sur lesquels les équipes s\'appuient.<br><br>Ce que je cherche : des produits exigeants où le design co-pilote la stratégie, pas une fonction support.',
             'landing.discover': 'Découvrir mon travail',
             'landing.about':    'À propos de moi',
@@ -1353,7 +1353,7 @@
     }
 
     // ===================================
-    // Footer clock — local time in Paris
+    // Footer clock — local time in Nantes (Europe/Paris)
     // ===================================
     function tickFooterClock() {
         const els = document.querySelectorAll('.footer-time');
@@ -1361,7 +1361,7 @@
         const time = new Intl.DateTimeFormat('fr-FR', {
             timeZone: 'Europe/Paris', hour: '2-digit', minute: '2-digit'
         }).format(new Date());
-        els.forEach(el => { el.textContent = `Paris ${time}`; });
+        els.forEach(el => { el.textContent = `Nantes ${time}`; });
     }
     tickFooterClock();
     setInterval(tickFooterClock, 30000);
