@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#1a1a1a">
     <script>
-        // Theme boot — runs before first paint to avoid a flash of wrong theme.
+        // Theme boot - runs before first paint to avoid a flash of wrong theme.
         (function () {
             var stored = null;
             try { stored = localStorage.getItem('folio-theme'); } catch (e) {}
@@ -77,7 +77,7 @@
     <!-- Navigation -->
     <nav class="nav">
         <a href="#landing" class="nav-logo" data-page="landing">
-            <svg width="32" height="32" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Guillaume Caillet — home" shape-rendering="crispEdges"><rect x="31.25" y="0.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="0.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="0.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="0.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="0.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="0.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="87.50" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="87.50" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="0.00" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="31.25" width="6.25" height="6.25" fill="#fff"/><rect x="31.25" y="31.25" width="6.25" height="6.25" fill="#fff"/><rect x="37.50" y="31.25" width="6.25" height="6.25" fill="#fff"/><rect x="43.75" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="31.25" width="6.25" height="6.25" fill="#fff"/><rect x="68.75" y="31.25" width="6.25" height="6.25" fill="#fff"/><rect x="75.00" y="31.25" width="6.25" height="6.25" fill="#fff"/><rect x="81.25" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="87.50" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="93.75" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="0.00" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="37.50" width="6.25" height="6.25" fill="#fff"/><rect x="25.00" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="37.50" width="6.25" height="6.25" fill="#fff"/><rect x="50.00" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="37.50" width="6.25" height="6.25" fill="#fff"/><rect x="62.50" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="37.50" width="6.25" height="6.25" fill="#fff"/><rect x="87.50" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="93.75" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="0.00" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="43.75" width="6.25" height="6.25" fill="#fff"/><rect x="25.00" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="43.75" width="6.25" height="6.25" fill="#fff"/><rect x="62.50" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="87.50" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="93.75" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="0.00" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="50.00" width="6.25" height="6.25" fill="#fff"/><rect x="25.00" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="50.00" width="6.25" height="6.25" fill="#fff"/><rect x="37.50" y="50.00" width="6.25" height="6.25" fill="#fff"/><rect x="43.75" y="50.00" width="6.25" height="6.25" fill="#fff"/><rect x="50.00" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="50.00" width="6.25" height="6.25" fill="#fff"/><rect x="62.50" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="87.50" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="93.75" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="0.00" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="56.25" width="6.25" height="6.25" fill="#fff"/><rect x="25.00" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="56.25" width="6.25" height="6.25" fill="#fff"/><rect x="50.00" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="56.25" width="6.25" height="6.25" fill="#fff"/><rect x="62.50" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="87.50" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="93.75" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="0.00" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="62.50" width="6.25" height="6.25" fill="#fff"/><rect x="25.00" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="62.50" width="6.25" height="6.25" fill="#fff"/><rect x="50.00" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="62.50" width="6.25" height="6.25" fill="#fff"/><rect x="62.50" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="62.50" width="6.25" height="6.25" fill="#fff"/><rect x="87.50" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="93.75" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="68.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="68.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="68.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="68.75" width="6.25" height="6.25" fill="#fff"/><rect x="31.25" y="68.75" width="6.25" height="6.25" fill="#fff"/><rect x="37.50" y="68.75" width="6.25" height="6.25" fill="#fff"/><rect x="43.75" y="68.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="68.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="68.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="68.75" width="6.25" height="6.25" fill="#fff"/><rect x="68.75" y="68.75" width="6.25" height="6.25" fill="#fff"/><rect x="75.00" y="68.75" width="6.25" height="6.25" fill="#fff"/><rect x="81.25" y="68.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="87.50" y="68.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="87.50" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="93.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="93.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="93.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="93.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="93.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="93.75" width="6.25" height="6.25" fill="#1400a0"/></svg>
+            <svg width="32" height="32" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Guillaume Caillet - home" shape-rendering="crispEdges"><rect x="31.25" y="0.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="0.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="0.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="0.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="0.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="0.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="6.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="12.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="87.50" y="18.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="87.50" y="25.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="0.00" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="31.25" width="6.25" height="6.25" fill="#fff"/><rect x="31.25" y="31.25" width="6.25" height="6.25" fill="#fff"/><rect x="37.50" y="31.25" width="6.25" height="6.25" fill="#fff"/><rect x="43.75" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="31.25" width="6.25" height="6.25" fill="#fff"/><rect x="68.75" y="31.25" width="6.25" height="6.25" fill="#fff"/><rect x="75.00" y="31.25" width="6.25" height="6.25" fill="#fff"/><rect x="81.25" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="87.50" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="93.75" y="31.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="0.00" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="37.50" width="6.25" height="6.25" fill="#fff"/><rect x="25.00" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="37.50" width="6.25" height="6.25" fill="#fff"/><rect x="50.00" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="37.50" width="6.25" height="6.25" fill="#fff"/><rect x="62.50" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="37.50" width="6.25" height="6.25" fill="#fff"/><rect x="87.50" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="93.75" y="37.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="0.00" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="43.75" width="6.25" height="6.25" fill="#fff"/><rect x="25.00" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="43.75" width="6.25" height="6.25" fill="#fff"/><rect x="62.50" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="87.50" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="93.75" y="43.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="0.00" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="50.00" width="6.25" height="6.25" fill="#fff"/><rect x="25.00" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="50.00" width="6.25" height="6.25" fill="#fff"/><rect x="37.50" y="50.00" width="6.25" height="6.25" fill="#fff"/><rect x="43.75" y="50.00" width="6.25" height="6.25" fill="#fff"/><rect x="50.00" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="50.00" width="6.25" height="6.25" fill="#fff"/><rect x="62.50" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="87.50" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="93.75" y="50.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="0.00" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="56.25" width="6.25" height="6.25" fill="#fff"/><rect x="25.00" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="56.25" width="6.25" height="6.25" fill="#fff"/><rect x="50.00" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="56.25" width="6.25" height="6.25" fill="#fff"/><rect x="62.50" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="87.50" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="93.75" y="56.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="0.00" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="62.50" width="6.25" height="6.25" fill="#fff"/><rect x="25.00" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="62.50" width="6.25" height="6.25" fill="#fff"/><rect x="50.00" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="62.50" width="6.25" height="6.25" fill="#fff"/><rect x="62.50" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="62.50" width="6.25" height="6.25" fill="#fff"/><rect x="87.50" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="93.75" y="62.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="68.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="68.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="68.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="68.75" width="6.25" height="6.25" fill="#fff"/><rect x="31.25" y="68.75" width="6.25" height="6.25" fill="#fff"/><rect x="37.50" y="68.75" width="6.25" height="6.25" fill="#fff"/><rect x="43.75" y="68.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="68.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="68.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="68.75" width="6.25" height="6.25" fill="#fff"/><rect x="68.75" y="68.75" width="6.25" height="6.25" fill="#fff"/><rect x="75.00" y="68.75" width="6.25" height="6.25" fill="#fff"/><rect x="81.25" y="68.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="87.50" y="68.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="6.25" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="87.50" y="75.00" width="6.25" height="6.25" fill="#1400a0"/><rect x="12.50" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="81.25" y="81.25" width="6.25" height="6.25" fill="#1400a0"/><rect x="18.75" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="25.00" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="68.75" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="75.00" y="87.50" width="6.25" height="6.25" fill="#1400a0"/><rect x="31.25" y="93.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="37.50" y="93.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="43.75" y="93.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="50.00" y="93.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="56.25" y="93.75" width="6.25" height="6.25" fill="#1400a0"/><rect x="62.50" y="93.75" width="6.25" height="6.25" fill="#1400a0"/></svg>
         </a>
         <div class="nav-right">
             <button class="burger-btn" id="burger-btn" aria-label="Toggle menu" aria-expanded="false">
@@ -198,7 +198,7 @@
 
                 <div class="experience-entry">
                     <div class="experience-header">
-                        <div class="experience-date" data-i18n="who.date.oplit">Sept. 2025 – Present</div>
+                        <div class="experience-date" data-i18n="who.date.oplit">Sept. 2025 - Present</div>
                         <div class="experience-details">
                             <span class="experience-role" data-i18n="who.role.oplit">Senior Product Designer</span>
                             <span class="experience-company">Oplit</span>
@@ -213,7 +213,7 @@
 
                 <div class="experience-entry">
                     <div class="experience-header">
-                        <div class="experience-date" data-i18n="who.date.prestashop">June 2022 – Sept. 2025</div>
+                        <div class="experience-date" data-i18n="who.date.prestashop">June 2022 - Sept. 2025</div>
                         <div class="experience-details">
                             <span class="experience-role" data-i18n="who.role.prestashop">Product Designer</span>
                             <span class="experience-company">PrestaShop</span>
@@ -233,7 +233,7 @@
 
                 <div class="experience-entry">
                     <div class="experience-header">
-                        <div class="experience-date" data-i18n="who.date.beapp">June 2021 – June 2022</div>
+                        <div class="experience-date" data-i18n="who.date.beapp">June 2021 - June 2022</div>
                         <div class="experience-details">
                             <span class="experience-role" data-i18n="who.role.beapp">UX/UI Designer</span>
                             <span class="experience-company">BeApp</span>
@@ -248,7 +248,7 @@
 
                 <div class="experience-entry">
                     <div class="experience-header">
-                        <div class="experience-date" data-i18n="who.date.lacapsule">Oct. 2020 – June 2021</div>
+                        <div class="experience-date" data-i18n="who.date.lacapsule">Oct. 2020 - June 2021</div>
                         <div class="experience-details">
                             <span class="experience-role" data-i18n="who.role.lacapsule">UX Designer Consultant</span>
                             <span class="experience-company">La Capsule</span>
@@ -262,7 +262,7 @@
 
                 <div class="experience-entry">
                     <div class="experience-header">
-                        <div class="experience-date" data-i18n="who.date.airbus">Sept. 2018 – Aug. 2020</div>
+                        <div class="experience-date" data-i18n="who.date.airbus">Sept. 2018 - Aug. 2020</div>
                         <div class="experience-details">
                             <span class="experience-role" data-i18n="who.role.airbus">UX Designer , Work-study</span>
                             <span class="experience-company">Airbus Atlantique</span>
@@ -277,7 +277,7 @@
 
                 <div class="experience-entry">
                     <div class="experience-header">
-                        <div class="experience-date" data-i18n="who.date.sncf">March 2018 – Aug. 2018</div>
+                        <div class="experience-date" data-i18n="who.date.sncf">March 2018 - Aug. 2018</div>
                         <div class="experience-details">
                             <span class="experience-role" data-i18n="who.role.sncf">UX Designer , Internship</span>
                             <span class="experience-company">SNCF</span>
@@ -291,7 +291,7 @@
 
                 <div class="experience-entry">
                     <div class="experience-header">
-                        <div class="experience-date" data-i18n="who.date.stereosuper">Aug. 2015 – Sept. 2017</div>
+                        <div class="experience-date" data-i18n="who.date.stereosuper">Aug. 2015 - Sept. 2017</div>
                         <div class="experience-details">
                             <span class="experience-role" data-i18n="who.role.stereosuper">UX Designer , Work-study</span>
                             <span class="experience-company">StéreoSuper</span>
@@ -310,7 +310,7 @@
 
                 <div class="experience-entry">
                     <div class="experience-header">
-                        <div class="experience-date" data-i18n="who.date.teacher">2025 – Present</div>
+                        <div class="experience-date" data-i18n="who.date.teacher">2025 - Present</div>
                         <div class="experience-details">
                             <span class="experience-role" data-i18n="who.role.teacher">Teacher</span>
                             <span class="experience-company">Ecole de design Nantes Atlantique</span>
@@ -327,7 +327,7 @@
 
                 <div class="experience-entry">
                     <div class="experience-header">
-                        <div class="experience-date" data-i18n="who.date.mentor">2024 – Present</div>
+                        <div class="experience-date" data-i18n="who.date.mentor">2024 - Present</div>
                         <div class="experience-details">
                             <span class="experience-role">Mentor</span>
                             <span class="experience-company"><a href="https://adplist.org/mentors/guillaume-caillet" target="_blank" rel="noopener">ADPList</a></span>
@@ -341,7 +341,7 @@
 
                 <div class="experience-entry">
                     <div class="experience-header">
-                        <div class="experience-date" data-i18n="who.date.ecv">2021 – Present</div>
+                        <div class="experience-date" data-i18n="who.date.ecv">2021 - Present</div>
                         <div class="experience-details">
                             <span class="experience-role" data-i18n="who.role.ecv">Speaker & Jury</span>
                             <span class="experience-company">ECV Nantes</span>
@@ -361,7 +361,7 @@
 
                 <div class="experience-entry">
                     <div class="experience-header">
-                        <div class="experience-date" data-i18n="who.date.freelance">2020 – Present</div>
+                        <div class="experience-date" data-i18n="who.date.freelance">2020 - Present</div>
                         <div class="experience-details">
                             <span class="experience-role" data-i18n="who.role.freelance">Freelancing</span>
                         </div>
@@ -376,7 +376,7 @@
 
                 <div class="experience-entry">
                     <div class="experience-header">
-                        <div class="experience-date">2017 – 2020</div>
+                        <div class="experience-date">2017 - 2020</div>
                         <div class="experience-details">
                             <span class="experience-company">ECV Nantes</span>
                         </div>
@@ -389,7 +389,7 @@
 
                 <div class="experience-entry">
                     <div class="experience-header">
-                        <div class="experience-date">2015 – 2017</div>
+                        <div class="experience-date">2015 - 2017</div>
                         <div class="experience-details">
                             <span class="experience-company">CESI Nantes</span>
                         </div>
@@ -890,7 +890,7 @@
                         <span class="case-metric-label" data-i18n="case.sa.metric1.label">successful associations per day</span>
                     </div>
                     <div class="case-metric">
-                        <span class="case-metric-value" data-i18n="case.sa.metric2.value">~–40%</span>
+                        <span class="case-metric-value" data-i18n="case.sa.metric2.value">~-40%</span>
                         <span class="case-metric-label" data-i18n="case.sa.metric2.label">estimated drop in error-driven abandonment</span>
                     </div>
                 </div>
@@ -952,7 +952,7 @@
                     <span class="who-label">Oplit · Opal DS</span>
                 </div>
                 <h2 class="case-title" data-i18n="case.dsexec.title">Oplit, Opal DS · Corrective Actions</h2>
-                <p class="case-subtitle" data-i18n="case.dsexec.subtitle">Executing the design system remediation plan: rebuilding 44 components, applying 2,634 token bindings, and establishing a dev-alignment workflow that accelerates feature delivery by 20–30%.</p>
+                <p class="case-subtitle" data-i18n="case.dsexec.subtitle">Executing the design system remediation plan: rebuilding 44 components, applying 2,634 token bindings, and establishing a dev-alignment workflow that accelerates feature delivery by 20-30%.</p>
                 <div class="case-tags">
                     <span class="case-tag">Design System</span>
                     <span class="case-tag">Design Ops</span>
@@ -1045,7 +1045,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
                     <span class="who-label">Oplit · Opal DS</span>
                 </div>
                 <h2 class="case-title" data-i18n="case.dsskills.title">Opal DS · AI Prototyping Skills</h2>
-                <p class="case-subtitle" data-i18n="case.dsskills.subtitle">Turning a solid but unused design system into a rapid-prototyping engine: two AI skills that let a PM build a client-ready prototype in a single morning, from a plain-language brief.</p>
+                <p class="case-subtitle" data-i18n="case.dsskills.subtitle">The morning my PM took a prototype to a client without me. Two AI skills that let the design system build screens from a plain-language brief, and what that did to the craft.</p>
                 <div class="case-tags">
                     <span class="case-tag">Design System</span>
                     <span class="case-tag">Design Ops</span>
@@ -1069,8 +1069,38 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
                 </div>
             </header>
             <div class="case-section">
+                <h3 class="case-section-title" data-i18n="case.section.shift">The profession is shifting</h3>
+                <div data-i18n-html="case.dsskills.shift"></div>
+            </div>
+            <div class="case-section">
                 <h3 class="case-section-title" data-i18n="case.section.problem">Problem</h3>
                 <div data-i18n-html="case.dsskills.problem"></div>
+            </div>
+            <div class="case-image case-image--cover">
+                <figure>
+                    <img src="src/img/oplit-ds-audit/audit-t0-synthese.png" alt="Audit at T0: no single source of truth, heavy UI debt, zero Figma-dev parity" loading="lazy">
+                    <figcaption data-i18n="case.dsskills.fig.audit_t0">The starting point at the audit (T0, Nov 2025): no single source of truth, ~90% UI debt, zero Figma-dev parity. The diagnosis was bad.</figcaption>
+                </figure>
+            </div>
+            <div class="case-image-grid">
+                <figure class="case-image">
+                    <img src="src/img/oplit-ds-audit/audit-t0-design.png" alt="Audit T0 design debt: foundations coverage and two competing Figma libraries" loading="lazy">
+                    <figcaption data-i18n="case.dsaudit.fig.design">Design debt: foundations coverage (Typography, Shadows, Breakpoints absent) and two competing Figma libraries.</figcaption>
+                </figure>
+                <figure class="case-image">
+                    <img src="src/img/oplit-ds-audit/audit-t0-dev.png" alt="Audit T0 dev debt: 3 icon libraries, Vuetify bypassed, no Storybook" loading="lazy">
+                    <figcaption data-i18n="case.dsaudit.fig.dev">Dev debt: 3 icon libraries, Vuetify bypassed with heavy overrides, no Storybook, no shared token repo.</figcaption>
+                </figure>
+                <figure class="case-image">
+                    <img src="src/img/oplit-ds-audit/audit-t0-transverse.png" alt="Audit T0 cross-cutting debt: the design-to-dev gap" loading="lazy">
+                    <figcaption data-i18n="case.dsaudit.fig.transverse">The most critical debt is cross-cutting: no Figma-to-code bridge, no parity, no governance. Design-dev alignment became the top priority.</figcaption>
+                </figure>
+            </div>
+            <div class="case-image case-image--cover">
+                <figure>
+                    <img src="src/img/oplit-ds-skills/05_dashboard-synthese-97-25-10.png" alt="Live health tracker: Design 97, Dev 25, Product 10" loading="lazy">
+                    <figcaption data-i18n="case.dsskills.fig.dashboard">The live tracker after corrective work: the design side is now solid (97), but product adoption stays low (10). That gap is the case for this project.</figcaption>
+                </figure>
             </div>
             <div class="case-section">
                 <h3 class="case-section-title" data-i18n="case.section.approach">Approach</h3>
@@ -1078,36 +1108,28 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/oplit-ds-skills/05_dashboard-synthese-97-25-10.png" alt="Design system health dashboard: Design 97, Dev 25, Product 10" loading="lazy">
-                    <figcaption data-i18n="case.dsskills.fig.dashboard">The diagnosis on one screen: Design 97, Dev 25, Product 10.</figcaption>
-                </figure>
-            </div>
-            <div class="case-image-grid">
-                <figure class="case-image">
-                    <img src="src/img/oplit-ds-skills/06_dashboard-detail-design.png" alt="Design axis detail, composite score 97/100" loading="lazy">
-                    <figcaption data-i18n="case.dsskills.fig.design">Design axis, composite 97/100, measured live.</figcaption>
-                </figure>
-                <figure class="case-image">
-                    <img src="src/img/oplit-ds-skills/07_dashboard-detail-dev.png" alt="Dev axis detail, tokens ready, Storybook pending" loading="lazy">
-                    <figcaption data-i18n="case.dsskills.fig.dev">Dev axis: tokens ready, Storybook waiting on resources.</figcaption>
-                </figure>
-                <figure class="case-image">
-                    <img src="src/img/oplit-ds-skills/08_dashboard-detail-produit.png" alt="Product axis detail, DS still thin in the app" loading="lazy">
-                    <figcaption data-i18n="case.dsskills.fig.product">Product axis: the DS still thin in the app.</figcaption>
+                    <img src="src/img/oplit-ds-skills/schema-architecture.png" alt="Architecture: how the operator and builder skills connect" loading="lazy">
+                    <figcaption data-i18n="case.dsskills.fig.schema_arch">How the two skills connect: live sources feed the operator (the knowledge), which feeds the builder (screen construction), under a human gate.</figcaption>
                 </figure>
             </div>
             <div class="case-section">
-                <h3 class="case-section-title" data-i18n="case.section.solution">The two skills</h3>
+                <h3 class="case-section-title" data-i18n="case.section.craft">The new craft</h3>
                 <div data-i18n-html="case.dsskills.solution"></div>
             </div>
             <div class="case-image case-image--cover">
                 <figure>
                     <img src="src/img/oplit-ds-skills/02_comparaison-3-versions-en-cours.png" alt="Three versions of the same screen: product reference, build v1, build v2" loading="lazy">
-                    <figcaption data-i18n="case.dsskills.fig.versions">The same screen in three states: real product, build v1, build v2.</figcaption>
+                    <figcaption data-i18n="case.dsskills.fig.versions">The same screen in three states: real product, build v1, build v2. The gap between v1 and v2 is where the craft sits.</figcaption>
+                </figure>
+            </div>
+            <div class="case-image case-image--cover">
+                <figure>
+                    <img src="src/img/oplit-ds-skills/schema-iterations.png" alt="Iterations: audit, corrective actions, build v1, diagnostic, build v2, autonomous PM use" loading="lazy">
+                    <figcaption data-i18n="case.dsskills.fig.schema_iter">How we reached the current skills: a clean-room loop where every fact is verified live and every version tested by a blank, memoryless agent.</figcaption>
                 </figure>
             </div>
             <div class="case-section">
-                <h3 class="case-section-title" data-i18n="case.section.outcome">Outcome</h3>
+                <h3 class="case-section-title" data-i18n="case.section.outcome">Outcome, measured honestly</h3>
                 <div data-i18n-html="case.dsskills.outcome"></div>
             </div>
             <div class="case-image case-image--cover">
@@ -1123,16 +1145,22 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
                 </figure>
             </div>
             <div class="case-section">
-                <h3 class="case-section-title" data-i18n="case.section.reflection">What makes it bigger</h3>
-                <div data-i18n-html="case.dsskills.reflection"></div>
+                <h3 class="case-section-title" data-i18n="case.section.impact">Impact</h3>
+                <div data-i18n-html="case.dsskills.impact"></div>
             </div>
             <div class="case-section">
-                <h3 class="case-section-title" data-i18n="case.section.questions">Open questions</h3>
+                <h3 class="case-section-title" data-i18n="case.section.uncomfortable">The uncomfortable part</h3>
                 <div data-i18n-html="case.dsskills.questions"></div>
             </div>
             <div class="case-section">
-                <h3 class="case-section-title" data-i18n="case.section.learning">What it taught me</h3>
+                <h3 class="case-section-title" data-i18n="case.section.takeaways">What I keep</h3>
                 <div data-i18n-html="case.dsskills.learning"></div>
+            </div>
+            <div class="case-image case-image--cover">
+                <figure>
+                    <img src="src/img/oplit-ds-skills/schema-value-chain.png" alt="The reusable value chain: brief, builder, real components, faithful prototype, handoff that holds" loading="lazy">
+                    <figcaption data-i18n="case.dsskills.fig.schema_chain">The reusable value chain: any team with a documented DS can deploy these skills on its own system.</figcaption>
+                </figure>
             </div>
         </div>
     </section>
@@ -1254,55 +1282,32 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
             <div class="case-section">
                 <h3 class="case-section-title" data-i18n="case.section.methodology">Methodology</h3>
                 <div data-i18n-html="case.dsaudit.methodology"></div>
-                <!-- Compliance table -->
-                <div class="proto-table-wrapper">
-                    <table class="proto-table">
-                        <thead>
-                            <tr><th>Component</th><th>Token usage</th><th>Naming</th><th>Accessibility</th><th>Status</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Button</td>
-                                <td><span class="proto-status proto-status--ko">✗</span></td>
-                                <td><span class="proto-status proto-status--warn">⚠</span></td>
-                                <td><span class="proto-status proto-status--ok">✓</span></td>
-                                <td><span class="proto-badge proto-badge--ko">NON-COMPLIANT</span></td>
-                            </tr>
-                            <tr>
-                                <td>TextField</td>
-                                <td><span class="proto-status proto-status--warn">⚠</span></td>
-                                <td><span class="proto-status proto-status--ok">✓</span></td>
-                                <td><span class="proto-status proto-status--warn">⚠</span></td>
-                                <td><span class="proto-badge proto-badge--warn">NEEDS WORK</span></td>
-                            </tr>
-                            <tr>
-                                <td>Chip</td>
-                                <td><span class="proto-status proto-status--ok">✓</span></td>
-                                <td><span class="proto-status proto-status--ok">✓</span></td>
-                                <td><span class="proto-status proto-status--ok">✓</span></td>
-                                <td><span class="proto-badge proto-badge--ok">COMPLIANT</span></td>
-                            </tr>
-                            <tr>
-                                <td>Dialog</td>
-                                <td><span class="proto-status proto-status--ko">✗</span></td>
-                                <td><span class="proto-status proto-status--ko">✗</span></td>
-                                <td><span class="proto-status proto-status--warn">⚠</span></td>
-                                <td><span class="proto-badge proto-badge--ko">NON-COMPLIANT</span></td>
-                            </tr>
-                            <tr>
-                                <td>Switch</td>
-                                <td><span class="proto-status proto-status--ok">✓</span></td>
-                                <td><span class="proto-status proto-status--ok">✓</span></td>
-                                <td><span class="proto-status proto-status--ok">✓</span></td>
-                                <td><span class="proto-badge proto-badge--ok">COMPLIANT</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            </div>
+            <div class="case-image case-image--cover">
+                <figure>
+                    <img src="src/img/oplit-ds-audit/audit-t0-synthese.png" alt="Audit synthesis at T0: token maturity, UI/DS debt, no single source of truth, zero Figma-dev parity" loading="lazy">
+                    <figcaption data-i18n="case.dsaudit.fig.synthese">The audit at T0 (Nov 2025): the global verdict in one screen, with the six structural points it revealed.</figcaption>
+                </figure>
             </div>
             <div class="case-section">
                 <h3 class="case-section-title" data-i18n="case.section.findings">Findings</h3>
                 <div data-i18n-html="case.dsaudit.findings"></div>
+            </div>
+            <div class="case-image-grid">
+                <figure class="case-image">
+                    <img src="src/img/oplit-ds-audit/audit-t0-design.png" alt="Design debt at audit: foundations coverage and two competing Figma libraries" loading="lazy">
+                    <figcaption data-i18n="case.dsaudit.fig.design">Design debt: foundations coverage (Typography, Shadows, Breakpoints absent) and two competing Figma libraries.</figcaption>
+                </figure>
+                <figure class="case-image">
+                    <img src="src/img/oplit-ds-audit/audit-t0-dev.png" alt="Dev debt at audit: 3 icon libraries, Vuetify bypassed, no Storybook" loading="lazy">
+                    <figcaption data-i18n="case.dsaudit.fig.dev">Dev debt: 3 icon libraries, Vuetify bypassed with heavy overrides, no Storybook, no shared token repo.</figcaption>
+                </figure>
+            </div>
+            <div class="case-image case-image--cover">
+                <figure>
+                    <img src="src/img/oplit-ds-audit/audit-t0-transverse.png" alt="Cross-cutting debt: the design-to-dev gap, the most critical finding" loading="lazy">
+                    <figcaption data-i18n="case.dsaudit.fig.transverse">The most critical debt is cross-cutting: no Figma-to-code bridge, no parity, no governance. Design-dev alignment became the top priority.</figcaption>
+                </figure>
             </div>
             <div class="case-section">
                 <h3 class="case-section-title" data-i18n="case.section.plan">Remediation Plan</h3>
@@ -1311,7 +1316,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
         </div>
     </section>
 
-    <!-- Page: Oplit — Capacity Transfer Between Sectors -->
+    <!-- Page: Oplit - Capacity Transfer Between Sectors -->
     <section class="page" id="project-transfer">
         <div class="case-study">
             <a href="#projects" class="case-back" data-page="projects" data-i18n="case.back">← Back to projects</a>
@@ -1480,7 +1485,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
     <!-- Cursor glow effect -->
     <div class="cursor-trail" id="cursor-trail" aria-hidden="true"></div>
 
-    <!-- Footer template — cloned into each .page by JS so it scrolls with content -->
+    <!-- Footer template - cloned into each .page by JS so it scrolls with content -->
     <footer class="site-footer footer-template" role="contentinfo" aria-hidden="true">
         <div class="footer-cta">
             <p class="footer-cta-kicker" data-i18n="footer.cta.kicker">Interested in my profile? Let's connect.</p>
