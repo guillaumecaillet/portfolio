@@ -1,83 +1,11 @@
 (() => {
     'use strict';
 
-    // --- Galaxy renderer ---
-    let GAL_W = 120, GAL_H = 50; // recalculated on init
-    const GAL_CHARS = ' ..,,,:::;;;===+++***###@@@';
-
-    function calcGalDims() {
-        // Measure actual char size from the pre element
-        const span = document.createElement('span');
-        span.textContent = '.'.repeat(20);
-        span.style.cssText = 'position:absolute;top:0;left:0;visibility:hidden;pointer-events:none';
-        sphereEl.appendChild(span);
-        const charW = (span.offsetWidth / 20) || 5.3;
-        const charH = span.offsetHeight || 9.6;
-        sphereEl.removeChild(span);
-        GAL_W = Math.ceil(sphereEl.offsetWidth  / charW) + 1;
-        GAL_H = Math.ceil(sphereEl.offsetHeight / charH) + 1;
-    }
-
-    function renderGalaxy(t) {
-        const cx = GAL_W / 2, cy = GAL_H / 2;
-        const rows = new Array(GAL_H);
-        for (let row = 0; row < GAL_H; row++) {
-            let rowStr = '';
-            for (let col = 0; col < GAL_W; col++) {
-                const dx = (col - cx) / cx;
-                const dy = (row - cy) / cy * 2.05;
-                const r  = Math.sqrt(dx * dx + dy * dy);
-                const theta = Math.atan2(dy, dx);
-                const phase = 2 * (theta - t - Math.log(Math.max(r, 0.05)) * 2.8);
-                const arm   = Math.pow(Math.max(0, Math.cos(phase)), 3);
-                const core  = Math.exp(-r * r * 9);
-                const disc  = Math.exp(-r * 1.7);
-                const armB  = arm * disc * (r > 0.05 ? 1 : 0);
-                const h     = Math.sin(col * 127.1 + row * 311.7) * 43758.5453;
-                const star  = (h - Math.floor(h)) > 0.965 ? 0.1 : 0;
-                const b     = Math.min(1, core * 4 + armB * 2 + star);
-                rowStr += GAL_CHARS[Math.floor(b * (GAL_CHARS.length - 1))];
-            }
-            rows[row] = rowStr;
-        }
-        return rows.join('\n');
-    }
-
-    // --- ASCII Galaxy ---
-    const sphereEl  = document.getElementById('ascii-sphere');
-    const galaxyBgEl = document.getElementById('galaxy-bg');
-    let sAngle = 0, sRunning = false, sTimer = null;
-
-    function startSphere() {
-        if (sRunning) return;
-        calcGalDims();
-        sRunning = true;
-        (function tick() {
-            if (!sRunning) return;
-            const frame = renderGalaxy(sAngle);
-            if (sphereEl)  sphereEl.textContent  = frame;
-            if (galaxyBgEl) galaxyBgEl.textContent = frame;
-            sAngle += 0.008;
-            sTimer = setTimeout(tick, 80);
-        })();
-    }
-
-    function stopSphere() {
-        sRunning = false;
-        clearTimeout(sTimer);
-    }
-
-    window.addEventListener('resize', () => { if (sRunning) calcGalDims(); });
-
-    // Start immediately - full opacity acts as loader
-    startSphere();
-
-    // After 2.5s: recede to bg + reveal nav + text
+    // --- Boot: reveal landing content ---
     setTimeout(() => {
-        sphereEl.classList.add('loaded');
         document.body.classList.remove('loading');
         revealTitle();
-    }, 2500);
+    }, 120);
 
     // --- Blur reveal ---
     function revealTitle() {
@@ -100,43 +28,7 @@
         '#FFE8C1', '#D1C1FF', '#C1FFF4', '#FFC1C1',
     ];
 
-    // --- Split-flap scramble effect ---
-    const scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-    function addScramble(el, textEl) {
-        const target = textEl || el;
-        let scrambleInterval = null;
-        let currentOriginal = '';
-
-        el.addEventListener('mouseenter', () => {
-            currentOriginal = target.textContent; // read live - respects current language
-            let iteration = 0;
-            clearInterval(scrambleInterval);
-            scrambleInterval = setInterval(() => {
-                target.textContent = currentOriginal
-                    .split('')
-                    .map((char, i) => {
-                        if (char === ' ') return ' ';
-                        if (i < iteration) return currentOriginal[i];
-                        return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
-                    })
-                    .join('');
-                iteration += 1 / 2;
-                if (iteration >= currentOriginal.length) {
-                    clearInterval(scrambleInterval);
-                    target.textContent = currentOriginal;
-                }
-            }, 30);
-        });
-
-        el.addEventListener('mouseleave', () => {
-            clearInterval(scrambleInterval);
-            target.textContent = currentOriginal || target.textContent;
-        });
-    }
-
-    // Scramble effect - nav links only (About / Projects)
-    document.querySelectorAll('.nav-link').forEach(el => addScramble(el));
+    // (scramble / geek hover effect removed in redesign)
 
     // ===================================
     // Projects filter - chips filter the list by theme or "key" projects.
@@ -275,7 +167,7 @@
         next.classList.add('page--active');
         next.scrollTop = 0;
         currentPage = pageId;
-        updateNav();           // landing-active toggled immediately → galaxy-bg in sync
+        updateNav();           // landing-active toggled immediately
         updatePageTitle(pageId);
         animatePageContent(next);
 
@@ -478,41 +370,7 @@
         });
     }
 
-    // --- Cursor: spring follower + ASCII trail ---
-    const trail = document.getElementById('cursor-trail');
-    const trailChars = '|:-+.';
-
-    // Spring follower element
-    const follower = document.createElement('div');
-    follower.className = 'cursor-follower';
-    follower.textContent = '+';
-    document.body.appendChild(follower);
-
-    let mouseX = 0, mouseY = 0;
-    let followerX = 0, followerY = 0;
-
-    document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
-
-    (function animFollower() {
-        followerX += (mouseX - followerX) * 0.1;
-        followerY += (mouseY - followerY) * 0.1;
-        follower.style.transform = `translate(${followerX - 5}px, ${followerY - 7}px)`;
-        requestAnimationFrame(animFollower);
-    })();
-
-    // Trail chars (throttled)
-    let lastTrailTime = 0;
-    document.addEventListener('mousemove', (e) => {
-        const now = Date.now();
-        if (now - lastTrailTime < 35) return;
-        lastTrailTime = now;
-        const span = document.createElement('span');
-        span.textContent = trailChars[Math.floor(Math.random() * trailChars.length)];
-        span.style.left = e.clientX + 'px';
-        span.style.top = e.clientY + 'px';
-        trail.appendChild(span);
-        setTimeout(() => span.remove(), 1200);
-    });
+    // (cursor follower + ASCII trail removed in redesign)
 
     // --- Keyboard Navigation ---
     document.addEventListener('keydown', (e) => {
@@ -609,53 +467,7 @@
         animatePageContent(document.querySelector('.page--active'));
     }, 100);
 
-    // ===================================
-    // Star Button
-    // ===================================
-    const starBtn      = document.getElementById('star-btn');
-    const starCountEl  = document.getElementById('star-count');
-    const starTooltipEl = document.getElementById('star-tooltip');
-    // Base score so the counter never reads as "0 social proof".
-    // The user's own star is added on top of this base.
-    const BASE_STARS = 10;
-    let isStarred  = localStorage.getItem('folio-starred') === 'true';
-    let starCount  = BASE_STARS + (isStarred ? 1 : 0);
-
-    function updateStarUI() {
-        if (starCountEl) {
-            starCountEl.textContent = starCount;
-            starCountEl.removeAttribute('hidden');
-        }
-        starBtn?.classList.toggle('starred', isStarred);
-        if (starBtn) {
-            starBtn.setAttribute('aria-pressed', isStarred ? 'true' : 'false');
-        }
-    }
-    updateStarUI();
-
-    let tooltipTimer = null;
-    function showStarTooltip(msg) {
-        if (!starTooltipEl) return;
-        starTooltipEl.textContent = msg;
-        starTooltipEl.classList.add('visible');
-        clearTimeout(tooltipTimer);
-        tooltipTimer = setTimeout(() => starTooltipEl.classList.remove('visible'), 3000);
-    }
-
-    starBtn?.addEventListener('click', () => {
-        isStarred = !isStarred;
-        starCount = BASE_STARS + (isStarred ? 1 : 0);
-        localStorage.setItem('folio-starred', isStarred ? 'true' : 'false');
-        updateStarUI();
-
-        const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
-        const shortcut = isMac ? '⌘D' : 'Ctrl+D';
-        const fr = currentLang === 'fr';
-        const msg = isStarred
-            ? (fr ? `Ajoutez aux favoris avec ${shortcut} !` : `Bookmark with ${shortcut} to keep it!`)
-            : (fr ? 'Retiré des étoiles' : 'Unstarred');
-        showStarTooltip(msg);
-    });
+    // (GitHub-style star/save button removed in redesign)
 
     // ===================================
     // i18n - FR / EN
@@ -1469,88 +1281,74 @@
         preview.className = 'project-preview';
         preview.innerHTML =
             '<div class="cover-card">' +
-                '<div class="cover-body">' +
-                    '<div class="cover-code"></div>' +
-                    '<div class="cover-metric"></div>' +
-                    '<div class="cover-title"></div>' +
-                '</div>' +
+                '<div class="cover-code"></div>' +
+                '<div class="cover-title"></div>' +
+                '<div class="cover-metric"></div>' +
                 '<div class="cover-icon" aria-hidden="true"></div>' +
-                '<div class="cover-foot"><span>Case study</span><span class="cover-slot"></span></div>' +
             '</div>';
         document.body.appendChild(preview);
 
         const coverCodeEl   = preview.querySelector('.cover-code');
         const coverMetricEl = preview.querySelector('.cover-metric');
         const coverTitleEl  = preview.querySelector('.cover-title');
-        const coverSlotEl   = preview.querySelector('.cover-slot');
         const coverIconEl   = preview.querySelector('.cover-icon');
 
-        // Themed pixel-art sprites - 1 = accent, 2 = highlight, . = empty.
-        const ICONS = {
-            'project-customer-account': [   // person
-                '....22222....','...2222222...','...2222222...','....22222....',
-                '.............','...1111111...','..111111111..','.11111111111.','.11111111111.'],
-            'project-design-system': [      // bricks (design system)
-                '.............','111.222.111.2','111.222.111.2','.............','2.222.111.222',
-                '2.222.111.222','.............','111.222.111.2','111.222.111.2'],
-            'project-ds-execution': [       // bricks (Opal DS - design system)
-                '.............','111.222.111.2','111.222.111.2','.............','2.222.111.222',
-                '2.222.111.222','.............','111.222.111.2','111.222.111.2'],
-            'project-ds-audit': [           // magnifier
-                '..2222.......','.2....2......','2......2.....','2......2.....','2......2.....',
-                '.2....2......','..2222.1.....','.......11....','........11...'],
-            'project-transfer': [           // two sectors + arrow
-                '.............','222.......222','222.......222','222....1..222','222.11111.222',
-                '222....1..222','222.......222','222.......222','.............'],
-            'project-signin': [             // key
-                '.............','.22..........','2..2.........','2..211111111.','2..2.....1.1.',
-                '.22..........','.............','.............','.............'],
-            'project-figma-plugin': [       // lightning bolt
-                '........11...','.......11....','......11.....','....22222....','.......11....',
-                '......11.....','.....11......','....11.......','.............'],
-            'project-ds-skills': [          // agent / bot
-                '......2......','......1......','.11111111111.','.1.........1.','.1.22...22.1.',
-                '.1.........1.','.1..22222..1.','.11111111111.','...1.....1...'],
-            'project-multiselect': [        // checklist
-                '22.111111111.','22.111111111.','.............','22.111111111.','22.111111111.',
-                '.............','11.111111111.','11.111111111.','.............'],
-            'project-store-association': [  // storefront
-                '.............','.11111111111.','.22222222222.','..2.2.2.2.2..','.11111111111.',
-                '.1...111...1.','.1...111...1.','.1...111...1.','.11111111111.']
+        // Soft-pixel mass, Manoeuvres-style: a deterministic skyline of
+        // desaturated slate/paper pixels seeded by the project slug.
+        const PIX_PALETTES = {
+            dark:  ['#3c434e', '#57626f', '#7b8b9e', '#a7b3c0', '#cfd0c8'],
+            light: ['#525c69', '#75839a', '#a2adbc', '#c6cbc9', '#e0ddd2']
         };
-        const ICON_FALLBACK = ICONS['project-customer-account'];
 
-        let iconCells = [];
-        function buildIcon(slug) {
-            const bmp = ICONS[slug] && ICONS[slug].length ? ICONS[slug] : ICON_FALLBACK;
-            const cols = bmp[0].length, rows = bmp.length;
-            coverIconEl.style.gridTemplateColumns = `repeat(${cols}, 5px)`;
-            coverIconEl.style.gridAutoRows = '5px';
-            coverIconEl.textContent = '';
-            iconCells = [];
-            for (let y = 0; y < rows; y++) {
-                for (let x = 0; x < cols; x++) {
-                    const ch = bmp[y][x];
-                    const cell = document.createElement('i');
-                    coverIconEl.appendChild(cell);
-                    if (ch !== '.') iconCells.push({ el: cell, x, y, base: ch });
-                }
+        function seededRandom(str) {
+            let h = 2166136261;
+            for (let i = 0; i < str.length; i++) {
+                h ^= str.charCodeAt(i);
+                h = Math.imul(h, 16777619);
             }
+            return function () {
+                h += 0x6D2B79F5;
+                let t = Math.imul(h ^ (h >>> 15), 1 | h);
+                t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
+                return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+            };
         }
 
-        // Very light shimmer: a slow diagonal band lifts lit pixels to the
-        // highlight tone as it passes; otherwise they hold the accent.
-        function updateIcon(f) {
-            for (let k = 0; k < iconCells.length; k++) {
-                const o = iconCells[k];
-                const band = (((o.x - o.y) - f) % 16 + 16) % 16 < 2;
-                o.el.style.background = (o.base === '2' || band) ? 'var(--cover-hi)' : 'var(--cover-accent)';
+        const PIX_COLS = 30, PIX_ROWS = 9, PIX_CELL = 10;
+
+        function buildMass(slug) {
+            const rnd = seededRandom(slug);
+            const theme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+            const pal = PIX_PALETTES[theme];
+            // Column heights: a bounded random walk, flat outside the mass.
+            const start = 2 + Math.floor(rnd() * 3);
+            const end = PIX_COLS - 2 - Math.floor(rnd() * 3);
+            let h = 2 + Math.floor(rnd() * 3);
+            const heights = [];
+            for (let c = 0; c < PIX_COLS; c++) {
+                if (c < start || c > end) { heights.push(0); continue; }
+                h += Math.floor(rnd() * 3) - 1;
+                h = Math.max(1, Math.min(PIX_ROWS - 1, h));
+                heights.push(h);
+            }
+            coverIconEl.style.gridTemplateColumns = `repeat(${PIX_COLS}, 1fr)`;
+            coverIconEl.style.gridAutoRows = PIX_CELL + 'px';
+            coverIconEl.textContent = '';
+            for (let y = 0; y < PIX_ROWS; y++) {
+                for (let x = 0; x < PIX_COLS; x++) {
+                    const cell = document.createElement('i');
+                    if (heights[x] >= (PIX_ROWS - y)) {
+                        const t = rnd();
+                        const idx = t < 0.16 ? 4 : t < 0.34 ? 3 : t < 0.58 ? 2 : (y > PIX_ROWS - 4 ? 0 : 1);
+                        cell.style.background = pal[idx];
+                    }
+                    coverIconEl.appendChild(cell);
+                }
             }
         }
 
         let pvX = 0, pvY = 0, pvTX = 0, pvTY = 0;
         let pvActive = false;
-        let rafCount = 0, gridFrame = 0;
 
         document.addEventListener('mousemove', (e) => {
             pvTX = e.clientX + 28;
@@ -1558,40 +1356,16 @@
         });
 
         (function animPreview() {
-            rafCount++;
             pvX += (pvTX - pvX) * 0.14;
             pvY += (pvTY - pvY) * 0.14;
             if (pvActive) {
-                const maxX = window.innerWidth - 360;
+                const maxX = window.innerWidth - 340;
                 const maxY = window.innerHeight - 240;
                 preview.style.transform =
                     `translate(${Math.min(pvX, maxX)}px, ${Math.max(12, Math.min(pvY, maxY))}px)`;
-                if (rafCount % 8 === 0) { gridFrame++; updateIcon(gridFrame); }
             }
             requestAnimationFrame(animPreview);
         })();
-
-        // Cover palette follows the company badge color, per theme.
-        // [accent, highlight, off-cell] - dark uses lighter highlights,
-        // light uses deeper accents so the grid reads on white.
-        const COVER_ACCENTS = {
-            'project-company--oplit': {
-                dark:  ['#6384ff', '#aec0ff', 'rgba(122, 110, 180, 0.14)'],
-                light: ['#3a5bd9', '#1400a0', 'rgba(20, 0, 160, 0.10)']
-            },
-            'project-company--prestashop': {
-                dark:  ['#a584e6', '#d6c4f2', 'rgba(122, 110, 180, 0.14)'],
-                light: ['#7c5bc7', '#59359c', 'rgba(111, 66, 193, 0.10)']
-            },
-            'project-company--perso': {
-                dark:  ['#9aa0a6', '#cfd2d6', 'rgba(160, 160, 170, 0.16)'],
-                light: ['#6b7077', '#3f4247', 'rgba(26, 26, 26, 0.08)']
-            }
-        };
-        const COVER_DEFAULT = {
-            dark:  ['#4d34ff', '#a99cff', 'rgba(122, 110, 180, 0.14)'],
-            light: ['#4d34ff', '#1400a0', 'rgba(20, 0, 160, 0.10)']
-        };
 
         document.querySelectorAll('#projects .project-card').forEach(card => {
             const slug = card.dataset.page;
@@ -1599,22 +1373,13 @@
             if (!data) return;
             card.addEventListener('mouseenter', () => {
                 const t = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
-                const companyEl = card.querySelector('.project-company');
-                const company = companyEl?.textContent || '';
+                const company = card.querySelector('.project-company')?.textContent || '';
                 const title = card.querySelector('.project-name')?.textContent || '';
                 const index = card.querySelector('.project-index')?.textContent || '00';
-                const accentClass = Object.keys(COVER_ACCENTS)
-                    .find(cls => companyEl?.classList.contains(cls));
-                const theme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
-                const [acc, hi] = (COVER_ACCENTS[accentClass] || COVER_DEFAULT)[theme];
-                preview.style.setProperty('--cover-accent', acc);
-                preview.style.setProperty('--cover-hi', hi);
-                coverCodeEl.textContent = `GC://${company.replace(/\s+/g, '-')}/${slug.replace('project-', '')}`.toUpperCase();
-                coverMetricEl.textContent = (t[data.metricKey] || '') + (data.suffix || '');
+                coverCodeEl.textContent = `${index} · ${company}`;
                 coverTitleEl.textContent = title;
-                coverSlotEl.textContent = `Slot ${index}`;
-                buildIcon(slug);
-                updateIcon(gridFrame);
+                coverMetricEl.textContent = (t[data.metricKey] || '') + (data.suffix || '');
+                buildMass(slug);
                 pvActive = true;
                 preview.classList.add('on');
             });
