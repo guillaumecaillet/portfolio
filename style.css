@@ -28,7 +28,7 @@
     --surface-border: rgba(231, 227, 215, 0.08);
     --ink: rgba(231, 227, 215, 0.1);
     --ink-strong: rgba(231, 227, 215, 0.28);
-    --font-sans: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+    --font-sans: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     --font-mono: 'IBM Plex Mono', monospace;
     --radius: 0;
     --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -3252,3 +3252,107 @@ body::after {
 /* Mute code/proto mockups into the Naibu palette */
 .proto-code { background: #212226 !important; filter: saturate(0.72); }
 .proto-figma-panel, .proto-figma-titlebar { filter: saturate(0.8); }
+
+/* ===== Swiss hero (topbar / tagline / meta grid) ===== */
+.landing-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--text);
+    margin-bottom: 48px;
+}
+
+.landing-title {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.landing-tagline {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 44ch;
+    margin-top: 24px;
+}
+
+.landing-tagline .landing-company {
+    color: var(--accent);
+}
+
+.landing-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+    margin-top: 40px;
+}
+
+.landing-meta-k {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+}
+
+.landing-meta-v {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+/* ===== Single-line project rows ===== */
+.project-card-inner { align-items: center; }
+
+.project-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.project-name {
+    order: 1;
+    margin-bottom: 0;
+    font-size: 1.05rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.project-key-badge {
+    order: 2;
+    margin: 0;
+    flex: none;
+}
+
+.project-company {
+    order: 3;
+    margin: 0 0 0 auto;
+    flex: none;
+}
+
+.project-type {
+    order: 4;
+    flex: none;
+    text-align: right;
+    white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+    .landing-meta { grid-template-columns: repeat(2, 1fr); }
+    .project-info { flex-wrap: wrap; gap: 8px 16px; }
+    .project-name { white-space: normal; width: 100%; }
+    .project-company { margin-left: 0; }
+    .project-type { text-align: left; }
+}

@@ -32,7 +32,7 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%231400a0'/%3E%3Ctext x='50' y='56' text-anchor='middle' font-family='system-ui,sans-serif' font-size='30' font-weight='700' fill='white'%3EGC%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script type="application/ld+json">
     {
@@ -100,39 +100,34 @@
     <!-- Page: Landing -->
     <section class="page page--active" id="landing">
         <div class="landing">
-            <!-- Hero: title + sub anchored at the geometric centre of the page -->
+            <!-- Hero: Swiss top bar + title + tagline + meta grid -->
             <div class="landing-hero">
+                <div class="landing-topbar" aria-hidden="true">
+                    <span>Guillaume Caillet</span>
+                    <span>Portfolio / 2026</span>
+                </div>
                 <h1 class="landing-title">
-                    <span class="line" data-delay="0" data-i18n="landing.line1">Senior Product Designer. </span>
-                    <span class="line" data-delay="1"><span data-i18n="landing.line2_pre">currently at </span><a href="https://www.oplit.com" target="_blank" rel="noopener" class="landing-company">Oplit</a></span>
+                    <span class="line" data-delay="0" data-i18n="landing.line1">Senior Product</span>
+                    <span class="line" data-delay="1" data-i18n="landing.line2">Designer</span>
                 </h1>
-                <p class="landing-sub">
-                    <span data-i18n="landing.sub_name">Guillaume Caillet</span>
-                    <span class="landing-sub-sep" aria-hidden="true">·</span>
-                    <span class="landing-sub-loc">
-                        <svg class="pin-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/>
-                            <circle cx="12" cy="10" r="3"/>
-                        </svg>
-                        <span data-i18n="landing.sub_loc">Nantes, France</span>
-                    </span>
-                </p>
-                <div class="landing-stats">
-                    <a href="#projects" class="landing-stat" data-page="projects">
-                        <span class="landing-stat-value">+74%</span>
-                        <span class="landing-stat-label" data-i18n="landing.stat1">active users at Oplit</span>
-                        <span class="landing-stat-go" aria-hidden="true" data-i18n="landing.stat.go">see the work →</span>
-                    </a>
-                    <a href="#project-signin" class="landing-stat" data-page="project-signin">
-                        <span class="landing-stat-value">-50%</span>
-                        <span class="landing-stat-label" data-i18n="landing.stat2">auth errors at PrestaShop (300k+ merchants)</span>
-                        <span class="landing-stat-go" aria-hidden="true" data-i18n="landing.stat.go">see the work →</span>
-                    </a>
-                    <a href="#project-ds-execution" class="landing-stat" data-page="project-ds-execution">
-                        <span class="landing-stat-value">30-50%</span>
-                        <span class="landing-stat-label" data-i18n="landing.stat3">faster design execution with the rebuilt design system</span>
-                        <span class="landing-stat-go" aria-hidden="true" data-i18n="landing.stat.go">see the work →</span>
-                    </a>
+                <p class="landing-tagline" data-i18n-html="landing.tagline">I make complex, demanding products simple. Currently on <a href="#project-ds-skills" data-page="project-ds-skills" class="landing-company">Opal DS</a> at Oplit.</p>
+                <div class="landing-meta">
+                    <div class="landing-meta-item">
+                        <span class="landing-meta-k" data-i18n="landing.meta.loc_k">Based in</span>
+                        <span class="landing-meta-v">Nantes, FR</span>
+                    </div>
+                    <div class="landing-meta-item">
+                        <span class="landing-meta-k" data-i18n="landing.meta.focus_k">Focus</span>
+                        <span class="landing-meta-v">B2B SaaS, DS</span>
+                    </div>
+                    <div class="landing-meta-item">
+                        <span class="landing-meta-k" data-i18n="landing.meta.xp_k">Experience</span>
+                        <span class="landing-meta-v" data-i18n="landing.meta.xp_v">7+ yrs</span>
+                    </div>
+                    <div class="landing-meta-item">
+                        <span class="landing-meta-k" data-i18n="landing.meta.status_k">Status</span>
+                        <span class="landing-meta-v" data-i18n="landing.meta.status_v">Open</span>
+                    </div>
                 </div>
                 <div class="landing-scroll-cue" aria-hidden="true"><span data-i18n="landing.scroll">Scroll</span></div>
             </div>
