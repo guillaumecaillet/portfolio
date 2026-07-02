@@ -136,7 +136,7 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 28px 48px;
+    padding: 24px 48px;
     pointer-events: none;
     transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -404,7 +404,7 @@ body.landing-active .cursor-trail span {
     display: flex;
     align-items: center;
     gap: 32px;
-    padding: 20px 0;
+    padding: 24px 0;
     border-top: 1px solid var(--border);
     transition: all var(--transition-fast);
     position: relative;
@@ -863,8 +863,8 @@ body.landing-active .cursor-trail span {
 .project-card-inner {
     display: flex;
     align-items: baseline;
-    gap: 22px;
-    padding: 26px 0;
+    gap: 24px;
+    padding: 24px 0;
     border-top: 1px solid var(--border);
     position: relative;
     z-index: 1;
@@ -1195,7 +1195,7 @@ body.landing-active .cursor-trail span {
     -webkit-backdrop-filter: none;
     border: 1px solid var(--surface-border);
     border-radius: 0;
-    padding: 28px 32px;
+    padding: 24px 32px;
 }
 
 /* Project cards: bare tabular rows, hairline separators only */
@@ -1209,7 +1209,7 @@ body.landing-active .cursor-trail span {
 .project-other-list {
     background: var(--surface);
     border: 1px solid var(--surface-border);
-    padding: 20px 28px;
+    padding: 24px;
 }
 
 /* Landing pitch — masked surface so the galaxy doesn't bleed through */
@@ -1225,11 +1225,11 @@ body.landing-active .cursor-trail span {
 
 /* On case study pages, the header & sections breathe a bit more */
 .case-header {
-    padding: 32px 36px;
+    padding: 32px;
     margin-bottom: 24px;
 }
 .case-section {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 
 /* Caption — meta commentary under code/diff blocks */
@@ -1374,7 +1374,7 @@ body.landing-active .cursor-trail span {
     }
 
     .project-card-inner {
-        padding: 20px 0;
+        padding: 16px 0;
     }
 
     .project-name {
@@ -1741,8 +1741,8 @@ body.landing-active .cursor-trail span {
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--text-muted);
-    padding: 20px 0 8px;
-    border-bottom: 1px solid var(--border);
+    padding: 24px 0 8px;
+    border-bottom: none;
     margin-bottom: 0;
     pointer-events: none;
     user-select: none;
@@ -1761,8 +1761,12 @@ body.landing-active .cursor-trail span {
 .project-list-sep {
     height: 1px;
     background: var(--border);
-    margin: 12px 0 4px;
+    margin: 56px 0 0;
     opacity: 0.5;
+}
+
+.project-other-intro {
+    margin: 24px 0 16px;
 }
 
 /* ===================================
@@ -1814,7 +1818,7 @@ body.landing-active .cursor-trail span {
     display: flex;
     align-items: baseline;
     gap: 16px;
-    padding: 10px 0;
+    padding: 8px 0;
     border-bottom: 1px solid var(--border);
     flex-wrap: wrap;
 }
@@ -1848,19 +1852,22 @@ body.landing-active .cursor-trail span {
    Project company tag (above name)
    =================================== */
 .project-company {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    height: 24px;
+    vertical-align: middle;
     font-size: 0.6rem;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--text-muted);
-    padding: 2px 8px;
+    padding: 0 8px;
     border: 1px solid var(--border);
     border-radius: 0;
     margin-bottom: 8px;
     transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
     font-family: 'IBM Plex Mono', monospace;
-    line-height: 1.3;
+    line-height: 1;
 }
 
 .project-card:hover .project-company {
@@ -2969,7 +2976,10 @@ body.landing-active .galaxy-bg { opacity: 0; }
 
 /* --- Projects list: KEY badge + hover preview --- */
 .project-key-badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    height: 24px;
+    vertical-align: middle;
     font-size: 0.58rem;
     font-weight: 700;
     letter-spacing: 0.14em;
@@ -2977,10 +2987,10 @@ body.landing-active .galaxy-bg { opacity: 0; }
     border: 1px solid var(--accent-soft);
     background: var(--accent-soft);
     border-radius: 0;
-    padding: 2px 6px;
+    padding: 0 8px;
     margin-left: 8px;
-    vertical-align: middle;
-    transform: translateY(-1px);
+    margin-bottom: 8px;
+    line-height: 1;
 }
 
 /* Floating preview: quiet album-cover card. Flat surface in the theme
@@ -3011,7 +3021,7 @@ body.landing-active .galaxy-bg { opacity: 0; }
 .cover-card {
     display: flex;
     flex-direction: column;
-    padding: 18px 18px 0;
+    padding: 16px 16px 0;
 }
 
 .cover-code {
@@ -3020,7 +3030,7 @@ body.landing-active .galaxy-bg { opacity: 0; }
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--text-dim);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .cover-title {
@@ -3042,7 +3052,7 @@ body.landing-active .galaxy-bg { opacity: 0; }
 .cover-icon {
     display: grid;
     gap: 0;
-    margin: 18px -18px 0;
+    margin: 16px -16px 0;
     line-height: 0;
 }
 
@@ -3220,8 +3230,8 @@ body::after {
     letter-spacing: 0;
 }
 .project-year-label {
-    margin-top: 26px;
-    margin-bottom: 2px;
+    margin-top: 40px;
+    margin-bottom: 0;
 }
 .projects-list > .project-year-label:first-child { margin-top: 8px; }
 
