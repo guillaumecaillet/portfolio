@@ -83,7 +83,6 @@
             </button>
             <div class="nav-links">
                 <a href="#who" class="nav-link" data-page="who" data-i18n="nav.who">Who am I</a>
-                <a href="#projects" class="nav-link" data-page="projects" data-i18n="nav.projects">Projects</a>
             </div>
             <div class="lang-switch" role="group" aria-label="Language switch">
                 <button class="lang-btn" data-lang="en">EN</button>
@@ -107,8 +106,7 @@
                     <span>Portfolio / 2026</span>
                 </div>
                 <h1 class="landing-title">
-                    <span class="line" data-delay="0" data-i18n="landing.line1">Senior Product</span>
-                    <span class="line" data-delay="1" data-i18n="landing.line2">Designer</span>
+                    <span class="line" data-delay="0" data-i18n="landing.line1">Senior Product Designer</span>
                 </h1>
                 <p class="landing-tagline" data-i18n-html="landing.tagline">I make complex, demanding products simple. Currently on <a href="#project-ds-skills" data-page="project-ds-skills" class="landing-company">Opal DS</a> at Oplit.</p>
                 <div class="landing-meta">
@@ -147,10 +145,6 @@
                 <p class="landing-pitch reveal" data-i18n-html="landing.pitch">Over the last 7 years, I've contributed to the design and improvement of B2B SaaS products, alongside teams at <strong>Oplit</strong> (industrial schedulers), <strong>PrestaShop</strong> (300k+ merchants), <strong>Airbus</strong> and <strong>SNCF</strong>. I've led design systems, run audits, and shipped infrastructure that teams build on.<br><br>What I'm looking for: high-stakes products where design co-pilots strategy, not a service function.</p>
                 <div class="landing-links">
                     <div class="landing-btn-row">
-                        <a href="#projects" class="landing-link-card" data-page="projects">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                            <span class="landing-link-card-label" data-i18n="landing.discover">Discover my work</span>
-                        </a>
                         <a href="#who" class="landing-link-card" data-page="who">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                             <span class="landing-link-card-label" data-i18n="landing.about">About me</span>
@@ -158,6 +152,169 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Projects: embedded after the pitch -->
+        <div class="projects">
+            <div class="projects-header">
+                <h2 class="page-title" data-i18n="projects.title">Projects</h2>
+            </div>
+
+            <div class="projects-filter" role="group" aria-label="Filter projects">
+                <button class="filter-chip filter-chip--key" data-filter="key">
+                    <span class="filter-chip-glyph" aria-hidden="true">◆</span>
+                    <span data-i18n="projects.filter.key">Key projects</span>
+                </button>
+                <span class="filter-sep" aria-hidden="true"></span>
+                <button class="filter-chip active" data-filter="all" data-i18n="projects.filter.all">All</button>
+                <button class="filter-chip" data-filter="ds" data-i18n="projects.filter.ds">Design Systems</button>
+                <button class="filter-chip" data-filter="product" data-i18n="projects.filter.product">Product</button>
+                <button class="filter-chip" data-filter="research" data-i18n="projects.filter.research">Research</button>
+                <button class="filter-chip" data-filter="tooling" data-i18n="projects.filter.tooling">Tooling</button>
+            </div>
+
+            <div class="projects-list">
+                <div class="project-year-label" data-i18n="year.2026">2026</div>
+                <a href="#project-ds-skills" class="project-card" data-page="project-ds-skills" data-theme="ds" data-key="true">
+                    <div class="project-card-inner">
+                        <span class="project-index">01</span>
+                        <div class="project-info">
+                            <span class="project-company project-company--oplit" data-i18n="project.tag.oplit">Oplit</span><span class="project-key-badge" aria-label="Key project">KEY</span>
+                            <h3 class="project-name" data-i18n="case.dsskills.title">Opal DS · AI Prototyping Skills</h3>
+                            <p class="project-type">Design System · AI · Prototyping</p>
+                        </div>
+                        <span class="project-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <a href="#project-ds-execution" class="project-card" data-page="project-ds-execution" data-theme="ds" data-key="true">
+                    <div class="project-card-inner">
+                        <span class="project-index">02</span>
+                        <div class="project-info">
+                            <span class="project-company project-company--oplit" data-i18n="project.tag.oplit">Oplit</span><span class="project-key-badge" aria-label="Key project">KEY</span>
+                            <h3 class="project-name" data-i18n="case.dsexec.title">Opal DS · Corrective Actions</h3>
+                            <p class="project-type">Design System · Design Ops · Automation</p>
+                        </div>
+                        <span class="project-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <a href="#project-multiselect" class="project-card" data-page="project-multiselect" data-theme="product">
+                    <div class="project-card-inner">
+                        <span class="project-index">03</span>
+                        <div class="project-info">
+                            <span class="project-company project-company--oplit" data-i18n="project.tag.oplit">Oplit</span>
+                            <h3 class="project-name" data-i18n="case.multi.title">Multi-select &amp; Sticky Action Bar</h3>
+                            <p class="project-type">Interaction Design · Pattern Design · Industrial SaaS</p>
+                        </div>
+                        <span class="project-arrow">&rarr;</span>
+                    </div>
+                </a>
+
+                <div class="project-year-label" data-i18n="year.2025">2025</div>
+                <a href="#project-figma-plugin" class="project-card" data-page="project-figma-plugin" data-theme="tooling">
+                    <div class="project-card-inner">
+                        <span class="project-index">04</span>
+                        <div class="project-info">
+                            <span class="project-company project-company--perso" data-i18n="project.tag.perso">Personal</span>
+                            <h3 class="project-name" data-i18n="case.plugin.title">Figma Plugin, Local Components Collector</h3>
+                            <p class="project-type">Design Ops · Tooling · Figma Plugin</p>
+                        </div>
+                        <span class="project-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <a href="#project-ds-audit" class="project-card" data-page="project-ds-audit" data-theme="ds">
+                    <div class="project-card-inner">
+                        <span class="project-index">05</span>
+                        <div class="project-info">
+                            <span class="project-company project-company--oplit" data-i18n="project.tag.oplit">Oplit</span>
+                            <h3 class="project-name" data-i18n="case.dsaudit.title">Opal DS · Audit</h3>
+                            <p class="project-type">Design System · Audit · Design Ops</p>
+                        </div>
+                        <span class="project-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <a href="#project-transfer" class="project-card" data-page="project-transfer" data-theme="product" data-key="true">
+                    <div class="project-card-inner">
+                        <span class="project-index">06</span>
+                        <div class="project-info">
+                            <span class="project-company project-company--oplit" data-i18n="project.tag.oplit">Oplit</span><span class="project-key-badge" aria-label="Key project">KEY</span>
+                            <h3 class="project-name" data-i18n="case.transfer.title">Capacity Transfer Between Sectors</h3>
+                            <p class="project-type">Product Design · Strategy · Sales Enablement</p>
+                        </div>
+                        <span class="project-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <a href="#project-design-system" class="project-card" data-page="project-design-system" data-theme="ds">
+                    <div class="project-card-inner">
+                        <span class="project-index">07</span>
+                        <div class="project-info">
+                            <span class="project-company project-company--prestashop" data-i18n="project.tag.prestashop">PrestaShop</span>
+                            <h3 class="project-name" data-i18n="case.ds.title">Design System</h3>
+                            <p class="project-type">Design System · Research · Product Design</p>
+                        </div>
+                        <span class="project-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <a href="#project-customer-account" class="project-card" data-page="project-customer-account" data-theme="research">
+                    <div class="project-card-inner">
+                        <span class="project-index">08</span>
+                        <div class="project-info">
+                            <span class="project-company project-company--prestashop" data-i18n="project.tag.prestashop">PrestaShop</span>
+                            <h3 class="project-name" data-i18n="case.ca.title">Customer Account</h3>
+                            <p class="project-type">Product Design · Research · UI Design</p>
+                        </div>
+                        <span class="project-arrow">&rarr;</span>
+                    </div>
+                </a>
+
+                <div class="project-year-label" data-i18n="year.2024">2024</div>
+                <a href="#project-signin" class="project-card" data-page="project-signin" data-theme="research" data-key="true">
+                    <div class="project-card-inner">
+                        <span class="project-index">09</span>
+                        <div class="project-info">
+                            <span class="project-company project-company--prestashop" data-i18n="project.tag.prestashop">PrestaShop</span><span class="project-key-badge" aria-label="Key project">KEY</span>
+                            <h3 class="project-name" data-i18n="case.si.title">Sign in / Sign up Flow</h3>
+                            <p class="project-type">Product Design · Research · UI Design</p>
+                        </div>
+                        <span class="project-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <a href="#project-store-association" class="project-card" data-page="project-store-association" data-theme="research">
+                    <div class="project-card-inner">
+                        <span class="project-index">10</span>
+                        <div class="project-info">
+                            <span class="project-company project-company--prestashop" data-i18n="project.tag.prestashop">PrestaShop</span>
+                            <h3 class="project-name" data-i18n="case.sa.title">Store Association Flow</h3>
+                            <p class="project-type">Product Design · Research · UI Design</p>
+                        </div>
+                        <span class="project-arrow">&rarr;</span>
+                    </div>
+                </a>
+
+                <div class="project-list-sep" aria-hidden="true"></div>
+                <p class="project-other-intro" data-i18n="projects.other.intro">Earlier projects: concept work, prototypes and student projects I still find relevant.</p>
+                <ul class="project-other-list" aria-label="Other projects">
+                    <li class="project-other-item">
+                        <span class="project-other-name">Mon Caviste</span>
+                        <span class="project-other-type">Mobile · Prototyping · Research · UI &amp; UX Design</span>
+                    </li>
+                    <li class="project-other-item">
+                        <span class="project-other-name">TAN</span>
+                        <span class="project-other-type">MaaS · Mobile · Product Design · Prototyping · UI &amp; UX Design</span>
+                    </li>
+                    <li class="project-other-item">
+                        <span class="project-other-name">Dashboard Fournitures</span>
+                        <span class="project-other-type">Design System · Product Design · SaaS · UI &amp; UX Design</span>
+                    </li>
+                    <li class="project-other-item">
+                        <span class="project-other-name">Hip Opsession</span>
+                        <span class="project-other-type">UI Design · UX Design</span>
+                    </li>
+                    <li class="project-other-item">
+                        <span class="project-other-name">UX Cards</span>
+                        <span class="project-other-type">Serious Game · UI Design</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
         </div>
     </section>
 
@@ -421,175 +578,11 @@
         </div>
     </section>
 
-    <!-- Page: Projects -->
-    <section class="page" id="projects">
-        <div class="projects">
-            <div class="projects-header">
-                <h2 class="page-title" data-i18n="projects.title">Projects</h2>
-            </div>
-
-            <div class="projects-filter" role="group" aria-label="Filter projects">
-                <button class="filter-chip filter-chip--key" data-filter="key">
-                    <span class="filter-chip-glyph" aria-hidden="true">◆</span>
-                    <span data-i18n="projects.filter.key">Key projects</span>
-                </button>
-                <span class="filter-sep" aria-hidden="true"></span>
-                <button class="filter-chip active" data-filter="all" data-i18n="projects.filter.all">All</button>
-                <button class="filter-chip" data-filter="ds" data-i18n="projects.filter.ds">Design Systems</button>
-                <button class="filter-chip" data-filter="product" data-i18n="projects.filter.product">Product</button>
-                <button class="filter-chip" data-filter="research" data-i18n="projects.filter.research">Research</button>
-                <button class="filter-chip" data-filter="tooling" data-i18n="projects.filter.tooling">Tooling</button>
-            </div>
-
-            <div class="projects-list">
-                <div class="project-year-label" data-i18n="year.2026">2026</div>
-                <a href="#project-ds-skills" class="project-card" data-page="project-ds-skills" data-theme="ds" data-key="true">
-                    <div class="project-card-inner">
-                        <span class="project-index">01</span>
-                        <div class="project-info">
-                            <span class="project-company project-company--oplit" data-i18n="project.tag.oplit">Oplit</span><span class="project-key-badge" aria-label="Key project">KEY</span>
-                            <h3 class="project-name" data-i18n="case.dsskills.title">Opal DS · AI Prototyping Skills</h3>
-                            <p class="project-type">Design System · AI · Prototyping</p>
-                        </div>
-                        <span class="project-arrow">&rarr;</span>
-                    </div>
-                </a>
-                <a href="#project-ds-execution" class="project-card" data-page="project-ds-execution" data-theme="ds" data-key="true">
-                    <div class="project-card-inner">
-                        <span class="project-index">02</span>
-                        <div class="project-info">
-                            <span class="project-company project-company--oplit" data-i18n="project.tag.oplit">Oplit</span><span class="project-key-badge" aria-label="Key project">KEY</span>
-                            <h3 class="project-name" data-i18n="case.dsexec.title">Opal DS · Corrective Actions</h3>
-                            <p class="project-type">Design System · Design Ops · Automation</p>
-                        </div>
-                        <span class="project-arrow">&rarr;</span>
-                    </div>
-                </a>
-                <a href="#project-multiselect" class="project-card" data-page="project-multiselect" data-theme="product">
-                    <div class="project-card-inner">
-                        <span class="project-index">03</span>
-                        <div class="project-info">
-                            <span class="project-company project-company--oplit" data-i18n="project.tag.oplit">Oplit</span>
-                            <h3 class="project-name" data-i18n="case.multi.title">Multi-select &amp; Sticky Action Bar</h3>
-                            <p class="project-type">Interaction Design · Pattern Design · Industrial SaaS</p>
-                        </div>
-                        <span class="project-arrow">&rarr;</span>
-                    </div>
-                </a>
-
-                <div class="project-year-label" data-i18n="year.2025">2025</div>
-                <a href="#project-figma-plugin" class="project-card" data-page="project-figma-plugin" data-theme="tooling">
-                    <div class="project-card-inner">
-                        <span class="project-index">04</span>
-                        <div class="project-info">
-                            <span class="project-company project-company--perso" data-i18n="project.tag.perso">Personal</span>
-                            <h3 class="project-name" data-i18n="case.plugin.title">Figma Plugin, Local Components Collector</h3>
-                            <p class="project-type">Design Ops · Tooling · Figma Plugin</p>
-                        </div>
-                        <span class="project-arrow">&rarr;</span>
-                    </div>
-                </a>
-                <a href="#project-ds-audit" class="project-card" data-page="project-ds-audit" data-theme="ds">
-                    <div class="project-card-inner">
-                        <span class="project-index">05</span>
-                        <div class="project-info">
-                            <span class="project-company project-company--oplit" data-i18n="project.tag.oplit">Oplit</span>
-                            <h3 class="project-name" data-i18n="case.dsaudit.title">Opal DS · Audit</h3>
-                            <p class="project-type">Design System · Audit · Design Ops</p>
-                        </div>
-                        <span class="project-arrow">&rarr;</span>
-                    </div>
-                </a>
-                <a href="#project-transfer" class="project-card" data-page="project-transfer" data-theme="product" data-key="true">
-                    <div class="project-card-inner">
-                        <span class="project-index">06</span>
-                        <div class="project-info">
-                            <span class="project-company project-company--oplit" data-i18n="project.tag.oplit">Oplit</span><span class="project-key-badge" aria-label="Key project">KEY</span>
-                            <h3 class="project-name" data-i18n="case.transfer.title">Capacity Transfer Between Sectors</h3>
-                            <p class="project-type">Product Design · Strategy · Sales Enablement</p>
-                        </div>
-                        <span class="project-arrow">&rarr;</span>
-                    </div>
-                </a>
-                <a href="#project-design-system" class="project-card" data-page="project-design-system" data-theme="ds">
-                    <div class="project-card-inner">
-                        <span class="project-index">07</span>
-                        <div class="project-info">
-                            <span class="project-company project-company--prestashop" data-i18n="project.tag.prestashop">PrestaShop</span>
-                            <h3 class="project-name" data-i18n="case.ds.title">Design System</h3>
-                            <p class="project-type">Design System · Research · Product Design</p>
-                        </div>
-                        <span class="project-arrow">&rarr;</span>
-                    </div>
-                </a>
-                <a href="#project-customer-account" class="project-card" data-page="project-customer-account" data-theme="research">
-                    <div class="project-card-inner">
-                        <span class="project-index">08</span>
-                        <div class="project-info">
-                            <span class="project-company project-company--prestashop" data-i18n="project.tag.prestashop">PrestaShop</span>
-                            <h3 class="project-name" data-i18n="case.ca.title">Customer Account</h3>
-                            <p class="project-type">Product Design · Research · UI Design</p>
-                        </div>
-                        <span class="project-arrow">&rarr;</span>
-                    </div>
-                </a>
-
-                <div class="project-year-label" data-i18n="year.2024">2024</div>
-                <a href="#project-signin" class="project-card" data-page="project-signin" data-theme="research" data-key="true">
-                    <div class="project-card-inner">
-                        <span class="project-index">09</span>
-                        <div class="project-info">
-                            <span class="project-company project-company--prestashop" data-i18n="project.tag.prestashop">PrestaShop</span><span class="project-key-badge" aria-label="Key project">KEY</span>
-                            <h3 class="project-name" data-i18n="case.si.title">Sign in / Sign up Flow</h3>
-                            <p class="project-type">Product Design · Research · UI Design</p>
-                        </div>
-                        <span class="project-arrow">&rarr;</span>
-                    </div>
-                </a>
-                <a href="#project-store-association" class="project-card" data-page="project-store-association" data-theme="research">
-                    <div class="project-card-inner">
-                        <span class="project-index">10</span>
-                        <div class="project-info">
-                            <span class="project-company project-company--prestashop" data-i18n="project.tag.prestashop">PrestaShop</span>
-                            <h3 class="project-name" data-i18n="case.sa.title">Store Association Flow</h3>
-                            <p class="project-type">Product Design · Research · UI Design</p>
-                        </div>
-                        <span class="project-arrow">&rarr;</span>
-                    </div>
-                </a>
-
-                <div class="project-list-sep" aria-hidden="true"></div>
-                <p class="project-other-intro" data-i18n="projects.other.intro">Earlier projects: concept work, prototypes and student projects I still find relevant.</p>
-                <ul class="project-other-list" aria-label="Other projects">
-                    <li class="project-other-item">
-                        <span class="project-other-name">Mon Caviste</span>
-                        <span class="project-other-type">Mobile · Prototyping · Research · UI &amp; UX Design</span>
-                    </li>
-                    <li class="project-other-item">
-                        <span class="project-other-name">TAN</span>
-                        <span class="project-other-type">MaaS · Mobile · Product Design · Prototyping · UI &amp; UX Design</span>
-                    </li>
-                    <li class="project-other-item">
-                        <span class="project-other-name">Dashboard Fournitures</span>
-                        <span class="project-other-type">Design System · Product Design · SaaS · UI &amp; UX Design</span>
-                    </li>
-                    <li class="project-other-item">
-                        <span class="project-other-name">Hip Opsession</span>
-                        <span class="project-other-type">UI Design · UX Design</span>
-                    </li>
-                    <li class="project-other-item">
-                        <span class="project-other-name">UX Cards</span>
-                        <span class="project-other-type">Serious Game · UI Design</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
 
     <!-- Page: PrestaShop Design System -->
     <section class="page" id="project-design-system">
         <div class="case-study">
-            <a href="#projects" class="case-back" data-page="projects" data-i18n="case.back">← Back to projects</a>
+            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -665,7 +658,7 @@
     <!-- Page: PrestaShop Customer Account -->
     <section class="page" id="project-customer-account">
         <div class="case-study">
-            <a href="#projects" class="case-back" data-page="projects" data-i18n="case.back">← Back to projects</a>
+            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -760,7 +753,7 @@
     <!-- Page: PrestaShop Sign in/Sign up Flow -->
     <section class="page" id="project-signin">
         <div class="case-study">
-            <a href="#projects" class="case-back" data-page="projects" data-i18n="case.back">← Back to projects</a>
+            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -853,7 +846,7 @@
     <!-- Page: PrestaShop Store Association Flow -->
     <section class="page" id="project-store-association">
         <div class="case-study">
-            <a href="#projects" class="case-back" data-page="projects" data-i18n="case.back">← Back to projects</a>
+            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -928,7 +921,7 @@
     <!-- Page: Oplit, Opal DS · Corrective Actions -->
     <section class="page" id="project-ds-execution">
         <div class="case-study">
-            <a href="#projects" class="case-back" data-page="projects" data-i18n="case.back">← Back to projects</a>
+            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -1021,7 +1014,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
     <!-- Page: Oplit, Opal DS · AI Prototyping Skills -->
     <section class="page" id="project-ds-skills">
         <div class="case-study">
-            <a href="#projects" class="case-back" data-page="projects" data-i18n="case.back">← Back to projects</a>
+            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -1151,7 +1144,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
     <!-- Page: Figma Plugin, Local Components Collector -->
     <section class="page" id="project-figma-plugin">
         <div class="case-study">
-            <a href="#projects" class="case-back" data-page="projects" data-i18n="case.back">← Back to projects</a>
+            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -1230,7 +1223,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
     <!-- Page: Oplit, Opal DS · Audit -->
     <section class="page" id="project-ds-audit">
         <div class="case-study">
-            <a href="#projects" class="case-back" data-page="projects" data-i18n="case.back">← Back to projects</a>
+            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -1302,7 +1295,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
     <!-- Page: Oplit - Capacity Transfer Between Sectors -->
     <section class="page" id="project-transfer">
         <div class="case-study">
-            <a href="#projects" class="case-back" data-page="projects" data-i18n="case.back">← Back to projects</a>
+            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -1391,7 +1384,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
     <!-- Page: Oplit, Multi-select & Sticky Action Bar -->
     <section class="page" id="project-multiselect">
         <div class="case-study">
-            <a href="#projects" class="case-back" data-page="projects" data-i18n="case.back">← Back to projects</a>
+            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>

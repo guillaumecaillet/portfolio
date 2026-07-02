@@ -59,7 +59,7 @@
 
             // Filtering is a deliberate action: end the scroll-reveal intro and
             // show everything that's currently visible.
-            const projPage = document.getElementById('projects');
+            const projPage = document.getElementById('landing');
             if (projPage && projPage._projReveal) { projPage.removeEventListener('scroll', projPage._projReveal); projPage._projReveal = null; }
             cards.forEach(c => { if (!c.classList.contains('is-filtered-out')) c.classList.add('visible'); });
             years.forEach(y => { if (!y.classList.contains('is-filtered-out')) y.classList.add('visible'); });
@@ -230,9 +230,9 @@
         if (hash && document.getElementById(hash)) {
             navigateTo(hash);
         } else if (hash) {
-            // Unknown hash - fall back to projects with a one-time toast.
+            // Unknown hash - fall back to the landing with a one-time toast.
             showFallbackToast(hash);
-            location.hash = 'projects';
+            location.hash = 'landing';
         }
     });
 
@@ -240,8 +240,8 @@
     function showFallbackToast(missingHash) {
         const fr = (typeof currentLang !== 'undefined' && currentLang === 'fr');
         const msg = fr
-            ? `Cette page n'existe plus, voici la liste des projets.`
-            : `That page doesn't exist anymore, here's the project list.`;
+            ? `Cette page n'existe plus, retour à l'accueil.`
+            : `That page doesn't exist anymore, back to the home page.`;
         let toast = document.getElementById('fallback-toast');
         if (!toast) {
             toast = document.createElement('div');
@@ -269,7 +269,7 @@
         } else if (hash && hash !== 'landing') {
             // Hash present but not a real page - soft 404.
             showFallbackToast(hash);
-            location.hash = 'projects';
+            location.hash = 'landing';
         }
     }
     updatePageTitle(currentPage);
@@ -480,20 +480,19 @@
             'nav.star':     'Save',
 
             // Landing
-            'landing.line1':    'Senior Product',
-            'landing.line2':    'Designer',
-            'landing.tagline':  'I make complex, demanding products simple. Currently on <a href="#project-ds-skills" data-page="project-ds-skills" class="landing-company">Opal DS</a> at Oplit.',
+            'landing.line1':    'Senior Product Designer',
+            'landing.tagline':  'I make complex, demanding products simple. Currently at <a href="https://www.oplit.com" target="_blank" rel="noopener" class="landing-company">Oplit</a>.',
             'landing.meta.loc_k':    'Based in',
             'landing.meta.focus_k':  'Focus',
             'landing.meta.xp_k':     'Experience',
             'landing.meta.xp_v':     '7+ yrs',
             'landing.meta.status_k': 'Status',
-            'landing.meta.status_v': 'Open',
+            'landing.meta.status_v': 'Available',
             'landing.sub':      'Guillaume Caillet · Senior Product Designer · Nantes, France',
             'landing.sub_name': 'Guillaume Caillet',
             'landing.sub_role': 'Senior Product Designer',
             'landing.sub_loc':  'Nantes, France',
-            'landing.pitch':    'Over the last 7 years, I\'ve contributed to the design and improvement of B2B SaaS products, alongside teams at <strong>Oplit</strong> (industrial schedulers), <strong>PrestaShop</strong> (300k+ merchants), <strong>Airbus</strong> and <strong>SNCF</strong>. I\'ve led design systems, run audits, and shipped infrastructure that teams build on.<br><br>What I\'m looking for: high-stakes products where design co-pilots strategy.',
+            'landing.pitch':    'Over the last 7 years, I\'ve contributed to the design and improvement of B2B SaaS products, alongside teams at <strong>Oplit</strong> (industrial schedulers), <strong>PrestaShop</strong> (300k+ merchants), <strong>Airbus</strong> and <strong>SNCF</strong>. I\'ve led design systems, run audits, and shipped infrastructure that teams build on.<span class="pitch-seek"><span class="pitch-seek-k">What I\'m looking for</span>High-stakes products where design co-pilots strategy.</span>',
             'landing.discover': 'Discover my work',
             'landing.about':    'About me',
             'landing.email':    'Email me',
@@ -548,7 +547,7 @@
             'who.company.designschool': 'École de Design Nantes',
             'who.role.freelance':   'Freelancing',
 
-            'who.desc.oplit':       '<p><strong>+74% active users (430 → 747)</strong> and key features now running on customers\' production lines.</p><p>Oplit builds production planning software for industrial manufacturers in aerospace, luxury and automotive. I own design on the product: continuous discovery with customers and prospects, strategic features shipped with product and engineering, and the design system I rebuilt (44 components, structured for AI-assisted workflows) which made design execution 30 to 50% faster.</p>',
+            'who.desc.oplit':       '<p><strong>+74% active users (430 → 747)</strong> and key features now running on customers\' production lines.</p><p>Oplit builds production planning software for industrial manufacturers in aerospace, luxury and automotive. I own design on the product: continuous discovery with customers and prospects, strategic features shipped with product and engineering, and the design system I rebuilt (44 components, structured for AI-assisted workflows) which made design execution 30 to 50% faster.</p><p>Latest: two AI skills (operator + builder) that let anyone generate design-system-faithful prototypes in Figma from a plain-language brief. A PM built and presented a client prototype on his own, in one morning.</p>',
             'who.desc.prestashop':  '<p><strong>Product Designer &amp; Design System Lead (2024)</strong></p><p>Progressively structured and deployed the research system across PrestaShop. Responsible for structuring and making the tools, templates, and user data operationally available so product teams could access them quickly and efficiently. The aim: provide efficient access to user research when designing PrestaShop products for 300k+ merchants.</p><p>Also worked on structuring the Design System so teams could rely on it and extend it. Proposing areas for development, structuring the team around the project and giving visibility to the work.</p><p><strong>Design System contributor (2023)</strong></p><p>Involved in structuring and implementing the PrestaShop Design System. Working on the monitoring, implementation, and use of components and design tokens by everyone who uses the design system, as well as the components designed by the Product Designers.</p><p><strong>Product Designer (2022)</strong></p><p>Within the Customer Platform team, working on the design and improvement of the user experience through the user account and, more generally, the login experience.</p>',
             'who.desc.beapp':       '<p>In charge of UX at Beapp, working mainly with the UI designer and in contact with all the people involved in the various customer projects (PO, Business, Tech).</p><p>Designing experiences for different types of clients in the healthcare, automotive, food, institutional, and other sectors. Running creativity, immersion, and co-creation workshops. In charge of user research and testing.</p>',
             'who.desc.lacapsule':   '<p>Work as a UX consultant for companies looking to improve their user experience.</p>',
@@ -811,20 +810,19 @@
             'nav.star':     'Sauvegarder',
 
             // Landing
-            'landing.line1':    'Senior Product',
-            'landing.line2':    'Designer',
-            'landing.tagline':  'Je rends simples des produits complexes et exigeants. En ce moment sur <a href="#project-ds-skills" data-page="project-ds-skills" class="landing-company">Opal DS</a> chez Oplit.',
+            'landing.line1':    'Senior Product Designer',
+            'landing.tagline':  'Je rends simples des produits complexes et exigeants. Actuellement chez <a href="https://www.oplit.com" target="_blank" rel="noopener" class="landing-company">Oplit</a>.',
             'landing.meta.loc_k':    'Basé à',
             'landing.meta.focus_k':  'Focus',
             'landing.meta.xp_k':     'Expérience',
             'landing.meta.xp_v':     '7+ ans',
             'landing.meta.status_k': 'Statut',
-            'landing.meta.status_v': 'Ouvert',
+            'landing.meta.status_v': 'Disponible',
             'landing.sub':      'Guillaume Caillet · Senior Product Designer · Nantes, France',
             'landing.sub_name': 'Guillaume Caillet',
             'landing.sub_role': 'Senior Product Designer',
             'landing.sub_loc':  'Nantes, France',
-            'landing.pitch':    'Sur les 7 dernières années, j\'ai participé à la conception et à l\'amélioration de produits SaaS B2B, aux côtés des équipes de <strong>Oplit</strong> (planification industrielle), <strong>PrestaShop</strong> (300k+ marchands), <strong>Airbus</strong> et <strong>SNCF</strong>. J\'ai piloté des design systems, mené des audits, et livré des chantiers d\'infrastructure sur lesquels les équipes s\'appuient.<br><br>Ce que je cherche : des produits exigeants où le design co-pilote la stratégie.',
+            'landing.pitch':    'Sur les 7 dernières années, j\'ai participé à la conception et à l\'amélioration de produits SaaS B2B, aux côtés des équipes de <strong>Oplit</strong> (planification industrielle), <strong>PrestaShop</strong> (300k+ marchands), <strong>Airbus</strong> et <strong>SNCF</strong>. J\'ai piloté des design systems, mené des audits, et livré des chantiers d\'infrastructure sur lesquels les équipes s\'appuient.<span class="pitch-seek"><span class="pitch-seek-k">Ce que je cherche</span>Des produits exigeants où le design co-pilote la stratégie.</span>',
             'landing.discover': 'Découvrir mon travail',
             'landing.about':    'À propos de moi',
             'landing.email':    'M\'écrire',
@@ -879,7 +877,7 @@
             'who.company.designschool': 'École de Design Nantes',
             'who.role.freelance':   'Freelance',
 
-            'who.desc.oplit':       '<p><strong>+74% d\'utilisateurs actifs (430 → 747)</strong> et des features clés déployées sur les lignes de production des clients.</p><p>Oplit conçoit un logiciel de planification industrielle pour l\'aéronautique, le luxe et l\'automobile. Je porte le design produit : discovery continue avec clients et prospects, features stratégiques livrées avec le produit et l\'engineering, et le design system que j\'ai reconstruit (44 composants, structuré pour des workflows assistés par IA) qui a accéléré l\'exécution design de 30 à 50%.</p>',
+            'who.desc.oplit':       '<p><strong>+74% d\'utilisateurs actifs (430 → 747)</strong> et des features clés déployées sur les lignes de production des clients.</p><p>Oplit conçoit un logiciel de planification industrielle pour l\'aéronautique, le luxe et l\'automobile. Je porte le design produit : discovery continue avec clients et prospects, features stratégiques livrées avec le produit et l\'engineering, et le design system que j\'ai reconstruit (44 composants, structuré pour des workflows assistés par IA) qui a accéléré l\'exécution design de 30 à 50%.</p><p>Dernièrement : deux skills IA (operator + builder) qui permettent de générer dans Figma des prototypes fidèles au design system, depuis un brief en langage naturel. Un PM a construit et présenté un prototype client seul, en une matinée.</p>',
             'who.desc.prestashop':  '<p><strong>Product Designer &amp; Design System Lead (2024)</strong></p><p>Déploiement progressif du système de recherche chez PrestaShop. Structuration et mise à disposition opérationnelle des outils, templates et données utilisateurs pour que les équipes produit y accèdent rapidement et efficacement. L\'objectif : offrir un accès efficace à la recherche utilisateur lors de la conception des produits PrestaShop pour 300k+ marchands.</p><p>Structuration du Design System pour que les équipes puissent s\'appuyer dessus et l\'étendre. Proposition d\'axes de développement, structuration de l\'équipe autour du projet et mise en visibilité des travaux.</p><p><strong>Contributeur Design System (2023)</strong></p><p>Implication dans la structuration et l\'implémentation du Design System PrestaShop. Suivi, implémentation et usage des composants et design tokens par l\'ensemble des utilisateurs du système, ainsi que les composants conçus par les Product Designers.</p><p><strong>Product Designer (2022)</strong></p><p>Au sein de l\'équipe Customer Platform, conception et amélioration de l\'expérience utilisateur au travers du compte utilisateur et de l\'expérience de connexion.</p>',
             'who.desc.beapp':       '<p>En charge de l\'UX chez Beapp, travaillant principalement avec le designer UI et en contact avec toutes les personnes impliquées dans les différents projets clients (PO, Business, Tech).</p><p>Conception d\'expériences pour différents types de clients dans les secteurs santé, automobile, alimentaire, institutionnel, etc. Animation d\'ateliers de créativité, d\'immersion et de co-création. En charge de la recherche utilisateur et des tests.</p>',
             'who.desc.lacapsule':   '<p>Travail en tant que consultant UX pour des entreprises souhaitant améliorer leur expérience utilisateur.</p>',
@@ -1381,7 +1379,7 @@
             requestAnimationFrame(animPreview);
         })();
 
-        document.querySelectorAll('#projects .project-card').forEach(card => {
+        document.querySelectorAll('#landing .project-card').forEach(card => {
             const slug = card.dataset.page;
             const data = COVER_DATA[slug];
             if (!data) return;
