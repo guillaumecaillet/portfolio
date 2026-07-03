@@ -3298,7 +3298,7 @@ body::after {
     font-size: 1.05rem;
     line-height: 1.6;
     color: var(--text-muted);
-    max-width: 44ch;
+    max-width: 84ch;
     margin-top: 24px;
 }
 
