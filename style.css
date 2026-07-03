@@ -249,23 +249,31 @@ body.loading .nav {
     overflow-x: hidden;
 }
 
-/* Pixel skyline — pinned to the viewport bottom, behind the landing content.
-   Opacity is driven by JS on scroll (dissolve down to 0.15). */
+/* Pixel skyline — generative PS2-style mass (same look as the project-card
+   hover cover), pinned to the viewport bottom, behind the landing content.
+   Grid cells are generated + coloured in main.js. Opacity is driven by JS on
+   scroll (dissolve down to 0.15 so it never fights the text). */
 .pixel-skyline {
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
-    height: 150px;
+    height: 144px;
     z-index: 0;
     pointer-events: none;
-    color: var(--accent);
+    display: grid;
+    align-content: end;
+    overflow: hidden;
     opacity: 0.5;
     will-change: opacity;
     transition: opacity 0.12s linear;
 }
 
-.pixel-skyline svg { display: block; }
+.pixel-skyline i {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
 
 @media (prefers-reduced-motion: reduce) {
     .pixel-skyline { transition: none; }

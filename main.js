@@ -1412,22 +1412,93 @@
         }, true);
     }
 
-    // --- Pixel skyline: dissolve on scroll (opacity 0.5 -> 0.15) ---
+    // --- Pixel skyline: generative PS2-style mass, dissolves on scroll ---
     (() => {
         const landing = document.getElementById('landing');
         const sky = document.querySelector('.pixel-skyline');
         if (!landing || !sky) return;
+
+        // Same desaturated slate/paper palette as the project-card hover cover.
+        const SKY_PALETTES = {
+            dark:  ['#3c434e', '#57626f', '#7b8b9e', '#a7b3c0', '#cfd0c8'],
+            light: ['#525c69', '#75839a', '#a2adbc', '#c6cbc9', '#e0ddd2']
+        };
+        const CELL = 16, ROWS = 9;
+
+        // Deterministic RNG (FNV-1a seed + mulberry32) so the shape is stable
+        // across theme toggles and only extends on resize.
+        function seeded(str) {
+            let h = 2166136261;
+            for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+            return function () {
+                h += 0x6D2B79F5;
+                let t = Math.imul(h ^ (h >>> 15), 1 | h);
+                t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
+                return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+            };
+        }
+
+        function buildSkyline() {
+            const cols = Math.ceil(window.innerWidth / CELL) + 1;
+            const theme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+            const pal = SKY_PALETTES[theme];
+            const rnd = seeded('gc-skyline-2026');
+
+            // Column heights: a bounded random walk across the full width.
+            let h = 3 + Math.floor(rnd() * 3);
+            const heights = [];
+            for (let c = 0; c < cols; c++) {
+                h += Math.floor(rnd() * 3) - 1;
+                h = Math.max(2, Math.min(ROWS, h));
+                heights.push(h);
+            }
+
+            sky.style.gridTemplateColumns = `repeat(${cols}, ${CELL}px)`;
+            sky.style.gridAutoRows = CELL + 'px';
+            const frag = document.createDocumentFragment();
+            for (let y = 0; y < ROWS; y++) {
+                for (let x = 0; x < cols; x++) {
+                    const cell = document.createElement('i');
+                    if (heights[x] >= (ROWS - y)) {
+                        const t = rnd();
+                        const idx = t < 0.16 ? 4 : t < 0.34 ? 3 : t < 0.58 ? 2 : (y > ROWS - 4 ? 0 : 1);
+                        cell.style.background = pal[idx];
+                    }
+                    frag.appendChild(cell);
+                }
+            }
+            sky.textContent = '';
+            sky.appendChild(frag);
+        }
+
+        // Dissolve: opacity 0.5 -> 0.15 over the first stretch of scroll.
         const START = 0.5, END = 0.15, DIST = 460;
         let ticking = false;
-        const apply = () => {
+        const applyOpacity = () => {
             const t = Math.min(landing.scrollTop / DIST, 1);
             sky.style.opacity = (START + (END - START) * t).toFixed(3);
             ticking = false;
         };
         landing.addEventListener('scroll', () => {
-            if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+            if (!ticking) { ticking = true; requestAnimationFrame(applyOpacity); }
         }, { passive: true });
-        apply();
+
+        buildSkyline();
+        applyOpacity();
+
+        // Rebuild on width change (debounced) and on theme toggle.
+        let rz;
+        let lastCols = Math.ceil(window.innerWidth / CELL) + 1;
+        window.addEventListener('resize', () => {
+            clearTimeout(rz);
+            rz = setTimeout(() => {
+                const cols = Math.ceil(window.innerWidth / CELL) + 1;
+                if (cols !== lastCols) { lastCols = cols; buildSkyline(); }
+            }, 150);
+        });
+        new MutationObserver(buildSkyline).observe(document.documentElement, {
+            attributes: true, attributeFilter: ['data-theme']
+        });
     })();
 
 })();
