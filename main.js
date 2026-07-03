@@ -1423,10 +1423,40 @@
             dark:  ['#3c434e', '#57626f', '#7b8b9e', '#a7b3c0', '#cfd0c8'],
             light: ['#525c69', '#75839a', '#a2adbc', '#c6cbc9', '#e0ddd2']
         };
-        const CELL = 16, ROWS = 9;
+        const CELL = 16, ROWS = 11;
 
-        // Deterministic RNG (FNV-1a seed + mulberry32) so the shape is stable
-        // across theme toggles and only extends on resize.
+        // Nantes landmarks as pixel sprites. Chars map to palette indices
+        // (0 = darkest .. 4 = lightest), '.' = empty. Rows top -> bottom,
+        // bottom-aligned to the ground when stamped.
+        const SPR = { '%': 0, '#': 1, '+': 2, ':': 3, '*': 4 };
+        const sprite = (rows) => ({ w: rows[0].length, h: rows.length, rows });
+
+        const CATHEDRALE = sprite([          // twin Gothic spires
+            '..*...*..', '..#...#..', '..#...#..', '.###.###.', '.###.###.',
+            '#########', '#########', '####*####', '#########', '##*###*##'
+        ]);
+        const ELEPHANT = sprite([            // Les Machines de l'île
+            '.....#####...', '...########..', '..##########.', '.###########.',
+            '.############', '%############', '%#.##.##.##..', '.#.##.##.##..',
+            '...#..#..#...'
+        ]);
+        const TOUR_LU = sprite([             // Tour LU + cupola/finial
+            '..*..', '..#..', '.:::.', ':::::', '.###.',
+            '.###.', '.###.', '.###.', '.###.', '#####'
+        ]);
+        const TOUR_BRETAGNE = sprite([       // tallest modern tower + antenna
+            '.*..', '####', '#*##', '####', '##*#', '####',
+            '#*##', '####', '##*#', '####', '####'
+        ]);
+        const GRUE_TITAN = sprite([          // Titan portal crane
+            '.#########.', '.#...#.....', '.....#.....', '....###....', '.....#.....',
+            '....#.#....', '...#...#...', '...#...#...', '..#.....#..', '..#.....#..', '.#.......#.'
+        ]);
+        const SCENE = [CATHEDRALE, ELEPHANT, TOUR_LU, TOUR_BRETAGNE, GRUE_TITAN];
+        const SCENE_GAP = 3;
+
+        // Deterministic RNG (FNV-1a seed + mulberry32) so the base city is
+        // stable across theme toggles and only extends on resize.
         function seeded(str) {
             let h = 2166136261;
             for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
@@ -1442,16 +1472,39 @@
             const cols = Math.ceil(window.innerWidth / CELL) + 1;
             const theme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
             const pal = SKY_PALETTES[theme];
-            const rnd = seeded('gc-skyline-2026');
+            const rnd = seeded('gc-nantes-2026');
 
-            // Column heights: a bounded random walk across the full width.
-            let h = 3 + Math.floor(rnd() * 3);
-            const heights = [];
-            for (let c = 0; c < cols; c++) {
-                h += Math.floor(rnd() * 3) - 1;
-                h = Math.max(2, Math.min(ROWS, h));
-                heights.push(h);
+            // grid[y][x] = palette index, -1 = empty.
+            const grid = [];
+            for (let y = 0; y < ROWS; y++) grid.push(new Array(cols).fill(-1));
+
+            // Base city: low procedural buildings across the full width.
+            let bh = 2 + Math.floor(rnd() * 3);
+            for (let x = 0; x < cols; x++) {
+                bh += Math.floor(rnd() * 3) - 1;
+                bh = Math.max(2, Math.min(5, bh));
+                for (let y = ROWS - bh; y < ROWS; y++) {
+                    const t = rnd();
+                    grid[y][x] = t < 0.18 ? 4 : t < 0.42 ? 3 : (y > ROWS - 3 ? 0 : 1);
+                }
             }
+
+            // Stamp the landmarks, centred, over a cleared patch of sky.
+            let sceneW = -SCENE_GAP;
+            SCENE.forEach(s => { sceneW += s.w + SCENE_GAP; });
+            let cx = Math.max(0, Math.floor((cols - sceneW) / 2));
+            SCENE.forEach(s => {
+                for (let x = cx; x < cx + s.w && x < cols; x++)
+                    for (let y = 0; y < ROWS; y++) grid[y][x] = -1;
+                const top = ROWS - s.h;
+                for (let r = 0; r < s.h; r++) {
+                    for (let c = 0; c < s.w; c++) {
+                        const idx = SPR[s.rows[r][c]];
+                        if (idx !== undefined && (cx + c) < cols) grid[top + r][cx + c] = idx;
+                    }
+                }
+                cx += s.w + SCENE_GAP;
+            });
 
             sky.style.gridTemplateColumns = `repeat(${cols}, ${CELL}px)`;
             sky.style.gridAutoRows = CELL + 'px';
@@ -1459,11 +1512,8 @@
             for (let y = 0; y < ROWS; y++) {
                 for (let x = 0; x < cols; x++) {
                     const cell = document.createElement('i');
-                    if (heights[x] >= (ROWS - y)) {
-                        const t = rnd();
-                        const idx = t < 0.16 ? 4 : t < 0.34 ? 3 : t < 0.58 ? 2 : (y > ROWS - 4 ? 0 : 1);
-                        cell.style.background = pal[idx];
-                    }
+                    const idx = grid[y][x];
+                    if (idx >= 0) cell.style.background = pal[idx];
                     frag.appendChild(cell);
                 }
             }
