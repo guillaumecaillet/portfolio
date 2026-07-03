@@ -1556,6 +1556,7 @@
             sky.style.gridTemplateColumns = `repeat(${cols}, ${CELL}px)`;
             sky.style.gridAutoRows = CELL + 'px';
             const frag = document.createDocumentFragment();
+            const cells = [];
             for (let y = 0; y < ROWS; y++) {
                 for (let x = 0; x < cols; x++) {
                     const cell = document.createElement('i');
@@ -1570,40 +1571,66 @@
                     } else if (y >= hazeTop[x]) {
                         col = hazeTone[x];
                     }
-                    if (col) cell.style.background = col;
+                    if (col) {
+                        cell.style.background = col;
+                        // per-pixel evaporation seeds: r1 = start delay, r2 = drift, row = height (top evaporates first)
+                        cells.push({ el: cell, row: y, r1: h2(x * 2 + 7, y * 3 + 1), r2: h2(x * 5 + 2, y * 7 + 4) });
+                    }
                     frag.appendChild(cell);
                 }
             }
             sky.textContent = '';
             sky.appendChild(frag);
+            skyCells = cells;
         }
 
-        // Dissolve: opacity 0.5 -> 0.15 over the first stretch of scroll.
-        const START = 0.5, END = 0.15, DIST = 460;
-        let ticking = false;
-        const applyOpacity = () => {
-            const t = Math.min(landing.scrollTop / DIST, 1);
-            sky.style.opacity = (START + (END - START) * t).toFixed(3);
+        // Scroll-driven evaporation: pixels rise, shrink and fade as you
+        // scroll into the page — top rows first, like vapour lifting off
+        // (reversible on the way back up). Falls back to a plain opacity fade
+        // under prefers-reduced-motion.
+        let skyCells = [];
+        const DIST = 520;
+        const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let ticking = false, evaporating = false;
+        const apply = () => {
             ticking = false;
+            const p = Math.min(landing.scrollTop / DIST, 1);
+            if (reduce) { sky.style.opacity = (0.5 - 0.35 * p).toFixed(3); return; }
+            if (p > 0 && !evaporating) { sky.classList.add('scattering'); evaporating = true; }
+            else if (p === 0 && evaporating) { sky.classList.remove('scattering'); evaporating = false; }
+            for (let i = 0; i < skyCells.length; i++) {
+                const c = skyCells[i];
+                // higher rows (small row index) start lifting earlier
+                const start = c.r1 * 0.45 + (1 - c.row / ROWS) * 0.28;
+                const l = Math.max(0, Math.min((p - start) / 0.42, 1));
+                if (l === c._l) continue;
+                c._l = l;
+                if (l === 0) { c.el.style.transform = ''; c.el.style.opacity = ''; continue; }
+                const ty = -l * (26 + c.r2 * 48);                 // drift upward
+                const tx = (c.r2 - 0.5) * 12 * l;                 // slight sideways wobble
+                const sc = 1 - 0.45 * l;                          // shrink as it rises
+                c.el.style.opacity = (1 - l).toFixed(3);
+                c.el.style.transform = 'translate3d(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px,0) scale(' + sc.toFixed(3) + ')';
+            }
         };
         landing.addEventListener('scroll', () => {
-            if (!ticking) { ticking = true; requestAnimationFrame(applyOpacity); }
+            if (!ticking) { ticking = true; requestAnimationFrame(apply); }
         }, { passive: true });
 
-        buildSkyline();
-        applyOpacity();
+        const rebuild = () => { buildSkyline(); apply(); };
+        rebuild();
 
         // Rebuild on width change (debounced) and on theme toggle.
         let rz;
-        let lastCols = Math.ceil(window.innerWidth / CELL) + 1;
+        let lastCols = Math.ceil(window.innerWidth / CELL) + 2;
         window.addEventListener('resize', () => {
             clearTimeout(rz);
             rz = setTimeout(() => {
-                const cols = Math.ceil(window.innerWidth / CELL) + 1;
-                if (cols !== lastCols) { lastCols = cols; buildSkyline(); }
+                const cols = Math.ceil(window.innerWidth / CELL) + 2;
+                if (cols !== lastCols) { lastCols = cols; rebuild(); }
             }, 150);
         });
-        new MutationObserver(buildSkyline).observe(document.documentElement, {
+        new MutationObserver(rebuild).observe(document.documentElement, {
             attributes: true, attributeFilter: ['data-theme']
         });
     })();

@@ -275,6 +275,11 @@ body.loading .nav {
     height: 100%;
 }
 
+/* Only promote pixels to their own layers while they're actively scattering. */
+.pixel-skyline.scattering i {
+    will-change: transform, opacity;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .pixel-skyline { transition: none; }
 }
