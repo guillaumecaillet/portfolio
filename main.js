@@ -1418,12 +1418,46 @@
         const sky = document.querySelector('.pixel-skyline');
         if (!landing || !sky) return;
 
-        // Same desaturated slate/paper palette as the project-card hover cover.
-        const SKY_PALETTES = {
-            dark:  ['#3c434e', '#57626f', '#7b8b9e', '#a7b3c0', '#cfd0c8'],
-            light: ['#525c69', '#75839a', '#a2adbc', '#c6cbc9', '#e0ddd2']
+        // 32-bit palettes: a shaded body ramp (dark base -> light top), a
+        // highlight, warm/glass windows, and low-contrast haze for the
+        // distant back layer. Slate/paper family, theme-aware.
+        const PAL = {
+            dark: {
+                body: ['#2f3640', '#3c4551', '#4e5a68', '#67788b', '#8ba0b6'],
+                hi:   '#c2cfdd',
+                win:  '#e7b968',
+                haze: ['#262c35', '#2d343e', '#353d48']
+            },
+            light: {
+                body: ['#59636f', '#6f7d8d', '#8d9bac', '#aab4bf', '#cdd0c9'],
+                hi:   '#e2e2d9',
+                win:  '#47566a',
+                haze: ['#e7e5db', '#dedcd1', '#d4d3c8']
+            }
         };
-        const CELL = 16, ROWS = 11;
+
+        const CELL = 11, ROWS = 16;
+
+        // Stable per-cell hash noise (independent of draw order).
+        function h2(x, y) {
+            let n = (x * 374761393 + y * 668265263) | 0;
+            n = Math.imul(n ^ (n >>> 13), 1274126177);
+            return ((n ^ (n >>> 16)) >>> 0) / 4294967296;
+        }
+        // Vertical shade with a touch of dither: top of a column is lightest,
+        // base darkest; a few cells step a facet lighter/darker for texture.
+        function shadeColor(P, x, y, top) {
+            const span = Math.max(1, (ROWS - 1) - top);
+            const f = (y - top) / span;
+            let i = Math.round((1 - f) * (P.body.length - 1));
+            const r = h2(x * 3 + 1, y * 5 + 2);
+            if (r < 0.10) i += 1; else if (r > 0.92) i -= 1;
+            return P.body[Math.max(0, Math.min(P.body.length - 1, i))];
+        }
+        // Lit window on the front base city (skip roof row + far edges).
+        function isWindow(x, y, top) {
+            return y > top && (x % 2 === 0) && (((ROWS - 1 - y) % 2) === 1) && h2(x, y) > 0.52;
+        }
 
         // Nantes landmarks as pixel sprites. Chars map to palette indices
         // (0 = darkest .. 4 = lightest), '.' = empty. Rows top -> bottom,
@@ -1469,51 +1503,74 @@
         }
 
         function buildSkyline() {
-            const cols = Math.ceil(window.innerWidth / CELL) + 1;
+            const cols = Math.ceil(window.innerWidth / CELL) + 2;
             const theme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
-            const pal = SKY_PALETTES[theme];
-            const rnd = seeded('gc-nantes-2026');
+            const P = PAL[theme];
+            const rnd = seeded('gc-nantes-32');
 
-            // grid[y][x] = palette index, -1 = empty.
-            const grid = [];
-            for (let y = 0; y < ROWS; y++) grid.push(new Array(cols).fill(-1));
-
-            // Base city: low procedural buildings across the full width.
-            let bh = 2 + Math.floor(rnd() * 3);
+            // Layer 1 — distant haze (low contrast, sits furthest back).
+            const hazeTop = new Array(cols), hazeTone = new Array(cols);
+            let bt = 5 + Math.floor(rnd() * 3);
             for (let x = 0; x < cols; x++) {
-                bh += Math.floor(rnd() * 3) - 1;
-                bh = Math.max(2, Math.min(5, bh));
-                for (let y = ROWS - bh; y < ROWS; y++) {
-                    const t = rnd();
-                    grid[y][x] = t < 0.18 ? 4 : t < 0.42 ? 3 : (y > ROWS - 3 ? 0 : 1);
-                }
+                bt += Math.floor(rnd() * 3) - 1;
+                bt = Math.max(4, Math.min(9, bt));
+                hazeTop[x] = ROWS - bt;
+                hazeTone[x] = P.haze[Math.floor(rnd() * P.haze.length)];
             }
 
-            // Stamp the landmarks, centred, over a cleared patch of sky.
+            // Layer 3 — landmarks, centred. Mark their columns so the front
+            // city doesn't grow through them; keep the haze visible behind.
+            const isLm = new Array(cols).fill(false);
+            const lmTop = new Array(cols).fill(ROWS);
+            const lmCell = [];
+            for (let y = 0; y < ROWS; y++) lmCell.push(new Int8Array(cols)); // 0 none, 2 body, 3 highlight
             let sceneW = -SCENE_GAP;
             SCENE.forEach(s => { sceneW += s.w + SCENE_GAP; });
             let cx = Math.max(0, Math.floor((cols - sceneW) / 2));
             SCENE.forEach(s => {
-                for (let x = cx; x < cx + s.w && x < cols; x++)
-                    for (let y = 0; y < ROWS; y++) grid[y][x] = -1;
+                for (let c = 0; c < s.w; c++) { const x = cx + c; if (x < cols) isLm[x] = true; }
                 const top = ROWS - s.h;
                 for (let r = 0; r < s.h; r++) {
                     for (let c = 0; c < s.w; c++) {
-                        const idx = SPR[s.rows[r][c]];
-                        if (idx !== undefined && (cx + c) < cols) grid[top + r][cx + c] = idx;
+                        const ch = s.rows[r][c];
+                        if (ch === '.') continue;
+                        const x = cx + c, y = top + r;
+                        if (x >= cols) continue;
+                        lmCell[y][x] = (ch === '*' || ch === ':') ? 3 : 2;
+                        if (y < lmTop[x]) lmTop[x] = y;
                     }
                 }
                 cx += s.w + SCENE_GAP;
             });
 
+            // Layer 2 — front base city (skips landmark columns).
+            const frontTop = new Array(cols).fill(ROWS);
+            let ft = 2 + Math.floor(rnd() * 2);
+            for (let x = 0; x < cols; x++) {
+                ft += Math.floor(rnd() * 3) - 1;
+                ft = Math.max(2, Math.min(6, ft));
+                if (!isLm[x]) frontTop[x] = ROWS - ft;
+            }
+
+            // Render, back-to-front, one cell at a time.
             sky.style.gridTemplateColumns = `repeat(${cols}, ${CELL}px)`;
             sky.style.gridAutoRows = CELL + 'px';
             const frag = document.createDocumentFragment();
             for (let y = 0; y < ROWS; y++) {
                 for (let x = 0; x < cols; x++) {
                     const cell = document.createElement('i');
-                    const idx = grid[y][x];
-                    if (idx >= 0) cell.style.background = pal[idx];
+                    let col = null;
+                    const lm = lmCell[y][x];
+                    if (lm === 3) {
+                        col = P.hi;
+                    } else if (lm === 2) {
+                        col = shadeColor(P, x, y, lmTop[x]);
+                    } else if (y >= frontTop[x]) {
+                        col = isWindow(x, y, frontTop[x]) ? P.win : shadeColor(P, x, y, frontTop[x]);
+                    } else if (y >= hazeTop[x]) {
+                        col = hazeTone[x];
+                    }
+                    if (col) cell.style.background = col;
                     frag.appendChild(cell);
                 }
             }
