@@ -36,7 +36,7 @@
 }
 
 html[data-theme="light"] {
-    --bg: #efece3;
+    --bg: #FEFEFB;
     --bg-elevated: #e8e4d9;
     --bg-card: #eae6dc;
     --text: #2b2c2b;
