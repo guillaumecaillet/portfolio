@@ -1412,4 +1412,22 @@
         }, true);
     }
 
+    // --- Pixel skyline: dissolve on scroll (opacity 0.5 -> 0.15) ---
+    (() => {
+        const landing = document.getElementById('landing');
+        const sky = document.querySelector('.pixel-skyline');
+        if (!landing || !sky) return;
+        const START = 0.5, END = 0.15, DIST = 460;
+        let ticking = false;
+        const apply = () => {
+            const t = Math.min(landing.scrollTop / DIST, 1);
+            sky.style.opacity = (START + (END - START) * t).toFixed(3);
+            ticking = false;
+        };
+        landing.addEventListener('scroll', () => {
+            if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+        }, { passive: true });
+        apply();
+    })();
+
 })();

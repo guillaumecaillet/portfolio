@@ -37,8 +37,8 @@
 
 html[data-theme="light"] {
     --bg: #FEFEFB;
-    --bg-elevated: #e8e4d9;
-    --bg-card: #eae6dc;
+    --bg-elevated: #f4f3ee;
+    --bg-card: #efeee9;
     --text: #2b2c2b;
     --text-muted: rgba(43, 44, 43, 0.55);
     --text-dim: rgba(43, 44, 43, 0.3);
@@ -48,8 +48,8 @@ html[data-theme="light"] {
     --accent: #3e5c7e;
     --accent-strong: #2f4a68;
     --accent-soft: rgba(62, 92, 126, 0.1);
-    --surface: rgba(239, 236, 227, 0.82);
-    --surface-light: rgba(239, 236, 227, 0.68);
+    --surface: rgba(254, 254, 251, 0.85);
+    --surface-light: rgba(254, 254, 251, 0.7);
     --surface-border: rgba(43, 44, 43, 0.1);
     --ink: rgba(43, 44, 43, 0.12);
     --ink-strong: rgba(43, 44, 43, 0.34);
@@ -247,6 +247,28 @@ body.loading .nav {
     color: var(--text);
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+/* Pixel skyline — pinned to the viewport bottom, behind the landing content.
+   Opacity is driven by JS on scroll (dissolve down to 0.15). */
+.pixel-skyline {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 150px;
+    z-index: 0;
+    pointer-events: none;
+    color: var(--accent);
+    opacity: 0.5;
+    will-change: opacity;
+    transition: opacity 0.12s linear;
+}
+
+.pixel-skyline svg { display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+    .pixel-skyline { transition: none; }
 }
 
 body.landing-active .cursor-trail span {
