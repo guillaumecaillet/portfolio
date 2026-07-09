@@ -1,0 +1,50 @@
+<svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Mono', ui-monospace, monospace">
+  <rect width="1120" height="520" fill="#0B0B0C"/>
+  <text x="60" y="80" fill="#8A8A92" font-size="14" letter-spacing="3">CADRAGE PRODUIT</text>
+  <text x="60" y="120" fill="#ECECEE" font-size="30" font-weight="600">Cinq points de contact prioritaires</text>
+  <text x="60" y="152" fill="#8A8A92" font-size="15">La colonne vertébrale du parcours, de la découverte au renouvellement.</text>
+
+  <g>
+    <rect x="60" y="210" width="180" height="150" rx="10" fill="#141417" stroke="#2A2A30"/>
+    <text x="80" y="248" fill="#2937FF" font-size="22" font-weight="700">01</text>
+    <text x="80" y="288" fill="#ECECEE" font-size="15">Découverte</text>
+    <text x="80" y="310" fill="#ECECEE" font-size="15">du programme</text>
+    <text x="80" y="342" fill="#6A6A72" font-size="12">free / premium</text>
+  </g>
+  <g>
+    <rect x="270" y="210" width="180" height="150" rx="10" fill="#141417" stroke="#2A2A30"/>
+    <text x="290" y="248" fill="#2937FF" font-size="22" font-weight="700">02</text>
+    <text x="290" y="288" fill="#ECECEE" font-size="15">Assignation</text>
+    <text x="290" y="310" fill="#ECECEE" font-size="15">&amp; invitation</text>
+    <text x="290" y="342" fill="#6A6A72" font-size="12">du développeur</text>
+  </g>
+  <g>
+    <rect x="480" y="210" width="180" height="150" rx="10" fill="#141417" stroke="#2A2A30"/>
+    <text x="500" y="248" fill="#2937FF" font-size="22" font-weight="700">03</text>
+    <text x="500" y="288" fill="#ECECEE" font-size="15">Évaluation</text>
+    <text x="500" y="342" fill="#6A6A72" font-size="12">examen surveillé</text>
+  </g>
+  <g>
+    <rect x="690" y="210" width="180" height="150" rx="10" fill="#141417" stroke="#2A2A30"/>
+    <text x="710" y="248" fill="#2937FF" font-size="22" font-weight="700">04</text>
+    <text x="710" y="288" fill="#ECECEE" font-size="15">Suivi</text>
+    <text x="710" y="342" fill="#6A6A72" font-size="12">dashboard</text>
+  </g>
+  <g>
+    <rect x="900" y="210" width="160" height="150" rx="10" fill="#141417" stroke="#2A2A30"/>
+    <text x="920" y="248" fill="#2937FF" font-size="22" font-weight="700">05</text>
+    <text x="920" y="288" fill="#ECECEE" font-size="15">Renouvel-</text>
+    <text x="920" y="310" fill="#ECECEE" font-size="15">lement</text>
+  </g>
+
+  <!-- connectors -->
+  <g stroke="#2A2A30" stroke-width="1.5">
+    <line x1="240" y1="285" x2="270" y2="285"/>
+    <line x1="450" y1="285" x2="480" y2="285"/>
+    <line x1="660" y1="285" x2="690" y2="285"/>
+    <line x1="870" y1="285" x2="900" y2="285"/>
+  </g>
+
+  <rect x="60" y="410" width="1000" height="70" rx="10" fill="#0E1330" stroke="#2937FF" stroke-width="1.5"/>
+  <text x="88" y="452" fill="#B9C0FF" font-size="15">Insight directeur : l'expérience du Channel Manager (interne) conditionne celle de l'Expert (externe).</text>
+</svg>

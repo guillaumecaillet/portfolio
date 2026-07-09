@@ -1862,6 +1862,41 @@ body.landing-active .cursor-trail span {
 }
 
 /* ===================================
+   Case diagrams — themed inline SVG
+   Blueprint-style diagrams whose colours follow the folio tokens
+   (light/dark) via .dg-* classes instead of hardcoded hex.
+   =================================== */
+.case-diagram {
+    margin: 28px 0;
+}
+.case-diagram svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--border);
+    background: var(--bg);
+}
+.case-diagram figcaption {
+    margin-top: 10px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.02em;
+}
+/* fills */
+.case-diagram .dg-bg { fill: var(--bg); }
+.case-diagram .dg-panel { fill: var(--bg-elevated); stroke: var(--border); }
+.case-diagram .dg-panel-accent { fill: var(--accent-soft); stroke: var(--accent); }
+.case-diagram .dg-text { fill: var(--text); }
+.case-diagram .dg-muted { fill: var(--text-muted); }
+.case-diagram .dg-accent { fill: var(--accent); }
+.case-diagram .dg-accent-text { fill: var(--accent-strong); }
+/* strokes */
+.case-diagram .dg-line { stroke: var(--border); }
+.case-diagram .dg-accent-line { stroke: var(--accent); }
+.case-diagram .dg-ring { stroke: var(--bg); }
+
+/* ===================================
    Other projects — simple list (non-clickable)
    =================================== */
 .project-other-list {

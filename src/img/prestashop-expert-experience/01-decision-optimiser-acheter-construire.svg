@@ -1,0 +1,38 @@
+<svg viewBox="0 0 1120 620" xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Mono', ui-monospace, monospace">
+  <rect width="1120" height="620" fill="#0B0B0C"/>
+  <text x="60" y="80" fill="#8A8A92" font-size="14" letter-spacing="3">LA DÉCISION STRATÉGIQUE</text>
+  <text x="60" y="120" fill="#ECECEE" font-size="30" font-weight="600">Optimiser · Acheter · Construire</text>
+  <text x="60" y="152" fill="#8A8A92" font-size="15">Le design a servi de boussole pour trancher, brique par brique.</text>
+
+  <!-- Option 1 -->
+  <rect x="60" y="200" width="320" height="200" rx="10" fill="#141417" stroke="#2A2A30"/>
+  <text x="88" y="248" fill="#8A8A92" font-size="13" letter-spacing="2">OPTION 01</text>
+  <text x="88" y="284" fill="#ECECEE" font-size="24" font-weight="600">Optimiser</text>
+  <text x="88" y="320" fill="#8A8A92" font-size="14">Garder l'outil existant</text>
+  <text x="88" y="342" fill="#8A8A92" font-size="14">et l'améliorer.</text>
+  <text x="88" y="378" fill="#6A6A72" font-size="13">Écarté — dette structurelle</text>
+
+  <!-- Option 2 -->
+  <rect x="400" y="200" width="320" height="200" rx="10" fill="#141417" stroke="#2A2A30"/>
+  <text x="428" y="248" fill="#8A8A92" font-size="13" letter-spacing="2">OPTION 02</text>
+  <text x="428" y="284" fill="#ECECEE" font-size="24" font-weight="600">Acheter</text>
+  <text x="428" y="320" fill="#8A8A92" font-size="14">S'appuyer sur une</text>
+  <text x="428" y="342" fill="#8A8A92" font-size="14">solution tierce spécialisée.</text>
+  <text x="428" y="378" fill="#2937FF" font-size="13">Retenu — plateforme de certif.</text>
+
+  <!-- Option 3 highlighted -->
+  <rect x="740" y="200" width="320" height="200" rx="10" fill="#0E1330" stroke="#2937FF" stroke-width="1.5"/>
+  <text x="768" y="248" fill="#7E8Cff" font-size="13" letter-spacing="2">OPTION 03</text>
+  <text x="768" y="284" fill="#ECECEE" font-size="24" font-weight="600">Construire</text>
+  <text x="768" y="320" fill="#B9C0FF" font-size="14">Développer un produit</text>
+  <text x="768" y="342" fill="#B9C0FF" font-size="14">en interne.</text>
+  <text x="768" y="378" fill="#2937FF" font-size="13">Retenu — portail partenaires</text>
+
+  <!-- Outcome mapping -->
+  <line x1="60" y1="452" x2="1060" y2="452" stroke="#2A2A30"/>
+  <text x="60" y="500" fill="#8A8A92" font-size="14">Portail partenaires</text>
+  <text x="300" y="500" fill="#ECECEE" font-size="14">→  Construire en interne (remplace la solution tierce)</text>
+  <text x="60" y="536" fill="#8A8A92" font-size="14">Plateforme d'examen</text>
+  <text x="300" y="536" fill="#ECECEE" font-size="14">→  Acheter (prestataire : examens surveillés, vérif. d'identité)</text>
+  <text x="60" y="580" fill="#6A6A72" font-size="13">Décision de portail actée après mon départ · liberté et maîtrise de l'itération</text>
+</svg>
