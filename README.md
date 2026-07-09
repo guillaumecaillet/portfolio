@@ -2,7 +2,7 @@
 
 Personal portfolio of Guillaume Caillet, Senior Product Designer with 7+ years of experience across industrial, agency, and SaaS environments.
 
-**Live:** [guillaumecaillet.fr](https://guillaumecaillet.fr)
+**Live:** [guillaumecaillet.fr](https://www.guillaumecaillet.fr)
 
 ---
 
@@ -45,15 +45,17 @@ npx serve .
 | `#landing` | Intro, ASCII galaxy background |
 | `#who` | Bio, experience timeline, links |
 | `#projects` | Year-grouped project list with company tags |
-| `#project-ds-execution` | Opal Design System · Actions correctives — case study |
-| `#project-multiselect` | Multi-select & Sticky Action Bar — case study |
-| `#project-figma-plugin` | Plugin Figma — case study |
-| `#project-ds-audit` | Opal Design System · Audit — case study |
-| `#project-transfer` | Capacity Transfer Between Sectors — case study |
+| `#project-ds-skills` | Opal DS · AI Prototyping Skills — Oplit, case study |
+| `#project-ds-execution` | Opal DS · Corrective Actions — Oplit, case study |
+| `#project-multiselect` | Multi-select & Sticky Action Bar — Oplit, case study |
+| `#project-figma-plugin` | Figma Plugin, Local Components Collector — case study |
+| `#project-ds-audit` | Opal DS · Audit — Oplit, case study |
+| `#project-transfer` | Capacity Transfer Between Sectors — Oplit, case study |
+| `#project-expert-experience` | Expert Experience — PrestaShop, case study |
 | `#project-design-system` | PrestaShop Design System — case study |
 | `#project-customer-account` | PrestaShop Customer Account — case study |
-| `#project-signin` | Sign in / Sign up Flow — case study |
-| `#project-store-association` | Store Association Flow — case study |
+| `#project-signin` | Sign in / Sign up Flow — PrestaShop, case study |
+| `#project-store-association` | Store Association Flow — PrestaShop, case study |
 
 ## Keyboard shortcuts
 
