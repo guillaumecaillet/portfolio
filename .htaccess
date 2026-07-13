@@ -9,6 +9,12 @@ RewriteRule ^ https://www.guillaumecaillet.fr%{REQUEST_URI} [R=301,L]
 RewriteCond %{HTTP_HOST} ^www\.guillaumecaillet\.fr$ [NC]
 RewriteCond %{HTTP:X-Forwarded-Proto} =http
 RewriteRule ^ https://www.guillaumecaillet.fr%{REQUEST_URI} [R=301,L]
+
+# SPA routing: serve index.html for any path that is not a real file/directory
+# (/who/, /fr/..., /projects/<slug>/ are all rendered client-side).
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ /index.html [L]
 </IfModule>
 
 # MOD_DEFLATE COMPRESSION

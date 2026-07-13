@@ -103,6 +103,44 @@
         pages.forEach(page => page.appendChild(clone()));
     })();
 
+    // Real URL per page (History API routing). Keys are page ids, values are paths.
+    const ROUTES = {
+        'landing':                  '/',
+        'who':                      '/who/',
+        'project-ds-skills':        '/projects/opal-ds-ai-prototyping-skills/',
+        'project-ds-execution':     '/projects/opal-ds-corrective-actions/',
+        'project-multiselect':      '/projects/multiselect-sticky-action-bar/',
+        'project-figma-plugin':     '/projects/figma-plugin-local-components-collector/',
+        'project-ds-audit':         '/projects/opal-ds-audit/',
+        'project-transfer':         '/projects/capacity-transfer/',
+        'project-expert-experience':'/projects/prestashop-expert-experience/',
+        'project-design-system':    '/projects/prestashop-design-system/',
+        'project-customer-account': '/projects/prestashop-customer-account/',
+        'project-signin':           '/projects/prestashop-signin-signup/',
+        'project-store-association':'/projects/prestashop-store-association/'
+    };
+    const PATH_TO_PAGE = Object.fromEntries(Object.entries(ROUTES).map(([k, v]) => [v, k]));
+    // Pages kept out of search engines (excluded from sitemap.xml as well).
+    const NOINDEX_PAGES = new Set(['project-transfer', 'project-expert-experience']);
+    const ORIGIN = 'https://www.guillaumecaillet.fr';
+
+    function langPrefix() {
+        return document.documentElement.lang.toLowerCase().startsWith('fr') ? '/fr' : '';
+    }
+    function pathForPage(pageId) {
+        const path = ROUTES[pageId] || '/';
+        const prefixed = langPrefix() + path;
+        return prefixed === '/fr/' ? '/fr/' : prefixed;
+    }
+    function pageForPath(pathname) {
+        let p = pathname;
+        let fr = false;
+        if (p === '/fr' || p.startsWith('/fr/')) { fr = true; p = p.slice(3) || '/'; }
+        if (!p.endsWith('/')) p += '/';
+        if (p === '//') p = '/';
+        return { page: PATH_TO_PAGE[p] || null, fr };
+    }
+
     // Per-page document titles (used for browser tab + SEO).
     const PAGE_TITLES = {
         'landing':                  'Guillaume Caillet · Senior Product Designer · Nantes',
@@ -139,11 +177,48 @@
         'project-store-association':'PrestaShop Store Association, 600+ successful associations per day, -40% error-driven abandonment.'
     };
 
+    // French titles + meta descriptions, used on /fr/ URLs.
+    const PAGE_TITLES_FR = {
+        'landing':                  'Guillaume Caillet · Senior Product Designer · Nantes',
+        'who':                      'À propos, Guillaume Caillet',
+        'projects':                 'Projets, Guillaume Caillet',
+        'project-ds-skills':        'Opal DS · Skills IA de prototypage, étude de cas',
+        'project-ds-execution':     'Opal DS · Actions correctives, étude de cas',
+        'project-multiselect':      'Multi-sélection & Sticky Action Bar, étude de cas',
+        'project-figma-plugin':     'Plugin Figma, Local Components Collector, étude de cas',
+        'project-ds-audit':         'Opal DS · Audit, étude de cas',
+        'project-transfer':         'Transfert de capacité entre secteurs, étude de cas',
+        'project-expert-experience':'PrestaShop Expert Experience, étude de cas',
+        'project-design-system':    'PrestaShop Design System, étude de cas',
+        'project-customer-account': 'PrestaShop Compte client, étude de cas',
+        'project-signin':           'PrestaShop Connexion / Inscription, étude de cas',
+        'project-store-association':'PrestaShop Association de boutique, étude de cas'
+    };
+    const PAGE_META_FR = {
+        'landing':                  'Guillaume Caillet, Senior Product Designer à Nantes. 7+ ans de conception de produits SaaS B2B et de design systems pour l\'industrie 4.0.',
+        'who':                      'Guillaume Caillet, Senior Product Designer à Nantes. 7+ ans d\'expérience chez Oplit, PrestaShop, Airbus et SNCF.',
+        'projects':                 'Études de cas : design systems, SaaS B2B, ordonnancement industriel et outillage design-ops.',
+        'project-ds-skills':        'Opal DS Skills IA de prototypage : deux skills connectées au design system pour qu\'un PM construise un prototype Figma présentable en une matinée.',
+        'project-ds-execution':     'Opal DS Actions correctives : 44 composants reconstruits, 2 634 liaisons de tokens, +20-30 % de gain par cycle de feature.',
+        'project-multiselect':      'Multi-sélection + Sticky Action Bar : un pattern couplé qui permet de mettre à jour 50 ordres de fabrication en un clic.',
+        'project-figma-plugin':     'Local Components Collector, un plugin Figma qui réduit le temps d\'audit d\'un design system de plusieurs jours à quelques heures.',
+        'project-ds-audit':         'Opal DS Audit : constats notés selon Atomic Design, BEM, DTCG et WCAG, avec un plan de remédiation en 3 horizons.',
+        'project-transfer':         'Transfert de capacité entre secteurs : permettre aux planificateurs de réallouer la production entre ateliers en quelques secondes.',
+        'project-expert-experience':'PrestaShop Expert Experience : refonte d\'un portail partenaire à l\'arrêt et d\'une certification dévalorisée.',
+        'project-design-system':    'PrestaShop Design System : 100 % d\'adoption par les squads, 80 % côté tech, -50 % de temps de développement.',
+        'project-customer-account': 'PrestaShop Compte client : trois comptes unifiés en un seul, suppression des demandes de support pour les mises à jour basiques.',
+        'project-signin':           'PrestaShop Connexion / Inscription : erreurs d\'authentification divisées par deux sur tout l\'écosystème.',
+        'project-store-association':'PrestaShop Association de boutique : 600+ associations réussies par jour, -40 % d\'abandons liés aux erreurs.'
+    };
+
     function updatePageTitle(pageId) {
-        const t = PAGE_TITLES[pageId] || PAGE_TITLES.landing;
+        const fr = langPrefix() === '/fr';
+        const titles = fr ? PAGE_TITLES_FR : PAGE_TITLES;
+        const metas  = fr ? PAGE_META_FR  : PAGE_META;
+        const t = titles[pageId] || titles.landing;
         document.title = t;
         // Sync meta description + open graph
-        const desc = PAGE_META[pageId] || PAGE_META.landing;
+        const desc = metas[pageId] || metas.landing;
         const setMeta = (sel, val) => {
             const el = document.querySelector(sel);
             if (el) el.setAttribute('content', val);
@@ -153,6 +228,25 @@
         setMeta('meta[property="og:description"]', desc);
         setMeta('meta[name="twitter:title"]', t);
         setMeta('meta[name="twitter:description"]', desc);
+
+        // Canonical + og:url follow the current URL (language-specific).
+        const url = ORIGIN + pathForPage(pageId);
+        const canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) canonical.setAttribute('href', url);
+        setMeta('meta[property="og:url"]', url);
+
+        // Sensitive case studies stay out of search engines.
+        let robots = document.querySelector('meta[name="robots"]');
+        if (NOINDEX_PAGES.has(pageId)) {
+            if (!robots) {
+                robots = document.createElement('meta');
+                robots.setAttribute('name', 'robots');
+                document.head.appendChild(robots);
+            }
+            robots.setAttribute('content', 'noindex, follow');
+        } else if (robots) {
+            robots.remove();
+        }
     }
 
     function navigateTo(pageId) {
@@ -203,7 +297,7 @@
             const target = link.dataset.page;
             if (!target) return; // Let external links work normally
             e.preventDefault();
-            location.hash = target;
+            history.pushState({ page: target }, '', pathForPage(target));
             navigateTo(target);
         });
     });
@@ -227,20 +321,20 @@
     }
 
     // Handle browser back/forward
-    window.addEventListener('hashchange', () => {
-        const hash = location.hash.slice(1);
-        if (hash && document.getElementById(hash)) {
-            navigateTo(hash);
-        } else if (hash) {
-            // Unknown hash - fall back to the landing with a one-time toast.
-            showFallbackToast(hash);
-            location.hash = 'landing';
+    window.addEventListener('popstate', () => {
+        const { page } = pageForPath(location.pathname);
+        if (page) {
+            navigateTo(page);
+        } else {
+            showFallbackToast(location.pathname);
+            history.replaceState({ page: 'landing' }, '', pathForPage('landing'));
+            navigateTo('landing');
         }
     });
 
     // Soft 404 toast - shown when the user lands on or navigates to an unknown hash.
     function showFallbackToast(missingHash) {
-        const fr = (typeof currentLang !== 'undefined' && currentLang === 'fr');
+        const fr = langPrefix() === '/fr';
         const msg = fr
             ? `Cette page n'existe plus, retour à l'accueil.`
             : `That page doesn't exist anymore, back to the home page.`;
@@ -258,23 +352,32 @@
         setTimeout(() => toast.classList.remove('visible'), 4000);
     }
 
-    // Initial hash navigation
-    if (location.hash) {
-        const hash = location.hash.slice(1);
-        if (document.getElementById(hash) && hash !== 'landing') {
-            document.querySelector('.page--active')?.classList.remove('page--active');
-            document.getElementById(hash)?.classList.add('page--active');
-            currentPage = hash;
-            updateNav();
-            updatePageTitle(hash);
-            setTimeout(() => animatePageContent(document.getElementById(hash)), 100);
-        } else if (hash && hash !== 'landing') {
-            // Hash present but not a real page - soft 404.
-            showFallbackToast(hash);
-            location.hash = 'landing';
+    // Initial navigation: resolve the page from the URL path.
+    // Legacy #hash URLs are upgraded to their real path (301-like, via replaceState).
+    (function initialRoute() {
+        let target = null;
+        const { page, fr } = pageForPath(location.pathname);
+        const legacyHash = location.hash.slice(1);
+        if (fr) document.documentElement.lang = 'fr-FR';
+        if (legacyHash && ROUTES[legacyHash]) {
+            target = legacyHash; // old #hash link takes precedence, upgraded to its path
+        } else if (page) {
+            target = page;
+        } else if (location.pathname !== '/' || (legacyHash && legacyHash !== 'landing')) {
+            // Unknown path or hash - soft 404 back to the landing.
+            showFallbackToast(location.pathname + location.hash);
         }
-    }
-    updatePageTitle(currentPage);
+        target = target || 'landing';
+        history.replaceState({ page: target }, '', pathForPage(target));
+        if (target !== 'landing') {
+            document.querySelector('.page--active')?.classList.remove('page--active');
+            document.getElementById(target)?.classList.add('page--active');
+            currentPage = target;
+            updateNav();
+            setTimeout(() => animatePageContent(document.getElementById(target)), 100);
+        }
+        updatePageTitle(currentPage);
+    })();
 
     // --- Projects: scroll-triggered reveal, year group by year group ---
     // 2026 shows on arrival; each next year group (2025, 2024…) fades in
@@ -749,7 +852,7 @@
             'case.dsskills.metric3.label': 'generated from a brief, no manual design step',
             'case.dsskills.shift':      '<p>"AI is transforming design" has been repeated for three years, to the point it means nothing. In 2026 the numbers caught up with the intuition.</p><p>Figma\'s <em>State of the Designer 2026</em> (900+ designers) reports that 91% now feel AI tools improve the <strong>quality</strong> of their work, beyond raw speed, and that regular users report markedly higher job satisfaction. The <em>State of AI in Design</em> places AI\'s contribution mostly in the first 60% of a project: ideation, first mockups, variant generation. The remaining 40% stays human: the trade-offs, the polish, the call on which direction actually serves the user.</p><p>The most accurate framing I have read is not about replacement but about a kind of <strong>sorting</strong>, one I touched on in a previous article.</p><p>On one side, designers who had made producing screens their whole value. On the other, those who already knew their value sat upstream, and slightly off to the side of all that: finding which problem deserves solving, which solution truly holds, and how to add the small touch a designer is genuinely able to bring.</p><p>In honesty, I note the selection bias in these surveys: designers who rejected AI outright rarely answer them. So the picture is rosier than the field. Still, to my mind the underlying trend is hard to argue with: value is sliding from execution toward judgment.</p><p>That leaves the one question that matters: what do I hand to AI, and what do I keep? This project is my attempt to answer it concretely, by building the tool with my own hands and watching what it actually moves.</p>',
             'case.dsskills.problem':    '<p>At Oplit we build software for industrial production planning. The cycle looked like this: a PM frames a need, I design in Figma, I try to stay faithful to the design system, I ship a prototype that looks like the product but is not the product, engineering re-decides things design could have settled, and every handoff creates friction.</p><p>The skills were there. The chain between them was where it broke.</p><p>Before touching anything, I wanted the real state of our design system, Opal. Not by intuition: live, recounted at the source from a Figma plugin. At the audit the picture was harsh: no single source of truth, heavy UI debt, almost no parity between Figma and the code. I then brought the design side up to standard, color tokenised, documented, accessible. But product adoption stayed dramatically low, around 8% of instances in product files came from the DS. The system became good on the design side, and almost no one used it in the product.</p><p>The lever was obvious: make the DS genuinely easy to mobilise. It was already well documented; what it lacked was use. That single move unlocked both quality and speed.</p>',
-            'case.dsskills.approach':   '<p>Part of the path was blocked on the engineering side. The design-to-code chain was waiting on resources: <a href="#project-ds-audit" data-page="project-ds-audit">Code Connect</a> to do, Storybook in progress, no design-to-code bridge yet. The tokens were ready to export, but someone had to wire them.</p><p>I could have waited, but I went around it instead, with a simple idea: <strong>if engineering cannot come to the design system, the design system has to go to the teams.</strong></p><p>Concretely, I built two skills, specialised AI agents that read and mobilise the DS to generate interfaces directly in Figma from a plain-language brief.</p><ul class="case-list"><li>The <strong>operator</strong> holds the knowledge: where components live, their variants, how they assemble, the rules that govern their use. It updates itself as the DS evolves.</li><li>The <strong>builder</strong> consumes that knowledge to construct screens. You give it a brief, "show the impact of format-change matrices on scheduling", and it instantiates the right components, in the right variants, with the right tokens.</li></ul><p>Said like that, it sounds like a tooling project. What I really want to tell is what <em>building</em> these skills did to me, because that is where the craft hides.</p>',
+            'case.dsskills.approach':   '<p>Part of the path was blocked on the engineering side. The design-to-code chain was waiting on resources: <a href="/projects/opal-ds-audit/" data-page="project-ds-audit">Code Connect</a> to do, Storybook in progress, no design-to-code bridge yet. The tokens were ready to export, but someone had to wire them.</p><p>I could have waited, but I went around it instead, with a simple idea: <strong>if engineering cannot come to the design system, the design system has to go to the teams.</strong></p><p>Concretely, I built two skills, specialised AI agents that read and mobilise the DS to generate interfaces directly in Figma from a plain-language brief.</p><ul class="case-list"><li>The <strong>operator</strong> holds the knowledge: where components live, their variants, how they assemble, the rules that govern their use. It updates itself as the DS evolves.</li><li>The <strong>builder</strong> consumes that knowledge to construct screens. You give it a brief, "show the impact of format-change matrices on scheduling", and it instantiates the right components, in the right variants, with the right tokens.</li></ul><p>Said like that, it sounds like a tooling project. What I really want to tell is what <em>building</em> these skills did to me, because that is where the craft hides.</p>',
             'case.dsskills.solution':   '<p>Here is what plenty of people forget to say about building a skill: <strong>it forces you to clearly put into words what you kept as intuition.</strong></p><p>Encoding a rule into an agent means settling it. "Is this component used in this context?" The answer can no longer be "it depends" when you configure a machine: you have to say exactly what it depends on, and write the rule. In a few weeks I settled ambiguities I had let sit for months, because the tool would not tolerate the vagueness. First shift: the craft moves from doing to formalising. The precise gesture is no longer in the mouse; it is in how accurately you describe your own judgment.</p><p>Second shift, the verification method. I built each skill in a <strong>clean room</strong>: every fact about the DS verified live before being encoded, and every version tested by a blank, memoryless agent to simulate someone starting from scratch. If it recovered the right knowledge from the live sources, the skill was valid. Otherwise we iterated. I am precise on this, in honesty: the protocol validates <em>retrieval</em>, not taste. Visual quality I judged by eye, against the real product. The agent guarantees you find the right brick; it does not guarantee you chose the right assembly. That choice stays mine.</p><p>Development was not a straight line. The first build produced structurally correct interfaces (right architecture, right components) but uniform, with no granularity: identical work-order cards, missing states, information density too low. The signal was clear, the skill lacked context on variants and their usage rules. After correction, v2 instantiated the right variant for the real state of each work order, rebuilt the column footers, told the statuses apart. Not perfect, but credible for a client.</p><p>Third shift, the most important: <strong>the guardrail as a design decision.</strong> I set a rule: nothing propagates into the DS without a validated manifest and my explicit approval. The system would have been faster without it, and also less reliable, less maintainable, and potentially dangerous for the integrity of the DS. That choice was not technical, it was a design decision. It is exactly what the surveys describe with their "40% that stays human": the stance on what is <em>good</em>, the responsibility for the call. This project only holds because speed and rigor coexist in it.</p>',
             'case.dsskills.outcome':    '<p>The best validation came from use, not from my own tests. My PM took the builder, on his own. In one morning he built a prototype of the feature he had to present that afternoon: a complex case that lets schedulers see the impact of item sequences on their OEE in real time. A few hours later he was presenting it to a client.</p><p>And these are not three rough screens. What strikes you across them is the consistency: table states are correct, modals use the right Form components, navigation follows the established patterns. This is the DS instantiated, not a mock-up.</p><p>Now the part I want to say, because an honest share cannot stop at the success. <strong>This project did not solve the original problem.</strong> The starting diagnosis was 8% product adoption, a DS invisible <em>inside the app</em>. The skills speed up <strong>prototyping</strong> and make the <strong>handoff</strong> more reliable, which is huge, but the DS is still not deployed in the app. I opened a path to faithful prototyping; I have not yet won the adoption battle in production. These are two distinct fights, and conflating them would be dishonest.</p><p>Where the impact is real and durable is the chain. Because the prototype is made of the real components and the real tokens, engineering receives screens it has almost nothing to reinterpret: fewer re-decisions, less back-and-forth, a shorter path from design to shipped code. That is the gain that holds.</p>',
             'case.dsskills.impact':     '<p>The bottom line, what building the skills actually delivered:</p><ul class="case-list"><li><strong>Speed and autonomy.</strong> A PM with no design training ships a client-ready prototype in a morning, on his own. Fewer bottlenecks for me, faster answers for clients.</li><li><strong>A handoff that holds.</strong> Prototypes are now made of the real components and tokens, so engineering has almost nothing to reinterpret: fewer re-decisions, less back-and-forth, design reaches shipped code faster.</li><li><strong>A reproducible model.</strong> Two agnostic skills, deployable on any documented design system. A way of working, not a one-off.</li></ul><p>And the honest scope: this opened fast, faithful prototyping. Production adoption of the DS is the next fight, and a separate one.</p>',
@@ -1110,7 +1213,7 @@
             'case.dsskills.metric3.label': 'générés depuis un brief, sans étape de design manuelle',
             'case.dsskills.shift':      '<p>On entend « l\'IA transforme le design » depuis trois ans, au point que la phrase ne veut plus rien dire. En 2026, les chiffres ont rattrapé l\'intuition.</p><p>Le <em>State of the Designer 2026</em> de Figma (900+ designers) rapporte que 91% estiment désormais que les outils d\'IA améliorent la <strong>qualité</strong> de leur travail, au-delà de la seule vitesse, et que les utilisateurs réguliers déclarent une satisfaction nettement supérieure. Le <em>State of AI in Design</em> situe l\'apport de l\'IA surtout sur les premiers 60% d\'un projet : idéation, premières maquettes, génération de variantes. Les 40% restants restent humains : les arbitrages, le polish, la décision de direction qui sert vraiment l\'utilisateur.</p><p>La formule la plus juste que j\'ai lue ne parle pas de remplacement mais d\'un certain <strong>tri</strong>, que j\'ai pu évoquer lors d\'un article précédent.</p><p>D\'un côté, les designers qui avaient fait de leur valeur la production d\'écrans. De l\'autre, ceux qui savaient déjà que leur valeur était en amont et/ou légèrement en décalé de tout ça : trouver quel problème mérite d\'être résolu, quelle solution tient vraiment et comment ajouter ce petit grain qu\'un designer est vraiment capable d\'ajouter.</p><p>Par honnêteté, je note le biais de sélection de ces enquêtes : les designers qui ont refusé l\'IA en bloc y répondent rarement. La photo est donc plus optimiste que le terrain. Cependant la tendance de fond ne se discute plus vraiment à mon sens : la valeur glisse de l\'exécution vers le jugement.</p><p>Reste la seule question qui compte : qu\'est-ce que je confie à l\'IA, et qu\'est-ce que je garde pour moi ? Ce projet est ma tentative d\'y répondre concrètement, en fabriquant l\'outil de mes propres mains et en regardant ce qu\'il déplace vraiment.</p>',
             'case.dsskills.problem':    '<p>Chez Oplit, on développe un logiciel de pilotage de production industrielle. Le cycle ressemblait à ça : un PM exprime un besoin, je conçois dans Figma, j\'essaie de rester fidèle au design system, je livre un prototype « qui ressemble mais qui n\'en est pas un », le dev refait des décisions que le design aurait pu fixer, et chaque handoff génère de la friction.</p><p>Les compétences étaient là. C\'est la chaîne entre elles qui coinçait.</p><p>Avant de toucher à quoi que ce soit, j\'ai voulu savoir dans quel état était réellement notre design system, Opal. Pas à l\'intuition : en live, recompté à la source depuis un plugin Figma. Au moment de l\'audit, le tableau était sévère : aucune source de vérité unique, une grosse dette UI, presque aucune parité entre Figma et le code. J\'ai ensuite remis le côté design au niveau, couleur tokenisée, documenté, accessible. Mais l\'adoption produit est restée dramatiquement basse, autour de 8% d\'instances issues du DS dans les fichiers produit. Le système est devenu bon côté design, et presque personne ne s\'en servait dans le produit.</p><p>Le levier était évident : rendre le DS vraiment facile à mobiliser. Il était déjà bien documenté ; ce qui manquait, c\'était l\'usage. Ce geste-là débloquait d\'un coup la qualité et la vitesse.</p>',
-            'case.dsskills.approach':   '<p>Une partie du chemin était bloquée côté dev. La chaîne design→code attendait des ressources : <a href="#project-ds-audit" data-page="project-ds-audit">Code Connect</a> à faire, Storybook en cours, un pont design-to-code encore inexistant. Les tokens étaient prêts à l\'export, mais il fallait quelqu\'un pour les brancher.</p><p>J\'aurais pu attendre mais j\'ai préféré contourner, avec une idée simple : <strong>si le dev ne peut pas venir au design system, le design system doit aller vers les équipes.</strong></p><p>Concrètement, j\'ai créé deux skills, des agents IA spécialisés capables de lire et de mobiliser le DS pour générer des interfaces directement dans Figma, à partir d\'un brief en langage naturel.</p><ul class="case-list"><li>L\'<strong>operator</strong> porte la connaissance : où vivent les composants, leurs variantes, comment ils s\'assemblent, les règles qui régissent leur usage. Et il sait se mettre à jour quand le DS évolue.</li><li>Le <strong>builder</strong> consomme cette connaissance pour construire des écrans. On lui donne un brief, « montre l\'impact des matrices de changement de format sur l\'ordonnancement », et il instancie les bons composants, dans les bonnes variantes, avec les bons tokens.</li></ul><p>Dit comme ça, ça sonne comme un projet d\'outillage. Mais ce que je veux vraiment raconter, c\'est ce que <em>fabriquer</em> ces skills m\'a fait, parce que c\'est là que se cache le craft.</p>',
+            'case.dsskills.approach':   '<p>Une partie du chemin était bloquée côté dev. La chaîne design→code attendait des ressources : <a href="/projects/opal-ds-audit/" data-page="project-ds-audit">Code Connect</a> à faire, Storybook en cours, un pont design-to-code encore inexistant. Les tokens étaient prêts à l\'export, mais il fallait quelqu\'un pour les brancher.</p><p>J\'aurais pu attendre mais j\'ai préféré contourner, avec une idée simple : <strong>si le dev ne peut pas venir au design system, le design system doit aller vers les équipes.</strong></p><p>Concrètement, j\'ai créé deux skills, des agents IA spécialisés capables de lire et de mobiliser le DS pour générer des interfaces directement dans Figma, à partir d\'un brief en langage naturel.</p><ul class="case-list"><li>L\'<strong>operator</strong> porte la connaissance : où vivent les composants, leurs variantes, comment ils s\'assemblent, les règles qui régissent leur usage. Et il sait se mettre à jour quand le DS évolue.</li><li>Le <strong>builder</strong> consomme cette connaissance pour construire des écrans. On lui donne un brief, « montre l\'impact des matrices de changement de format sur l\'ordonnancement », et il instancie les bons composants, dans les bonnes variantes, avec les bons tokens.</li></ul><p>Dit comme ça, ça sonne comme un projet d\'outillage. Mais ce que je veux vraiment raconter, c\'est ce que <em>fabriquer</em> ces skills m\'a fait, parce que c\'est là que se cache le craft.</p>',
             'case.dsskills.solution':   '<p>Voici ce que pas mal de monde oublie de dire sur la fabrication d\'un skill : <strong>ça t\'oblige à formuler clairement ce que tu gardais en intuition.</strong></p><p>Encoder une règle dans un agent, c\'est la trancher. « Est-ce que ce composant s\'utilise dans ce contexte ? » La réponse ne peut plus être « ça dépend » quand tu configures une machine : il faut dire de quoi ça dépend, exactement, et écrire la règle. J\'ai réglé en quelques semaines des ambiguïtés que je laissais traîner depuis des mois, parce que l\'outil ne tolérait pas le flou. Première mutation : le craft se déplace du faire vers le formaliser. Le geste précis n\'est plus dans la souris ; il est dans la justesse avec laquelle tu décris ton propre jugement.</p><p>Deuxième mutation, la méthode de vérification. J\'ai construit chaque skill en <strong>clean room</strong> : chaque fait sur le DS vérifié en live avant d\'être encodé, et chaque version testée par un agent vierge, sans mémoire, pour simuler quelqu\'un qui part de zéro. S\'il retrouvait la bonne connaissance depuis les sources live, le skill était valide. Sinon, on itérait. Je suis précis là-dessus, par honnêteté : ce protocole valide la <em>récupération</em> de l\'information, pas le goût. La qualité visuelle, je l\'ai validée à l\'œil, en comparant au produit réel. L\'agent garantit qu\'on retrouve la bonne brique ; il ne garantit pas qu\'on a choisi le bon assemblage. Ce choix reste mien.</p><p>Le développement n\'a pas été une ligne droite. Le premier build générait des interfaces structurellement justes (bonne architecture, bons composants) mais uniformes, sans granularité : cartes OF identiques, états manquants, densité d\'info trop faible. Le signal était clair, le skill manquait de contexte sur les variantes et leurs règles d\'usage. Après correction, la v2 instanciait la bonne variante selon l\'état réel de chaque OF, reconstituait les footers de colonnes, différenciait les statuts. Pas parfait, mais crédible pour un client.</p><p>Troisième mutation, la plus importante : <strong>le garde-fou comme décision de design.</strong> J\'ai posé une règle : rien ne se propage dans le DS sans manifeste validé et sans accord explicite de ma part. Le système aurait été plus rapide sans ce garde-fou. Il aurait aussi été moins fiable, moins maintenable, et potentiellement dangereux pour l\'intégrité du DS. Ce choix n\'était pas technique, c\'était une décision de design. C\'est exactement ce que les enquêtes décrivent avec leurs « 40% qui restent humains » : la posture sur ce qui est <em>bien</em>, la responsabilité de l\'arbitrage. Ce projet ne tient que parce que la vitesse et la rigueur y coexistent.</p>',
             'case.dsskills.outcome':    '<p>La meilleure validation est venue de l\'usage, pas de mes tests. Mon PM a pris le builder, seul. Et en une matinée, il a construit un prototype de la feature qu\'il devait présenter l\'après-midi : un cas complexe qui permet aux ordonnanceurs de visualiser l\'impact des séquences d\'articles sur leur TRS en temps réel. Quelques heures plus tard, il le présentait à un client.</p><p>Et ce ne sont pas trois écrans bricolés. Ce qui frappe sur ces écrans, c\'est la cohérence : les états de table sont corrects, les modales utilisent les bons composants Form, la navigation respecte les patterns établis. C\'est du DS instancié, pas du mock-up.</p><p>Maintenant la partie que je tiens à dire, parce qu\'un partage honnête ne peut pas s\'arrêter au succès. <strong>Ce projet n\'a pas réglé le problème initial.</strong> Le diagnostic de départ, c\'était une adoption produit à 8%, un DS invisible <em>dans l\'application</em>. Les skills accélèrent le <strong>prototypage</strong> et fiabilisent le <strong>handoff</strong>, ce qui est énorme, mais le DS n\'est toujours pas déployé dans l\'app. J\'ai ouvert une voie de prototypage fidèle ; je n\'ai pas encore gagné la bataille de l\'adoption en production. Ce sont deux combats distincts, et les confondre serait malhonnête.</p><p>Là où l\'impact est réel et durable, c\'est sur la chaîne. Parce que le prototype est fait des vrais composants et des vrais tokens, le dev reçoit des écrans qu\'il n\'a presque rien à réinterpréter : moins de décisions refaites, moins d\'allers-retours, un chemin plus court entre le design et le code livré. C\'est ça, le gain qui tient.</p>',
             'case.dsskills.impact':     '<p>L\'essentiel, ce que la création des skills a réellement apporté :</p><ul class="case-list"><li><strong>Vitesse et autonomie.</strong> Un PM sans formation design livre un prototype montrable à un client en une matinée, tout seul. Moins de goulots pour moi, des réponses plus rapides pour les clients.</li><li><strong>Un handoff qui tient.</strong> Les prototypes sont faits des vrais composants et tokens, donc le dev n\'a presque rien à réinterpréter : moins de décisions refaites, moins d\'allers-retours, le design arrive plus vite au code livré.</li><li><strong>Un modèle reproductible.</strong> Deux skills agnostiques, déployables sur n\'importe quel design system documenté. Une façon de travailler, pas un one-shot.</li></ul><p>Et le périmètre honnête : ça a ouvert un prototypage rapide et fidèle. L\'adoption du DS en production reste le combat suivant, et distinct.</p>',
@@ -1201,7 +1304,9 @@
     // Detect browser language as fallback when no preference is stored.
     const browserLang = (navigator.language || navigator.userLanguage || 'en')
         .toLowerCase().startsWith('fr') ? 'fr' : 'en';
-    let currentLang = localStorage.getItem('folio-lang') || browserLang;
+    // URL prefix wins (/fr/... is the French version), then stored preference, then browser.
+    const urlLang = (location.pathname === '/fr' || location.pathname.startsWith('/fr/')) ? 'fr' : null;
+    let currentLang = urlLang || localStorage.getItem('folio-lang') || browserLang;
 
     function setLang(lang) {
         if (!TRANSLATIONS[lang]) return;
@@ -1230,6 +1335,12 @@
             if (isActive) btn.setAttribute('aria-current', 'true');
             else btn.removeAttribute('aria-current');
         });
+
+        // Keep the URL prefix (/fr) and canonical/og:url in sync with the language.
+        if (typeof pathForPage === 'function' && typeof currentPage !== 'undefined') {
+            history.replaceState({ page: currentPage }, '', pathForPage(currentPage));
+            updatePageTitle(currentPage);
+        }
     }
 
     // Initialise language on load
