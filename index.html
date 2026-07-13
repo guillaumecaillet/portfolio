@@ -14,11 +14,10 @@
         })();
     </script>
     <meta name="description" content="Guillaume Caillet, Senior Product Designer based in Nantes, France. 7+ years designing B2B SaaS products and design systems for Industry 4.0.">
-    <meta name="keywords" content="Senior Product Designer, Product Designer Nantes, UX Designer Nantes, Design System, B2B SaaS, Industry 4.0, Design Ops, Product Design, Oplit, PrestaShop">
     <meta property="og:title" content="Guillaume Caillet · Senior Product Designer · Nantes">
     <meta property="og:description" content="Senior Product Designer at Oplit, based in Nantes. 7+ years building B2B SaaS products and design systems for Industry 4.0.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.guillaumecaillet.fr">
+    <meta property="og:url" content="https://www.guillaumecaillet.fr/">
     <meta property="og:image" content="https://www.guillaumecaillet.fr/src/img/og-default.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -28,12 +27,12 @@
     <meta name="twitter:description" content="Senior Product Designer at Oplit, based in Nantes. 7+ years building B2B SaaS products and design systems for Industry 4.0.">
     <meta name="twitter:image" content="https://www.guillaumecaillet.fr/src/img/og-default.png">
     <title>Guillaume Caillet · Senior Product Designer · Nantes</title>
-    <link rel="canonical" href="https://www.guillaumecaillet.fr">
+    <link rel="canonical" href="https://www.guillaumecaillet.fr/">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%231400a0'/%3E%3Ctext x='50' y='56' text-anchor='middle' font-family='system-ui,sans-serif' font-size='30' font-weight='700' fill='white'%3EGC%3C/text%3E%3C/svg%3E">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <!-- Self-hosted fonts (Inter + IBM Plex Mono), no third-party request -->
+    <link rel="preload" href="/src/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/src/fonts/fonts.css">
+    <link rel="stylesheet" href="/style.css">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -73,7 +72,7 @@
 
     <!-- Navigation -->
     <nav class="nav">
-        <a href="#landing" class="nav-logo" data-page="landing">
+        <a href="/" class="nav-logo" data-page="landing">
             <span class="nav-logo-mark">GC</span>
         </a>
         <div class="nav-right">
@@ -82,7 +81,7 @@
                 <span class="burger-line"></span>
             </button>
             <div class="nav-links">
-                <a href="#who" class="nav-link" data-page="who" data-i18n="nav.who">Who am I</a>
+                <a href="/who/" class="nav-link" data-page="who" data-i18n="nav.who">Who am I</a>
             </div>
             <div class="lang-switch" role="group" aria-label="Language switch">
                 <button class="lang-btn" data-lang="en">EN</button>
@@ -110,7 +109,7 @@
                 <h1 class="landing-title">
                     <span class="line" data-delay="0" data-i18n="landing.line1">Senior Product Designer</span>
                 </h1>
-                <p class="landing-tagline" data-i18n-html="landing.tagline">I make complex, demanding products simple. Currently on <a href="#project-ds-skills" data-page="project-ds-skills" class="landing-company">Opal DS</a> at Oplit.</p>
+                <p class="landing-tagline" data-i18n-html="landing.tagline">I make complex, demanding products simple. Currently on <a href="/projects/opal-ds-ai-prototyping-skills/" data-page="project-ds-skills" class="landing-company">Opal DS</a> at Oplit.</p>
                 <div class="landing-meta">
                     <div class="landing-meta-item">
                         <span class="landing-meta-k" data-i18n="landing.meta.loc_k">Based in</span>
@@ -147,7 +146,7 @@
                 <p class="landing-pitch reveal" data-i18n-html="landing.pitch">Over the last 7 years, I've contributed to the design and improvement of B2B SaaS products, alongside teams at <strong>Oplit</strong> (industrial schedulers), <strong>PrestaShop</strong> (300k+ merchants), <strong>Airbus</strong> and <strong>SNCF</strong>. I've led design systems, run audits, and shipped infrastructure that teams build on.<br><br>What I'm looking for: high-stakes products where design co-pilots strategy, not a service function.</p>
                 <div class="landing-links">
                     <div class="landing-btn-row">
-                        <a href="#who" class="landing-link-card" data-page="who">
+                        <a href="/who/" class="landing-link-card" data-page="who">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                             <span class="landing-link-card-label" data-i18n="landing.about">About me</span>
                         </a>
@@ -176,7 +175,7 @@
 
             <div class="projects-list">
                 <div class="project-year-label" data-i18n="year.2026">2026</div>
-                <a href="#project-ds-skills" class="project-card" data-page="project-ds-skills" data-theme="ds" data-key="true">
+                <a href="/projects/opal-ds-ai-prototyping-skills/" class="project-card" data-page="project-ds-skills" data-theme="ds" data-key="true">
                     <div class="project-card-inner">
                         <span class="project-index">01</span>
                         <div class="project-info">
@@ -187,7 +186,7 @@
                         <span class="project-arrow">&rarr;</span>
                     </div>
                 </a>
-                <a href="#project-ds-execution" class="project-card" data-page="project-ds-execution" data-theme="ds" data-key="true">
+                <a href="/projects/opal-ds-corrective-actions/" class="project-card" data-page="project-ds-execution" data-theme="ds" data-key="true">
                     <div class="project-card-inner">
                         <span class="project-index">02</span>
                         <div class="project-info">
@@ -198,7 +197,7 @@
                         <span class="project-arrow">&rarr;</span>
                     </div>
                 </a>
-                <a href="#project-multiselect" class="project-card" data-page="project-multiselect" data-theme="product">
+                <a href="/projects/multiselect-sticky-action-bar/" class="project-card" data-page="project-multiselect" data-theme="product">
                     <div class="project-card-inner">
                         <span class="project-index">03</span>
                         <div class="project-info">
@@ -211,7 +210,7 @@
                 </a>
 
                 <div class="project-year-label" data-i18n="year.2025">2025</div>
-                <a href="#project-figma-plugin" class="project-card" data-page="project-figma-plugin" data-theme="tooling">
+                <a href="/projects/figma-plugin-local-components-collector/" class="project-card" data-page="project-figma-plugin" data-theme="tooling">
                     <div class="project-card-inner">
                         <span class="project-index">04</span>
                         <div class="project-info">
@@ -222,7 +221,7 @@
                         <span class="project-arrow">&rarr;</span>
                     </div>
                 </a>
-                <a href="#project-ds-audit" class="project-card" data-page="project-ds-audit" data-theme="ds">
+                <a href="/projects/opal-ds-audit/" class="project-card" data-page="project-ds-audit" data-theme="ds">
                     <div class="project-card-inner">
                         <span class="project-index">05</span>
                         <div class="project-info">
@@ -233,7 +232,7 @@
                         <span class="project-arrow">&rarr;</span>
                     </div>
                 </a>
-                <a href="#project-transfer" class="project-card" data-page="project-transfer" data-theme="product" data-key="true">
+                <a href="/projects/capacity-transfer/" class="project-card" data-page="project-transfer" data-theme="product" data-key="true">
                     <div class="project-card-inner">
                         <span class="project-index">06</span>
                         <div class="project-info">
@@ -244,7 +243,7 @@
                         <span class="project-arrow">&rarr;</span>
                     </div>
                 </a>
-                <a href="#project-expert-experience" class="project-card" data-page="project-expert-experience" data-theme="product" data-key="true">
+                <a href="/projects/prestashop-expert-experience/" class="project-card" data-page="project-expert-experience" data-theme="product" data-key="true">
                     <div class="project-card-inner">
                         <span class="project-index">07</span>
                         <div class="project-info">
@@ -255,7 +254,7 @@
                         <span class="project-arrow">&rarr;</span>
                     </div>
                 </a>
-                <a href="#project-design-system" class="project-card" data-page="project-design-system" data-theme="ds">
+                <a href="/projects/prestashop-design-system/" class="project-card" data-page="project-design-system" data-theme="ds">
                     <div class="project-card-inner">
                         <span class="project-index">08</span>
                         <div class="project-info">
@@ -266,7 +265,7 @@
                         <span class="project-arrow">&rarr;</span>
                     </div>
                 </a>
-                <a href="#project-customer-account" class="project-card" data-page="project-customer-account" data-theme="research">
+                <a href="/projects/prestashop-customer-account/" class="project-card" data-page="project-customer-account" data-theme="research">
                     <div class="project-card-inner">
                         <span class="project-index">09</span>
                         <div class="project-info">
@@ -279,7 +278,7 @@
                 </a>
 
                 <div class="project-year-label" data-i18n="year.2024">2024</div>
-                <a href="#project-signin" class="project-card" data-page="project-signin" data-theme="research" data-key="true">
+                <a href="/projects/prestashop-signin-signup/" class="project-card" data-page="project-signin" data-theme="research" data-key="true">
                     <div class="project-card-inner">
                         <span class="project-index">10</span>
                         <div class="project-info">
@@ -290,7 +289,7 @@
                         <span class="project-arrow">&rarr;</span>
                     </div>
                 </a>
-                <a href="#project-store-association" class="project-card" data-page="project-store-association" data-theme="research">
+                <a href="/projects/prestashop-store-association/" class="project-card" data-page="project-store-association" data-theme="research">
                     <div class="project-card-inner">
                         <span class="project-index">11</span>
                         <div class="project-info">
@@ -585,7 +584,7 @@
             <!-- CV -->
             <div class="who-section">
                 <h3 class="who-section-title" data-i18n="who.section.cv">Curriculum Vitae</h3>
-                <a href="src/img/cv/cv-guillaume-caillet.pdf" target="_blank" rel="noopener" class="who-link" data-i18n="who.cv.link">Download CV (PDF) →</a>
+                <a href="/src/img/cv/cv-guillaume-caillet.pdf" target="_blank" rel="noopener" class="who-link" data-i18n="who.cv.link">Download CV (PDF) →</a>
             </div>
 
         </div>
@@ -595,7 +594,7 @@
     <!-- Page: PrestaShop Design System -->
     <section class="page" id="project-design-system">
         <div class="case-study">
-            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
+            <a href="/" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -671,7 +670,7 @@
     <!-- Page: PrestaShop Customer Account -->
     <section class="page" id="project-customer-account">
         <div class="case-study">
-            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
+            <a href="/" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -706,21 +705,21 @@
             </div>
             <div class="case-image-grid">
                 <figure class="case-image">
-                    <img src="src/img/prestashop-customer-account/Screenshot_2022-01-21_at_11.43.14.webp" alt="Back Office, Employee profile page" loading="lazy">
+                    <img src="/src/img/prestashop-customer-account/Screenshot_2022-01-21_at_11.43.14.webp" alt="Back Office, Employee profile page" loading="lazy" width="1600" height="940">
                     <figcaption>Back Office, Employee profile (before)</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/prestashop-customer-account/Screenshot_2022-01-21_at_11.50.10.webp" alt="Marketplace Addons, Account page" loading="lazy">
+                    <img src="/src/img/prestashop-customer-account/Screenshot_2022-01-21_at_11.50.10.webp" alt="Marketplace Addons, Account page" loading="lazy" width="1600" height="889">
                     <figcaption>Marketplace Addons, Account (before)</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/prestashop-customer-account/account-settings-old.webp" alt="Unified account, Account settings (before)" loading="lazy">
+                    <img src="/src/img/prestashop-customer-account/account-settings-old.webp" alt="Unified account, Account settings (before)" loading="lazy" width="1600" height="1333">
                     <figcaption>Account settings (before)</figcaption>
                 </figure>
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/prestashop-customer-account/mixpanel_source_to-account.webp" alt="Mixpanel, Origin of connections to customer account" loading="lazy">
+                    <img src="/src/img/prestashop-customer-account/mixpanel_source_to-account.webp" alt="Mixpanel, Origin of connections to customer account" loading="lazy" width="1460" height="696">
                     <figcaption>Mixpanel, Origin of connections to customer account</figcaption>
                 </figure>
             </div>
@@ -742,17 +741,17 @@
             </div>
             <div class="case-image-grid">
                 <figure class="case-image">
-                    <img src="src/img/prestashop-customer-account/Capture_decran_2024-02-22_a_15.51.32.webp" alt="Unified account, Personal information" loading="lazy">
+                    <img src="/src/img/prestashop-customer-account/Capture_decran_2024-02-22_a_15.51.32.webp" alt="Unified account, Personal information" loading="lazy" width="1600" height="776">
                     <figcaption>Unified account, Personal information</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/prestashop-customer-account/Capture_decran_2024-02-22_a_15.53.18.webp" alt="Unified account, Business information" loading="lazy">
+                    <img src="/src/img/prestashop-customer-account/Capture_decran_2024-02-22_a_15.53.18.webp" alt="Unified account, Business information" loading="lazy" width="1600" height="771">
                     <figcaption>Unified account, Business information</figcaption>
                 </figure>
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/prestashop-customer-account/account-settings-final.webp" alt="Unified Customer Account, Final design" loading="lazy">
+                    <img src="/src/img/prestashop-customer-account/account-settings-final.webp" alt="Unified Customer Account, Final design" loading="lazy" width="1600" height="1051">
                     <figcaption>Unified Customer Account, Final design</figcaption>
                 </figure>
             </div>
@@ -766,7 +765,7 @@
     <!-- Page: PrestaShop Expert Experience -->
     <section class="page" id="project-expert-experience">
         <div class="case-study">
-            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
+            <a href="/" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -906,7 +905,7 @@
             </figure>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/prestashop-expert-experience/flow-discovery.webp" alt="Userflow de discovery cartographiant les parcours gratuit, payant et développeur, avec impasses et boucles" loading="lazy">
+                    <img src="/src/img/prestashop-expert-experience/flow-discovery.webp" alt="Userflow de discovery cartographiant les parcours gratuit, payant et développeur, avec impasses et boucles" loading="lazy" width="1600" height="697">
                     <figcaption data-i18n="case.expert.shot.flowdiscovery">Userflow de discovery : tous les chemins cartographiés (gratuit, payant, parcours développeur) avant la mise en écrans.</figcaption>
                 </figure>
             </div>
@@ -1006,43 +1005,43 @@
 
             <div class="case-image-grid">
                 <figure class="case-image">
-                    <img src="src/img/prestashop-expert-experience/screen-onboarding-step2.webp" alt="Onboarding, étape de souscription au programme Expert+" loading="lazy">
+                    <img src="/src/img/prestashop-expert-experience/screen-onboarding-step2.webp" alt="Onboarding, étape de souscription au programme Expert+" loading="lazy" width="1440" height="2384">
                     <figcaption data-i18n="case.expert.shot.onboarding">Onboarding, rejoindre le programme Expert+</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/prestashop-expert-experience/screen-abonnement-expert-plus.webp" alt="Comparatif d'offres et abonnement Expert+" loading="lazy">
+                    <img src="/src/img/prestashop-expert-experience/screen-abonnement-expert-plus.webp" alt="Comparatif d'offres et abonnement Expert+" loading="lazy" width="1440" height="3147">
                     <figcaption data-i18n="case.expert.shot.pricing">Comparatif d'offres, abonnement Expert+</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/prestashop-expert-experience/screen-certif-invitation.webp" alt="Certification, page de découverte" loading="lazy">
+                    <img src="/src/img/prestashop-expert-experience/screen-certif-invitation.webp" alt="Certification, page de découverte" loading="lazy" width="1440" height="2276">
                     <figcaption data-i18n="case.expert.shot.invitation">Certification, page de découverte</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/prestashop-expert-experience/screen-certif-detail-paid.webp" alt="Certification, page de détail (premium)" loading="lazy">
+                    <img src="/src/img/prestashop-expert-experience/screen-certif-detail-paid.webp" alt="Certification, page de détail (premium)" loading="lazy" width="1440" height="1501">
                     <figcaption data-i18n="case.expert.shot.detail">Certification, page de détail (premium)</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/prestashop-expert-experience/screen-select-developer.webp" alt="Sélection et invitation d'un développeur de l'équipe" loading="lazy">
+                    <img src="/src/img/prestashop-expert-experience/screen-select-developer.webp" alt="Sélection et invitation d'un développeur de l'équipe" loading="lazy" width="1440" height="1813">
                     <figcaption data-i18n="case.expert.shot.select">Sélection et invitation d'un développeur</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/prestashop-expert-experience/screen-certif-dashboard.webp" alt="Dashboard de suivi, certification en attente" loading="lazy">
+                    <img src="/src/img/prestashop-expert-experience/screen-certif-dashboard.webp" alt="Dashboard de suivi, certification en attente" loading="lazy" width="1440" height="1360">
                     <figcaption data-i18n="case.expert.shot.dashboard">Dashboard de suivi, certification en attente</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/prestashop-expert-experience/screen-certif-dashboard-succeed.webp" alt="Dashboard de suivi, agence certifiée" loading="lazy">
+                    <img src="/src/img/prestashop-expert-experience/screen-certif-dashboard-succeed.webp" alt="Dashboard de suivi, agence certifiée" loading="lazy" width="1440" height="1360">
                     <figcaption data-i18n="case.expert.shot.dashboardsucceed">Dashboard de suivi, agence certifiée</figcaption>
                 </figure>
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/prestashop-expert-experience/flow-certification-global.webp" alt="Vue d'ensemble du parcours de certification complet" loading="lazy">
+                    <img src="/src/img/prestashop-expert-experience/flow-certification-global.webp" alt="Vue d'ensemble du parcours de certification complet" loading="lazy" width="1600" height="738">
                     <figcaption data-i18n="case.expert.shot.flowcertif">Parcours de certification complet, vue d'ensemble</figcaption>
                 </figure>
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/prestashop-expert-experience/flow-onboarding.webp" alt="Vue d'ensemble du parcours d'onboarding complet" loading="lazy">
+                    <img src="/src/img/prestashop-expert-experience/flow-onboarding.webp" alt="Vue d'ensemble du parcours d'onboarding complet" loading="lazy" width="1600" height="727">
                     <figcaption data-i18n="case.expert.shot.flowonboarding">Parcours d'onboarding complet, vue d'ensemble</figcaption>
                 </figure>
             </div>
@@ -1057,7 +1056,7 @@
     <!-- Page: PrestaShop Sign in/Sign up Flow -->
     <section class="page" id="project-signin">
         <div class="case-study">
-            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
+            <a href="/" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -1096,7 +1095,7 @@
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/prestashop-signin-signup/Capture_decran_2024-02-22_a_15.58.36.webp" alt="Sign in/Sign up, Research and user flows" loading="lazy">
+                    <img src="/src/img/prestashop-signin-signup/Capture_decran_2024-02-22_a_15.58.36.webp" alt="Sign in/Sign up, Research and user flows" loading="lazy" width="1600" height="931">
                     <figcaption>Research, User flows and integration mapping</figcaption>
                 </figure>
             </div>
@@ -1114,23 +1113,23 @@
             </div>
             <div class="case-image-grid">
                 <figure class="case-image">
-                    <img src="src/img/prestashop-signin-signup/connexion 1.webp" alt="Sign in, New unified login page with Google SSO" loading="lazy">
+                    <img src="/src/img/prestashop-signin-signup/connexion 1.webp" alt="Sign in, New unified login page with Google SSO" loading="lazy" width="1600" height="853">
                     <figcaption>Sign in, "Continue with Google" prioritized, unified login</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/prestashop-signin-signup/signup_EN.webp" alt="Sign up, Simplified account creation" loading="lazy">
+                    <img src="/src/img/prestashop-signin-signup/signup_EN.webp" alt="Sign up, Simplified account creation" loading="lazy" width="1600" height="1107">
                     <figcaption>Sign up, "Sign up with Google" + simplified form</figcaption>
                 </figure>
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/prestashop-signin-signup/Capture_decran_2024-02-22_a_16.08.34.webp" alt="Sign up, Full flow in 3 steps" loading="lazy">
+                    <img src="/src/img/prestashop-signin-signup/Capture_decran_2024-02-22_a_16.08.34.webp" alt="Sign up, Full flow in 3 steps" loading="lazy" width="1600" height="267">
                     <figcaption>Full sign up flow, from account creation to account settings</figcaption>
                 </figure>
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/prestashop-signin-signup/1779047443763_image.webp" alt="Sign up, Complete flow with freelance/agency variant and account settings" loading="lazy">
+                    <img src="/src/img/prestashop-signin-signup/1779047443763_image.webp" alt="Sign up, Complete flow with freelance/agency variant and account settings" loading="lazy" width="1600" height="619">
                     <figcaption>Flow overview, signup, profiling steps, freelance/agency variant, account settings</figcaption>
                 </figure>
             </div>
@@ -1140,7 +1139,7 @@
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/prestashop-signin-signup/Screenshot_2024-08-22_at_17.31.33.webp" alt="Mixpanel, Credentials vs Google SSO comparison graph" loading="lazy">
+                    <img src="/src/img/prestashop-signin-signup/Screenshot_2024-08-22_at_17.31.33.webp" alt="Mixpanel, Credentials vs Google SSO comparison graph" loading="lazy" width="1600" height="378">
                     <figcaption>Mixpanel, Credentials vs Google SSO adoption (solid = post-redesign, dashed = before)</figcaption>
                 </figure>
             </div>
@@ -1150,7 +1149,7 @@
     <!-- Page: PrestaShop Store Association Flow -->
     <section class="page" id="project-store-association">
         <div class="case-study">
-            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
+            <a href="/" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -1195,22 +1194,22 @@
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/prestashop-store-association/Screenshot_2024-08-01_at_14.15.50.webp" alt="Store Association, Research and flow mapping">
+                    <img src="/src/img/prestashop-store-association/Screenshot_2024-08-01_at_14.15.50.webp" alt="Store Association, Research and flow mapping" width="1600" height="653" loading="lazy">
                     <figcaption>Research, Flow mapping and wireframes</figcaption>
                 </figure>
             </div>
             <div class="case-image-grid">
                 <figure class="case-image">
-                    <img src="src/img/prestashop-store-association/Screenshot_2024-08-01_at_14.06.29.webp" alt="Store Association, Current production flow">
+                    <img src="/src/img/prestashop-store-association/Screenshot_2024-08-01_at_14.06.29.webp" alt="Store Association, Current production flow" width="1600" height="459" loading="lazy">
                     <figcaption>Current production flow, Association success path</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/prestashop-store-association/Screenshot_2024-08-01_at_14.07.23.webp" alt="Store Association, New workflow">
+                    <img src="/src/img/prestashop-store-association/Screenshot_2024-08-01_at_14.07.23.webp" alt="Store Association, New workflow" width="1600" height="340" loading="lazy">
                     <figcaption>New association workflow, Simplified steps</figcaption>
                 </figure>
             </div>
             <figure class="case-image case-image--cover case-video">
-                <video src="src/img/prestashop-store-association/proto-asso.mp4" autoplay muted loop playsinline controls preload="metadata" aria-label="Prototype of the redesigned store association flow"></video>
+                <video src="/src/img/prestashop-store-association/proto-asso.mp4" width="1280" height="912" autoplay muted loop playsinline controls preload="metadata" aria-label="Prototype of the redesigned store association flow"></video>
                 <figcaption>Prototype, End-to-end walkthrough of the redesigned association flow</figcaption>
             </figure>
             <div class="case-section">
@@ -1229,7 +1228,7 @@
     <!-- Page: Oplit, Opal DS · Corrective Actions -->
     <section class="page" id="project-ds-execution">
         <div class="case-study">
-            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
+            <a href="/" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -1322,7 +1321,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
     <!-- Page: Oplit, Opal DS · AI Prototyping Skills -->
     <section class="page" id="project-ds-skills">
         <div class="case-study">
-            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
+            <a href="/" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -1362,21 +1361,21 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/oplit-ds-audit/audit-t0-synthese.webp" alt="Audit at T0: no single source of truth, heavy UI debt, zero Figma-dev parity" loading="lazy">
+                    <img src="/src/img/oplit-ds-audit/audit-t0-synthese.webp" alt="Audit at T0: no single source of truth, heavy UI debt, zero Figma-dev parity" loading="lazy" width="1600" height="1434">
                     <figcaption data-i18n="case.dsskills.fig.audit_t0">The starting point at the audit (T0, Nov 2025): no single source of truth, ~90% UI debt, zero Figma-dev parity. The diagnosis was bad.</figcaption>
                 </figure>
             </div>
             <div class="case-image-grid">
                 <figure class="case-image">
-                    <img src="src/img/oplit-ds-audit/audit-t0-design.webp" alt="Audit T0 design debt: foundations coverage and two competing Figma libraries" loading="lazy">
+                    <img src="/src/img/oplit-ds-audit/audit-t0-design.webp" alt="Audit T0 design debt: foundations coverage and two competing Figma libraries" loading="lazy" width="1600" height="1141">
                     <figcaption data-i18n="case.dsaudit.fig.design">Design debt: foundations coverage (Typography, Shadows, Breakpoints absent) and two competing Figma libraries.</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/oplit-ds-audit/audit-t0-dev.webp" alt="Audit T0 dev debt: 3 icon libraries, Vuetify bypassed, no Storybook" loading="lazy">
+                    <img src="/src/img/oplit-ds-audit/audit-t0-dev.webp" alt="Audit T0 dev debt: 3 icon libraries, Vuetify bypassed, no Storybook" loading="lazy" width="1600" height="1003">
                     <figcaption data-i18n="case.dsaudit.fig.dev">Dev debt: 3 icon libraries, Vuetify bypassed with heavy overrides, no Storybook, no shared token repo.</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/oplit-ds-audit/audit-t0-transverse.webp" alt="Audit T0 cross-cutting debt: the design-to-dev gap" loading="lazy">
+                    <img src="/src/img/oplit-ds-audit/audit-t0-transverse.webp" alt="Audit T0 cross-cutting debt: the design-to-dev gap" loading="lazy" width="1600" height="725">
                     <figcaption data-i18n="case.dsaudit.fig.transverse">The most critical debt is cross-cutting: no Figma-to-code bridge, no parity, no governance. Design-dev alignment became the top priority.</figcaption>
                 </figure>
             </div>
@@ -1386,7 +1385,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/oplit-ds-skills/schema-architecture.webp" alt="Architecture: how the operator and builder skills connect" loading="lazy">
+                    <img src="/src/img/oplit-ds-skills/schema-architecture.webp" alt="Architecture: how the operator and builder skills connect" loading="lazy" width="1600" height="1078">
                     <figcaption data-i18n="case.dsskills.fig.schema_arch">How the two skills connect: live sources feed the operator (the knowledge), which feeds the builder (screen construction), under a human gate.</figcaption>
                 </figure>
             </div>
@@ -1396,13 +1395,13 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/oplit-ds-skills/02_comparaison-3-versions-en-cours.webp" alt="Three versions of the same screen: product reference, build v1, build v2" loading="lazy">
+                    <img src="/src/img/oplit-ds-skills/02_comparaison-3-versions-en-cours.webp" alt="Three versions of the same screen: product reference, build v1, build v2" loading="lazy" width="822" height="1490">
                     <figcaption data-i18n="case.dsskills.fig.versions">The same screen in three states: real product, build v1, build v2. The gap between v1 and v2 is where the craft sits.</figcaption>
                 </figure>
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/oplit-ds-skills/schema-iterations.webp" alt="Iterations: audit, corrective actions, build v1, diagnostic, build v2, autonomous PM use" loading="lazy">
+                    <img src="/src/img/oplit-ds-skills/schema-iterations.webp" alt="Iterations: audit, corrective actions, build v1, diagnostic, build v2, autonomous PM use" loading="lazy" width="1600" height="1281">
                     <figcaption data-i18n="case.dsskills.fig.schema_iter">How we reached the current skills: a clean-room loop where every fact is verified live and every version tested by a blank, memoryless agent.</figcaption>
                 </figure>
             </div>
@@ -1410,7 +1409,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
                 <h3 class="case-section-title" data-i18n="case.section.outcome">Outcome, measured honestly</h3>
                 <div class="case-image case-image--cover">
                     <figure>
-                        <img src="src/img/oplit-ds-skills/05_dashboard-synthese-97-25-10.webp" alt="Live health tracker: Design 97, Dev 25, Product 10" loading="lazy">
+                        <img src="/src/img/oplit-ds-skills/05_dashboard-synthese-97-25-10.webp" alt="Live health tracker: Design 97, Dev 25, Product 10" loading="lazy" width="1600" height="725">
                         <figcaption data-i18n="case.dsskills.fig.dashboard">The live tracker after corrective work: the design side is now solid (97), but product adoption stays low (10). That gap is the case for this project.</figcaption>
                     </figure>
                 </div>
@@ -1418,13 +1417,13 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/oplit-ds-skills/03_flow-en-cours-4-etapes.webp" alt="In-progress flow generated in 4 states" loading="lazy">
+                    <img src="/src/img/oplit-ds-skills/03_flow-en-cours-4-etapes.webp" alt="In-progress flow generated in 4 states" loading="lazy" width="1600" height="281">
                     <figcaption data-i18n="case.dsskills.fig.flow1">A full 4-step flow generated from a brief, with real Form components.</figcaption>
                 </figure>
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/oplit-ds-skills/04_flow-parametres-complet.webp" alt="Full settings flow: 11 screens and 4 modals" loading="lazy">
+                    <img src="/src/img/oplit-ds-skills/04_flow-parametres-complet.webp" alt="Full settings flow: 11 screens and 4 modals" loading="lazy" width="1600" height="911">
                     <figcaption data-i18n="case.dsskills.fig.flow2">11 screens, 4 modals, a whole system, no manual design step.</figcaption>
                 </figure>
             </div>
@@ -1440,7 +1439,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
                 <h3 class="case-section-title" data-i18n="case.section.takeaways">What I keep</h3>
                 <div class="case-image case-image--cover">
                     <figure>
-                        <img src="src/img/oplit-ds-skills/schema-value-chain.webp" alt="The reusable value chain: brief, builder, real components, faithful prototype, handoff that holds" loading="lazy">
+                        <img src="/src/img/oplit-ds-skills/schema-value-chain.webp" alt="The reusable value chain: brief, builder, real components, faithful prototype, handoff that holds" loading="lazy" width="1600" height="729">
                         <figcaption data-i18n="case.dsskills.fig.schema_chain">The reusable value chain: any team with a documented DS can deploy these skills on its own system.</figcaption>
                     </figure>
                 </div>
@@ -1452,7 +1451,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
     <!-- Page: Figma Plugin, Local Components Collector -->
     <section class="page" id="project-figma-plugin">
         <div class="case-study">
-            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
+            <a href="/" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -1531,7 +1530,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
     <!-- Page: Oplit, Opal DS · Audit -->
     <section class="page" id="project-ds-audit">
         <div class="case-study">
-            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
+            <a href="/" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -1569,7 +1568,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/oplit-ds-audit/audit-t0-synthese.webp" alt="Audit synthesis at T0: token maturity, UI/DS debt, no single source of truth, zero Figma-dev parity" loading="lazy">
+                    <img src="/src/img/oplit-ds-audit/audit-t0-synthese.webp" alt="Audit synthesis at T0: token maturity, UI/DS debt, no single source of truth, zero Figma-dev parity" loading="lazy" width="1600" height="1434">
                     <figcaption data-i18n="case.dsaudit.fig.synthese">The audit at T0 (Nov 2025): the global verdict in one screen, with the six structural points it revealed.</figcaption>
                 </figure>
             </div>
@@ -1579,17 +1578,17 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
             </div>
             <div class="case-image-grid">
                 <figure class="case-image">
-                    <img src="src/img/oplit-ds-audit/audit-t0-design.webp" alt="Design debt at audit: foundations coverage and two competing Figma libraries" loading="lazy">
+                    <img src="/src/img/oplit-ds-audit/audit-t0-design.webp" alt="Design debt at audit: foundations coverage and two competing Figma libraries" loading="lazy" width="1600" height="1141">
                     <figcaption data-i18n="case.dsaudit.fig.design">Design debt: foundations coverage (Typography, Shadows, Breakpoints absent) and two competing Figma libraries.</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/oplit-ds-audit/audit-t0-dev.webp" alt="Dev debt at audit: 3 icon libraries, Vuetify bypassed, no Storybook" loading="lazy">
+                    <img src="/src/img/oplit-ds-audit/audit-t0-dev.webp" alt="Dev debt at audit: 3 icon libraries, Vuetify bypassed, no Storybook" loading="lazy" width="1600" height="1003">
                     <figcaption data-i18n="case.dsaudit.fig.dev">Dev debt: 3 icon libraries, Vuetify bypassed with heavy overrides, no Storybook, no shared token repo.</figcaption>
                 </figure>
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/oplit-ds-audit/audit-t0-transverse.webp" alt="Cross-cutting debt: the design-to-dev gap, the most critical finding" loading="lazy">
+                    <img src="/src/img/oplit-ds-audit/audit-t0-transverse.webp" alt="Cross-cutting debt: the design-to-dev gap, the most critical finding" loading="lazy" width="1600" height="725">
                     <figcaption data-i18n="case.dsaudit.fig.transverse">The most critical debt is cross-cutting: no Figma-to-code bridge, no parity, no governance. Design-dev alignment became the top priority.</figcaption>
                 </figure>
             </div>
@@ -1603,7 +1602,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
     <!-- Page: Oplit - Capacity Transfer Between Sectors -->
     <section class="page" id="project-transfer">
         <div class="case-study">
-            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
+            <a href="/" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -1645,7 +1644,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
                 <div data-i18n-html="case.transfer.research_discovery"></div>
             </div>
             <figure class="case-image case-image--cover">
-                <img src="src/img/oplit-capacity-transfer/decision-flow-diagram.webp" alt="Decision flow diagram, load rate and stock verification logic" loading="lazy">
+                <img src="/src/img/oplit-capacity-transfer/decision-flow-diagram.webp" alt="Decision flow diagram, load rate and stock verification logic" loading="lazy" width="1600" height="540">
                 <figcaption>Decision flow, Manufacturing tab → Stock tab, load rate OK/NOK and stock OK/NOK conditions</figcaption>
             </figure>
             <div class="case-section">
@@ -1661,25 +1660,25 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
                 <div data-i18n-html="case.transfer.design_solution"></div>
             </div>
             <figure class="case-image case-image--cover">
-                <img src="src/img/oplit-capacity-transfer/four1-overloaded.webp" alt="Sector at 200% load rate, stock view with rupture alerts and production targets" loading="lazy">
+                <img src="/src/img/oplit-capacity-transfer/four1-overloaded.webp" alt="Sector at 200% load rate, stock view with rupture alerts and production targets" loading="lazy" width="1600" height="1381">
                 <figcaption>Before transfer, Sector 1 at 200% load rate, stock rupture alert, production targets</figcaption>
             </figure>
             <figure class="case-image case-image--cover">
-                <img src="src/img/oplit-capacity-transfer/transfer-modal.webp" alt="Transfer modal, destination selection with load rate display" loading="lazy">
+                <img src="/src/img/oplit-capacity-transfer/transfer-modal.webp" alt="Transfer modal, destination selection with load rate display" loading="lazy" width="1494" height="1012">
                 <figcaption>Transfer modal, pre-filled info, destination selection with current load rate (15%)</figcaption>
             </figure>
             <div class="case-image-grid">
                 <figure class="case-image">
-                    <img src="src/img/oplit-capacity-transfer/four1-after-transfer.webp" alt="Sector 1 after transfer, partial transfer tag and adjusted production target" loading="lazy">
+                    <img src="/src/img/oplit-capacity-transfer/four1-after-transfer.webp" alt="Sector 1 after transfer, partial transfer tag and adjusted production target" loading="lazy" width="1600" height="1442">
                     <figcaption>After transfer, Sector 1: "Partial transfer" tag, "To Sector 2 ↗" link, target adjusted from 90 to 45</figcaption>
                 </figure>
                 <figure class="case-image">
-                    <img src="src/img/oplit-capacity-transfer/four2-received-transfer.webp" alt="Sector 2 after transfer, received transfer tag with hatched stock bars" loading="lazy">
+                    <img src="/src/img/oplit-capacity-transfer/four2-received-transfer.webp" alt="Sector 2 after transfer, received transfer tag with hatched stock bars" loading="lazy" width="1600" height="1333">
                     <figcaption>After transfer, Sector 2: "Transfer received" tag, "From Sector 1 ↗" link, hatched stock bars</figcaption>
                 </figure>
             </div>
             <figure class="case-image case-image--cover">
-                <img src="src/img/oplit-capacity-transfer/capacity-transfer-full-board.webp" alt="Full design board, all sections organized" loading="lazy">
+                <img src="/src/img/oplit-capacity-transfer/capacity-transfer-full-board.webp" alt="Full design board, all sections organized" loading="lazy" width="1600" height="582">
                 <figcaption>Design board overview, Stocks, Sector origin, Transfer adjustments, Actions, Sector destination</figcaption>
             </figure>
             <div class="case-section">
@@ -1692,7 +1691,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
     <!-- Page: Oplit, Multi-select & Sticky Action Bar -->
     <section class="page" id="project-multiselect">
         <div class="case-study">
-            <a href="#landing" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
+            <a href="/" class="case-back" data-page="landing" data-i18n="case.back">← Back to projects</a>
             <header class="case-header">
                 <div class="case-meta">
                     <span class="who-label" data-i18n="case.label">Case Study</span>
@@ -1746,11 +1745,11 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
                 <div data-i18n-html="case.multi.design_solution"></div>
             </div>
             <figure class="case-image case-image--cover">
-                <img src="src/img/oplit-multiselect-stickybar/Suivi%20d'avancement.webp" alt="Multi-select across Suivi d'avancement cards (per PDC, multi-PDC, status update) and Gantt view" loading="lazy">
+                <img src="/src/img/oplit-multiselect-stickybar/Suivi%20d'avancement.webp" alt="Multi-select across Suivi d'avancement cards (per PDC, multi-PDC, status update) and Gantt view" loading="lazy" width="1600" height="751">
                 <figcaption>Multi-select in context, Suivi d'avancement (cards) per PDC, multi-PDC, status update · Gantt view</figcaption>
             </figure>
             <figure class="case-image case-image--cover">
-                <img src="src/img/oplit-multiselect-stickybar/Stickybar.webp" alt="Sticky action bar, annotated specifications" loading="lazy">
+                <img src="/src/img/oplit-multiselect-stickybar/Stickybar.webp" alt="Sticky action bar, annotated specifications" loading="lazy" width="1600" height="524">
                 <figcaption>Sticky action bar, annotated specs: full bar, capacity-aware variant, secondary actions menu, loading state</figcaption>
             </figure>
             <div class="case-section">
@@ -1759,7 +1758,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
             </div>
             <div class="case-image case-image--cover">
                 <figure>
-                    <img src="src/img/oplit-multiselect-stickybar/Capture_d_e_cran_2026-05-18_a__16_41_04.webp" alt="Mixpanel dashboard, Multi-select usage by action type over 30 days" loading="lazy">
+                    <img src="/src/img/oplit-multiselect-stickybar/Capture_d_e_cran_2026-05-18_a__16_41_04.webp" alt="Mixpanel dashboard, Multi-select usage by action type over 30 days" loading="lazy" width="1600" height="758">
                     <figcaption>Mixpanel, Multi-select usage by action type (30 days) + distribution by client/user (2,250 total)</figcaption>
                 </figure>
             </div>
@@ -1805,6 +1804,6 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
         </div>
     </footer>
 
-    <script src="main.js"></script>
+    <script src="/main.js"></script>
 </body>
 </html>

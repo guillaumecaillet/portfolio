@@ -1,9 +1,202 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.guillaumecaillet.fr/</loc>
-    <lastmod>2026-06-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/"/>
+    <lastmod>2026-07-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/who/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/who/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/who/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/who/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/fr/who/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/who/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/who/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/who/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/projects/opal-ds-ai-prototyping-skills/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/opal-ds-ai-prototyping-skills/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/opal-ds-ai-prototyping-skills/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/opal-ds-ai-prototyping-skills/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/fr/projects/opal-ds-ai-prototyping-skills/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/opal-ds-ai-prototyping-skills/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/opal-ds-ai-prototyping-skills/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/opal-ds-ai-prototyping-skills/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/projects/opal-ds-corrective-actions/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/opal-ds-corrective-actions/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/opal-ds-corrective-actions/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/opal-ds-corrective-actions/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/fr/projects/opal-ds-corrective-actions/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/opal-ds-corrective-actions/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/opal-ds-corrective-actions/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/opal-ds-corrective-actions/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/projects/multiselect-sticky-action-bar/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/multiselect-sticky-action-bar/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/multiselect-sticky-action-bar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/multiselect-sticky-action-bar/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/fr/projects/multiselect-sticky-action-bar/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/multiselect-sticky-action-bar/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/multiselect-sticky-action-bar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/multiselect-sticky-action-bar/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/projects/figma-plugin-local-components-collector/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/figma-plugin-local-components-collector/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/figma-plugin-local-components-collector/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/figma-plugin-local-components-collector/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/fr/projects/figma-plugin-local-components-collector/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/figma-plugin-local-components-collector/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/figma-plugin-local-components-collector/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/figma-plugin-local-components-collector/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/projects/opal-ds-audit/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/opal-ds-audit/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/opal-ds-audit/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/opal-ds-audit/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/fr/projects/opal-ds-audit/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/opal-ds-audit/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/opal-ds-audit/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/opal-ds-audit/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/projects/prestashop-design-system/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/prestashop-design-system/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/prestashop-design-system/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/prestashop-design-system/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/fr/projects/prestashop-design-system/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/prestashop-design-system/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/prestashop-design-system/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/prestashop-design-system/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/projects/prestashop-customer-account/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/prestashop-customer-account/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/prestashop-customer-account/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/prestashop-customer-account/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/fr/projects/prestashop-customer-account/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/prestashop-customer-account/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/prestashop-customer-account/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/prestashop-customer-account/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/projects/prestashop-signin-signup/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/prestashop-signin-signup/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/prestashop-signin-signup/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/prestashop-signin-signup/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/fr/projects/prestashop-signin-signup/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/prestashop-signin-signup/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/prestashop-signin-signup/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/prestashop-signin-signup/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/projects/prestashop-store-association/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/prestashop-store-association/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/prestashop-store-association/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/prestashop-store-association/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.guillaumecaillet.fr/fr/projects/prestashop-store-association/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.guillaumecaillet.fr/projects/prestashop-store-association/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.guillaumecaillet.fr/fr/projects/prestashop-store-association/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.guillaumecaillet.fr/projects/prestashop-store-association/"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
