@@ -1190,6 +1190,13 @@ body.landing-active .cursor-trail span {
     transform: scale(1.02);
 }
 
+.case-video video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius);
+}
+
 .case-image-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
