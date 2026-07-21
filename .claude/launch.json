@@ -6,6 +6,24 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["serve", "-l", "4242", "."],
       "port": 4242
+    },
+    {
+      "name": "folio-ds-demo",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-l", "4243", "/Users/guillaumecaillet/Documents/Perso/Dev/Portfolio/folio-26/design-system"],
+      "port": 4243
+    },
+    {
+      "name": "freelance-lp",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-l", "4244", "/Users/guillaumecaillet/Documents/Perso/Dev/Portfolio/folio-26"],
+      "port": 4244
+    },
+    {
+      "name": "folio-ds-storybook",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "storybook", "--prefix", "/Users/guillaumecaillet/Documents/Perso/Dev/Portfolio/folio-26/design-system", "--", "--no-open"],
+      "port": 6006
     }
   ]
 }

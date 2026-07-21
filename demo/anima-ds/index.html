@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Accompagnement Design System — Guillaume Caillet</title>
+  <meta name="description" content="J'aide les SaaS B2B et les petites équipes design à structurer, faire vivre et déployer leur design system — du diagnostic à l'autonomie." />
+  <!-- Démo non référencée : hors index, hors sitemap -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Folio DS: self-hosted fonts + tokens + web components (bundled locally for this demo) -->
+  <link rel="stylesheet" href="./vendor/fonts/fonts.css" />
+  <link rel="stylesheet" href="./vendor/tokens.css" />
+  <link rel="stylesheet" href="./lp.css" />
+  <script type="module" src="./vendor/folio-ds.js"></script>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ===== Topbar ===== -->
+  <header class="topbar" id="topbar">
+    <div class="wrap topbar-inner">
+      <span class="brand">Anima<b>DS</b></span>
+      <nav class="topbar-nav">
+        <folio-link href="#offres" variant="nav">Offres</folio-link>
+        <folio-link href="#abo" variant="nav">Abonnement</folio-link>
+        <folio-link href="#methode" variant="nav">Méthode</folio-link>
+        <folio-theme-toggle></folio-theme-toggle>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ===== Hero ===== -->
+    <section class="hero" id="top">
+      <folio-section-title class="reveal" data-reveal>Accompagnement Design System</folio-section-title>
+      <h1 class="hero-title">
+        <span class="line" data-line="0">Un design system qui <span class="hl">sert</span>,</span>
+        <span class="line" data-line="1">tous les jours, à toute l'équipe.</span>
+      </h1>
+      <p class="hero-lede reveal" data-reveal>
+        J'aide les <strong>SaaS B2B</strong> et les petites équipes design à structurer, faire vivre
+        et déployer leur design system — puis à embarquer toute l'équipe autour.
+      </p>
+      <div class="hero-cta reveal" data-reveal>
+        <folio-button variant="card" href="#contact">Réserver un échange&nbsp;↗</folio-button>
+        <folio-button variant="ghost" href="#offres">Voir les offres</folio-button>
+      </div>
+    </section>
+
+    <!-- ===== Pour qui ===== -->
+    <section class="sec" id="pour-qui">
+      <div class="sec-head reveal" data-reveal>
+        <folio-section-title dim>Pour qui</folio-section-title>
+        <h2>Vous grandissez, votre interface diverge.</h2>
+        <p>
+          Un design system n'est pas une librairie Figma de plus, c'est ce qui fait que design et dev
+          parlent la même langue et qu'on arrête de recoder trois fois le même bouton.
+          <strong>Votre dev vous en parle déjà ? C'est le signal.</strong>
+        </p>
+      </div>
+
+      <div class="audience" data-reveal-group>
+        <div class="audience-cell" data-reveal>
+          <strong>SaaS B2B en croissance</strong>
+          <span>L'UI part dans tous les sens à mesure que l'équipe grandit.</span>
+        </div>
+        <div class="audience-cell" data-reveal>
+          <strong>Équipes seed → série B</strong>
+          <span>10 à 80 personnes, ≥ 2 devs front, pas encore de culture design system.</span>
+        </div>
+        <div class="audience-cell" data-reveal>
+          <strong>Petites équipes design</strong>
+          <span>1 à 5 personnes qui veulent monter en maturité sans recruter un·e lead.</span>
+        </div>
+        <div class="audience-cell" data-reveal>
+          <strong>DS en sommeil</strong>
+          <span>Un « début de design system » abandonné, à relancer.</span>
+        </div>
+      </div>
+
+      <p class="cost-note reveal" data-reveal>
+        <span class="cost-k">Le coût caché</span>
+        3 devs front qui perdent ~15 % de leur temps en rework UI, c'est <b>~100 jours-dev / an</b>,
+        soit <b>45 à 60 k€</b>. Un design system, c'est d'abord ça que vous récupérez.
+      </p>
+
+      <div class="flow reveal" data-reveal aria-label="Fil rouge de l'accompagnement">
+        <span class="flow-label">Fil rouge</span>
+        <b>Structurer</b><i>→</i><b>Utiliser</b><i>→</i><b>Déployer</b><i>→</i><b>Évangéliser</b>
+      </div>
+    </section>
+
+    <!-- ===== Preuve ===== -->
+    <section class="sec" id="preuve">
+      <div class="sec-head reveal" data-reveal>
+        <folio-section-title dim>Preuve</folio-section-title>
+        <h2>Dernier terrain : Oplit, SaaS industriel.</h2>
+        <p>
+          Design system repris, reconstruit et structuré pour les workflows IA. Résultat : un PM livre
+          un prototype client en une matinée, sans étape de design manuelle — et l'équipe design
+          exécute 30 à 50 % plus vite.
+        </p>
+      </div>
+      <div class="stats" data-reveal-group>
+        <folio-stat data-reveal data-count value="+74 %" label="utilisateurs actifs (430 → 747)"></folio-stat>
+        <folio-stat data-reveal value="30–50 %" label="d'exécution design en moins"></folio-stat>
+        <folio-stat data-reveal data-count value="44" label="composants structurés et documentés pour l'IA"></folio-stat>
+      </div>
+    </section>
+
+    <!-- ===== Les offres ===== -->
+    <section class="sec" id="offres">
+      <div class="sec-head reveal" data-reveal>
+        <folio-section-title dim>Les offres</folio-section-title>
+        <h2>Quatre façons d'avancer, du diagnostic à l'autonomie.</h2>
+      </div>
+
+      <div class="offers" data-reveal-group>
+        <article class="offer" data-reveal>
+          <div class="offer-num"><span class="offer-num-b">01</span></div>
+          <div class="offer-body">
+            <h3>Diagnostic Design System</h3>
+            <p class="offer-promise">En 2 à 3 semaines, vous savez où vous en êtes et quoi faire.</p>
+            <ul>
+              <li>Audit produit, Figma, tokens, lien design ↔ code</li>
+              <li>Revue accessibilité (RGAA / EAA)</li>
+              <li>Roadmap priorisée + proposition de structure</li>
+            </ul>
+          </div>
+          <div class="offer-price"><span class="amt">4 500 – 6 000 €</span><span class="unit">forfait · 2–3 sem.</span></div>
+        </article>
+
+        <article class="offer" data-reveal>
+          <div class="offer-num"><span class="offer-num-b">02</span></div>
+          <div class="offer-body">
+            <h3>Conception &amp; Implémentation</h3>
+            <p class="offer-promise">Un design system solide, documenté et connecté au code.</p>
+            <ul>
+              <li>Fondations &amp; tokens (Figma variables, DTCG, modes)</li>
+              <li>Composants, doc, gouvernance</li>
+              <li>Connexion au code (Code Connect) + accessibilité by design</li>
+              <li class="ex">Ex. type : SaaS 15 pers., ~25 composants, 3 mois ≈ 22 k€</li>
+            </ul>
+          </div>
+          <div class="offer-price"><span class="amt">10 – 50 k€</span><span class="unit">forfait ou TJM · 1–6 mois</span></div>
+        </article>
+
+        <article class="offer" data-reveal>
+          <div class="offer-num"><span class="offer-num-b">03</span></div>
+          <div class="offer-body">
+            <folio-tag>Abonnement</folio-tag>
+            <h3>Design System as a Service</h3>
+            <p class="offer-promise">Un·e responsable DS senior à temps partiel sans le coût d'un recrutement.</p>
+            <ul>
+              <li>Le DS évolue chaque mois, la dette recule</li>
+              <li>Coaching de l'équipe &amp; déploiement continu</li>
+              <li>Ateliers d'évangélisation, onboarding des nouveaux</li>
+            </ul>
+          </div>
+          <div class="offer-price"><span class="amt">dès ~1 100 €</span><span class="unit">/ mois · voir paliers ↓</span></div>
+        </article>
+
+        <article class="offer" data-reveal>
+          <div class="offer-num"><span class="offer-num-b">04</span></div>
+          <div class="offer-body">
+            <h3>Formations &amp; Workshops</h3>
+            <p class="offer-promise">Votre équipe repart avec des méthodes concrètes, pas des slides.</p>
+            <ul>
+              <li>Fondamentaux DS · Tokens &amp; variables Figma</li>
+              <li>Contribuer au DS · Design ↔ Dev · Accessibilité</li>
+              <li>Présentiel ou distanciel, design ET dev</li>
+            </ul>
+          </div>
+          <div class="offer-price"><span class="amt">1 500 €</span><span class="unit">/ session (4h)</span></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Abonnement · DSaaS ===== -->
+    <section class="sec" id="abo">
+      <div class="sec-head reveal" data-reveal>
+        <folio-section-title dim>Abonnement · DSaaS</folio-section-title>
+        <h2>La continuité, calée sur votre maturité.</h2>
+        <p>
+          Un design system n'est jamais « terminé ». Sans quelqu'un pour le faire vivre, il se périme
+          en quelques mois. Trois paliers, ajustables chaque trimestre.
+        </p>
+      </div>
+
+      <div class="tiers" data-reveal-group>
+        <article class="tier" data-reveal>
+          <h3 class="tier-name">Essentiel</h3>
+          <p class="tier-for">Garder un DS en vie et cohérent.</p>
+          <folio-stat variant="plain" value="~1 100 €" label="/ mois · ~2 j / mois"></folio-stat>
+          <ul>
+            <li>Évolution &amp; maintenance</li>
+            <li>Scorecard mensuelle (dette · couverture · adoption)</li>
+            <li>Point de suivi mensuel</li>
+            <li class="off">Coaching équipe</li>
+            <li class="off">Ateliers d'évangélisation</li>
+          </ul>
+          <div class="tier-cta"><folio-button variant="ghost" href="#contact">Réserver un échange →</folio-button></div>
+        </article>
+
+        <article class="tier tier--featured" data-reveal>
+          <folio-badge tone="accent">Le plus choisi</folio-badge>
+          <h3 class="tier-name">Croissance</h3>
+          <p class="tier-for">Faire adopter le DS à toute l'équipe.</p>
+          <folio-stat variant="plain" value="~2 100 €" label="/ mois · ~4 j / mois"></folio-stat>
+          <ul>
+            <li>Tout Essentiel, plus :</li>
+            <li>Coaching équipe (design &amp; dev)</li>
+            <li>Déploiement &amp; gouvernance</li>
+            <li>1 atelier / trimestre</li>
+            <li>Canal Slack dédié</li>
+          </ul>
+          <div class="tier-cta"><folio-button variant="ghost" href="#contact">Réserver un échange →</folio-button></div>
+        </article>
+
+        <article class="tier" data-reveal>
+          <h3 class="tier-name">Scale</h3>
+          <p class="tier-for">Passer à l'échelle (multi-équipe / multi-marque).</p>
+          <folio-stat variant="plain" value="~4 000 €" label="/ mois · ~8 j / mois"></folio-stat>
+          <ul>
+            <li>Tout Croissance, plus :</li>
+            <li>Suivi hebdomadaire</li>
+            <li>1 atelier / mois</li>
+            <li>Slack prioritaire</li>
+            <li>Multi-marque / theming</li>
+          </ul>
+          <div class="tier-cta"><folio-button variant="ghost" href="#contact">Réserver un échange →</folio-button></div>
+        </article>
+      </div>
+
+      <p class="degressif reveal" data-reveal>
+        Tarif dégressif avec l'engagement : <b>600 €/j</b> en ponctuel → <b>~550 €/j</b> en Essentiel
+        → <b>~525 €/j</b> en Croissance → <b>~500 €/j</b> en Scale. Plus vous vous engagez, moins la
+        journée coûte. Abonnement sans engagement au-delà du trimestre en cours.
+      </p>
+
+      <div class="vs" data-reveal-group>
+        <div class="vs-card" data-reveal>
+          <folio-section-title dim>Abonnement vs. TJM ponctuel</folio-section-title>
+          <folio-contact-row label="Coût" value="Lissé et prévisible"></folio-contact-row>
+          <folio-contact-row label="Adoption" value="S'installe dans la durée"></folio-contact-row>
+          <folio-contact-row label="Votre équipe" value="Monte en compétence"></folio-contact-row>
+        </div>
+        <div class="vs-card" data-reveal>
+          <folio-section-title dim>Abonnement vs. recrutement</folio-section-title>
+          <folio-contact-row label="Coût / an" value="dès ~13 k€ vs. 70–90 k€"></folio-contact-row>
+          <folio-contact-row label="Délai" value="1 semaine vs. 3–6 mois"></folio-contact-row>
+          <folio-contact-row label="Séniorité" value="Senior dès le jour 1"></folio-contact-row>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== À la carte ===== -->
+    <section class="sec" id="carte">
+      <div class="sec-head reveal" data-reveal>
+        <folio-section-title dim>À la carte</folio-section-title>
+        <h2>Un besoin précis ? Choisissez juste ce qu'il vous faut.</h2>
+      </div>
+      <table class="alc reveal" data-reveal>
+        <tbody>
+          <tr><td>Audit express</td><td>Analyse de l'existant + rapport de recommandations (2 j + synthèse)</td><td>dès 1 500 €</td></tr>
+          <tr><td>Formation seule</td><td>Session DS de 4h, présentiel ou distanciel</td><td>1 500 €</td></tr>
+          <tr><td>Maintenance mensuelle</td><td>Ajouts, doc, support ponctuel (réactif)</td><td>500 € / mois</td></tr>
+          <tr><td>Tokens — config initiale</td><td>Fondations (raw values + options)</td><td>1 000 €</td></tr>
+          <tr><td>Tokens — à la volée</td><td>Audit tokens 500 € + fondations 1 000 €</td><td>+100 € / composant</td></tr>
+          <tr><td>TJM hors pack</td><td>Ponctuel sans engagement : mission sur-mesure ou jours au-delà du palier</td><td>600 € / j</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== Et l'IA ? ===== -->
+    <section class="sec" id="ia">
+      <div class="sec-head reveal" data-reveal>
+        <folio-section-title dim>Et l'IA ?</folio-section-title>
+        <h2>« On a shadcn/UI et l'IA générative. » Justement.</h2>
+      </div>
+      <div class="ia-body reveal" data-reveal>
+        <p>
+          Un kit vous donne des composants, pas des décisions : pas de tokens tranchés, pas de règles
+          d'usage, pas de gouvernance. Chaque dev fork sa variante, et la divergence revient — plus vite.
+        </p>
+        <p>
+          L'IA amplifie le phénomène : elle génère dans le style qu'on lui donne. Sans système structuré,
+          elle produit de l'incohérence à la vitesse de la machine. Avec un design system documenté, elle
+          devient une <strong>usine à écrans justes</strong>.
+        </p>
+        <p>
+          C'est le cœur de ma pratique : structurer votre système pour que vos outils — humains et IA —
+          produisent juste.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Méthode ===== -->
+    <section class="sec" id="methode">
+      <div class="sec-head reveal" data-reveal>
+        <folio-section-title dim>Méthode</folio-section-title>
+        <h2>Comment nous travaillons ensemble.</h2>
+      </div>
+      <div class="steps" data-reveal-group>
+        <div class="step" data-reveal>
+          <span class="step-n">01</span>
+          <strong>Échange (30 min)</strong>
+          <span>Gratuit. On cadre votre contexte et votre besoin réel.</span>
+        </div>
+        <div class="step" data-reveal>
+          <span class="step-n">02</span>
+          <strong>Proposition</strong>
+          <span>L'offre la plus adaptée — souvent le Diagnostic en porte d'entrée.</span>
+        </div>
+        <div class="step" data-reveal>
+          <span class="step-n">03</span>
+          <strong>On avance</strong>
+          <span>Mission ponctuelle ou accompagnement récurrent.</span>
+        </div>
+        <div class="step" data-reveal>
+          <span class="step-n">04</span>
+          <strong>Transfert</strong>
+          <span>Objectif : rendre votre équipe autonome.</span>
+        </div>
+      </div>
+    </section>
+    <!-- ===== Recommandeur ===== -->
+    <section class="sec" id="besoin">
+      <div class="sec-head reveal" data-reveal>
+        <folio-section-title dim>Par où commencer ?</folio-section-title>
+        <h2>Dites-moi votre situation, je vous oriente.</h2>
+        <p>Pas sûr de l'offre ? Choisissez ce qui vous ressemble le plus — vous obtenez une indication d'offre et de budget, puis on en parle de vive voix.</p>
+      </div>
+
+      <div class="reco-tool reveal" data-reveal>
+        <div class="fdrop" data-dropdown>
+          <button type="button" class="fdrop-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Votre situation">
+            <span class="fdrop-value is-placeholder">Choisissez votre situation…</span>
+            <span class="fdrop-arrow" aria-hidden="true">▾</span>
+          </button>
+          <ul class="fdrop-list" role="listbox" aria-label="Situations" tabindex="-1" hidden>
+            <li class="fdrop-opt" role="option" aria-selected="false" data-offer="diagnostic">On démarre, pas encore de design system</li>
+            <li class="fdrop-opt" role="option" aria-selected="false" data-offer="conception">Notre UI diverge, on veut la structurer</li>
+            <li class="fdrop-opt" role="option" aria-selected="false" data-offer="essentiel">Le DS existe, mais personne ne le maintient</li>
+            <li class="fdrop-opt" role="option" aria-selected="false" data-offer="croissance">On veut que toute l'équipe l'adopte</li>
+            <li class="fdrop-opt" role="option" aria-selected="false" data-offer="scale">Multi-équipe / multi-marque, à l'échelle</li>
+            <li class="fdrop-opt" role="option" aria-selected="false" data-offer="formation">Je veux juste former mon équipe</li>
+            <li class="fdrop-opt" role="option" aria-selected="false" data-offer="carte">Un besoin ponctuel et précis</li>
+          </ul>
+        </div>
+
+        <div class="reco" hidden aria-live="polite">
+          <span class="reco-k">Recommandation</span>
+          <h3 class="reco-offer"></h3>
+          <p class="reco-price"></p>
+          <p class="reco-note"></p>
+          <ul class="reco-points"></ul>
+          <p class="reco-invite"></p>
+          <div class="reco-cta-row">
+            <folio-button variant="card" href="#contact" class="reco-cta">Réserver un échange de 30 min ↗</folio-button>
+            <span class="reco-cta-hint">Gratuit, sans engagement</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer CTA ===== -->
+  <footer class="foot" id="contact">
+    <div class="wrap foot-inner">
+      <folio-section-title dim class="reveal" data-reveal>On en parle ?</folio-section-title>
+      <h2 class="reveal" data-reveal>Voyons où en est votre design system.</h2>
+      <div class="foot-contact reveal" data-reveal>
+        <folio-contact-row label="RDV" value="Réserver un créneau" href="https://calendly.com/guillaume-caillet" target="_blank"></folio-contact-row>
+        <folio-contact-row label="Email" value="contact@guillaumecaillet.fr" href="mailto:contact@guillaumecaillet.fr"></folio-contact-row>
+        <folio-contact-row label="Réseaux" value="LinkedIn · Malt · Shine"></folio-contact-row>
+      </div>
+      <p class="foot-note reveal" data-reveal>
+        Tarifs indicatifs : engagement sur un livrable de qualité, non sur une temporalité.
+      </p>
+    </div>
+  </footer>
+
+  <script src="./lp.js" type="module"></script>
+</body>
+</html>
