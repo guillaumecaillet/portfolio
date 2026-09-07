@@ -153,21 +153,23 @@
     const NOINDEX_PAGES = new Set(['project-transfer', 'project-expert-experience']);
     const ORIGIN = 'https://www.guillaumecaillet.fr';
 
+    // French is the base language (root paths, no prefix) since this is a
+    // .fr domain; English is the alternate, prefixed with /en.
     function langPrefix() {
-        return document.documentElement.lang.toLowerCase().startsWith('fr') ? '/fr' : '';
+        return document.documentElement.lang.toLowerCase().startsWith('en') ? '/en' : '';
     }
     function pathForPage(pageId) {
         const path = ROUTES[pageId] || '/';
         const prefixed = langPrefix() + path;
-        return prefixed === '/fr/' ? '/fr/' : prefixed;
+        return prefixed === '/en/' ? '/en/' : prefixed;
     }
     function pageForPath(pathname) {
         let p = pathname;
-        let fr = false;
-        if (p === '/fr' || p.startsWith('/fr/')) { fr = true; p = p.slice(3) || '/'; }
+        let en = false;
+        if (p === '/en' || p.startsWith('/en/')) { en = true; p = p.slice(3) || '/'; }
         if (!p.endsWith('/')) p += '/';
         if (p === '//') p = '/';
-        return { page: PATH_TO_PAGE[p] || null, fr };
+        return { page: PATH_TO_PAGE[p] || null, en };
     }
 
     // Per-page document titles (used for browser tab + SEO).
@@ -241,9 +243,9 @@
     };
 
     function updatePageTitle(pageId) {
-        const fr = langPrefix() === '/fr';
-        const titles = fr ? PAGE_TITLES_FR : PAGE_TITLES;
-        const metas  = fr ? PAGE_META_FR  : PAGE_META;
+        const en = langPrefix() === '/en';
+        const titles = en ? PAGE_TITLES : PAGE_TITLES_FR;
+        const metas  = en ? PAGE_META   : PAGE_META_FR;
         const t = titles[pageId] || titles.landing;
         document.title = t;
         // Sync meta description + open graph
@@ -351,7 +353,10 @@
 
     // Handle browser back/forward
     window.addEventListener('popstate', () => {
-        const { page } = pageForPath(location.pathname);
+        const { page, en } = pageForPath(location.pathname);
+        // The URL may cross a language boundary (e.g. /en/projects/... -> /projects/...);
+        // resync the active language without touching the URL the browser just set.
+        if (typeof setLang === 'function') setLang(en ? 'en' : 'fr', { syncUrl: false });
         if (page) {
             navigateTo(page);
         } else {
@@ -363,7 +368,7 @@
 
     // Soft 404 toast - shown when the user lands on or navigates to an unknown hash.
     function showFallbackToast(missingHash) {
-        const fr = langPrefix() === '/fr';
+        const fr = langPrefix() !== '/en';
         const msg = fr
             ? `Cette page n'existe plus, retour à l'accueil.`
             : `That page doesn't exist anymore, back to the home page.`;
@@ -385,9 +390,9 @@
     // Legacy #hash URLs are upgraded to their real path (301-like, via replaceState).
     (function initialRoute() {
         let target = null;
-        const { page, fr } = pageForPath(location.pathname);
+        const { page, en } = pageForPath(location.pathname);
         const legacyHash = location.hash.slice(1);
-        if (fr) document.documentElement.lang = 'fr-FR';
+        document.documentElement.lang = en ? 'en' : 'fr-FR';
         if (legacyHash && ROUTES[legacyHash]) {
             target = legacyHash; // old #hash link takes precedence, upgraded to its path
         } else if (page) {
@@ -1331,13 +1336,13 @@
     };
 
     // Detect browser language as fallback when no preference is stored.
-    const browserLang = (navigator.language || navigator.userLanguage || 'en')
+    const browserLang = (navigator.language || navigator.userLanguage || 'fr')
         .toLowerCase().startsWith('fr') ? 'fr' : 'en';
-    // URL prefix wins (/fr/... is the French version), then stored preference, then browser.
-    const urlLang = (location.pathname === '/fr' || location.pathname.startsWith('/fr/')) ? 'fr' : null;
+    // URL prefix wins (/en/... is the English version), then stored preference, then browser.
+    const urlLang = (location.pathname === '/en' || location.pathname.startsWith('/en/')) ? 'en' : null;
     let currentLang = urlLang || localStorage.getItem('folio-lang') || browserLang;
 
-    function setLang(lang) {
+    function setLang(lang, { syncUrl = true } = {}) {
         if (!TRANSLATIONS[lang]) return;
         currentLang = lang;
         localStorage.setItem('folio-lang', lang);
@@ -1365,8 +1370,9 @@
             else btn.removeAttribute('aria-current');
         });
 
-        // Keep the URL prefix (/fr) and canonical/og:url in sync with the language.
-        if (typeof pathForPage === 'function' && typeof currentPage !== 'undefined') {
+        // Keep the URL prefix (/en) and canonical/og:url in sync with the language.
+        // Skipped when called from popstate: the browser already owns the URL there.
+        if (syncUrl && typeof pathForPage === 'function' && typeof currentPage !== 'undefined') {
             history.replaceState({ page: currentPage }, '', pathForPage(currentPage));
             updatePageTitle(currentPage);
         }
