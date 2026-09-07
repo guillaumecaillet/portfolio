@@ -1,11 +1,40 @@
 (() => {
     'use strict';
 
-    // --- Boot: reveal landing content ---
-    setTimeout(() => {
-        document.body.classList.remove('loading');
-        revealTitle();
-    }, 120);
+    // --- Boot: dotmatrix sparkle loader, then reveal landing content ---
+    (() => {
+        const overlay = document.getElementById('boot-loader');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function finishBoot() {
+            document.body.classList.remove('loading');
+            revealTitle();
+            if (overlay) {
+                overlay.classList.add('hide');
+                overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+            }
+        }
+
+        if (!overlay || reduceMotion || typeof DotMatrixLoader === 'undefined') {
+            if (overlay) overlay.remove();
+            setTimeout(finishBoot, 120);
+            return;
+        }
+
+        DotMatrixLoader.createLoader('#boot-loader-dots', {
+            pattern: 'sparkle',
+            size: 7,
+            dotSize: 7,
+            gap: 5,
+            duration: 1.1,
+            colorOn: 'var(--text)',
+            colorOff: 'var(--border)',
+            minOpacity: 0.15,
+            shape: 'circle',
+        });
+
+        setTimeout(finishBoot, 2500);
+    })();
 
     // --- Blur reveal ---
     function revealTitle() {
@@ -1442,373 +1471,5 @@
     }
     tickFooterClock();
     setInterval(tickFooterClock, 30000);
-
-    // ===================================
-    // Projects list - floating "memory card" cover on hover.
-    // One generated template per project: same structure, deterministic
-    // ASCII motif seeded by the project slug. Desktop pointers only.
-    // ===================================
-    const COVER_DATA = {
-        'project-ds-skills':        { metricKey: 'case.dsskills.metric1.value' },
-        'project-ds-execution':     { metricKey: 'case.dsexec.metric2.value' },
-        'project-multiselect':      { metricKey: 'case.multi.metric1.value', suffix: ' actions' },
-        'project-figma-plugin':     { metricKey: 'case.plugin.metric1.value' },
-        'project-ds-audit':         { metricKey: 'case.dsaudit.metric3.value' },
-        'project-transfer':         { metricKey: 'case.transfer.metric3.value' },
-        'project-expert-experience':{ metricKey: 'case.expert.metric1.value' },
-        'project-design-system':    { metricKey: 'case.ds.metric3.value' },
-        'project-customer-account': { metricKey: 'case.ca.metric1.value' },
-        'project-signin':           { metricKey: 'case.si.metric1.value' },
-        'project-store-association':{ metricKey: 'case.sa.metric1.value' }
-    };
-
-    const finePointer = window.matchMedia('(pointer: fine)').matches;
-
-    if (finePointer && !reduceMotion) {
-        const preview = document.createElement('div');
-        preview.className = 'project-preview';
-        preview.innerHTML =
-            '<div class="cover-card">' +
-                '<div class="cover-code"></div>' +
-                '<div class="cover-title"></div>' +
-                '<div class="cover-metric"></div>' +
-                '<div class="cover-icon" aria-hidden="true"></div>' +
-            '</div>';
-        document.body.appendChild(preview);
-
-        const coverCodeEl   = preview.querySelector('.cover-code');
-        const coverMetricEl = preview.querySelector('.cover-metric');
-        const coverTitleEl  = preview.querySelector('.cover-title');
-        const coverIconEl   = preview.querySelector('.cover-icon');
-
-        // Soft-pixel mass, Manoeuvres-style: a deterministic skyline of
-        // desaturated slate/paper pixels seeded by the project slug.
-        const PIX_PALETTES = {
-            dark:  ['#3c434e', '#57626f', '#7b8b9e', '#a7b3c0', '#cfd0c8'],
-            light: ['#525c69', '#75839a', '#a2adbc', '#c6cbc9', '#e0ddd2']
-        };
-
-        function seededRandom(str) {
-            let h = 2166136261;
-            for (let i = 0; i < str.length; i++) {
-                h ^= str.charCodeAt(i);
-                h = Math.imul(h, 16777619);
-            }
-            return function () {
-                h += 0x6D2B79F5;
-                let t = Math.imul(h ^ (h >>> 15), 1 | h);
-                t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
-                return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-            };
-        }
-
-        const PIX_COLS = 30, PIX_ROWS = 9, PIX_CELL = 10;
-
-        function buildMass(slug) {
-            const rnd = seededRandom(slug);
-            const theme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
-            const pal = PIX_PALETTES[theme];
-            // Column heights: a bounded random walk, flat outside the mass.
-            const start = 2 + Math.floor(rnd() * 3);
-            const end = PIX_COLS - 2 - Math.floor(rnd() * 3);
-            let h = 2 + Math.floor(rnd() * 3);
-            const heights = [];
-            for (let c = 0; c < PIX_COLS; c++) {
-                if (c < start || c > end) { heights.push(0); continue; }
-                h += Math.floor(rnd() * 3) - 1;
-                h = Math.max(1, Math.min(PIX_ROWS - 1, h));
-                heights.push(h);
-            }
-            coverIconEl.style.gridTemplateColumns = `repeat(${PIX_COLS}, 1fr)`;
-            coverIconEl.style.gridAutoRows = PIX_CELL + 'px';
-            coverIconEl.textContent = '';
-            for (let y = 0; y < PIX_ROWS; y++) {
-                for (let x = 0; x < PIX_COLS; x++) {
-                    const cell = document.createElement('i');
-                    if (heights[x] >= (PIX_ROWS - y)) {
-                        const t = rnd();
-                        const idx = t < 0.16 ? 4 : t < 0.34 ? 3 : t < 0.58 ? 2 : (y > PIX_ROWS - 4 ? 0 : 1);
-                        cell.style.background = pal[idx];
-                    }
-                    coverIconEl.appendChild(cell);
-                }
-            }
-        }
-
-        let pvX = 0, pvY = 0, pvTX = 0, pvTY = 0;
-        let pvActive = false;
-
-        document.addEventListener('mousemove', (e) => {
-            pvTX = e.clientX + 28;
-            pvTY = e.clientY - 90;
-        });
-
-        (function animPreview() {
-            pvX += (pvTX - pvX) * 0.14;
-            pvY += (pvTY - pvY) * 0.14;
-            if (pvActive) {
-                const maxX = window.innerWidth - 340;
-                const maxY = window.innerHeight - 240;
-                preview.style.transform =
-                    `translate(${Math.min(pvX, maxX)}px, ${Math.max(12, Math.min(pvY, maxY))}px)`;
-            }
-            requestAnimationFrame(animPreview);
-        })();
-
-        document.querySelectorAll('#landing .project-card').forEach(card => {
-            const slug = card.dataset.page;
-            const data = COVER_DATA[slug];
-            if (!data) return;
-            card.addEventListener('mouseenter', () => {
-                const t = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
-                const company = card.querySelector('.project-company')?.textContent || '';
-                const title = card.querySelector('.project-name')?.textContent || '';
-                const index = card.querySelector('.project-index')?.textContent || '00';
-                coverCodeEl.textContent = `${index} · ${company}`;
-                coverTitleEl.textContent = title;
-                coverMetricEl.textContent = (t[data.metricKey] || '') + (data.suffix || '');
-                buildMass(slug);
-                pvActive = true;
-                preview.classList.add('on');
-            });
-            card.addEventListener('mouseleave', () => {
-                pvActive = false;
-                preview.classList.remove('on');
-            });
-        });
-
-        // Never leave a cover floating after a navigation or click
-        window.addEventListener('hashchange', () => {
-            pvActive = false;
-            preview.classList.remove('on');
-        });
-        document.addEventListener('click', () => {
-            pvActive = false;
-            preview.classList.remove('on');
-        }, true);
-    }
-
-    // --- Pixel skyline: generative PS2-style mass, dissolves on scroll ---
-    (() => {
-        const landing = document.getElementById('landing');
-        const sky = document.querySelector('.pixel-skyline');
-        if (!landing || !sky) return;
-
-        // 32-bit palettes: a shaded body ramp (dark base -> light top), a
-        // highlight, warm/glass windows, and low-contrast haze for the
-        // distant back layer. Slate/paper family, theme-aware.
-        const PAL = {
-            dark: {
-                body: ['#2f3640', '#3c4551', '#4e5a68', '#67788b', '#8ba0b6'],
-                hi:   '#c2cfdd',
-                win:  '#e7b968',
-                haze: ['#262c35', '#2d343e', '#353d48']
-            },
-            light: {
-                body: ['#59636f', '#6f7d8d', '#8d9bac', '#aab4bf', '#cdd0c9'],
-                hi:   '#e2e2d9',
-                win:  '#47566a',
-                haze: ['#e7e5db', '#dedcd1', '#d4d3c8']
-            }
-        };
-
-        const CELL = 11, ROWS = 16;
-
-        // Stable per-cell hash noise (independent of draw order).
-        function h2(x, y) {
-            let n = (x * 374761393 + y * 668265263) | 0;
-            n = Math.imul(n ^ (n >>> 13), 1274126177);
-            return ((n ^ (n >>> 16)) >>> 0) / 4294967296;
-        }
-        // Vertical shade with a touch of dither: top of a column is lightest,
-        // base darkest; a few cells step a facet lighter/darker for texture.
-        function shadeColor(P, x, y, top) {
-            const span = Math.max(1, (ROWS - 1) - top);
-            const f = (y - top) / span;
-            let i = Math.round((1 - f) * (P.body.length - 1));
-            const r = h2(x * 3 + 1, y * 5 + 2);
-            if (r < 0.10) i += 1; else if (r > 0.92) i -= 1;
-            return P.body[Math.max(0, Math.min(P.body.length - 1, i))];
-        }
-        // Lit window on the front base city (skip roof row + far edges).
-        function isWindow(x, y, top) {
-            return y > top && (x % 2 === 0) && (((ROWS - 1 - y) % 2) === 1) && h2(x, y) > 0.52;
-        }
-
-        // Nantes landmarks as pixel sprites. Chars map to palette indices
-        // (0 = darkest .. 4 = lightest), '.' = empty. Rows top -> bottom,
-        // bottom-aligned to the ground when stamped.
-        const SPR = { '%': 0, '#': 1, '+': 2, ':': 3, '*': 4 };
-        const sprite = (rows) => ({ w: rows[0].length, h: rows.length, rows });
-
-        const CATHEDRALE = sprite([          // twin Gothic spires
-            '..*...*..', '..#...#..', '..#...#..', '.###.###.', '.###.###.',
-            '#########', '#########', '####*####', '#########', '##*###*##'
-        ]);
-        const ELEPHANT = sprite([            // Les Machines de l'île
-            '.....#####...', '...########..', '..##########.', '.###########.',
-            '.############', '%############', '%#.##.##.##..', '.#.##.##.##..',
-            '...#..#..#...'
-        ]);
-        const TOUR_LU = sprite([             // Tour LU + cupola/finial
-            '..*..', '..#..', '.:::.', ':::::', '.###.',
-            '.###.', '.###.', '.###.', '.###.', '#####'
-        ]);
-        const TOUR_BRETAGNE = sprite([       // tallest modern tower + antenna
-            '.*..', '####', '#*##', '####', '##*#', '####',
-            '#*##', '####', '##*#', '####', '####'
-        ]);
-        const GRUE_TITAN = sprite([          // Titan portal crane
-            '.#########.', '.#...#.....', '.....#.....', '....###....', '.....#.....',
-            '....#.#....', '...#...#...', '...#...#...', '..#.....#..', '..#.....#..', '.#.......#.'
-        ]);
-        const SCENE = [CATHEDRALE, ELEPHANT, TOUR_LU, TOUR_BRETAGNE, GRUE_TITAN];
-        const SCENE_GAP = 3;
-
-        // Deterministic RNG (FNV-1a seed + mulberry32) so the base city is
-        // stable across theme toggles and only extends on resize.
-        function seeded(str) {
-            let h = 2166136261;
-            for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
-            return function () {
-                h += 0x6D2B79F5;
-                let t = Math.imul(h ^ (h >>> 15), 1 | h);
-                t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
-                return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-            };
-        }
-
-        function buildSkyline() {
-            const cols = Math.ceil(window.innerWidth / CELL) + 2;
-            const theme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
-            const P = PAL[theme];
-            const rnd = seeded('gc-nantes-32');
-
-            // Layer 1 — distant haze (low contrast, sits furthest back).
-            const hazeTop = new Array(cols), hazeTone = new Array(cols);
-            let bt = 5 + Math.floor(rnd() * 3);
-            for (let x = 0; x < cols; x++) {
-                bt += Math.floor(rnd() * 3) - 1;
-                bt = Math.max(4, Math.min(9, bt));
-                hazeTop[x] = ROWS - bt;
-                hazeTone[x] = P.haze[Math.floor(rnd() * P.haze.length)];
-            }
-
-            // Layer 3 — landmarks, centred. Mark their columns so the front
-            // city doesn't grow through them; keep the haze visible behind.
-            const isLm = new Array(cols).fill(false);
-            const lmTop = new Array(cols).fill(ROWS);
-            const lmCell = [];
-            for (let y = 0; y < ROWS; y++) lmCell.push(new Int8Array(cols)); // 0 none, 2 body, 3 highlight
-            let sceneW = -SCENE_GAP;
-            SCENE.forEach(s => { sceneW += s.w + SCENE_GAP; });
-            let cx = Math.max(0, Math.floor((cols - sceneW) / 2));
-            SCENE.forEach(s => {
-                for (let c = 0; c < s.w; c++) { const x = cx + c; if (x < cols) isLm[x] = true; }
-                const top = ROWS - s.h;
-                for (let r = 0; r < s.h; r++) {
-                    for (let c = 0; c < s.w; c++) {
-                        const ch = s.rows[r][c];
-                        if (ch === '.') continue;
-                        const x = cx + c, y = top + r;
-                        if (x >= cols) continue;
-                        lmCell[y][x] = (ch === '*' || ch === ':') ? 3 : 2;
-                        if (y < lmTop[x]) lmTop[x] = y;
-                    }
-                }
-                cx += s.w + SCENE_GAP;
-            });
-
-            // Layer 2 — front base city (skips landmark columns).
-            const frontTop = new Array(cols).fill(ROWS);
-            let ft = 2 + Math.floor(rnd() * 2);
-            for (let x = 0; x < cols; x++) {
-                ft += Math.floor(rnd() * 3) - 1;
-                ft = Math.max(2, Math.min(6, ft));
-                if (!isLm[x]) frontTop[x] = ROWS - ft;
-            }
-
-            // Render, back-to-front, one cell at a time.
-            sky.style.gridTemplateColumns = `repeat(${cols}, ${CELL}px)`;
-            sky.style.gridAutoRows = CELL + 'px';
-            const frag = document.createDocumentFragment();
-            const cells = [];
-            for (let y = 0; y < ROWS; y++) {
-                for (let x = 0; x < cols; x++) {
-                    const cell = document.createElement('i');
-                    let col = null;
-                    const lm = lmCell[y][x];
-                    if (lm === 3) {
-                        col = P.hi;
-                    } else if (lm === 2) {
-                        col = shadeColor(P, x, y, lmTop[x]);
-                    } else if (y >= frontTop[x]) {
-                        col = isWindow(x, y, frontTop[x]) ? P.win : shadeColor(P, x, y, frontTop[x]);
-                    } else if (y >= hazeTop[x]) {
-                        col = hazeTone[x];
-                    }
-                    if (col) {
-                        cell.style.background = col;
-                        // per-pixel evaporation seeds: r1 = start delay, r2 = drift, row = height (top evaporates first)
-                        cells.push({ el: cell, row: y, r1: h2(x * 2 + 7, y * 3 + 1), r2: h2(x * 5 + 2, y * 7 + 4) });
-                    }
-                    frag.appendChild(cell);
-                }
-            }
-            sky.textContent = '';
-            sky.appendChild(frag);
-            skyCells = cells;
-        }
-
-        // Scroll-driven evaporation: pixels rise, shrink and fade as you
-        // scroll into the page — top rows first, like vapour lifting off
-        // (reversible on the way back up). Falls back to a plain opacity fade
-        // under prefers-reduced-motion.
-        let skyCells = [];
-        const DIST = 520;
-        const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        let ticking = false, evaporating = false;
-        const apply = () => {
-            ticking = false;
-            const p = Math.min(landing.scrollTop / DIST, 1);
-            if (reduce) { sky.style.opacity = (0.5 - 0.35 * p).toFixed(3); return; }
-            if (p > 0 && !evaporating) { sky.classList.add('scattering'); evaporating = true; }
-            else if (p === 0 && evaporating) { sky.classList.remove('scattering'); evaporating = false; }
-            for (let i = 0; i < skyCells.length; i++) {
-                const c = skyCells[i];
-                // higher rows (small row index) start lifting earlier
-                const start = c.r1 * 0.45 + (1 - c.row / ROWS) * 0.28;
-                const l = Math.max(0, Math.min((p - start) / 0.42, 1));
-                if (l === c._l) continue;
-                c._l = l;
-                if (l === 0) { c.el.style.transform = ''; c.el.style.opacity = ''; continue; }
-                const ty = -l * (26 + c.r2 * 48);                 // drift upward
-                const tx = (c.r2 - 0.5) * 12 * l;                 // slight sideways wobble
-                const sc = 1 - 0.45 * l;                          // shrink as it rises
-                c.el.style.opacity = (1 - l).toFixed(3);
-                c.el.style.transform = 'translate3d(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px,0) scale(' + sc.toFixed(3) + ')';
-            }
-        };
-        landing.addEventListener('scroll', () => {
-            if (!ticking) { ticking = true; requestAnimationFrame(apply); }
-        }, { passive: true });
-
-        const rebuild = () => { buildSkyline(); apply(); };
-        rebuild();
-
-        // Rebuild on width change (debounced) and on theme toggle.
-        let rz;
-        let lastCols = Math.ceil(window.innerWidth / CELL) + 2;
-        window.addEventListener('resize', () => {
-            clearTimeout(rz);
-            rz = setTimeout(() => {
-                const cols = Math.ceil(window.innerWidth / CELL) + 2;
-                if (cols !== lastCols) { lastCols = cols; rebuild(); }
-            }, 150);
-        });
-        new MutationObserver(rebuild).observe(document.documentElement, {
-            attributes: true, attributeFilter: ['data-theme']
-        });
-    })();
 
 })();

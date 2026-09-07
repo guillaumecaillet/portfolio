@@ -70,6 +70,11 @@
 </head>
 <body class="loading">
 
+    <!-- Boot loader: dotmatrix sparkle, shown for ~2.5s before the folio reveals -->
+    <div class="boot-loader" id="boot-loader" aria-hidden="true">
+        <div id="boot-loader-dots"></div>
+    </div>
+
     <!-- Navigation -->
     <nav class="nav">
         <a href="/" class="nav-logo" data-page="landing">
@@ -97,15 +102,9 @@
 
     <!-- Page: Landing -->
     <section class="page page--active" id="landing">
-        <!-- Pixel skyline: generative PS2-style mass, pinned bottom, dissolves on scroll (built in main.js) -->
-        <div class="pixel-skyline" aria-hidden="true"></div>
         <div class="landing">
             <!-- Hero: Swiss top bar + title + tagline + meta grid -->
             <div class="landing-hero">
-                <div class="landing-topbar" aria-hidden="true">
-                    <span>Guillaume Caillet</span>
-                    <span>Portfolio / 2026</span>
-                </div>
                 <h1 class="landing-title">
                     <span class="line" data-delay="0" data-i18n="landing.line1">Senior Product Designer</span>
                 </h1>
@@ -1804,6 +1803,7 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
         </div>
     </footer>
 
+    <script src="/src/js/dotmatrix-loader.js"></script>
     <script src="/main.js"></script>
 </body>
 </html>

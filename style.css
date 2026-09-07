@@ -28,8 +28,9 @@
     --surface-border: rgba(231, 227, 215, 0.08);
     --ink: rgba(231, 227, 215, 0.1);
     --ink-strong: rgba(231, 227, 215, 0.28);
-    --font-sans: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-sans: 'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     --font-mono: 'IBM Plex Mono', monospace;
+    --font-display: 'Pixelify Sans', 'Space Grotesk', sans-serif;
     --radius: 0;
     --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     --transition-fast: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -65,7 +66,7 @@ html {
 body {
     font-family: var(--font-sans);
     font-weight: 400;
-    letter-spacing: -0.01em;
+    letter-spacing: normal;
     background-color: var(--bg);
     color: var(--text);
     overflow: hidden;
@@ -144,6 +145,29 @@ a {
 body.loading .nav {
     opacity: 0;
     pointer-events: none;
+}
+
+/* Boot loader: full-screen dotmatrix sparkle, fades out once the folio
+   is ready to reveal (see main.js). Removed from the DOM after the fade. */
+.boot-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    opacity: 1;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.boot-loader.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .boot-loader { transition: none; }
 }
 
 .nav::after {
@@ -247,41 +271,6 @@ body.loading .nav {
     color: var(--text);
     overflow-y: auto;
     overflow-x: hidden;
-}
-
-/* Pixel skyline — generative PS2-style mass (same look as the project-card
-   hover cover), pinned to the viewport bottom, behind the landing content.
-   Grid cells are generated + coloured in main.js. Opacity is driven by JS on
-   scroll (dissolve down to 0.15 so it never fights the text). */
-.pixel-skyline {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 176px;
-    z-index: 0;
-    pointer-events: none;
-    display: grid;
-    align-content: end;
-    overflow: hidden;
-    opacity: 0.5;
-    will-change: opacity;
-    transition: opacity 0.12s linear;
-}
-
-.pixel-skyline i {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-/* Only promote pixels to their own layers while they're actively scattering. */
-.pixel-skyline.scattering i {
-    will-change: transform, opacity;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .pixel-skyline { transition: none; }
 }
 
 body.landing-active .cursor-trail span {
@@ -3091,73 +3080,6 @@ body.landing-active .galaxy-bg { opacity: 0; }
     line-height: 1;
 }
 
-/* Floating preview: quiet album-cover card. Flat surface in the theme
-   palette, understated text, and a deterministic soft-pixel mass at the
-   bottom (Manoeuvres-style skyline), generated per project. */
-.project-preview {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 300px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    background: var(--bg-elevated);
-    pointer-events: none;
-    z-index: 450;
-    opacity: 0;
-    transition: opacity 0.25s ease;
-    will-change: transform;
-    color: var(--text);
-}
-
-.project-preview::after { content: none; }
-
-.project-preview.on {
-    opacity: 1;
-}
-
-.cover-card {
-    display: flex;
-    flex-direction: column;
-    padding: 16px 16px 0;
-}
-
-.cover-code {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 8px;
-}
-
-.cover-title {
-    font-family: var(--font-sans);
-    font-size: 0.95rem;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    color: var(--text);
-    margin-bottom: 4px;
-}
-
-.cover-metric {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    font-variant-numeric: tabular-nums;
-}
-
-.cover-icon {
-    display: grid;
-    gap: 0;
-    margin: 16px -16px 0;
-    line-height: 0;
-}
-
-.cover-icon i {
-    display: block;
-}
-
 /* --- Scroll reveals --- */
 .reveal {
     opacity: 0;
@@ -3296,8 +3218,6 @@ body::after {
 
     .footer-cta { padding: 0 0 16px; flex-wrap: wrap; gap: 14px; text-align: center; }
     .footer-cta-kicker { font-size: 0.95rem; }
-
-    .project-preview { display: none; }
 }
 
 /* --- Reduced motion: calm everything down --- */
@@ -3351,21 +3271,7 @@ body::after {
 .proto-code { background: #212226 !important; filter: saturate(0.72); }
 .proto-figma-panel, .proto-figma-titlebar { filter: saturate(0.8); }
 
-/* ===== Swiss hero (topbar / tagline / meta grid) ===== */
-.landing-topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--text);
-    margin-bottom: 48px;
-}
-
+/* ===== Swiss hero (tagline / meta grid) ===== */
 .landing-title {
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -3468,3 +3374,41 @@ body::after {
 }
 
 .landing-title { font-size: clamp(2.4rem, 5.5vw, 4rem); }
+
+/* ===== Typography — Pixelify Sans (display) / Space Grotesk (text) =====
+   Wins on source order (same specificity as the rules above) rather than
+   duplicating every heading/body selector's font-size, so each component
+   keeps its own tuned/responsive sizing and only the typeface, weight,
+   line-height and tracking change. */
+.landing-title,
+.page-title,
+.case-title,
+.project-name,
+.case-section-title,
+.who-section-title {
+    font-family: var(--font-display);
+}
+
+/* h1-equivalent */
+.landing-title {
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+}
+
+/* h2-equivalent */
+.page-title,
+.case-title {
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+}
+
+/* h3-equivalent */
+.project-name,
+.case-section-title,
+.who-section-title {
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+}
