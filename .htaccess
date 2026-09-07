@@ -10,8 +10,14 @@ RewriteCond %{HTTP_HOST} ^www\.guillaumecaillet\.fr$ [NC]
 RewriteCond %{HTTP:X-Forwarded-Proto} =http
 RewriteRule ^ https://www.guillaumecaillet.fr%{REQUEST_URI} [R=301,L]
 
+# Legacy /fr/... URLs (French used to live under this prefix) -> the same
+# path with no prefix, now the French default. Keeps old links/search
+# results working with a real 301 instead of a client-side soft-404.
+RewriteRule ^fr/?$ / [R=301,L]
+RewriteRule ^fr/(.*)$ /$1 [R=301,L]
+
 # SPA routing: serve index.html for any path that is not a real file/directory
-# (/who/, /fr/..., /projects/<slug>/ are all rendered client-side).
+# (/who/, /en/..., /projects/<slug>/ are all rendered client-side).
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ /index.html [L]
