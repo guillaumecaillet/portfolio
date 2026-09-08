@@ -163,6 +163,12 @@
         const prefixed = langPrefix() + path;
         return prefixed === '/en/' ? '/en/' : prefixed;
     }
+    // Language-agnostic path builder (unlike pathForPage, not tied to the
+    // current document language) — used to emit both hreflang alternates.
+    function pathForPageLang(pageId, lang) {
+        const path = ROUTES[pageId] || '/';
+        return (lang === 'en' ? '/en' : '') + path;
+    }
     function pageForPath(pathname) {
         let p = pathname;
         let en = false;
@@ -265,6 +271,26 @@
         const canonical = document.querySelector('link[rel="canonical"]');
         if (canonical) canonical.setAttribute('href', url);
         setMeta('meta[property="og:url"]', url);
+
+        // hreflang alternates: fr is the root/default, en lives under /en/,
+        // x-default falls back to fr. Skipped on noindex pages (moot there).
+        const setHreflang = (lang, href) => {
+            let link = document.querySelector(`link[rel="alternate"][hreflang="${lang}"]`);
+            if (!link) {
+                link = document.createElement('link');
+                link.setAttribute('rel', 'alternate');
+                link.setAttribute('hreflang', lang);
+                document.head.appendChild(link);
+            }
+            link.setAttribute('href', href);
+        };
+        if (NOINDEX_PAGES.has(pageId)) {
+            document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(l => l.remove());
+        } else {
+            setHreflang('fr', ORIGIN + pathForPageLang(pageId, 'fr'));
+            setHreflang('en', ORIGIN + pathForPageLang(pageId, 'en'));
+            setHreflang('x-default', ORIGIN + pathForPageLang(pageId, 'fr'));
+        }
 
         // Sensitive case studies stay out of search engines.
         let robots = document.querySelector('meta[name="robots"]');
