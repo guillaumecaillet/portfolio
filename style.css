@@ -127,6 +127,17 @@ a {
 
 .galaxy-bg, .ascii-sphere { display: none; }
 
+/* Ambient background: WebGL dithering shader (mounted in src/js/shader-bg.js).
+   Fixed behind every page; the shader's own stylesheet paints its canvas at
+   z-index -1 inside this box, so anything else here would sit above it. */
+.shader-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.06;
+}
+
 /* --- Navigation --- */
 .nav {
     position: fixed;
@@ -267,7 +278,8 @@ body.loading .nav {
 }
 
 #landing {
-    background-color: var(--bg);
+    /* No background-color here: body's own var(--bg) shows through so the
+       shader-bg layer (mounted on <body>, behind every page) stays visible. */
     color: var(--text);
     overflow-y: auto;
     overflow-x: hidden;

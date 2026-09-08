@@ -70,6 +70,9 @@
 </head>
 <body class="loading">
 
+    <!-- Ambient background: WebGL dithering shader, sits behind every page -->
+    <div class="shader-bg" id="shader-bg" aria-hidden="true"></div>
+
     <!-- Boot loader: dotmatrix sparkle, shown for ~2.5s before the folio reveals -->
     <div class="boot-loader" id="boot-loader" aria-hidden="true">
         <div id="boot-loader-dots"></div>
@@ -1805,5 +1808,6 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
 
     <script src="/src/js/dotmatrix-loader.js"></script>
     <script src="/main.js"></script>
+    <script type="module" src="/src/js/shader-bg.js"></script>
 </body>
 </html>
