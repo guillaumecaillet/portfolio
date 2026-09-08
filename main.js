@@ -684,6 +684,7 @@
             'who.section.articles':     'Articles',
             'who.section.podcasts':     'Podcasts',
             'who.section.templates':    'Templates for Notion',
+            'who.section.cv':           'Curriculum Vitae',
 
             'who.date.oplit':       'Sept. 2025 - Present',
             'who.date.prestashop':  'June 2022 - Sept. 2025',
@@ -728,6 +729,7 @@
             'who.articles.link':   'Guillaume CAILLET on Medium →',
             'who.podcast.simon':   'Interview with Simon Robic on mobile-first design →',
             'who.templates.link':  'Guillaume Caillet | Notion Template Creator →',
+            'who.cv.link':         'Download CV (PDF) →',
             'who.email':           'Email me',
             'who.linkedin':        'Connect on LinkedIn',
 
@@ -1043,6 +1045,7 @@
             'who.section.articles':     'Articles',
             'who.section.podcasts':     'Podcasts',
             'who.section.templates':    'Templates pour Notion',
+            'who.section.cv':           'Curriculum Vitae',
 
             'who.date.oplit':       'Sept. 2025 - Aujourd\'hui',
             'who.date.prestashop':  'Juin 2022 - Sept. 2025',
@@ -1087,6 +1090,7 @@
             'who.articles.link':   'Guillaume Caillet sur Medium →',
             'who.podcast.simon':   'Interview avec Simon Robic sur le mobile-first →',
             'who.templates.link':  'Guillaume Caillet | Créateur de Templates Notion →',
+            'who.cv.link':         'Télécharger le CV (PDF) →',
             'who.email':           'M\'écrire',
             'who.linkedin':        'Me suivre sur LinkedIn',
 
