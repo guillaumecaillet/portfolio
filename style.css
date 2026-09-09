@@ -32,6 +32,7 @@
        key-projects chip so it cuts through all the blue. */
     --flow-gold: #e0ac4e;
     --flow-gold-hot: #eec26d;
+    --flow-gold-ink: #e0ac4e;
     --surface: rgba(30, 31, 34, 0.72);
     --surface-light: rgba(30, 31, 34, 0.6);
     --surface-border: rgba(231, 227, 215, 0.08);
@@ -46,6 +47,7 @@
 }
 
 html[data-theme="light"] {
+    --flow-gold-ink: #8a6320;
     --bg: #FEFEFB;
     --bg-elevated: #f4f3ee;
     --bg-card: #efeee9;
@@ -3122,9 +3124,9 @@ body.landing-active .galaxy-bg { opacity: 0; }
     font-size: 0.58rem;
     font-weight: 700;
     letter-spacing: 0.14em;
-    color: #1b1c1e;
-    border: 1px solid var(--flow-gold);
-    background: var(--flow-gold);
+    color: var(--flow-gold-ink);
+    border: 1px solid color-mix(in srgb, var(--flow-gold) 55%, transparent);
+    background: color-mix(in srgb, var(--flow-gold) 13%, transparent);
     border-radius: 0;
     padding: 0 8px;
     margin-left: 8px;
@@ -3356,9 +3358,9 @@ body::after {
 
 /* ===== Redesign finishing pass ===== */
 .project-key-badge {
-    color: #1b1c1e;
-    border: 1px solid var(--flow-gold);
-    background: var(--flow-gold);
+    color: var(--flow-gold-ink);
+    border: 1px solid color-mix(in srgb, var(--flow-gold) 55%, transparent);
+    background: color-mix(in srgb, var(--flow-gold) 13%, transparent);
     font-family: var(--font-mono);
     letter-spacing: 0.04em;
 }
