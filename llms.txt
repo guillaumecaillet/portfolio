@@ -1,0 +1,28 @@
+# Guillaume Caillet, Senior Product Designer
+
+> Senior Product Designer based in Nantes, France, with 7+ years designing B2B SaaS products and design systems for Industry 4.0. Currently at Oplit. This site is a bilingual (French/English) portfolio of case studies.
+
+Site is available in French (default, no path prefix) and English (`/en/` prefix). Each URL below has an equivalent in the other language.
+
+## Pages
+
+- [Home](https://www.guillaumecaillet.fr/): Landing page introducing Guillaume Caillet, Senior Product Designer.
+- [Who am I](https://www.guillaumecaillet.fr/who/): Background, experience, and skills.
+- [Projects](https://www.guillaumecaillet.fr/#projects): Overview of case studies and side projects, embedded on the homepage.
+
+## Case studies
+
+- [Opal DS · Audit](https://www.guillaumecaillet.fr/projects/opal-ds-audit/): A systematic Opal Design System audit, graded findings against four industry frameworks, with a phased remediation plan executed over the following months.
+- [Opal DS · Corrective Actions](https://www.guillaumecaillet.fr/projects/opal-ds-corrective-actions/): Executing the design system remediation plan: rebuilding 44 components, applying 2,634 token bindings, and establishing a dev-alignment workflow that accelerates feature delivery by 20-30%.
+- [Opal DS · AI Prototyping Skills](https://www.guillaumecaillet.fr/projects/opal-ds-ai-prototyping-skills/): Two AI skills that read and mobilize the design system to generate interfaces in Figma directly from a plain-language brief.
+- [PrestaShop Design System](https://www.guillaumecaillet.fr/projects/prestashop-design-system/): Structuring and development of the PrestaShop Design System, giving product and core teams access to a system for coherent, fluid, easily structured experiences.
+- [PrestaShop Customer Account](https://www.guillaumecaillet.fr/projects/prestashop-customer-account/): Unifying three fragmented PrestaShop accounts (Back Office, Marketplace, Business Care) into one.
+- [PrestaShop Sign in / Sign up Flow](https://www.guillaumecaillet.fr/projects/prestashop-signin-signup/): Cutting authentication errors in half by redesigning sign-in across the entire PrestaShop ecosystem.
+- [PrestaShop Store Association Flow](https://www.guillaumecaillet.fr/projects/prestashop-store-association/): Redesign of the association flow between a user account and shop, making it transparent and error-resistant.
+- [Multi-select & Sticky Action Bar](https://www.guillaumecaillet.fr/projects/multiselect-sticky-action-bar/): A coupled pattern where multi-select triggers a sticky action bar, letting schedulers update many work orders in one click, consistent across cards and Gantt views.
+- [Figma Plugin, Local Components Collector](https://www.guillaumecaillet.fr/projects/figma-plugin-local-components-collector/): A JavaScript plugin built with the Figma Plugin API to automate local component audits, reducing DS audit time from days to hours.
+
+## Optional
+
+- [Sitemap](https://www.guillaumecaillet.fr/sitemap.xml): Full list of indexed URLs with language alternates.
+- [LinkedIn](https://www.linkedin.com/in/guillaume-caillet/): Professional profile.
