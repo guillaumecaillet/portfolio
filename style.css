@@ -118,26 +118,6 @@ a {
 }
 
 /* --- Navigation --- */
-/* --- Global galaxy background (dark pages) --- */
-.galaxy-bg {
-    position: fixed;
-    inset: 0;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.52rem;
-    line-height: 1.15;
-    color: var(--ink);
-    white-space: pre;
-    letter-spacing: 0.04em;
-    overflow: hidden;
-    pointer-events: none;
-    user-select: none;
-    z-index: 0;
-    opacity: 0;
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.galaxy-bg, .ascii-sphere { display: none; }
-
 /* Ambient background: WebGL dithering shader (mounted in src/js/shader-bg.js).
    Fixed behind every page; the shader's own stylesheet paints its canvas at
    z-index -1 inside this box, so anything else here would sit above it. */
@@ -294,10 +274,6 @@ body.loading .nav {
     color: var(--text);
     overflow-y: auto;
     overflow-x: hidden;
-}
-
-body.landing-active .cursor-trail span {
-    color: var(--ink-strong);
 }
 
 .landing-company {
@@ -575,41 +551,6 @@ body.landing-active .cursor-trail span {
     .landing-links-grid {
         grid-template-columns: 1fr;
     }
-}
-
-/* --- ASCII Galaxy --- */
-.ascii-sphere {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.52rem;
-    line-height: 1.15;
-    color: var(--text);
-    white-space: pre;
-    letter-spacing: 0.04em;
-    pointer-events: none;
-    user-select: none;
-    z-index: 0;
-    transition: color 1.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.ascii-sphere.loaded {
-    color: var(--ink);
-}
-
-/* --- Cursor follower --- */
-.cursor-follower {
-    position: fixed;
-    top: 0;
-    left: 0;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--ink-strong);
-    pointer-events: none;
-    z-index: 9999;
-    will-change: transform;
-    transition: color 0.3s;
 }
 
 /* --- Page Title (shared) --- */
@@ -1061,35 +1002,6 @@ body.landing-active .cursor-trail span {
     transform: translateY(0);
 }
 
-/* --- Cursor ASCII Trail --- */
-.cursor-trail {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-}
-
-.cursor-trail span {
-    position: absolute;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 14px;
-    color: var(--text-muted);
-    pointer-events: none;
-    animation: trailFade 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes trailFade {
-    0% {
-        opacity: 0.6;
-        transform: translate(-50%, -50%) scale(1) rotate(0deg);
-    }
-    100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.3) rotate(45deg);
-    }
-}
-
 /* --- Page title animation --- */
 .page-title {
     opacity: 0;
@@ -1321,10 +1233,9 @@ body.landing-active .cursor-trail span {
 }
 
 /* ===================================
-   Readable surfaces — semi-opaque dark backgrounds for text blocks
-   so the galaxy canvas doesn't distract from reading.
-   Default = dark anthracite (used on every page with galaxy bg).
-   Landing page overrides below (clean white page, no boxes needed).
+   Readable surfaces — semi-opaque backgrounds for text blocks so the
+   textured background doesn't distract from reading.
+   Landing page overrides below (clean page, no boxes needed).
    =================================== */
 .who-intro,
 .who-section,
@@ -3005,10 +2916,6 @@ html[data-theme="light"] .case-section .case-caption em {
     color: #8a6d00;
 }
 
-/* Galaxy canvases stay visible on every page incl. landing */
-body:not(.loading) .galaxy-bg { opacity: 1; }
-body.landing-active .galaxy-bg { opacity: 0; }
-
 /* --- Hero: proof stats --- */
 .landing-stats {
     display: flex;
@@ -3306,12 +3213,8 @@ body::after {
     }
 }
 
-/* Thematic compass: restored — immersive companion to the hover covers */
-
 /* --- Mobile adjustments --- */
 @media (max-width: 768px) {
-    .ascii-sphere.loaded { opacity: 0.55; }
-
     .landing-stats { flex-wrap: wrap; gap: 14px 24px; margin-top: 32px; }
     .landing-stat { flex: 1 1 100%; }
     .landing-stat-value { font-size: 1.15rem; }
@@ -3329,7 +3232,6 @@ body::after {
     .landing-scroll-cue { display: none; }
     body::after { animation: none; }
     .reveal { opacity: 1; transform: none; transition: none; }
-    .cursor-follower, .cursor-trail { display: none !important; }
     .footer-status::before { animation: none; }
 }
 
