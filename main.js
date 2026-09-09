@@ -30,7 +30,7 @@
             colorOn: 'var(--text)',
             colorOff: 'var(--border)',
             minOpacity: 0.15,
-            shape: 'circle',
+            shape: 'square',
         });
 
         setTimeout(finishBoot, 2500);
