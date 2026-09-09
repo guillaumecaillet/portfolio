@@ -50,15 +50,6 @@
         if (links) setTimeout(() => links.classList.add('visible'), 620);
     }
 
-    // --- Pastel Hover on Landing Link Cards ---
-    const pastels = [
-        '#FFD1DC', '#FFDAC1', '#FFF1C1', '#D4F0C0',
-        '#C1E1FF', '#E1C1FF', '#FFE1F0', '#C1FFE1',
-        '#FFE8C1', '#D1C1FF', '#C1FFF4', '#FFC1C1',
-    ];
-
-    // (scramble / geek hover effect removed in redesign)
-
     // ===================================
     // Projects filter - chips filter the list by theme or "key" projects.
     // "All" restores the full timeline (year labels + earlier projects).
@@ -101,16 +92,6 @@
             });
         });
     })();
-
-    document.querySelectorAll('.landing-link-card, .who-link-card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            const color = pastels[Math.floor(Math.random() * pastels.length)];
-            card.style.backgroundColor = color;
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.backgroundColor = '';
-        });
-    });
 
     // --- Page Navigation ---
     const pages = document.querySelectorAll('.page');
@@ -418,17 +399,20 @@
         let target = null;
         const { page, en } = pageForPath(location.pathname);
         const legacyHash = location.hash.slice(1);
+        // Plain in-page anchors (e.g. #projects) point at a real element on the
+        // landing page rather than a route - leave them alone, no soft-404.
+        const isPlainAnchor = legacyHash && !ROUTES[legacyHash] && document.getElementById(legacyHash);
         document.documentElement.lang = en ? 'en' : 'fr-FR';
         if (legacyHash && ROUTES[legacyHash]) {
             target = legacyHash; // old #hash link takes precedence, upgraded to its path
         } else if (page) {
             target = page;
-        } else if (location.pathname !== '/' || (legacyHash && legacyHash !== 'landing')) {
+        } else if (!isPlainAnchor && (location.pathname !== '/' || (legacyHash && legacyHash !== 'landing'))) {
             // Unknown path or hash - soft 404 back to the landing.
             showFallbackToast(location.pathname + location.hash);
         }
         target = target || 'landing';
-        history.replaceState({ page: target }, '', pathForPage(target));
+        history.replaceState({ page: target }, '', pathForPage(target) + (isPlainAnchor ? '#' + legacyHash : ''));
         if (target !== 'landing') {
             document.querySelector('.page--active')?.classList.remove('page--active');
             document.getElementById(target)?.classList.add('page--active');
@@ -669,7 +653,6 @@
             'landing.stat.go':  'see the work →',
 
             // Marquee labels
-            'mq.skills':  'Skills',
 
             // Who page
             'who.title': 'Who am I?',
@@ -735,6 +718,16 @@
 
             // Projects
             'projects.title': 'Projects',
+            'process.title': 'How I work',
+            'process.intro': 'Four moments, always in the same order. The first one is the one people skip.',
+            'process.s1.name': 'Discovery',
+            'process.s1.desc': 'Interviews, shadowing, usage data. Finding what actually blocks people rather than what we assume blocks them.',
+            'process.s2.name': 'Design',
+            'process.s2.desc': 'Flows, patterns, components, edge cases. Specs that still hold up once they reach engineering.',
+            'process.s3.name': 'Build',
+            'process.s3.desc': 'Working alongside engineering: design system, tokens, prototypes that serve as the reference.',
+            'process.s4.name': 'Ship',
+            'process.s4.desc': 'Deploy, track, iterate on real usage. A feature nobody measures is a feature nobody learns from.',
             'projects.other.intro': 'Earlier projects: concept work, prototypes and student projects I still find relevant.',
             'projects.filter.key':      'Key projects',
             'projects.filter.all':      'All',
@@ -1030,7 +1023,6 @@
             'landing.stat.go':  'voir le projet →',
 
             // Marquee labels
-            'mq.skills':  'Compétences',
 
             // Who page
             'who.title': 'Qui suis-je ?',
@@ -1096,6 +1088,16 @@
 
             // Projects
             'projects.title': 'Projets',
+            'process.title': 'Ma façon de travailler',
+            'process.intro': 'Quatre moments, toujours dans cet ordre. Le premier est celui qu\'on saute le plus souvent.',
+            'process.s1.name': 'Discovery',
+            'process.s1.desc': 'Entretiens, observation terrain, données d\'usage. Trouver ce qui bloque vraiment, pas ce qu\'on suppose.',
+            'process.s2.name': 'Design',
+            'process.s2.desc': 'Flows, patterns, composants, cas limites. Des specs qui tiennent encore une fois arrivées côté tech.',
+            'process.s3.name': 'Build',
+            'process.s3.desc': 'Avec les devs : design system, tokens, prototypes qui font référence.',
+            'process.s4.name': 'Ship',
+            'process.s4.desc': 'Déployer, tracker, itérer sur les usages réels. Une feature que personne ne mesure n\'apprend rien à personne.',
             'projects.other.intro': 'Projets antérieurs : concepts, prototypes et travaux étudiants que je trouve toujours pertinents.',
             'projects.filter.key':      'Projets clés',
             'projects.filter.all':      'Tous',
@@ -1463,12 +1465,21 @@
         });
     }
 
-    // Follow system changes only when the user hasn't chosen explicitly
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('folio-theme')) {
-            document.documentElement.dataset.theme = e.matches ? 'light' : 'dark';
-        }
-    });
+    // Default theme follows the time of day (see the boot script in the
+    // <head>): light 07h-19h, dark otherwise. Re-check periodically so a tab
+    // left open across sunset flips over on its own. An explicit choice via
+    // the toggle is stored and always wins.
+    function themeForNow() {
+        const h = new Date().getHours();
+        return (h >= 7 && h < 19) ? 'light' : 'dark';
+    }
+    setInterval(() => {
+        if (localStorage.getItem('folio-theme')) return;
+        const next = themeForNow();
+        if (document.documentElement.dataset.theme === next) return;
+        document.documentElement.dataset.theme = next;
+        if (themeMeta) themeMeta.setAttribute('content', next === 'light' ? '#ffffff' : '#1a1a1a');
+    }, 60000);
 
     // ===================================
     // Scroll reveals - .reveal → .in

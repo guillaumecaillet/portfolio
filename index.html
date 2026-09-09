@@ -6,11 +6,14 @@
     <meta name="theme-color" content="#1a1a1a">
     <script>
         // Theme boot - runs before first paint to avoid a flash of wrong theme.
+        // Default follows the visitor's local time of day (light between 07h
+        // and 19h, dark otherwise); an explicit choice always wins.
         (function () {
             var stored = null;
             try { stored = localStorage.getItem('folio-theme'); } catch (e) {}
-            var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-            document.documentElement.dataset.theme = theme;
+            var hour = new Date().getHours();
+            var daytime = hour >= 7 && hour < 19;
+            document.documentElement.dataset.theme = stored || (daytime ? 'light' : 'dark');
         })();
     </script>
     <meta name="description" content="Guillaume Caillet, Senior Product Designer à Nantes. 7+ ans de conception de produits SaaS B2B et de design systems pour l'industrie 4.0.">
@@ -136,16 +139,6 @@
                 <div class="landing-scroll-cue" aria-hidden="true"><span data-i18n="landing.scroll">Scroll</span></div>
             </div>
 
-            <!-- Marquee: skills band -->
-            <div class="landing-marquee" aria-hidden="true">
-                <div class="marquee-row">
-                    <div class="marquee-track">
-                        <span><b class="mq-label" data-i18n="mq.skills">Skills</b> Design Systems <span class="mq-accent">·</span> Product Discovery <span class="mq-accent">·</span> User Research <span class="mq-accent">·</span> Design Tokens <span class="mq-accent">·</span> Industrial SaaS <span class="mq-accent">·</span> Prototyping <span class="mq-accent">·</span> Design Ops <span class="mq-accent">·</span> Figma <span class="mq-accent">·</span> </span>
-                        <span><b class="mq-label" data-i18n="mq.skills">Skills</b> Design Systems <span class="mq-accent">·</span> Product Discovery <span class="mq-accent">·</span> User Research <span class="mq-accent">·</span> Design Tokens <span class="mq-accent">·</span> Industrial SaaS <span class="mq-accent">·</span> Prototyping <span class="mq-accent">·</span> Design Ops <span class="mq-accent">·</span> Figma <span class="mq-accent">·</span> </span>
-                    </div>
-                </div>
-            </div>
-
             <!-- Context: pitch + CTA, sitting at the bottom of the page -->
             <div class="landing-context">
                 <p class="landing-pitch reveal" data-i18n-html="landing.pitch">Over the last 7 years, I've contributed to the design and improvement of B2B SaaS products, alongside teams at <strong>Oplit</strong> (industrial schedulers), <strong>PrestaShop</strong> (300k+ merchants), <strong>Airbus</strong> and <strong>SNCF</strong>. I've led design systems, run audits, and shipped infrastructure that teams build on.<br><br>What I'm looking for: high-stakes products where design co-pilots strategy, not a service function.</p>
@@ -159,8 +152,37 @@
                 </div>
             </div>
 
+            <!-- Process: pixel stream running Discovery -> Ship -->
+            <section class="process reveal" id="process" aria-labelledby="process-title">
+                <h2 class="process-title" id="process-title" data-i18n="process.title">How I work</h2>
+                <p class="process-intro" data-i18n="process.intro">Four moments, always in the same order. The first one is the one people skip.</p>
+                <canvas class="process-stream" id="process-stream" aria-hidden="true"></canvas>
+                <ol class="process-steps">
+                    <li class="process-step">
+                        <span class="process-step-n">01</span>
+                        <h3 class="process-step-name" data-i18n="process.s1.name">Discovery</h3>
+                        <p class="process-step-desc" data-i18n="process.s1.desc">Interviews, shadowing, usage data. Finding what actually blocks people rather than what we assume blocks them.</p>
+                    </li>
+                    <li class="process-step">
+                        <span class="process-step-n">02</span>
+                        <h3 class="process-step-name" data-i18n="process.s2.name">Design</h3>
+                        <p class="process-step-desc" data-i18n="process.s2.desc">Flows, patterns, components, edge cases. Specs that still hold up once they reach engineering.</p>
+                    </li>
+                    <li class="process-step">
+                        <span class="process-step-n">03</span>
+                        <h3 class="process-step-name" data-i18n="process.s3.name">Build</h3>
+                        <p class="process-step-desc" data-i18n="process.s3.desc">Working alongside engineering: design system, tokens, prototypes that serve as the reference.</p>
+                    </li>
+                    <li class="process-step">
+                        <span class="process-step-n">04</span>
+                        <h3 class="process-step-name" data-i18n="process.s4.name">Ship</h3>
+                        <p class="process-step-desc" data-i18n="process.s4.desc">Deploy, track, iterate on real usage. A feature nobody measures is a feature nobody learns from.</p>
+                    </li>
+                </ol>
+            </section>
+
             <!-- Projects: embedded after the pitch -->
-        <div class="projects">
+        <div class="projects" id="projects">
             <div class="projects-header">
                 <h2 class="page-title" data-i18n="projects.title">Projects</h2>
             </div>
@@ -1811,6 +1833,8 @@ border: 1px solid {<span class="proto-token">color.neutral.900</span>};</code></
 
     <script src="/src/js/dotmatrix-loader.js"></script>
     <script src="/main.js"></script>
+    <script src="/src/js/pixel-hover.js"></script>
+    <script src="/src/js/process-stream.js"></script>
     <script type="module" src="/src/js/shader-bg.js"></script>
 </body>
 </html>

@@ -23,6 +23,15 @@
     --accent: #8ba6c6;
     --accent-strong: #a7bdd6;
     --accent-soft: rgba(139, 166, 198, 0.14);
+    /* Fixed (not theme-swapped) blue for CTA buttons, so they read the
+       same recognizable blue in light and dark mode. Bright enough to
+       register as blue, dark enough to keep white label text at ~5.5:1. */
+    --cta-blue: #3566b3;
+    --cta-blue-hot: #4478c4;
+    /* Warm end of the process stream (the "Ship" pixels). Also used for the
+       key-projects chip so it cuts through all the blue. */
+    --flow-gold: #e0ac4e;
+    --flow-gold-hot: #eec26d;
     --surface: rgba(30, 31, 34, 0.72);
     --surface-light: rgba(30, 31, 34, 0.6);
     --surface-border: rgba(231, 227, 215, 0.08);
@@ -135,7 +144,7 @@ a {
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.06;
+    opacity: 0.14;
 }
 
 /* --- Navigation --- */
@@ -880,12 +889,87 @@ body.landing-active .cursor-trail span {
     max-width: 800px;
     padding-top: 20px;
     padding-bottom: 56px;
+    scroll-margin-top: 100px;
+}
+
+/* --- Process: pixel stream + four steps --- */
+.process {
+    margin: 96px 0 24px;
+}
+
+.process-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 10px;
+}
+
+.process-intro {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.process-stream {
+    display: block;
+    width: 100%;
+    height: 230px;
+}
+
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.process-step-n {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: #fff;
+    background: var(--cta-blue);
+    padding: 3px 6px;
+    margin-bottom: 10px;
+}
+
+.process-step-name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+}
+
+.process-step-desc {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+}
+
+@media (max-width: 900px) {
+    .process-steps { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .process-stream { height: 170px; }
+}
+
+@media (max-width: 560px) {
+    .process-steps { grid-template-columns: 1fr; }
 }
 
 .projects-list {
     display: flex;
     flex-direction: column;
     gap: 0;
+    /* Quiet opaque surface so the background dither doesn't fight with the
+       row text now that it runs faster/brighter. No border: the surface
+       alone is enough separation. */
+    background: var(--surface);
+    padding: 24px 24px;
 }
 
 .project-card {
@@ -1131,6 +1215,18 @@ body.landing-active .cursor-trail span {
 
 .case-image img:hover {
     transform: scale(1.02);
+}
+
+/* Overlay canvas that redraws the hovered case-study image as chunky
+   blocks near its corners, sampling the image's own pixels so it reads
+   as the picture disintegrating. Built in src/js/pixel-hover.js. */
+.crumble-layer {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
 }
 
 /* --- Lightbox --- */
@@ -1483,13 +1579,13 @@ body.landing-active .cursor-trail span {
     align-items: center !important;
     justify-content: flex-start !important;
     gap: 8px !important;
-    padding: 8px 14px !important;
-    border: 1px solid var(--border-hover) !important;
+    padding: 13px 24px !important;
+    border: 1px solid var(--cta-blue) !important;
     border-radius: 0;
-    font-size: 0.8125rem !important;
+    font-size: 0.875rem !important;
     font-weight: 500 !important;
-    color: var(--text) !important;
-    background: var(--bg-card) !important;
+    color: #fff !important;
+    background: var(--cta-blue) !important;
     cursor: pointer !important;
     transition: all var(--transition-fast) !important;
     position: relative !important;
@@ -1498,20 +1594,20 @@ body.landing-active .cursor-trail span {
 }
 
 .landing-link-card:hover {
-    background: var(--bg-elevated) !important;
-    border-color: var(--text-dim) !important;
-    transform: translateY(-1px) !important;
+    background: var(--cta-blue-hot) !important;
+    border-color: var(--cta-blue-hot) !important;
+    transform: translateY(-2px) !important;
 }
 
 .landing-link-card svg {
     flex-shrink: 0;
-    opacity: 0.65;
+    opacity: 0.85;
 }
 
 .landing-link-card-label {
-    font-size: 0.8125rem !important;
+    font-size: 0.875rem !important;
     font-weight: 500 !important;
-    color: var(--text) !important;
+    color: #fff !important;
 }
 
 .landing-btn-row {
@@ -1526,13 +1622,13 @@ body.landing-active .cursor-trail span {
     align-items: center !important;
     justify-content: flex-start !important;
     gap: 8px !important;
-    padding: 8px 14px !important;
-    border: 1px solid var(--border-hover) !important;
+    padding: 13px 24px !important;
+    border: 1px solid var(--cta-blue) !important;
     border-radius: 0;
-    font-size: 0.8125rem !important;
+    font-size: 0.875rem !important;
     font-weight: 500 !important;
-    color: var(--text) !important;
-    background: var(--bg-card) !important;
+    color: #fff !important;
+    background: var(--cta-blue) !important;
     cursor: pointer !important;
     transition: all var(--transition-fast) !important;
     position: relative !important;
@@ -1540,20 +1636,20 @@ body.landing-active .cursor-trail span {
 }
 
 .who-link-card:hover {
-    background: var(--bg-elevated) !important;
-    border-color: var(--text-dim) !important;
-    transform: translateY(-1px) !important;
+    background: var(--cta-blue-hot) !important;
+    border-color: var(--cta-blue-hot) !important;
+    transform: translateY(-2px) !important;
 }
 
 .who-link-card svg {
     flex-shrink: 0;
-    opacity: 0.6;
+    opacity: 0.85;
 }
 
 .who-link-card-label {
-    font-size: 0.8125rem !important;
+    font-size: 0.875rem !important;
     font-weight: 500 !important;
-    color: var(--text) !important;
+    color: #fff !important;
 }
 
 .who-btn-row {
@@ -2706,7 +2802,7 @@ body.landing-active .cursor-trail span {
     font-weight: 500;
     letter-spacing: 0.02em;
     color: var(--text-muted);
-    background: transparent;
+    background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 0;
     padding: 6px 12px;
@@ -2730,27 +2826,40 @@ body.landing-active .cursor-trail span {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    color: var(--accent);
-    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
-    background: var(--accent-soft);
+    color: var(--text);
+    border-color: color-mix(in srgb, var(--flow-gold) 60%, transparent);
+    background: linear-gradient(
+        color-mix(in srgb, var(--flow-gold) 12%, transparent),
+        color-mix(in srgb, var(--flow-gold) 12%, transparent)
+    ), var(--bg);
 }
 
 .filter-chip--key .filter-chip-glyph {
     font-size: 0.6rem;
     line-height: 1;
     transform: translateY(0.5px);
+    color: var(--flow-gold);
+}
+
+.filter-chip--key.active .filter-chip-glyph {
+    color: inherit;
 }
 
 .filter-chip--key:hover {
-    color: var(--accent);
-    border-color: color-mix(in srgb, var(--accent) 65%, transparent);
+    color: var(--text);
+    border-color: var(--flow-gold);
     box-shadow: none;
 }
 
+.filter-chip--key.active:hover {
+    background: var(--flow-gold-hot);
+    border-color: var(--flow-gold-hot);
+}
+
 .filter-chip--key.active {
-    color: #fff;
-    background: var(--accent);
-    border-color: var(--accent);
+    color: #1b1c1e;
+    background: var(--flow-gold);
+    border-color: var(--flow-gold);
     box-shadow: none;
 }
 
@@ -2999,76 +3108,7 @@ body.landing-active .galaxy-bg { opacity: 0; }
     100% { transform: scaleY(0); transform-origin: bottom; }
 }
 
-/* --- Marquee: two bands — clients · skills --- */
-.landing-marquee {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    user-select: none;
-}
-
-.marquee-row {
-    overflow: hidden;
-    padding: 14px 0;
-}
-
-.marquee-row + .marquee-row {
-    border-top: 1px dashed var(--border);
-}
-
-.marquee-track {
-    display: flex;
-    width: max-content;
-    animation: marqueeScroll 40s linear infinite;
-}
-
-.marquee-track--reverse {
-    animation-name: marqueeScrollReverse;
-    animation-duration: 52s;
-}
-
-.landing-marquee:hover .marquee-track {
-    animation-play-state: paused;
-}
-
-.marquee-track span {
-    flex-shrink: 0;
-    white-space: nowrap;
-    font-size: 0.78rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    padding-right: 18px;
-}
-
-.marquee-track .mq-accent {
-    color: var(--accent);
-}
-
-.marquee-track .mq-label {
-    font-weight: 700;
-    font-style: normal;
-    color: var(--bg);
-    background: var(--text-muted);
-    border-radius: 0;
-    padding: 2px 8px;
-    margin-right: 16px;
-    font-size: 0.62rem;
-    letter-spacing: 0.18em;
-}
-
-@keyframes marqueeScroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-}
-
-@keyframes marqueeScrollReverse {
-    from { transform: translateX(-50%); }
-    to   { transform: translateX(0); }
-}
-
-/* --- Landing context (pitch + CTA) spacing after the marquee --- */
+/* --- Landing context (pitch + CTA) spacing --- */
 .landing-context {
     margin-top: 72px;
 }
@@ -3135,27 +3175,77 @@ body.landing-active .galaxy-bg { opacity: 0; }
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 14px;
-    border: 1px solid var(--border-hover);
+    padding: 13px 24px;
+    border: 1px solid var(--cta-blue);
     border-radius: 0;
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     font-weight: 500;
-    color: var(--text);
-    background: var(--bg-card);
+    color: #fff;
+    background: var(--cta-blue);
     cursor: pointer;
     transition: all var(--transition-fast);
     white-space: nowrap;
 }
 
 .footer-cta-mail:hover {
-    background: var(--bg-elevated);
-    border-color: var(--text-dim);
-    transform: translateY(-1px);
+    background: var(--cta-blue-hot);
+    border-color: var(--cta-blue-hot);
+    transform: translateY(-2px);
 }
 
 .footer-cta-mail svg {
     flex-shrink: 0;
-    opacity: 0.6;
+    opacity: 0.85;
+}
+
+/* Pixel CTAs: stepped ("8-bit chamfer") corners cut with clip-path, and a
+   grid of cells that flickers random accent pixels while hovered — the
+   cells are re-rolled on an interval in JS, not transitioned, which is
+   what gives it the live/glitchy feel. See src/js/pixel-hover.js. */
+.landing-link-card,
+.who-link-card,
+.footer-cta-mail {
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(
+        10px 0, calc(100% - 10px) 0,
+        calc(100% - 10px) 5px, calc(100% - 5px) 5px,
+        calc(100% - 5px) 10px, 100% 10px,
+        100% calc(100% - 10px), calc(100% - 5px) calc(100% - 10px),
+        calc(100% - 5px) calc(100% - 5px), calc(100% - 10px) calc(100% - 5px),
+        calc(100% - 10px) 100%, 10px 100%,
+        10px calc(100% - 5px), 5px calc(100% - 5px),
+        5px calc(100% - 10px), 0 calc(100% - 10px),
+        0 10px, 5px 10px,
+        5px 5px, 10px 5px
+    );
+}
+
+.landing-link-card-label,
+.who-link-card-label,
+.landing-link-card svg,
+.who-link-card svg,
+.footer-cta-mail > span:not(.pxfx),
+.footer-cta-mail svg {
+    position: relative;
+    z-index: 2;
+}
+
+/* Specificity has to beat the label rules above - .pxfx is itself a
+   <span> inside these buttons. */
+.landing-link-card .pxfx,
+.who-link-card .pxfx,
+.footer-cta-mail .pxfx {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.pxfx i {
+    display: block;
+    background: transparent;
 }
 
 .footer-time {
@@ -3234,7 +3324,6 @@ body::after {
 
 /* --- Reduced motion: calm everything down --- */
 @media (prefers-reduced-motion: reduce) {
-    .marquee-track { animation: none; }
     .landing-scroll-cue { display: none; }
     body::after { animation: none; }
     .reveal { opacity: 1; transform: none; transition: none; }
@@ -3375,8 +3464,8 @@ body::after {
 
 /* ===== Projects embedded in the landing ===== */
 #landing .projects {
-    padding-top: 80px;
-    padding-bottom: 24px;
+    padding-top: 168px;
+    padding-bottom: 168px;
     max-width: none;
 }
 

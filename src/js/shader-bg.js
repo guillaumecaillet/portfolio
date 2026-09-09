@@ -45,7 +45,7 @@ import { ShaderFitOptions, defaultPatternSizing } from './paper-shaders/shader-s
                 u_worldHeight: defaultPatternSizing.worldHeight,
             },
             undefined,
-            reduceMotion ? 0 : 0.25,
+            reduceMotion ? 0 : 0.6,
             0
         );
     } catch (err) {
