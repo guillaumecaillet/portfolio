@@ -20,7 +20,7 @@ import { ShaderFitOptions, defaultPatternSizing } from './paper-shaders/shader-s
     function colorUniforms() {
         return {
             u_colorBack: getShaderColorFromString('#00000000'),
-            u_colorFront: getShaderColorFromString(cssVar('--accent')),
+            u_colorFront: getShaderColorFromString(cssVar('--folio-color-accent')),
         };
     }
 

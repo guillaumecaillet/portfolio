@@ -28,11 +28,11 @@
     // muddy grey. Light variants give the field some texture.
     let COLD, COLD_L, WARM, WARM_L, INK;
     function readPalette() {
-        COLD = cssVar('--cta-blue', '#3566b3');
+        COLD = cssVar('--folio-color-cta', '#3566b3');
         COLD_L = '#8fb0d8';
-        WARM = cssVar('--flow-gold', '#e0ac4e');
+        WARM = cssVar('--folio-color-key', '#e0ac4e');
         WARM_L = '#f2d49a';
-        INK = cssVar('--text', '#2b2c2b');
+        INK = cssVar('--folio-color-text', '#2b2c2b');
     }
 
     // stable pseudo-random in [0,1)

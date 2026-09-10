@@ -27,8 +27,8 @@
             dotSize: 7,
             gap: 5,
             duration: 1.1,
-            colorOn: 'var(--text)',
-            colorOff: 'var(--border)',
+            colorOn: 'var(--folio-color-text)',
+            colorOff: 'var(--folio-color-border)',
             minOpacity: 0.15,
             shape: 'square',
         });
