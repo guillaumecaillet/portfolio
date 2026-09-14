@@ -29,9 +29,9 @@
     let COLD, COLD_L, WARM, WARM_L, INK;
     function readPalette() {
         COLD = cssVar('--folio-color-cta', '#3566b3');
-        COLD_L = '#8fb0d8';
+        COLD_L = cssVar('--folio-color-cta-light', '#8fb0d8');
         WARM = cssVar('--folio-color-key', '#e0ac4e');
-        WARM_L = '#f2d49a';
+        WARM_L = cssVar('--folio-color-key-light', '#f2d49a');
         INK = cssVar('--folio-color-text', '#2b2c2b');
     }
 
