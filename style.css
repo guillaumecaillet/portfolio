@@ -2624,3 +2624,9 @@ p,
 .experience-desc {
     font-family: var(--folio-font-family-body);
 }
+
+/* structural <p>: metadata and kickers stay in the mono voice */
+.project-type,
+.footer-cta-kicker {
+    font-family: var(--folio-font-family-sans);
+}
