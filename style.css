@@ -2576,40 +2576,51 @@ body::after {
 
 .landing-title { font-size: var(--folio-text-hero); }
 
-/* ===== Typography — Pixelify Sans (display) / Space Grotesk (text) =====
+/* ===== Typography — Folio DS 0.4.0: three voices =====
+   Jersey 15 (display) on the h1, Faculty Glyphic (body) on reading copy,
+   IBM Plex Mono (sans) on everything else — h2/h3, nav, buttons, chips,
+   labels — which it already gets from `body`.
    Wins on source order (same specificity as the rules above) rather than
    duplicating every heading/body selector's font-size, so each component
    keeps its own tuned/responsive sizing and only the typeface, weight,
    line-height and tracking change. */
-.landing-title,
-.page-title,
-.case-title,
-.project-name,
-.case-section-title,
-.who-section-title {
-    font-family: var(--folio-font-family-display);
-}
 
-/* h1-equivalent */
+/* h1 — the only pixel text on the page */
 .landing-title {
-    font-weight: 500;
+    font-family: var(--folio-font-family-display);
+    font-weight: 400;
     line-height: 0.95;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
 }
 
 /* h2-equivalent */
 .page-title,
-.case-title {
-    font-weight: 400;
+.case-title,
+.process-title {
+    font-family: var(--folio-font-family-sans);
+    font-weight: 500;
     line-height: 1.05;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
 }
 
 /* h3-equivalent */
 .project-name,
 .case-section-title,
-.who-section-title {
-    font-weight: 400;
+.who-section-title,
+.process-step-name {
+    font-family: var(--folio-font-family-sans);
+    font-weight: 500;
     line-height: 1.15;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
+}
+
+/* reading copy */
+p,
+.case-list li,
+.landing-sub,
+.process-intro,
+.process-step-desc,
+.project-desc,
+.experience-desc {
+    font-family: var(--folio-font-family-body);
 }

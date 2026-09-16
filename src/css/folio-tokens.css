@@ -37,9 +37,10 @@
   --folio-color-key-light: #f2d49a;
   --folio-color-glow: transparent;
 
-  --folio-font-family-sans: 'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --folio-font-family-sans: 'IBM Plex Mono', monospace;
+  --folio-font-family-body: 'Faculty Glyphic', Georgia, serif;
   --folio-font-family-mono: 'IBM Plex Mono', monospace;
-  --folio-font-family-display: 'Pixelify Sans', 'Space Grotesk', sans-serif;
+  --folio-font-family-display: 'Jersey 15', 'IBM Plex Mono', monospace;
   --folio-text-hero: clamp(2.5rem, 5.5vw, 4rem);
   --folio-text-title: clamp(2rem, 4vw, 3rem);
   --folio-text-heading: 1.75rem;

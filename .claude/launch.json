@@ -4,8 +4,9 @@
     {
       "name": "portfolio",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "-l", "4242", "."],
-      "port": 4242
+      "runtimeArgs": ["serve", "."],
+      "port": 4242,
+      "autoPort": true
     },
     {
       "name": "folio-ds-demo",
