@@ -1482,6 +1482,105 @@
     }, 60000);
 
     // ===================================
+    // Agent view — render the active page as the plain markdown a crawler/LLM
+    // reads. Walks the visible .page--active and serialises its semantic
+    // content the way a text-only agent would extract it.
+    // ===================================
+    const agentToggle = document.getElementById('agent-toggle');
+    const agentView   = document.getElementById('agent-view');
+    const agentDoc    = document.getElementById('agent-view-doc');
+    const agentClose  = document.getElementById('agent-view-close');
+    const agentHint   = document.getElementById('agent-view-hint');
+
+    if (agentToggle && agentView && agentDoc) {
+        const SKIP = new Set(['SCRIPT', 'STYLE', 'SVG', 'BUTTON', 'VIDEO', 'NAV', 'NOSCRIPT']);
+
+        const inline = (el) => {
+            let out = '';
+            el.childNodes.forEach(n => {
+                if (n.nodeType === 3) { out += n.textContent; return; }
+                if (n.nodeType !== 1 || SKIP.has(n.tagName)) return;
+                if (n.tagName === 'A') out += `[${inline(n)}](${n.getAttribute('href') || ''})`;
+                else if (n.tagName === 'STRONG' || n.tagName === 'B') out += `**${inline(n)}**`;
+                else if (n.tagName === 'EM' || n.tagName === 'I') out += `*${inline(n)}*`;
+                else if (n.tagName === 'BR') out += ' ';
+                // Elements that render as their own block (e.g. label spans set to
+                // display:block) get spaced so their text doesn't jam into the next.
+                else if (getComputedStyle(n).display.indexOf('inline') !== 0) out += ` ${inline(n)} `;
+                else out += inline(n);
+            });
+            return out.replace(/\s+/g, ' ').trim();
+        };
+
+        const walk = (el, lines) => {
+            el.childNodes.forEach(n => {
+                if (n.nodeType !== 1 || SKIP.has(n.tagName)) return;
+                const t = n.tagName;
+                if (t === 'H1') lines.push('# ' + inline(n));
+                else if (t === 'H2') lines.push('## ' + inline(n));
+                else if (t === 'H3') lines.push('### ' + inline(n));
+                else if (t === 'H4' || t === 'H5' || t === 'H6') lines.push('#### ' + inline(n));
+                else if (t === 'P' || t === 'BLOCKQUOTE' || t === 'FIGCAPTION') {
+                    const s = inline(n);
+                    if (s) lines.push(t === 'BLOCKQUOTE' ? '> ' + s : s);
+                } else if (t === 'UL' || t === 'OL') {
+                    n.querySelectorAll(':scope > li').forEach((li, i) => {
+                        const s = inline(li);
+                        if (s) lines.push((t === 'OL' ? `${i + 1}. ` : '- ') + s);
+                    });
+                } else if (t === 'IMG') {
+                    if (n.getAttribute('alt')) lines.push(`![${n.getAttribute('alt')}](${n.getAttribute('src') || ''})`);
+                } else {
+                    walk(n, lines);
+                }
+            });
+        };
+
+        const buildDoc = () => {
+            const page = document.querySelector('.page--active');
+            const fr = document.documentElement.lang.startsWith('fr');
+            if (agentHint) agentHint.textContent = fr
+                ? 'Ce que lit un agent sur cette page'
+                : 'What an agent reads on this page';
+            if (!page) return '';
+            const lines = [];
+            walk(page, lines);
+            return `<!-- ${location.origin + location.pathname} -->\n\n` + lines.join('\n\n');
+        };
+
+        const open = () => {
+            agentDoc.textContent = buildDoc();
+            agentView.hidden = false;
+            agentToggle.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+            agentDoc.focus();
+        };
+        const close = () => {
+            agentView.hidden = true;
+            agentToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+            agentToggle.focus();
+        };
+
+        // Hover tooltip + aria-label, kept in the current language.
+        const syncLabel = () => {
+            const label = document.documentElement.lang.startsWith('fr')
+                ? 'Voir cette page comme la lit un agent IA'
+                : 'View this page as an AI agent reads it';
+            agentToggle.setAttribute('title', label);
+            agentToggle.setAttribute('aria-label', label);
+        };
+        syncLabel();
+        document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', syncLabel));
+
+        agentToggle.addEventListener('click', () => agentView.hidden ? open() : close());
+        if (agentClose) agentClose.addEventListener('click', close);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !agentView.hidden) close();
+        });
+    }
+
+    // ===================================
     // Scroll reveals - .reveal → .in
     // ===================================
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

@@ -2630,3 +2630,86 @@ p,
 .footer-cta-kicker {
     font-family: var(--folio-font-family-sans);
 }
+
+/* ===================================
+   Agent view — the plain markdown a crawler/LLM reads for the active page.
+   Toggled by #agent-toggle in the nav. Mono voice, Swiss grid, radius 0.
+   =================================== */
+.agent-toggle { margin-left: var(--folio-space-8); }
+.agent-toggle[aria-expanded="true"] {
+    background: var(--folio-color-bg-elevated);
+    border-color: var(--folio-color-text-dim);
+    color: var(--folio-color-text);
+}
+
+.agent-view {
+    position: fixed;
+    inset: 0;
+    z-index: 950;
+    display: flex;
+    flex-direction: column;
+    background: var(--folio-color-bg);
+}
+.agent-view[hidden] { display: none; }
+
+.agent-view-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--folio-space-16);
+    padding: var(--folio-space-16) var(--folio-space-24);
+    border-bottom: 1px solid var(--folio-color-border);
+    font-family: var(--folio-font-family-mono);
+    font-size: var(--folio-text-small);
+}
+.agent-view-tag {
+    padding: 2px var(--folio-space-8);
+    background: var(--folio-color-key);
+    color: var(--folio-color-key-ink);
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+.agent-view-hint { color: var(--folio-color-text-muted); }
+.agent-view-llms {
+    margin-left: auto;
+    color: var(--folio-color-text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--folio-color-border-hover);
+}
+.agent-view-llms:hover { color: var(--folio-color-text); }
+.agent-view-close {
+    padding: var(--folio-space-4) var(--folio-space-8);
+    border: 1px solid var(--folio-color-border-hover);
+    border-radius: 0;
+    background: transparent;
+    color: var(--folio-color-text-muted);
+    font-family: var(--folio-font-family-mono);
+    font-size: var(--folio-text-small);
+    cursor: pointer;
+    transition: all var(--folio-transition-fast);
+}
+.agent-view-close:hover {
+    background: var(--folio-color-bg-elevated);
+    border-color: var(--folio-color-text-dim);
+    color: var(--folio-color-text);
+}
+
+.agent-view-doc {
+    flex: 1;
+    margin: 0;
+    padding: var(--folio-space-32) var(--folio-space-24) var(--folio-space-80);
+    overflow-y: auto;
+    max-width: 80ch;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--folio-font-family-mono);
+    font-size: var(--folio-text-body);
+    line-height: 1.7;
+    color: var(--folio-color-text);
+    white-space: pre-wrap;
+    word-break: break-word;
+    tab-size: 2;
+}
+
+@media (max-width: 640px) {
+    .agent-view-hint { display: none; }
+}
