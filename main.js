@@ -1499,7 +1499,7 @@
             let out = '';
             el.childNodes.forEach(n => {
                 if (n.nodeType === 3) { out += n.textContent; return; }
-                if (n.nodeType !== 1 || SKIP.has(n.tagName)) return;
+                if (n.nodeType !== 1 || SKIP.has(n.tagName) || n.getAttribute('aria-hidden') === 'true') return;
                 if (n.tagName === 'A') out += `[${inline(n)}](${n.getAttribute('href') || ''})`;
                 else if (n.tagName === 'STRONG' || n.tagName === 'B') out += `**${inline(n)}**`;
                 else if (n.tagName === 'EM' || n.tagName === 'I') out += `*${inline(n)}*`;
@@ -1514,7 +1514,7 @@
 
         const walk = (el, lines) => {
             el.childNodes.forEach(n => {
-                if (n.nodeType !== 1 || SKIP.has(n.tagName)) return;
+                if (n.nodeType !== 1 || SKIP.has(n.tagName) || n.getAttribute('aria-hidden') === 'true') return;
                 const t = n.tagName;
                 if (t === 'H1') lines.push('# ' + inline(n));
                 else if (t === 'H2') lines.push('## ' + inline(n));
@@ -1530,6 +1530,16 @@
                     });
                 } else if (t === 'IMG') {
                     if (n.getAttribute('alt')) lines.push(`![${n.getAttribute('alt')}](${n.getAttribute('src') || ''})`);
+                } else if (t === 'A') {
+                    // A block-wrapping link (e.g. a project card): keep the href
+                    // and, for a known page, append its short description so an
+                    // agent reads where the link goes and what it is.
+                    const href = n.getAttribute('href') || '';
+                    const head = n.querySelector('h2, h3, h4');
+                    const text = (head ? inline(head) : inline(n)) || href;
+                    const fr = document.documentElement.lang.startsWith('fr');
+                    const desc = (fr ? PAGE_META_FR : PAGE_META)[n.dataset.page];
+                    lines.push(`- [${text}](${href})` + (desc ? ` — ${desc}` : ''));
                 } else {
                     walk(n, lines);
                 }
