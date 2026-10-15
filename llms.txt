@@ -1,6 +1,6 @@
 # Guillaume Caillet, Senior Product Designer
 
-> Senior Product Designer based in Nantes, France, with 7+ years designing B2B SaaS products and design systems for Industry 4.0. Currently at Oplit. This site is a bilingual (French/English) portfolio of case studies.
+> Senior Product Designer based in Nantes, France, with 7+ years designing B2B SaaS products and design systems for Industry 4.0. This site is a bilingual (French/English) portfolio of case studies.
 
 Site is available in French (default, no path prefix) and English (`/en/` prefix). Each URL below has an equivalent in the other language.
 

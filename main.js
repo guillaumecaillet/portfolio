@@ -636,7 +636,7 @@
 
             // Landing
             'landing.line1':    'Senior Product Designer',
-            'landing.tagline':  'I make complex, demanding products simple. Currently at <a href="https://www.oplit.com" target="_blank" rel="noopener" class="landing-company">Oplit</a>.',
+            'landing.tagline':  'I make complex, demanding products simple.',
             'landing.meta.loc_k':    'Based in',
             'landing.meta.focus_k':  'Focus',
             'landing.meta.xp_k':     'Experience',
@@ -675,7 +675,7 @@
             'who.section.templates':    'Templates for Notion',
             'who.section.cv':           'Curriculum Vitae',
 
-            'who.date.oplit':       'Sept. 2025 - Present',
+            'who.date.oplit':       'Sept. 2025 - Sept. 2026',
             'who.date.prestashop':  'June 2022 - Sept. 2025',
             'who.date.beapp':       'June 2021 - June 2022',
             'who.date.lacapsule':   'Oct. 2020 - June 2021',
@@ -701,7 +701,7 @@
             'who.company.designschool': 'École de Design Nantes',
             'who.role.freelance':   'Freelancing',
 
-            'who.desc.oplit':       '<p><strong>+74% active users (430 → 747)</strong> and key features now running on customers\' production lines.</p><p>Oplit builds production planning software for industrial manufacturers in aerospace, luxury and automotive. I own design on the product: continuous discovery with customers and prospects, strategic features shipped with product and engineering, and the design system I rebuilt (44 components, structured for AI-assisted workflows) which made design execution 30 to 50% faster.</p><p>Latest: two AI skills (operator + builder) that let anyone generate design-system-faithful prototypes in Figma from a plain-language brief. A PM built and presented a client prototype on his own, in one morning.</p>',
+            'who.desc.oplit':       '<p><strong>+74% active users (430 → 747)</strong> and key features now running on customers\' production lines.</p><p>Oplit builds production planning software for industrial manufacturers in aerospace, luxury and automotive. I owned design on the product: continuous discovery with customers and prospects, strategic features shipped with product and engineering, and the design system I rebuilt (44 components, structured for AI-assisted workflows) which made design execution 30 to 50% faster.</p><p>Latest: two AI skills (operator + builder) that let anyone generate design-system-faithful prototypes in Figma from a plain-language brief. A PM built and presented a client prototype on his own, in one morning.</p>',
             'who.desc.prestashop':  '<p><strong>Product Designer &amp; Design System Lead (2024)</strong></p><p>Progressively structured and deployed the research system across PrestaShop. Responsible for structuring and making the tools, templates, and user data operationally available so product teams could access them quickly and efficiently. The aim: provide efficient access to user research when designing PrestaShop products for 300k+ merchants.</p><p>Also worked on structuring the Design System so teams could rely on it and extend it. Proposing areas for development, structuring the team around the project and giving visibility to the work.</p><p><strong>Design System contributor (2023)</strong></p><p>Involved in structuring and implementing the PrestaShop Design System. Working on the monitoring, implementation, and use of components and design tokens by everyone who uses the design system, as well as the components designed by the Product Designers.</p><p><strong>Product Designer (2022)</strong></p><p>Within the Customer Platform team, working on the design and improvement of the user experience through the user account and, more generally, the login experience.</p>',
             'who.desc.beapp':       '<p>In charge of UX at Beapp, working mainly with the UI designer and in contact with all the people involved in the various customer projects (PO, Business, Tech).</p><p>Designing experiences for different types of clients in the healthcare, automotive, food, institutional, and other sectors. Running creativity, immersion, and co-creation workshops. In charge of user research and testing.</p>',
             'who.desc.lacapsule':   '<p>Work as a UX consultant for companies looking to improve their user experience.</p>',
@@ -1007,7 +1007,7 @@
 
             // Landing
             'landing.line1':    'Senior Product Designer',
-            'landing.tagline':  'Je rends simples des produits complexes et exigeants. Actuellement chez <a href="https://www.oplit.com" target="_blank" rel="noopener" class="landing-company">Oplit</a>.',
+            'landing.tagline':  'Je rends simples des produits complexes et exigeants.',
             'landing.meta.loc_k':    'Basé à',
             'landing.meta.focus_k':  'Focus',
             'landing.meta.xp_k':     'Expérience',
@@ -1046,7 +1046,7 @@
             'who.section.templates':    'Templates pour Notion',
             'who.section.cv':           'Curriculum Vitae',
 
-            'who.date.oplit':       'Sept. 2025 - Aujourd\'hui',
+            'who.date.oplit':       'Sept. 2025 - Sept. 2026',
             'who.date.prestashop':  'Juin 2022 - Sept. 2025',
             'who.date.beapp':       'Juin 2021 - Juin 2022',
             'who.date.lacapsule':   'Oct. 2020 - Juin 2021',
@@ -1072,7 +1072,7 @@
             'who.company.designschool': 'École de Design Nantes',
             'who.role.freelance':   'Freelance',
 
-            'who.desc.oplit':       '<p><strong>+74% d\'utilisateurs actifs (430 → 747)</strong> et des features clés déployées sur les lignes de production des clients.</p><p>Oplit conçoit un logiciel de planification industrielle pour l\'aéronautique, le luxe et l\'automobile. Je porte le design produit : discovery continue avec clients et prospects, features stratégiques livrées avec le produit et l\'engineering, et le design system que j\'ai reconstruit (44 composants, structuré pour des workflows assistés par IA) qui a accéléré l\'exécution design de 30 à 50%.</p><p>Dernièrement : deux skills IA (operator + builder) qui permettent de générer dans Figma des prototypes fidèles au design system, depuis un brief en langage naturel. Un PM a construit et présenté un prototype client seul, en une matinée.</p>',
+            'who.desc.oplit':       '<p><strong>+74% d\'utilisateurs actifs (430 → 747)</strong> et des features clés déployées sur les lignes de production des clients.</p><p>Oplit conçoit un logiciel de planification industrielle pour l\'aéronautique, le luxe et l\'automobile. J\'ai porté le design produit : discovery continue avec clients et prospects, features stratégiques livrées avec le produit et l\'engineering, et le design system que j\'ai reconstruit (44 composants, structuré pour des workflows assistés par IA) qui a accéléré l\'exécution design de 30 à 50%.</p><p>Dernièrement : deux skills IA (operator + builder) qui permettent de générer dans Figma des prototypes fidèles au design system, depuis un brief en langage naturel. Un PM a construit et présenté un prototype client seul, en une matinée.</p>',
             'who.desc.prestashop':  '<p><strong>Product Designer &amp; Design System Lead (2024)</strong></p><p>Déploiement progressif du système de recherche chez PrestaShop. Structuration et mise à disposition opérationnelle des outils, templates et données utilisateurs pour que les équipes produit y accèdent rapidement et efficacement. L\'objectif : offrir un accès efficace à la recherche utilisateur lors de la conception des produits PrestaShop pour 300k+ marchands.</p><p>Structuration du Design System pour que les équipes puissent s\'appuyer dessus et l\'étendre. Proposition d\'axes de développement, structuration de l\'équipe autour du projet et mise en visibilité des travaux.</p><p><strong>Contributeur Design System (2023)</strong></p><p>Implication dans la structuration et l\'implémentation du Design System PrestaShop. Suivi, implémentation et usage des composants et design tokens par l\'ensemble des utilisateurs du système, ainsi que les composants conçus par les Product Designers.</p><p><strong>Product Designer (2022)</strong></p><p>Au sein de l\'équipe Customer Platform, conception et amélioration de l\'expérience utilisateur au travers du compte utilisateur et de l\'expérience de connexion.</p>',
             'who.desc.beapp':       '<p>En charge de l\'UX chez Beapp, travaillant principalement avec le designer UI et en contact avec toutes les personnes impliquées dans les différents projets clients (PO, Business, Tech).</p><p>Conception d\'expériences pour différents types de clients dans les secteurs santé, automobile, alimentaire, institutionnel, etc. Animation d\'ateliers de créativité, d\'immersion et de co-création. En charge de la recherche utilisateur et des tests.</p>',
             'who.desc.lacapsule':   '<p>Travail en tant que consultant UX pour des entreprises souhaitant améliorer leur expérience utilisateur.</p>',

@@ -219,12 +219,6 @@ body.loading .nav {
     overflow-x: hidden;
 }
 
-.landing-company {
-    color: var(--folio-color-accent);
-    text-decoration: none;
-    display: inline-block;
-}
-
 /* --- Landing Page ---
    3-row grid: spacer · hero · spacer ; with the bottom context anchored to the
    end of row 3 so the hero stays at the geometric centre of the page.
@@ -2511,10 +2505,6 @@ body::after {
     color: var(--folio-color-text-muted);
     max-width: 84ch;
     margin-top: var(--folio-space-24);
-}
-
-.landing-tagline .landing-company {
-    color: var(--folio-color-accent);
 }
 
 .landing-meta {
