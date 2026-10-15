@@ -45,7 +45,7 @@ strong { font-weight: 600; color: var(--folio-color-text); }
 .topbar-inner { display: flex; align-items: center; justify-content: space-between; height: 58px; }
 .brand { font-family: var(--folio-font-family-mono); font-weight: 500; font-size: 14px; letter-spacing: 0.02em; }
 .brand b { color: var(--folio-color-accent); font-weight: 500; }
-.topbar-nav { display: flex; align-items: center; gap: var(--folio-space-5); }
+.topbar-nav { display: flex; align-items: center; gap: var(--folio-space-24); }
 @media (max-width: 640px) { .topbar-nav folio-link { display: none; } }
 
 /* ===================== Hero ===================== */
@@ -60,7 +60,7 @@ strong { font-weight: 600; color: var(--folio-color-text); }
   color: var(--folio-color-text-muted); max-width: 620px; margin: 26px 0 0;
 }
 .hero-lede strong { color: var(--folio-color-accent); }
-.hero-cta { display: flex; gap: var(--folio-space-3); flex-wrap: wrap; margin-top: 36px; }
+.hero-cta { display: flex; gap: var(--folio-space-16); flex-wrap: wrap; margin-top: 36px; }
 
 /* ===================== Section shell ===================== */
 .sec { padding: 68px 0; border-bottom: 1px solid var(--folio-color-border); }
@@ -69,13 +69,19 @@ strong { font-weight: 600; color: var(--folio-color-text); }
 .sec-head p { color: var(--folio-color-text-muted); max-width: 600px; margin: 14px 0 0; font-size: 15.5px; }
 
 /* ===================== Pour qui ===================== */
-.audience {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 1px; background: var(--folio-color-border);
-  border: 1px solid var(--folio-color-border);
-}
+/* Cards pile up on scroll: each sticks 16px below the previous one.
+   --i (stagger index) is set by lp.js on every [data-reveal] child. */
+.audience { --tilt: 2deg; display: flex; flex-direction: column; gap: var(--folio-space-24); max-width: 640px; margin-inline: auto; }
+/* `rotate`, not `transform`, so the reveal animation doesn't reset it */
+.audience-cell:nth-child(odd) { rotate: calc(var(--tilt) * -1); }
+.audience-cell:nth-child(even) { rotate: var(--tilt); }
 .audience-cell {
-  background: var(--folio-color-bg-card); padding: 22px;
+  position: sticky; top: calc(58px + var(--folio-space-24) + var(--i, 0) * var(--folio-space-16));
+  /* decreasing bottom margin keeps the offset when the pile scrolls away (4 cards) */
+  margin-bottom: calc((3 - var(--i, 0)) * var(--folio-space-16));
+  min-height: 160px; padding: var(--folio-space-32);
+  background: var(--folio-color-bg-card);
+  border: 1px solid var(--folio-color-border);
   transition: background var(--folio-transition-fast);
 }
 .audience-cell:hover { background: var(--folio-color-bg-elevated); }
@@ -113,7 +119,7 @@ strong { font-weight: 600; color: var(--folio-color-text); }
 .flow:hover i { color: var(--folio-color-accent); transform: translateX(3px); }
 
 /* ===================== Preuve ===================== */
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--folio-space-8); }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--folio-space-48); }
 
 /* ===================== Offers ===================== */
 .offers { display: flex; flex-direction: column; }
@@ -146,7 +152,7 @@ strong { font-weight: 600; color: var(--folio-color-text); }
 .offer-price .unit { display: block; font-size: 12px; color: var(--folio-color-text-muted); margin-top: 3px; }
 
 /* ===================== Tiers ===================== */
-.tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: var(--folio-space-4); }
+.tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: var(--folio-space-16); }
 .tier {
   background: var(--folio-color-bg-card); border: 1px solid var(--folio-color-border);
   padding: 24px; display: flex; flex-direction: column;
@@ -161,7 +167,7 @@ strong { font-weight: 600; color: var(--folio-color-text); }
 .tier li { padding: 8px 0; border-top: 1px solid var(--folio-color-border); display: flex; gap: 8px; }
 .tier li::before { content: "→"; color: var(--folio-color-accent); }
 .tier li.off { color: var(--folio-color-text-dim); }
-.tier li.off::before { content: "·"; color: var(--folio-color-text-dim); }
+.tier li.off::before { content: "×"; color: var(--folio-color-text-dim); }
 
 .degressif {
   margin-top: 26px; font-family: var(--folio-font-family-mono);
@@ -169,7 +175,7 @@ strong { font-weight: 600; color: var(--folio-color-text); }
 }
 .degressif b { color: var(--folio-color-accent); font-weight: 500; }
 
-.vs { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--folio-space-4); margin-top: 26px; }
+.vs { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--folio-space-16); margin-top: 26px; }
 .vs-card { border: 1px solid var(--folio-color-border); padding: 6px 18px 10px; }
 .vs-card folio-section-title { display: block; padding: 12px 0; }
 
@@ -318,6 +324,35 @@ button:focus-visible {
   font-family: var(--folio-font-family-mono); font-size: 11px;
   letter-spacing: 0.06em; color: var(--folio-color-text-muted);
 }
+
+/* ============================================================
+   TYPOGRAPHY — Folio DS 0.5.0: two voices
+   Mozilla Headline (sans, from `body`) carries structure: headings,
+   nav, labels, prices. Faculty Glyphic (body) carries reading copy.
+   Wins on source order, so each rule above keeps its own sizing.
+   ============================================================ */
+.hero-title { font-family: var(--folio-font-family-display); font-weight: 500; letter-spacing: 0; }
+h2, h3, .reco-offer { font-weight: 500; letter-spacing: -0.02em; }
+
+p,
+.audience-cell span,
+.offer ul,
+.tier-for,
+.tier ul,
+.alc td,
+.step span:last-child,
+.reco-points li { font-family: var(--folio-font-family-body); }
+
+/* structural text inside reading blocks stays in the sans voice */
+.offer li.ex,
+.degressif,
+.reco-price,
+.foot-note,
+.alc td:first-child,
+.alc td:last-child { font-family: var(--folio-font-family-sans); }
+
+/* 0.5.0: text-dim no longer dresses readable text */
+.flow-label { color: var(--folio-color-text-muted); }
 
 /* ============================================================
    MOTION — scroll reveal, hero load, stagger

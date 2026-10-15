@@ -64,8 +64,8 @@ function countUp(statEl) {
 const RECO = {
   diagnostic: {
     offer: 'Diagnostic Design System',
-    price: 'dès 4 500 € · forfait · 2–3 sem.',
-    note: "Avant d'investir dans un système, il faut savoir ce qu'il doit résoudre. En 2 à 3 semaines, j'audite votre produit, votre Figma et le lien design ↔ code, puis je vous rends une feuille de route priorisée — pas un rapport de plus, un plan actionnable.",
+    price: 'dès 4 500 €, forfait, 2 à 3 sem.',
+    note: "Avant d'investir dans un système, il faut savoir ce qu'il doit résoudre. En 2 à 3 semaines, j'audite votre produit, votre Figma et le lien design et code, puis je vous rends une feuille de route avec les priorités dans l'ordre.",
     points: [
       'Audit produit, Figma, tokens & accessibilité (RGAA / EAA)',
       'Roadmap priorisée + proposition de structure',
@@ -75,41 +75,41 @@ const RECO = {
   },
   conception: {
     offer: 'Conception & Implémentation',
-    price: '10 – 50 k€ · ex. type ~22 k€',
-    note: "Votre interface diverge parce que chaque écran est recodé à la main. Je construis les fondations, les composants et la doc, connectés au code (Code Connect) — pour que design et dev arrêtent de repartir de zéro.",
+    price: '10 à 50 k€, ex. type ~22 k€',
+    note: "Votre interface diverge parce que chaque écran est recodé à la main. Je construis les fondations, les composants et la doc, connectés au code (Code Connect), pour que design et dev arrêtent de repartir de zéro.",
     points: [
       'Fondations & tokens (Figma variables, DTCG, modes)',
       'Composants documentés + gouvernance',
       'Connexion au code + accessibilité by design'
     ],
-    invite: "Montrez-moi votre produit en 30 min : je vous donne une fourchette réaliste et les 2–3 premières priorités."
+    invite: "Montrez-moi votre produit en 30 min : je vous donne une fourchette réaliste et les 2 ou 3 premières priorités."
   },
   essentiel: {
-    offer: 'Abonnement · Essentiel',
-    price: 'dès ~1 100 € / mois · ~2 j/mois',
-    note: "Un design system sans personne pour le faire vivre se périme en quelques mois. Pour ~2 jours/mois, je le garde cohérent, la dette recule, et vous suivez sa santé via une scorecard mensuelle — sans engagement au-delà du trimestre.",
+    offer: 'Abonnement Essentiel',
+    price: 'dès ~1 100 € / mois, ~2 j/mois',
+    note: "Un design system sans personne pour le faire vivre se périme en quelques mois. Pour ~2 jours/mois, je le garde cohérent, la dette recule, et vous suivez sa santé via une scorecard mensuelle, sans engagement au-delà du trimestre.",
     points: [
       'Évolution & maintenance continues',
-      'Scorecard mensuelle (dette · couverture · adoption)',
+      'Scorecard mensuelle (dette, couverture, adoption)',
       'Point de suivi mensuel'
     ],
     invite: "Parlons 30 min de l'état actuel de votre DS : je vous montre concrètement ce qu'un mois-type changerait."
   },
   croissance: {
-    offer: 'Abonnement · Croissance',
-    price: '~2 100 € / mois · ~4 j/mois',
-    note: "Un DS n'a de valeur que s'il est adopté. Pour ~4 jours/mois, je coache vos équipes design ET dev, je déploie la gouvernance et j'anime un atelier par trimestre — l'objectif est que tout le monde s'en serve, pas qu'il existe.",
+    offer: 'Abonnement Croissance',
+    price: '~2 100 € / mois, ~4 j/mois',
+    note: "Un DS n'a de valeur que s'il est adopté. Pour ~4 jours/mois, je coache vos équipes design ET dev, je déploie la gouvernance et j'anime un atelier par trimestre. Le but : que tout le monde s'en serve au quotidien.",
     points: [
       'Coaching équipe (design & dev)',
       'Déploiement & gouvernance',
       '1 atelier / trimestre + canal Slack dédié'
     ],
-    invite: "En 30 min, on identifie ce qui bloque l'adoption chez vous — et par quoi commencer dès le premier mois."
+    invite: "En 30 min, on identifie ce qui bloque l'adoption chez vous et par quoi commencer dès le premier mois."
   },
   scale: {
-    offer: 'Abonnement · Scale',
-    price: '~4 000 € / mois · ~8 j/mois',
-    note: "Passer à l'échelle, c'est gérer plusieurs équipes, plusieurs marques, du theming. Pour ~8 jours/mois, j'assure un suivi hebdomadaire, un atelier par mois et une architecture multi-marque qui tient la charge.",
+    offer: 'Abonnement Scale',
+    price: '~4 000 € / mois, ~8 j/mois',
+    note: "Passer à l'échelle, c'est faire tenir plusieurs équipes et plusieurs marques sur un même système. Pour ~8 jours/mois, j'assure un suivi hebdomadaire, un atelier par mois et une architecture multi-marque qui encaisse la croissance.",
     points: [
       'Suivi hebdomadaire + Slack prioritaire',
       '1 atelier / mois',
@@ -120,20 +120,20 @@ const RECO = {
   formation: {
     offer: 'Formations & Workshops',
     price: '1 500 € / session (4h)',
-    note: "Parfois le besoin n'est pas de construire, mais de faire monter l'équipe en compétence. En 4h, présentiel ou distanciel, vos designers et devs repartent avec des méthodes concrètes — pas des slides.",
+    note: "Parfois l'équipe a surtout besoin de monter en compétence. En 4h, présentiel ou distanciel, vos designers et devs apprennent des méthodes qu'ils appliquent dès le lendemain.",
     points: [
-      'Fondamentaux DS · Tokens & variables Figma',
-      'Contribuer au DS · Design ↔ Dev · Accessibilité',
+      'Fondamentaux DS, tokens & variables Figma',
+      'Contribuer au DS, lien design et dev, accessibilité',
       'Adaptée à votre stack, design ET dev'
     ],
     invite: "Dites-moi le niveau de votre équipe en 30 min : je cale le programme sur vos vrais besoins."
   },
   carte: {
     offer: 'À la carte / TJM',
-    price: 'dès 500 € · TJM 600 €/j',
+    price: 'dès 500 €, TJM 600 €/j',
     note: "Un besoin précis ne mérite pas un pack entier. Audit express, config de tokens, formation seule ou quelques jours sur-mesure : on prend juste ce qu'il faut, sans engagement.",
     points: [
-      'Audit express dès 1 500 € · Tokens dès 500 €',
+      'Audit express dès 1 500 €, tokens dès 500 €',
       'Maintenance ponctuelle 500 €/mois',
       'TJM 600 €/j pour le sur-mesure'
     ],

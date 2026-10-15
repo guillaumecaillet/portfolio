@@ -3,8 +3,8 @@
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const at = globalThis, wt = at.ShadowRoot && (at.ShadyCSS === void 0 || at.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, At = Symbol(), St = /* @__PURE__ */ new WeakMap();
-let Ft = class {
+const st = globalThis, wt = st.ShadowRoot && (st.ShadyCSS === void 0 || st.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, At = Symbol(), Ct = /* @__PURE__ */ new WeakMap();
+let Bt = class {
   constructor(t, o, r) {
     if (this._$cssResult$ = !0, r !== At) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
     this.cssText = t, this.t = o;
@@ -14,7 +14,7 @@ let Ft = class {
     const o = this.t;
     if (wt && t === void 0) {
       const r = o !== void 0 && o.length === 1;
-      r && (t = St.get(o)), t === void 0 && ((this.o = t = new CSSStyleSheet()).replaceSync(this.cssText), r && St.set(o, t));
+      r && (t = Ct.get(o)), t === void 0 && ((this.o = t = new CSSStyleSheet()).replaceSync(this.cssText), r && Ct.set(o, t));
     }
     return t;
   }
@@ -22,30 +22,30 @@ let Ft = class {
     return this.cssText;
   }
 };
-const Yt = (i) => new Ft(typeof i == "string" ? i : i + "", void 0, At), v = (i, ...t) => {
+const Xt = (i) => new Bt(typeof i == "string" ? i : i + "", void 0, At), u = (i, ...t) => {
   const o = i.length === 1 ? i[0] : t.reduce((r, e, s) => r + ((a) => {
     if (a._$cssResult$ === !0) return a.cssText;
     if (typeof a == "number") return a;
     throw Error("Value passed to 'css' function must be a 'css' function result: " + a + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
   })(e) + i[s + 1], i[0]);
-  return new Ft(o, i, At);
+  return new Bt(o, i, At);
 }, Jt = (i, t) => {
   if (wt) i.adoptedStyleSheets = t.map((o) => o instanceof CSSStyleSheet ? o : o.styleSheet);
   else for (const o of t) {
-    const r = document.createElement("style"), e = at.litNonce;
+    const r = document.createElement("style"), e = st.litNonce;
     e !== void 0 && r.setAttribute("nonce", e), r.textContent = o.cssText, i.appendChild(r);
   }
-}, zt = wt ? (i) => i : (i) => i instanceof CSSStyleSheet ? ((t) => {
+}, St = wt ? (i) => i : (i) => i instanceof CSSStyleSheet ? ((t) => {
   let o = "";
   for (const r of t.cssRules) o += r.cssText;
-  return Yt(o);
+  return Xt(o);
 })(i) : i;
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const { is: Gt, defineProperty: Qt, getOwnPropertyDescriptor: te, getOwnPropertyNames: ee, getOwnPropertySymbols: oe, getPrototypeOf: re } = Object, x = globalThis, Dt = x.trustedTypes, ie = Dt ? Dt.emptyScript : "", gt = x.reactiveElementPolyfillSupport, Z = (i, t) => i, nt = { toAttribute(i, t) {
+const { is: Gt, defineProperty: Qt, getOwnPropertyDescriptor: te, getOwnPropertyNames: ee, getOwnPropertySymbols: oe, getPrototypeOf: re } = Object, w = globalThis, zt = w.trustedTypes, ie = zt ? zt.emptyScript : "", gt = w.reactiveElementPolyfillSupport, K = (i, t) => i, at = { toAttribute(i, t) {
   switch (t) {
     case Boolean:
       i = i ? ie : null;
@@ -73,9 +73,9 @@ const { is: Gt, defineProperty: Qt, getOwnPropertyDescriptor: te, getOwnProperty
       }
   }
   return o;
-} }, Pt = (i, t) => !Gt(i, t), jt = { attribute: !0, type: String, converter: nt, reflect: !1, useDefault: !1, hasChanged: Pt };
-Symbol.metadata ?? (Symbol.metadata = Symbol("metadata")), x.litPropertyMetadata ?? (x.litPropertyMetadata = /* @__PURE__ */ new WeakMap());
-let T = class extends HTMLElement {
+} }, Pt = (i, t) => !Gt(i, t), jt = { attribute: !0, type: String, converter: at, reflect: !1, useDefault: !1, hasChanged: Pt };
+Symbol.metadata ?? (Symbol.metadata = Symbol("metadata")), w.litPropertyMetadata ?? (w.litPropertyMetadata = /* @__PURE__ */ new WeakMap());
+let M = class extends HTMLElement {
   static addInitializer(t) {
     this._$Ei(), (this.l ?? (this.l = [])).push(t);
   }
@@ -103,13 +103,13 @@ let T = class extends HTMLElement {
     return this.elementProperties.get(t) ?? jt;
   }
   static _$Ei() {
-    if (this.hasOwnProperty(Z("elementProperties"))) return;
+    if (this.hasOwnProperty(K("elementProperties"))) return;
     const t = re(this);
     t.finalize(), t.l !== void 0 && (this.l = [...t.l]), this.elementProperties = new Map(t.elementProperties);
   }
   static finalize() {
-    if (this.hasOwnProperty(Z("finalized"))) return;
-    if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(Z("properties"))) {
+    if (this.hasOwnProperty(K("finalized"))) return;
+    if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(K("properties"))) {
       const o = this.properties, r = [...ee(o), ...oe(o)];
       for (const e of r) this.createProperty(e, o[e]);
     }
@@ -129,8 +129,8 @@ let T = class extends HTMLElement {
     const o = [];
     if (Array.isArray(t)) {
       const r = new Set(t.flat(1 / 0).reverse());
-      for (const e of r) o.unshift(zt(e));
-    } else t !== void 0 && o.push(zt(t));
+      for (const e of r) o.unshift(St(e));
+    } else t !== void 0 && o.push(St(t));
     return o;
   }
   static _$Eu(t, o) {
@@ -184,7 +184,7 @@ let T = class extends HTMLElement {
     var s;
     const r = this.constructor.elementProperties.get(t), e = this.constructor._$Eu(t, r);
     if (e !== void 0 && r.reflect === !0) {
-      const a = (((s = r.converter) == null ? void 0 : s.toAttribute) !== void 0 ? r.converter : nt).toAttribute(o, r.type);
+      const a = (((s = r.converter) == null ? void 0 : s.toAttribute) !== void 0 ? r.converter : at).toAttribute(o, r.type);
       this._$Em = t, a == null ? this.removeAttribute(e) : this.setAttribute(e, a), this._$Em = null;
     }
   }
@@ -192,7 +192,7 @@ let T = class extends HTMLElement {
     var s, a;
     const r = this.constructor, e = r._$Eh.get(t);
     if (e !== void 0 && this._$Em !== e) {
-      const c = r.getPropertyOptions(e), n = typeof c.converter == "function" ? { fromAttribute: c.converter } : ((s = c.converter) == null ? void 0 : s.fromAttribute) !== void 0 ? c.converter : nt;
+      const c = r.getPropertyOptions(e), n = typeof c.converter == "function" ? { fromAttribute: c.converter } : ((s = c.converter) == null ? void 0 : s.fromAttribute) !== void 0 ? c.converter : at;
       this._$Em = e;
       const f = n.fromAttribute(o, c.type);
       this[e] = f ?? ((a = this._$Ej) == null ? void 0 : a.get(e)) ?? f, this._$Em = null;
@@ -278,30 +278,30 @@ let T = class extends HTMLElement {
   firstUpdated(t) {
   }
 };
-T.elementStyles = [], T.shadowRootOptions = { mode: "open" }, T[Z("elementProperties")] = /* @__PURE__ */ new Map(), T[Z("finalized")] = /* @__PURE__ */ new Map(), gt == null || gt({ ReactiveElement: T }), (x.reactiveElementVersions ?? (x.reactiveElementVersions = [])).push("2.1.2");
+M.elementStyles = [], M.shadowRootOptions = { mode: "open" }, M[K("elementProperties")] = /* @__PURE__ */ new Map(), M[K("finalized")] = /* @__PURE__ */ new Map(), gt == null || gt({ ReactiveElement: M }), (w.reactiveElementVersions ?? (w.reactiveElementVersions = [])).push("2.1.2");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const K = globalThis, Mt = (i) => i, lt = K.trustedTypes, Tt = lt ? lt.createPolicy("lit-html", { createHTML: (i) => i }) : void 0, It = "$lit$", _ = `lit$${Math.random().toFixed(9).slice(2)}$`, qt = "?" + _, se = `<${qt}>`, C = document, X = () => C.createComment(""), Y = (i) => i === null || typeof i != "object" && typeof i != "function", Et = Array.isArray, ae = (i) => Et(i) || typeof (i == null ? void 0 : i[Symbol.iterator]) == "function", $t = `[ 	
-\f\r]`, W = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Ut = /-->/g, Rt = />/g, P = RegExp(`>|${$t}(?:([^\\s"'>=/]+)(${$t}*=${$t}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), Ht = /'/g, kt = /"/g, Vt = /^(?:script|style|textarea|title)$/i, ne = (i) => (t, ...o) => ({ _$litType$: i, strings: t, values: o }), p = ne(1), U = Symbol.for("lit-noChange"), h = Symbol.for("lit-nothing"), Nt = /* @__PURE__ */ new WeakMap(), E = C.createTreeWalker(C, 129);
-function Wt(i, t) {
+const Y = globalThis, kt = (i) => i, nt = Y.trustedTypes, Dt = nt ? nt.createPolicy("lit-html", { createHTML: (i) => i }) : void 0, Ft = "$lit$", x = `lit$${Math.random().toFixed(9).slice(2)}$`, It = "?" + x, se = `<${It}>`, C = document, Z = () => C.createComment(""), X = (i) => i === null || typeof i != "object" && typeof i != "function", Et = Array.isArray, ae = (i) => Et(i) || typeof (i == null ? void 0 : i[Symbol.iterator]) == "function", yt = `[ 	
+\f\r]`, W = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Tt = /-->/g, Mt = />/g, P = RegExp(`>|${yt}(?:([^\\s"'>=/]+)(${yt}*=${yt}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`, "g"), Ut = /'/g, Rt = /"/g, qt = /^(?:script|style|textarea|title)$/i, ne = (i) => (t, ...o) => ({ _$litType$: i, strings: t, values: o }), p = ne(1), U = Symbol.for("lit-noChange"), h = Symbol.for("lit-nothing"), Ht = /* @__PURE__ */ new WeakMap(), E = C.createTreeWalker(C, 129);
+function Vt(i, t) {
   if (!Et(i) || !i.hasOwnProperty("raw")) throw Error("invalid template strings array");
-  return Tt !== void 0 ? Tt.createHTML(t) : t;
+  return Dt !== void 0 ? Dt.createHTML(t) : t;
 }
 const le = (i, t) => {
   const o = i.length - 1, r = [];
   let e, s = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", a = W;
   for (let c = 0; c < o; c++) {
     const n = i[c];
-    let f, b, d = -1, $ = 0;
-    for (; $ < n.length && (a.lastIndex = $, b = a.exec(n), b !== null); ) $ = a.lastIndex, a === W ? b[1] === "!--" ? a = Ut : b[1] !== void 0 ? a = Rt : b[2] !== void 0 ? (Vt.test(b[2]) && (e = RegExp("</" + b[2], "g")), a = P) : b[3] !== void 0 && (a = P) : a === P ? b[0] === ">" ? (a = e ?? W, d = -1) : b[1] === void 0 ? d = -2 : (d = a.lastIndex - b[2].length, f = b[1], a = b[3] === void 0 ? P : b[3] === '"' ? kt : Ht) : a === kt || a === Ht ? a = P : a === Ut || a === Rt ? a = W : (a = P, e = void 0);
-    const y = a === P && i[c + 1].startsWith("/>") ? " " : "";
-    s += a === W ? n + se : d >= 0 ? (r.push(f), n.slice(0, d) + It + n.slice(d) + _ + y) : n + _ + (d === -2 ? c : y);
+    let f, b, d = -1, y = 0;
+    for (; y < n.length && (a.lastIndex = y, b = a.exec(n), b !== null); ) y = a.lastIndex, a === W ? b[1] === "!--" ? a = Tt : b[1] !== void 0 ? a = Mt : b[2] !== void 0 ? (qt.test(b[2]) && (e = RegExp("</" + b[2], "g")), a = P) : b[3] !== void 0 && (a = P) : a === P ? b[0] === ">" ? (a = e ?? W, d = -1) : b[1] === void 0 ? d = -2 : (d = a.lastIndex - b[2].length, f = b[1], a = b[3] === void 0 ? P : b[3] === '"' ? Rt : Ut) : a === Rt || a === Ut ? a = P : a === Tt || a === Mt ? a = W : (a = P, e = void 0);
+    const _ = a === P && i[c + 1].startsWith("/>") ? " " : "";
+    s += a === W ? n + se : d >= 0 ? (r.push(f), n.slice(0, d) + Ft + n.slice(d) + x + _) : n + x + (d === -2 ? c : _);
   }
-  return [Wt(i, s + (i[o] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
+  return [Vt(i, s + (i[o] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
 };
 class J {
   constructor({ strings: t, _$litType$: o }, r) {
@@ -315,22 +315,22 @@ class J {
     }
     for (; (e = E.nextNode()) !== null && n.length < c; ) {
       if (e.nodeType === 1) {
-        if (e.hasAttributes()) for (const d of e.getAttributeNames()) if (d.endsWith(It)) {
-          const $ = b[a++], y = e.getAttribute(d).split(_), st = /([.?@])?(.*)/.exec($);
-          n.push({ type: 1, index: s, name: st[2], strings: y, ctor: st[1] === "." ? he : st[1] === "?" ? pe : st[1] === "@" ? de : dt }), e.removeAttribute(d);
-        } else d.startsWith(_) && (n.push({ type: 6, index: s }), e.removeAttribute(d));
-        if (Vt.test(e.tagName)) {
-          const d = e.textContent.split(_), $ = d.length - 1;
-          if ($ > 0) {
-            e.textContent = lt ? lt.emptyScript : "";
-            for (let y = 0; y < $; y++) e.append(d[y], X()), E.nextNode(), n.push({ type: 2, index: ++s });
-            e.append(d[$], X());
+        if (e.hasAttributes()) for (const d of e.getAttributeNames()) if (d.endsWith(Ft)) {
+          const y = b[a++], _ = e.getAttribute(d).split(x), it = /([.?@])?(.*)/.exec(y);
+          n.push({ type: 1, index: s, name: it[2], strings: _, ctor: it[1] === "." ? he : it[1] === "?" ? pe : it[1] === "@" ? de : dt }), e.removeAttribute(d);
+        } else d.startsWith(x) && (n.push({ type: 6, index: s }), e.removeAttribute(d));
+        if (qt.test(e.tagName)) {
+          const d = e.textContent.split(x), y = d.length - 1;
+          if (y > 0) {
+            e.textContent = nt ? nt.emptyScript : "";
+            for (let _ = 0; _ < y; _++) e.append(d[_], Z()), E.nextNode(), n.push({ type: 2, index: ++s });
+            e.append(d[y], Z());
           }
         }
-      } else if (e.nodeType === 8) if (e.data === qt) n.push({ type: 2, index: s });
+      } else if (e.nodeType === 8) if (e.data === It) n.push({ type: 2, index: s });
       else {
         let d = -1;
-        for (; (d = e.data.indexOf(_, d + 1)) !== -1; ) n.push({ type: 7, index: s }), d += _.length - 1;
+        for (; (d = e.data.indexOf(x, d + 1)) !== -1; ) n.push({ type: 7, index: s }), d += x.length - 1;
       }
       s++;
     }
@@ -344,7 +344,7 @@ function R(i, t, o = i, r) {
   var a, c;
   if (t === U) return t;
   let e = r !== void 0 ? (a = o._$Co) == null ? void 0 : a[r] : o._$Cl;
-  const s = Y(t) ? void 0 : t._$litDirective$;
+  const s = X(t) ? void 0 : t._$litDirective$;
   return (e == null ? void 0 : e.constructor) !== s && ((c = e == null ? void 0 : e._$AO) == null || c.call(e, !1), s === void 0 ? e = void 0 : (e = new s(i), e._$AT(i, o, r)), r !== void 0 ? (o._$Co ?? (o._$Co = []))[r] = e : o._$Cl = e), e !== void 0 && (t = R(i, e._$AS(i, t.values), e, r)), t;
 }
 class ce {
@@ -364,7 +364,7 @@ class ce {
     for (; n !== void 0; ) {
       if (a === n.index) {
         let f;
-        n.type === 2 ? f = new tt(s, s.nextSibling, this, t) : n.type === 1 ? f = new n.ctor(s, n.name, n.strings, this, t) : n.type === 6 && (f = new fe(s, this, t)), this._$AV.push(f), n = r[++c];
+        n.type === 2 ? f = new Q(s, s.nextSibling, this, t) : n.type === 1 ? f = new n.ctor(s, n.name, n.strings, this, t) : n.type === 6 && (f = new fe(s, this, t)), this._$AV.push(f), n = r[++c];
       }
       a !== (n == null ? void 0 : n.index) && (s = E.nextNode(), a++);
     }
@@ -375,7 +375,7 @@ class ce {
     for (const r of this._$AV) r !== void 0 && (r.strings !== void 0 ? (r._$AI(t, r, o), o += r.strings.length - 2) : r._$AI(t[o])), o++;
   }
 }
-class tt {
+class Q {
   get _$AU() {
     var t;
     return ((t = this._$AM) == null ? void 0 : t._$AU) ?? this._$Cv;
@@ -395,7 +395,7 @@ class tt {
     return this._$AB;
   }
   _$AI(t, o = this) {
-    t = R(this, t, o), Y(t) ? t === h || t == null || t === "" ? (this._$AH !== h && this._$AR(), this._$AH = h) : t !== this._$AH && t !== U && this._(t) : t._$litType$ !== void 0 ? this.$(t) : t.nodeType !== void 0 ? this.T(t) : ae(t) ? this.k(t) : this._(t);
+    t = R(this, t, o), X(t) ? t === h || t == null || t === "" ? (this._$AH !== h && this._$AR(), this._$AH = h) : t !== this._$AH && t !== U && this._(t) : t._$litType$ !== void 0 ? this.$(t) : t.nodeType !== void 0 ? this.T(t) : ae(t) ? this.k(t) : this._(t);
   }
   O(t) {
     return this._$AA.parentNode.insertBefore(t, this._$AB);
@@ -404,11 +404,11 @@ class tt {
     this._$AH !== t && (this._$AR(), this._$AH = this.O(t));
   }
   _(t) {
-    this._$AH !== h && Y(this._$AH) ? this._$AA.nextSibling.data = t : this.T(C.createTextNode(t)), this._$AH = t;
+    this._$AH !== h && X(this._$AH) ? this._$AA.nextSibling.data = t : this.T(C.createTextNode(t)), this._$AH = t;
   }
   $(t) {
     var s;
-    const { values: o, _$litType$: r } = t, e = typeof r == "number" ? this._$AC(t) : (r.el === void 0 && (r.el = J.createElement(Wt(r.h, r.h[0]), this.options)), r);
+    const { values: o, _$litType$: r } = t, e = typeof r == "number" ? this._$AC(t) : (r.el === void 0 && (r.el = J.createElement(Vt(r.h, r.h[0]), this.options)), r);
     if (((s = this._$AH) == null ? void 0 : s._$AD) === e) this._$AH.p(o);
     else {
       const a = new ce(e, this), c = a.u(this.options);
@@ -416,21 +416,21 @@ class tt {
     }
   }
   _$AC(t) {
-    let o = Nt.get(t.strings);
-    return o === void 0 && Nt.set(t.strings, o = new J(t)), o;
+    let o = Ht.get(t.strings);
+    return o === void 0 && Ht.set(t.strings, o = new J(t)), o;
   }
   k(t) {
     Et(this._$AH) || (this._$AH = [], this._$AR());
     const o = this._$AH;
     let r, e = 0;
-    for (const s of t) e === o.length ? o.push(r = new tt(this.O(X()), this.O(X()), this, this.options)) : r = o[e], r._$AI(s), e++;
+    for (const s of t) e === o.length ? o.push(r = new Q(this.O(Z()), this.O(Z()), this, this.options)) : r = o[e], r._$AI(s), e++;
     e < o.length && (this._$AR(r && r._$AB.nextSibling, e), o.length = e);
   }
   _$AR(t = this._$AA.nextSibling, o) {
     var r;
     for ((r = this._$AP) == null ? void 0 : r.call(this, !1, !0, o); t !== this._$AB; ) {
-      const e = Mt(t).nextSibling;
-      Mt(t).remove(), t = e;
+      const e = kt(t).nextSibling;
+      kt(t).remove(), t = e;
     }
   }
   setConnected(t) {
@@ -451,11 +451,11 @@ class dt {
   _$AI(t, o = this, r, e) {
     const s = this.strings;
     let a = !1;
-    if (s === void 0) t = R(this, t, o, 0), a = !Y(t) || t !== this._$AH && t !== U, a && (this._$AH = t);
+    if (s === void 0) t = R(this, t, o, 0), a = !X(t) || t !== this._$AH && t !== U, a && (this._$AH = t);
     else {
       const c = t;
       let n, f;
-      for (t = s[0], n = 0; n < s.length - 1; n++) f = R(this, c[r + n], o, n), f === U && (f = this._$AH[n]), a || (a = !Y(f) || f !== this._$AH[n]), f === h ? t = h : t !== h && (t += (f ?? "") + s[n + 1]), this._$AH[n] = f;
+      for (t = s[0], n = 0; n < s.length - 1; n++) f = R(this, c[r + n], o, n), f === U && (f = this._$AH[n]), a || (a = !X(f) || f !== this._$AH[n]), f === h ? t = h : t !== h && (t += (f ?? "") + s[n + 1]), this._$AH[n] = f;
     }
     a && !e && this.j(t);
   }
@@ -504,14 +504,14 @@ class fe {
     R(this, t);
   }
 }
-const yt = K.litHtmlPolyfillSupport;
-yt == null || yt(J, tt), (K.litHtmlVersions ?? (K.litHtmlVersions = [])).push("3.3.3");
-const ue = (i, t, o) => {
+const $t = Y.litHtmlPolyfillSupport;
+$t == null || $t(J, Q), (Y.litHtmlVersions ?? (Y.litHtmlVersions = [])).push("3.3.3");
+const ve = (i, t, o) => {
   const r = (o == null ? void 0 : o.renderBefore) ?? t;
   let e = r._$litPart$;
   if (e === void 0) {
     const s = (o == null ? void 0 : o.renderBefore) ?? null;
-    r._$litPart$ = e = new tt(t.insertBefore(X(), s), s, void 0, o ?? {});
+    r._$litPart$ = e = new Q(t.insertBefore(Z(), s), s, void 0, o ?? {});
   }
   return e._$AI(i), e;
 };
@@ -521,7 +521,7 @@ const ue = (i, t, o) => {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 const O = globalThis;
-class u extends T {
+class v extends M {
   constructor() {
     super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
   }
@@ -532,7 +532,7 @@ class u extends T {
   }
   update(t) {
     const o = this.render();
-    this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(t), this._$Do = ue(o, this.renderRoot, this.renderOptions);
+    this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(t), this._$Do = ve(o, this.renderRoot, this.renderOptions);
   }
   connectedCallback() {
     var t;
@@ -546,10 +546,10 @@ class u extends T {
     return U;
   }
 }
-var Bt;
-u._$litElement$ = !0, u.finalized = !0, (Bt = O.litElementHydrateSupport) == null || Bt.call(O, { LitElement: u });
+var Lt;
+v._$litElement$ = !0, v.finalized = !0, (Lt = O.litElementHydrateSupport) == null || Lt.call(O, { LitElement: v });
 const _t = O.litElementPolyfillSupport;
-_t == null || _t({ LitElement: u });
+_t == null || _t({ LitElement: v });
 (O.litElementVersions ?? (O.litElementVersions = [])).push("4.2.2");
 /**
  * @license
@@ -566,7 +566,7 @@ const m = (i) => (t, o) => {
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const ve = { attribute: !0, type: String, converter: nt, reflect: !1, hasChanged: Pt }, me = (i = ve, t, o) => {
+const ue = { attribute: !0, type: String, converter: at, reflect: !1, hasChanged: Pt }, me = (i = ue, t, o) => {
   const { kind: r, metadata: e } = o;
   let s = globalThis.litPropertyMetadata.get(e);
   if (s === void 0 && globalThis.litPropertyMetadata.set(e, s = /* @__PURE__ */ new Map()), r === "setter" && ((i = Object.create(i)).wrapped = !0), s.set(o.name, i), r === "accessor") {
@@ -598,10 +598,10 @@ function l(i) {
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-function F(i) {
+function I(i) {
   return l({ ...i, state: !0, attribute: !1 });
 }
-const M = v`
+const D = u`
   :focus-visible {
     outline: 2px solid var(--folio-color-accent);
     outline-offset: 3px;
@@ -610,7 +610,7 @@ const M = v`
   :focus:not(:focus-visible) {
     outline: none;
   }
-`, g = v`
+`, g = u`
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -620,23 +620,23 @@ const M = v`
       animation-iteration-count: 1 !important;
     }
   }
-`, I = v`
+`, q = u`
   .mono-label {
     font-family: var(--folio-font-family-mono);
-    font-size: var(--folio-text-label);
+    font-size: var(--folio-text-small);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
 `;
-var be = Object.defineProperty, ge = Object.getOwnPropertyDescriptor, q = (i, t, o, r) => {
+var be = Object.defineProperty, ge = Object.getOwnPropertyDescriptor, T = (i, t, o, r) => {
   for (var e = r > 1 ? void 0 : r ? ge(t, o) : t, s = i.length - 1, a; s >= 0; s--)
     (a = i[s]) && (e = (r ? a(t, o, e) : a(e)) || e);
   return r && e && be(t, o, e), e;
 };
-let w = class extends u {
+let $ = class extends v {
   constructor() {
-    super(...arguments), this.variant = "card", this.disabled = !1, this.type = "button";
+    super(...arguments), this.variant = "card", this.pixel = !1, this.disabled = !1, this.type = "button";
   }
   render() {
     const i = p`<slot name="icon"></slot><slot></slot>`;
@@ -658,20 +658,22 @@ let w = class extends u {
         </button>`;
   }
 };
-w.styles = [
-  M,
+$.styles = [
+  D,
   g,
-  v`
+  u`
       :host {
         display: inline-block;
       }
       .btn {
         display: inline-flex;
         align-items: center;
-        gap: var(--folio-space-2);
-        padding: var(--folio-space-2) 14px;
+        gap: var(--folio-space-8);
+        box-sizing: border-box;
+        height: var(--folio-control-lg);
+        padding-inline: var(--folio-space-16);
         font-family: var(--folio-font-family-sans);
-        font-size: var(--folio-text-caption);
+        font-size: var(--folio-text-body);
         font-weight: 500;
         letter-spacing: -0.01em;
         color: var(--folio-color-text);
@@ -689,16 +691,61 @@ w.styles = [
         background: var(--folio-color-bg-elevated);
         transform: translateY(-1px);
       }
+      /* Primary: the one filled treatment. The blue is fixed across themes
+         on purpose — see --folio-color-cta. */
+      :host([variant='primary']) .btn {
+        height: var(--folio-control-xl);
+        padding-inline: var(--folio-space-24);
+        /* The card variant tightens tracking; the CTA does not. */
+        letter-spacing: normal;
+        color: var(--folio-color-cta-ink);
+        background: var(--folio-color-cta);
+        border-color: var(--folio-color-cta);
+      }
+      :host([variant='primary']) .btn:hover {
+        background: var(--folio-color-cta-hot);
+        border-color: var(--folio-color-cta-hot);
+        transform: translateY(-2px);
+      }
+      /* Notched corners. Cut with clip-path so the shape survives any
+         background; the border is drawn by the fill, not by the border box. */
+      :host([variant='primary'][pixel]) .btn {
+        --n: var(--folio-pixel-notch);
+        --i: var(--folio-pixel-notch-inner);
+        clip-path: polygon(
+          var(--n) 0, calc(100% - var(--n)) 0,
+          calc(100% - var(--n)) var(--i), calc(100% - var(--i)) var(--i),
+          calc(100% - var(--i)) var(--n), 100% var(--n),
+          100% calc(100% - var(--n)), calc(100% - var(--i)) calc(100% - var(--n)),
+          calc(100% - var(--i)) calc(100% - var(--i)), calc(100% - var(--n)) calc(100% - var(--i)),
+          calc(100% - var(--n)) 100%, var(--n) 100%,
+          var(--n) calc(100% - var(--i)), var(--i) calc(100% - var(--i)),
+          var(--i) calc(100% - var(--n)), 0 calc(100% - var(--n)),
+          0 var(--n), var(--i) var(--n),
+          var(--i) var(--i), var(--n) var(--i)
+        );
+      }
+      :host([variant='primary'][pixel]) .btn:focus-visible {
+        outline-color: currentColor;
+        outline-offset: -6px;
+      }
+
       :host([variant='ghost']) .btn {
         background: transparent;
         border-color: transparent;
         color: var(--folio-color-text-muted);
-        padding-inline: var(--folio-space-1);
+        padding-inline: var(--folio-space-8);
       }
       :host([variant='ghost']) .btn:hover {
         color: var(--folio-color-text);
         background: transparent;
         transform: none;
+      }
+      /* A disabled primary must stop reading as the page's one live action,
+         so it drops the fill entirely rather than just dimming its label. */
+      :host([variant='primary'][disabled]) .btn {
+        background: var(--folio-color-bg-card);
+        border-color: var(--folio-color-border);
       }
       :host([disabled]) .btn {
         color: var(--folio-color-text-dim);
@@ -712,45 +759,54 @@ w.styles = [
         width: 16px;
         height: 16px;
       }
+      ::slotted(svg) {
+        flex-shrink: 0;
+      }
     `
 ];
-q([
+T([
   l({ reflect: !0 })
-], w.prototype, "variant", 2);
-q([
-  l()
-], w.prototype, "href", 2);
-q([
-  l()
-], w.prototype, "target", 2);
-q([
+], $.prototype, "variant", 2);
+T([
   l({ type: Boolean, reflect: !0 })
-], w.prototype, "disabled", 2);
-q([
+], $.prototype, "pixel", 2);
+T([
   l()
-], w.prototype, "type", 2);
-w = q([
+], $.prototype, "href", 2);
+T([
+  l()
+], $.prototype, "target", 2);
+T([
+  l({ type: Boolean, reflect: !0 })
+], $.prototype, "disabled", 2);
+T([
+  l()
+], $.prototype, "type", 2);
+$ = T([
   m("folio-button")
-], w);
-var $e = Object.getOwnPropertyDescriptor, ye = (i, t, o, r) => {
-  for (var e = r > 1 ? void 0 : r ? $e(t, o) : t, s = i.length - 1, a; s >= 0; s--)
+], $);
+var ye = Object.getOwnPropertyDescriptor, $e = (i, t, o, r) => {
+  for (var e = r > 1 ? void 0 : r ? ye(t, o) : t, s = i.length - 1, a; s >= 0; s--)
     (a = i[s]) && (e = a(e) || e);
   return e;
 };
-let xt = class extends u {
+let xt = class extends v {
   render() {
     return p`<span class="tag mono-label"><slot></slot></span>`;
   }
 };
 xt.styles = [
-  I,
-  v`
+  q,
+  u`
       :host {
         display: inline-block;
       }
       .tag {
-        display: inline-block;
-        padding: var(--folio-space-1) var(--folio-space-3);
+        display: inline-flex;
+        align-items: center;
+        box-sizing: border-box;
+        height: var(--folio-control-sm);
+        padding-inline: var(--folio-space-16);
         border: 1px solid var(--folio-color-border);
         border-radius: var(--folio-radius-none);
         color: var(--folio-color-text-muted);
@@ -758,7 +814,7 @@ xt.styles = [
       }
     `
 ];
-xt = ye([
+xt = $e([
   m("folio-tag")
 ], xt);
 var _e = Object.defineProperty, xe = Object.getOwnPropertyDescriptor, Ot = (i, t, o, r) => {
@@ -766,7 +822,7 @@ var _e = Object.defineProperty, xe = Object.getOwnPropertyDescriptor, Ot = (i, t
     (a = i[s]) && (e = (r ? a(t, o, e) : a(e)) || e);
   return r && e && _e(t, o, e), e;
 };
-let G = class extends u {
+let G = class extends v {
   constructor() {
     super(...arguments), this.selected = !1, this.disabled = !1;
   }
@@ -792,19 +848,21 @@ let G = class extends u {
   }
 };
 G.styles = [
-  M,
+  D,
   g,
-  v`
+  u`
       :host {
         display: inline-block;
       }
       .chip {
         display: inline-flex;
         align-items: center;
-        gap: var(--folio-space-2);
-        padding: 6px var(--folio-space-3);
+        gap: var(--folio-space-8);
+        box-sizing: border-box;
+        height: var(--folio-control-md);
+        padding-inline: var(--folio-space-16);
         font-family: var(--folio-font-family-sans);
-        font-size: 0.72rem;
+        font-size: var(--folio-text-small);
         font-weight: 500;
         letter-spacing: 0.02em;
         color: var(--folio-color-text-muted);
@@ -842,12 +900,12 @@ Ot([
 G = Ot([
   m("folio-chip")
 ], G);
-var we = Object.defineProperty, Ae = Object.getOwnPropertyDescriptor, Zt = (i, t, o, r) => {
+var we = Object.defineProperty, Ae = Object.getOwnPropertyDescriptor, Wt = (i, t, o, r) => {
   for (var e = r > 1 ? void 0 : r ? Ae(t, o) : t, s = i.length - 1, a; s >= 0; s--)
     (a = i[s]) && (e = (r ? a(t, o, e) : a(e)) || e);
   return r && e && we(t, o, e), e;
 };
-let ct = class extends u {
+let lt = class extends v {
   constructor() {
     super(...arguments), this.tone = "accent";
   }
@@ -855,21 +913,25 @@ let ct = class extends u {
     return p`<span class="badge mono-label"><slot></slot></span>`;
   }
 };
-ct.styles = [
-  I,
-  v`
+lt.styles = [
+  q,
+  u`
       :host {
         display: inline-block;
       }
       .badge {
         display: inline-flex;
         align-items: center;
-        height: 24px;
-        padding-inline: var(--folio-space-2);
+        /* border-box so the bordered key tone keeps the same height as the
+           filled tones instead of growing by its border. */
+        box-sizing: border-box;
+        height: var(--folio-control-sm);
+        padding-inline: var(--folio-space-8);
         border-radius: var(--folio-radius-none);
-        font-size: 0.62rem;
+        font-size: var(--folio-text-small);
         font-weight: 700;
         letter-spacing: 0.08em;
+        line-height: 1;
         color: var(--folio-color-accent);
         background: var(--folio-color-accent-soft);
       }
@@ -889,20 +951,28 @@ ct.styles = [
         color: var(--folio-color-status-info);
         background: var(--folio-color-status-info-soft);
       }
+      /* Key projects. Tinted rather than filled so it reads as a marker,
+         not a status, and keeps its weight against a page of blue. */
+      :host([tone='key']) .badge {
+        color: var(--folio-color-key-ink);
+        background: color-mix(in srgb, var(--folio-color-key) 13%, transparent);
+        border: 1px solid color-mix(in srgb, var(--folio-color-key) 55%, transparent);
+        letter-spacing: 0.04em;
+      }
     `
 ];
-Zt([
+Wt([
   l({ reflect: !0 })
-], ct.prototype, "tone", 2);
-ct = Zt([
+], lt.prototype, "tone", 2);
+lt = Wt([
   m("folio-badge")
-], ct);
-var Pe = Object.defineProperty, Ee = Object.getOwnPropertyDescriptor, et = (i, t, o, r) => {
+], lt);
+var Pe = Object.defineProperty, Ee = Object.getOwnPropertyDescriptor, tt = (i, t, o, r) => {
   for (var e = r > 1 ? void 0 : r ? Ee(t, o) : t, s = i.length - 1, a; s >= 0; s--)
     (a = i[s]) && (e = (r ? a(t, o, e) : a(e)) || e);
   return r && e && Pe(t, o, e), e;
 };
-let S = class extends u {
+let S = class extends v {
   constructor() {
     super(...arguments), this.href = "#", this.variant = "inline", this.active = !1;
   }
@@ -920,9 +990,9 @@ let S = class extends u {
   }
 };
 S.styles = [
-  M,
+  D,
   g,
-  v`
+  u`
       :host {
         display: inline-block;
       }
@@ -930,7 +1000,7 @@ S.styles = [
         position: relative;
         display: inline-flex;
         align-items: center;
-        gap: var(--folio-space-2);
+        gap: var(--folio-space-8);
         font-family: var(--folio-font-family-sans);
         text-decoration: none;
         transition: color var(--folio-transition-fast);
@@ -938,7 +1008,7 @@ S.styles = [
 
       /* nav */
       :host([variant='nav']) a {
-        font-size: var(--folio-text-small);
+        font-size: var(--folio-text-body);
         color: var(--folio-color-text-muted);
         letter-spacing: 0.01em;
       }
@@ -974,11 +1044,36 @@ S.styles = [
 
       /* back */
       :host([variant='back']) a {
-        font-size: var(--folio-text-caption);
-        color: var(--folio-color-text-muted);
+        --n: var(--folio-pixel-notch);
+        --i: var(--folio-pixel-notch-inner);
+        font-size: var(--folio-text-small);
+        font-weight: 500;
+        color: var(--folio-color-accent-strong);
+        /* Padding gives the hover shape room; the negative margin keeps the
+           label aligned with the column. */
+        padding: var(--folio-space-8) var(--folio-space-16);
+        margin-left: calc(-1 * var(--folio-space-16));
+        clip-path: polygon(
+          var(--n) 0, calc(100% - var(--n)) 0,
+          calc(100% - var(--n)) var(--i), calc(100% - var(--i)) var(--i),
+          calc(100% - var(--i)) var(--n), 100% var(--n),
+          100% calc(100% - var(--n)), calc(100% - var(--i)) calc(100% - var(--n)),
+          calc(100% - var(--i)) calc(100% - var(--i)), calc(100% - var(--n)) calc(100% - var(--i)),
+          calc(100% - var(--n)) 100%, var(--n) 100%,
+          var(--n) calc(100% - var(--i)), var(--i) calc(100% - var(--i)),
+          var(--i) calc(100% - var(--n)), 0 calc(100% - var(--n)),
+          0 var(--n), var(--i) var(--n),
+          var(--i) var(--i), var(--n) var(--i)
+        );
+        transition: color var(--folio-transition-fast), background var(--folio-transition-fast);
       }
       :host([variant='back']) a:hover {
-        color: var(--folio-color-text);
+        color: var(--folio-color-cta-ink);
+        background: var(--folio-color-cta);
+      }
+      :host([variant='back']) a:focus-visible {
+        outline-color: currentColor;
+        outline-offset: -6px;
       }
       :host([variant='back']) .arrow {
         transition: transform var(--folio-transition-fast);
@@ -988,29 +1083,29 @@ S.styles = [
       }
     `
 ];
-et([
+tt([
   l()
 ], S.prototype, "href", 2);
-et([
+tt([
   l({ reflect: !0 })
 ], S.prototype, "variant", 2);
-et([
+tt([
   l({ type: Boolean, reflect: !0 })
 ], S.prototype, "active", 2);
-et([
+tt([
   l()
 ], S.prototype, "target", 2);
-S = et([
+S = tt([
   m("folio-link")
 ], S);
-var Oe = Object.defineProperty, Ce = Object.getOwnPropertyDescriptor, Ct = (i, t, o, r) => {
+var Oe = Object.defineProperty, Ce = Object.getOwnPropertyDescriptor, Kt = (i, t, o, r) => {
   for (var e = r > 1 ? void 0 : r ? Ce(t, o) : t, s = i.length - 1, a; s >= 0; s--)
     (a = i[s]) && (e = (r ? a(t, o, e) : a(e)) || e);
   return r && e && Oe(t, o, e), e;
 };
-let Q = class extends u {
+let ct = class extends v {
   constructor() {
-    super(...arguments), this.level = 2, this.dim = !1;
+    super(...arguments), this.level = 2;
   }
   render() {
     const i = Math.min(6, Math.max(1, this.level));
@@ -1019,9 +1114,9 @@ let Q = class extends u {
     </p>`;
   }
 };
-Q.styles = [
-  I,
-  v`
+ct.styles = [
+  q,
+  u`
       :host {
         display: block;
       }
@@ -1030,37 +1125,31 @@ Q.styles = [
         color: var(--folio-color-text-muted);
         letter-spacing: 0.14em;
       }
-      :host([dim]) .title {
-        color: var(--folio-color-text-dim);
-      }
     `
 ];
-Ct([
+Kt([
   l({ type: Number })
-], Q.prototype, "level", 2);
-Ct([
-  l({ type: Boolean, reflect: !0 })
-], Q.prototype, "dim", 2);
-Q = Ct([
+], ct.prototype, "level", 2);
+ct = Kt([
   m("folio-section-title")
-], Q);
-var Se = Object.defineProperty, ze = Object.getOwnPropertyDescriptor, Kt = (i, t, o, r) => {
+], ct);
+var Se = Object.defineProperty, ze = Object.getOwnPropertyDescriptor, Yt = (i, t, o, r) => {
   for (var e = r > 1 ? void 0 : r ? ze(t, o) : t, s = i.length - 1, a; s >= 0; s--)
     (a = i[s]) && (e = (r ? a(t, o, e) : a(e)) || e);
   return r && e && Se(t, o, e), e;
 };
-const Lt = "folio-theme";
-let ht = class extends u {
+const Nt = "folio-theme";
+let ht = class extends v {
   constructor() {
     super(...arguments), this.theme = "dark";
   }
   connectedCallback() {
     super.connectedCallback();
-    const i = localStorage.getItem(Lt), t = document.documentElement.getAttribute("data-theme");
+    const i = localStorage.getItem(Nt), t = document.documentElement.getAttribute("data-theme");
     this.theme = i === "light" || t === "light" ? "light" : "dark", this.apply(!1);
   }
   apply(i) {
-    document.documentElement.setAttribute("data-theme", this.theme), this.setAttribute("data-current", this.theme), i && (localStorage.setItem(Lt, this.theme), this.dispatchEvent(
+    document.documentElement.setAttribute("data-theme", this.theme), this.setAttribute("data-current", this.theme), i && (localStorage.setItem(Nt, this.theme), this.dispatchEvent(
       new CustomEvent("folio-theme-change", {
         detail: { theme: this.theme },
         bubbles: !0,
@@ -1090,9 +1179,9 @@ let ht = class extends u {
   }
 };
 ht.styles = [
-  M,
+  D,
   g,
-  v`
+  u`
       :host {
         display: inline-block;
       }
@@ -1100,8 +1189,8 @@ ht.styles = [
         position: relative;
         display: grid;
         place-items: center;
-        width: 32px;
-        height: 32px;
+        width: var(--folio-control-md);
+        height: var(--folio-control-md);
         padding: 0;
         background: none;
         border: none;
@@ -1139,18 +1228,18 @@ ht.styles = [
       }
     `
 ];
-Kt([
-  F()
+Yt([
+  I()
 ], ht.prototype, "theme", 2);
-ht = Kt([
+ht = Yt([
   m("folio-theme-toggle")
 ], ht);
-var De = Object.defineProperty, je = Object.getOwnPropertyDescriptor, ft = (i, t, o, r) => {
-  for (var e = r > 1 ? void 0 : r ? je(t, o) : t, s = i.length - 1, a; s >= 0; s--)
+var je = Object.defineProperty, ke = Object.getOwnPropertyDescriptor, ft = (i, t, o, r) => {
+  for (var e = r > 1 ? void 0 : r ? ke(t, o) : t, s = i.length - 1, a; s >= 0; s--)
     (a = i[s]) && (e = (r ? a(t, o, e) : a(e)) || e);
-  return r && e && De(t, o, e), e;
+  return r && e && je(t, o, e), e;
 };
-let H = class extends u {
+let H = class extends v {
   constructor() {
     super(...arguments), this.timezone = "Europe/Paris", this.label = "", this.now = /* @__PURE__ */ new Date();
   }
@@ -1169,21 +1258,21 @@ let H = class extends u {
     return p`<time datetime=${this.now.toISOString()}>${i}</time>${this.label ? p`<span class="label">${this.label}</span>` : ""}`;
   }
 };
-H.styles = v`
+H.styles = u`
     :host {
       display: inline-flex;
       align-items: baseline;
-      gap: var(--folio-space-2);
+      gap: var(--folio-space-8);
       font-family: var(--folio-font-family-mono);
-      font-size: var(--folio-text-caption);
+      font-size: var(--folio-text-small);
       color: var(--folio-color-text-muted);
       font-variant-numeric: tabular-nums;
     }
     .label {
-      font-size: var(--folio-text-label);
+      font-size: var(--folio-text-small);
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--folio-color-text-dim);
+      color: var(--folio-color-text-muted);
     }
   `;
 ft([
@@ -1193,19 +1282,19 @@ ft([
   l()
 ], H.prototype, "label", 2);
 ft([
-  F()
+  I()
 ], H.prototype, "now", 2);
 H = ft([
   m("folio-local-time")
 ], H);
-var Me = Object.defineProperty, Te = Object.getOwnPropertyDescriptor, ut = (i, t, o, r) => {
+var De = Object.defineProperty, Te = Object.getOwnPropertyDescriptor, vt = (i, t, o, r) => {
   for (var e = r > 1 ? void 0 : r ? Te(t, o) : t, s = i.length - 1, a; s >= 0; s--)
     (a = i[s]) && (e = (r ? a(t, o, e) : a(e)) || e);
-  return r && e && Me(t, o, e), e;
+  return r && e && De(t, o, e), e;
 };
-let Ue = 0, k = class extends u {
+let Me = 0, N = class extends v {
   constructor() {
-    super(...arguments), this.text = "", this.position = "top", this.visible = !1, this.id_ = `folio-tooltip-${++Ue}`, this.show = () => this.visible = !0, this.hide = () => this.visible = !1;
+    super(...arguments), this.text = "", this.position = "top", this.visible = !1, this.id_ = `folio-tooltip-${++Me}`, this.show = () => this.visible = !0, this.hide = () => this.visible = !1;
   }
   connectedCallback() {
     super.connectedCallback(), this.addEventListener("mouseenter", this.show), this.addEventListener("mouseleave", this.hide), this.addEventListener("focusin", this.show), this.addEventListener("focusout", this.hide), this.addEventListener("keydown", (i) => {
@@ -1219,9 +1308,9 @@ let Ue = 0, k = class extends u {
       >`;
   }
 };
-k.styles = [
+N.styles = [
   g,
-  v`
+  u`
       :host {
         position: relative;
         display: inline-block;
@@ -1231,9 +1320,9 @@ k.styles = [
         left: 50%;
         z-index: var(--folio-z-tooltip);
         transform: translateX(-50%) translateY(2px);
-        padding: 6px 10px;
+        padding: var(--folio-space-8) var(--folio-space-16);
         font-family: var(--folio-font-family-sans);
-        font-size: 0.72rem;
+        font-size: var(--folio-text-small);
         font-weight: 500;
         white-space: nowrap;
         color: var(--folio-color-bg);
@@ -1272,24 +1361,24 @@ k.styles = [
       }
     `
 ];
-ut([
+vt([
   l()
-], k.prototype, "text", 2);
-ut([
+], N.prototype, "text", 2);
+vt([
   l({ reflect: !0 })
-], k.prototype, "position", 2);
-ut([
-  F()
-], k.prototype, "visible", 2);
-k = ut([
+], N.prototype, "position", 2);
+vt([
+  I()
+], N.prototype, "visible", 2);
+N = vt([
   m("folio-tooltip")
-], k);
-var Re = Object.defineProperty, He = Object.getOwnPropertyDescriptor, vt = (i, t, o, r) => {
-  for (var e = r > 1 ? void 0 : r ? He(t, o) : t, s = i.length - 1, a; s >= 0; s--)
+], N);
+var Ue = Object.defineProperty, Re = Object.getOwnPropertyDescriptor, ut = (i, t, o, r) => {
+  for (var e = r > 1 ? void 0 : r ? Re(t, o) : t, s = i.length - 1, a; s >= 0; s--)
     (a = i[s]) && (e = (r ? a(t, o, e) : a(e)) || e);
-  return r && e && Re(t, o, e), e;
+  return r && e && Ue(t, o, e), e;
 };
-let N = class extends u {
+let L = class extends v {
   constructor() {
     super(...arguments), this.value = "", this.label = "", this.variant = "plain";
   }
@@ -1300,54 +1389,56 @@ let N = class extends u {
     </div>`;
   }
 };
-N.styles = [
-  I,
-  v`
+L.styles = [
+  q,
+  u`
       :host {
         display: block;
       }
+      /* 32px value + 16px label = 48px, so a stat occupies exactly six
+         grid rows with no gap of its own. */
       .stat {
         display: flex;
         flex-direction: column;
-        gap: var(--folio-space-1);
       }
       :host([variant='bar']) .stat {
         border-left: 2px solid var(--folio-color-accent);
-        padding-left: var(--folio-space-4);
+        padding-left: var(--folio-space-16);
       }
       .value {
         font-family: var(--folio-font-family-mono);
-        font-size: 1.6rem;
+        font-size: var(--folio-text-heading);
         font-weight: 500;
         color: var(--folio-color-text);
         font-variant-numeric: tabular-nums;
         letter-spacing: -0.02em;
-        line-height: 1.1;
+        line-height: var(--folio-leading-heading);
       }
       .label {
         color: var(--folio-color-text-muted);
         letter-spacing: 0.08em;
+        line-height: var(--folio-leading-small);
       }
     `
 ];
-vt([
+ut([
   l()
-], N.prototype, "value", 2);
-vt([
+], L.prototype, "value", 2);
+ut([
   l()
-], N.prototype, "label", 2);
-vt([
+], L.prototype, "label", 2);
+ut([
   l({ reflect: !0 })
-], N.prototype, "variant", 2);
-N = vt([
+], L.prototype, "variant", 2);
+L = ut([
   m("folio-stat")
-], N);
-var ke = Object.defineProperty, Ne = Object.getOwnPropertyDescriptor, Xt = (i, t, o, r) => {
+], L);
+var He = Object.defineProperty, Ne = Object.getOwnPropertyDescriptor, Zt = (i, t, o, r) => {
   for (var e = r > 1 ? void 0 : r ? Ne(t, o) : t, s = i.length - 1, a; s >= 0; s--)
     (a = i[s]) && (e = (r ? a(t, o, e) : a(e)) || e);
-  return r && e && ke(t, o, e), e;
+  return r && e && He(t, o, e), e;
 };
-let pt = class extends u {
+let pt = class extends v {
   constructor() {
     super(...arguments), this.exclusive = !1, this.onToggle = (i) => {
       if (!this.exclusive) return;
@@ -1364,15 +1455,15 @@ let pt = class extends u {
     return p`<slot></slot>`;
   }
 };
-pt.styles = v`
+pt.styles = u`
     :host {
       display: block;
     }
   `;
-Xt([
+Zt([
   l({ type: Boolean })
 ], pt.prototype, "exclusive", 2);
-pt = Xt([
+pt = Zt([
   m("folio-accordion")
 ], pt);
 var Le = Object.defineProperty, Be = Object.getOwnPropertyDescriptor, mt = (i, t, o, r) => {
@@ -1380,7 +1471,7 @@ var Le = Object.defineProperty, Be = Object.getOwnPropertyDescriptor, mt = (i, t
     (a = i[s]) && (e = (r ? a(t, o, e) : a(e)) || e);
   return r && e && Le(t, o, e), e;
 };
-let Fe = 0, L = class extends u {
+let Fe = 0, B = class extends v {
   constructor() {
     super(...arguments), this.heading = "", this.meta = "", this.open = !1, this.id_ = `folio-acc-${++Fe}`;
   }
@@ -1414,10 +1505,10 @@ let Fe = 0, L = class extends u {
     `;
   }
 };
-L.styles = [
-  M,
+B.styles = [
+  D,
   g,
-  v`
+  u`
       :host {
         display: block;
         border-top: 1px solid var(--folio-color-border);
@@ -1428,9 +1519,9 @@ L.styles = [
       .header {
         display: flex;
         align-items: baseline;
-        gap: var(--folio-space-4);
+        gap: var(--folio-space-16);
         width: 100%;
-        padding: var(--folio-space-4) 0;
+        padding: var(--folio-space-16) 0;
         background: none;
         border: none;
         border-radius: var(--folio-radius-none);
@@ -1447,7 +1538,7 @@ L.styles = [
       .meta {
         margin-left: auto;
         font-family: var(--folio-font-family-mono);
-        font-size: var(--folio-text-label);
+        font-size: var(--folio-text-small);
         color: var(--folio-color-text-muted);
         font-variant-numeric: tabular-nums;
         white-space: nowrap;
@@ -1455,7 +1546,7 @@ L.styles = [
       .toggle {
         flex: none;
         font-family: var(--folio-font-family-mono);
-        font-size: 0.9rem;
+        font-size: var(--folio-text-body);
         color: var(--folio-color-accent);
         transition: transform var(--folio-transition);
         transform-origin: center;
@@ -1477,7 +1568,7 @@ L.styles = [
         overflow: hidden;
       }
       .panel-content {
-        padding: 0 0 var(--folio-space-5);
+        padding: 0 0 var(--folio-space-24);
         font-size: var(--folio-text-body);
         line-height: 1.65;
         color: var(--folio-color-text-muted);
@@ -1487,22 +1578,22 @@ L.styles = [
 ];
 mt([
   l()
-], L.prototype, "heading", 2);
+], B.prototype, "heading", 2);
 mt([
   l()
-], L.prototype, "meta", 2);
+], B.prototype, "meta", 2);
 mt([
   l({ type: Boolean, reflect: !0 })
-], L.prototype, "open", 2);
-L = mt([
+], B.prototype, "open", 2);
+B = mt([
   m("folio-accordion-item")
-], L);
+], B);
 var Ie = Object.defineProperty, qe = Object.getOwnPropertyDescriptor, V = (i, t, o, r) => {
   for (var e = r > 1 ? void 0 : r ? qe(t, o) : t, s = i.length - 1, a; s >= 0; s--)
     (a = i[s]) && (e = (r ? a(t, o, e) : a(e)) || e);
   return r && e && Ie(t, o, e), e;
 };
-let A = class extends u {
+let A = class extends v {
   constructor() {
     super(...arguments), this.index = "", this.name = "", this.company = "", this.kind = "", this.href = "#";
   }
@@ -1517,9 +1608,9 @@ let A = class extends u {
   }
 };
 A.styles = [
-  M,
+  D,
   g,
-  v`
+  u`
       :host {
         display: block;
         border-top: 1px solid var(--folio-color-border);
@@ -1530,8 +1621,8 @@ A.styles = [
       a {
         display: flex;
         align-items: baseline;
-        gap: var(--folio-space-5);
-        padding: var(--folio-space-4) var(--folio-space-2);
+        gap: var(--folio-space-24);
+        padding: var(--folio-space-16) var(--folio-space-8);
         text-decoration: none;
         font-family: var(--folio-font-family-sans);
         transition: background var(--folio-transition-fast);
@@ -1539,34 +1630,34 @@ A.styles = [
       .index {
         flex: none;
         font-family: var(--folio-font-family-mono);
-        font-size: var(--folio-text-label);
-        color: var(--folio-color-text-dim);
+        font-size: var(--folio-text-small);
+        color: var(--folio-color-text-muted);
         font-variant-numeric: tabular-nums;
         transition: color var(--folio-transition-fast);
       }
       .name {
-        font-size: 1.05rem;
+        font-size: var(--folio-text-subtitle);
         font-weight: 500;
         letter-spacing: -0.01em;
         color: var(--folio-color-text);
         transition: color var(--folio-transition-fast);
       }
       .company {
-        font-size: var(--folio-text-caption);
+        font-size: var(--folio-text-small);
         color: var(--folio-project-row-company, var(--folio-color-text-muted));
       }
       .kind {
         margin-left: auto;
         font-family: var(--folio-font-family-mono);
-        font-size: var(--folio-text-label);
+        font-size: var(--folio-text-small);
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: var(--folio-color-text-dim);
+        color: var(--folio-color-text-muted);
         white-space: nowrap;
       }
       .arrow {
         flex: none;
-        color: var(--folio-color-text-dim);
+        color: var(--folio-color-text-muted);
         transition:
           color var(--folio-transition-fast),
           transform var(--folio-transition-fast);
@@ -1604,12 +1695,12 @@ V([
 A = V([
   m("folio-project-row")
 ], A);
-var Ve = Object.defineProperty, We = Object.getOwnPropertyDescriptor, ot = (i, t, o, r) => {
+var Ve = Object.defineProperty, We = Object.getOwnPropertyDescriptor, et = (i, t, o, r) => {
   for (var e = r > 1 ? void 0 : r ? We(t, o) : t, s = i.length - 1, a; s >= 0; s--)
     (a = i[s]) && (e = (r ? a(t, o, e) : a(e)) || e);
   return r && e && Ve(t, o, e), e;
 };
-let z = class extends u {
+let z = class extends v {
   constructor() {
     super(...arguments), this.label = "", this.value = "", this.href = "#";
   }
@@ -1627,10 +1718,10 @@ let z = class extends u {
   }
 };
 z.styles = [
-  M,
+  D,
   g,
-  I,
-  v`
+  q,
+  u`
       :host {
         display: block;
         border-top: 1px solid var(--folio-color-border);
@@ -1642,21 +1733,21 @@ z.styles = [
         display: flex;
         align-items: baseline;
         justify-content: space-between;
-        gap: var(--folio-space-5);
-        padding: var(--folio-space-4) 0;
+        gap: var(--folio-space-24);
+        padding: var(--folio-space-16) 0;
         text-decoration: none;
         transition: padding-left var(--folio-transition);
       }
       a:hover {
-        padding-left: var(--folio-space-3);
+        padding-left: var(--folio-space-16);
       }
       .label {
-        color: var(--folio-color-text-dim);
+        color: var(--folio-color-text-muted);
         transition: color var(--folio-transition-fast);
       }
       .value {
         font-family: var(--folio-font-family-sans);
-        font-size: var(--folio-text-small);
+        font-size: var(--folio-text-body);
         color: var(--folio-color-text-muted);
         transition: color var(--folio-transition-fast);
       }
@@ -1668,27 +1759,27 @@ z.styles = [
       }
     `
 ];
-ot([
+et([
   l()
 ], z.prototype, "label", 2);
-ot([
+et([
   l()
 ], z.prototype, "value", 2);
-ot([
+et([
   l()
 ], z.prototype, "href", 2);
-ot([
+et([
   l()
 ], z.prototype, "target", 2);
-z = ot([
+z = et([
   m("folio-contact-row")
 ], z);
-var Ze = Object.defineProperty, Ke = Object.getOwnPropertyDescriptor, rt = (i, t, o, r) => {
-  for (var e = r > 1 ? void 0 : r ? Ke(t, o) : t, s = i.length - 1, a; s >= 0; s--)
+var Ke = Object.defineProperty, Ye = Object.getOwnPropertyDescriptor, ot = (i, t, o, r) => {
+  for (var e = r > 1 ? void 0 : r ? Ye(t, o) : t, s = i.length - 1, a; s >= 0; s--)
     (a = i[s]) && (e = (r ? a(t, o, e) : a(e)) || e);
-  return r && e && Ze(t, o, e), e;
+  return r && e && Ke(t, o, e), e;
 };
-let D = class extends u {
+let j = class extends v {
   constructor() {
     super(...arguments), this.src = "", this.alt = "", this.caption = "", this.zoomable = !1;
   }
@@ -1712,10 +1803,10 @@ let D = class extends u {
     </figure>`;
   }
 };
-D.styles = [
+j.styles = [
   g,
-  I,
-  v`
+  q,
+  u`
       :host {
         display: block;
       }
@@ -1744,38 +1835,38 @@ D.styles = [
         display: grid;
         place-items: center;
         aspect-ratio: 16 / 9;
-        color: var(--folio-color-text-dim);
+        color: var(--folio-color-text-muted);
         letter-spacing: 0.14em;
       }
       figcaption {
-        padding-top: var(--folio-space-2);
-        font-size: var(--folio-text-caption);
+        padding-top: var(--folio-space-8);
+        font-size: var(--folio-text-small);
         color: var(--folio-color-text-muted);
         line-height: 1.5;
       }
     `
 ];
-rt([
+ot([
   l()
-], D.prototype, "src", 2);
-rt([
+], j.prototype, "src", 2);
+ot([
   l()
-], D.prototype, "alt", 2);
-rt([
+], j.prototype, "alt", 2);
+ot([
   l()
-], D.prototype, "caption", 2);
-rt([
+], j.prototype, "caption", 2);
+ot([
   l({ type: Boolean, reflect: !0 })
-], D.prototype, "zoomable", 2);
-D = rt([
+], j.prototype, "zoomable", 2);
+j = ot([
   m("folio-figure")
-], D);
-var Xe = Object.defineProperty, Ye = Object.getOwnPropertyDescriptor, bt = (i, t, o, r) => {
-  for (var e = r > 1 ? void 0 : r ? Ye(t, o) : t, s = i.length - 1, a; s >= 0; s--)
+], j);
+var Ze = Object.defineProperty, Xe = Object.getOwnPropertyDescriptor, bt = (i, t, o, r) => {
+  for (var e = r > 1 ? void 0 : r ? Xe(t, o) : t, s = i.length - 1, a; s >= 0; s--)
     (a = i[s]) && (e = (r ? a(t, o, e) : a(e)) || e);
-  return r && e && Xe(t, o, e), e;
+  return r && e && Ze(t, o, e), e;
 };
-let B = class extends u {
+let F = class extends v {
   constructor() {
     super(...arguments), this.message = "", this.duration = 4e3, this.open = !1;
   }
@@ -1793,21 +1884,21 @@ let B = class extends u {
     </div>`;
   }
 };
-B.styles = [
+F.styles = [
   g,
-  v`
+  u`
       :host {
         position: fixed;
-        bottom: var(--folio-space-6);
+        bottom: var(--folio-space-32);
         left: 50%;
         transform: translateX(-50%);
         z-index: var(--folio-z-toast);
         pointer-events: none;
       }
       .toast {
-        padding: var(--folio-space-3) var(--folio-space-5);
+        padding: var(--folio-space-16) var(--folio-space-24);
         font-family: var(--folio-font-family-sans);
-        font-size: var(--folio-text-caption);
+        font-size: var(--folio-text-small);
         font-weight: 500;
         color: var(--folio-color-bg);
         background: var(--folio-color-text);
@@ -1826,22 +1917,22 @@ B.styles = [
 ];
 bt([
   l()
-], B.prototype, "message", 2);
+], F.prototype, "message", 2);
 bt([
   l({ type: Number })
-], B.prototype, "duration", 2);
+], F.prototype, "duration", 2);
 bt([
   l({ type: Boolean, reflect: !0 })
-], B.prototype, "open", 2);
-B = bt([
+], F.prototype, "open", 2);
+F = bt([
   m("folio-toast")
-], B);
-var Je = Object.defineProperty, Ge = Object.getOwnPropertyDescriptor, it = (i, t, o, r) => {
+], F);
+var Je = Object.defineProperty, Ge = Object.getOwnPropertyDescriptor, rt = (i, t, o, r) => {
   for (var e = r > 1 ? void 0 : r ? Ge(t, o) : t, s = i.length - 1, a; s >= 0; s--)
     (a = i[s]) && (e = (r ? a(t, o, e) : a(e)) || e);
   return r && e && Je(t, o, e), e;
 };
-let j = class extends u {
+let k = class extends v {
   constructor() {
     super(...arguments), this.manual = !1, this.src = "", this.alt = "", this.open = !1, this.previousFocus = null, this.onZoom = (i) => {
       const { src: t, alt: o } = i.detail;
@@ -1884,16 +1975,16 @@ let j = class extends u {
     </div>`;
   }
 };
-j.styles = [
+k.styles = [
   g,
-  v`
+  u`
       .overlay {
         position: fixed;
         inset: 0;
         z-index: var(--folio-z-overlay);
         display: grid;
         place-items: center;
-        padding: var(--folio-space-6);
+        padding: var(--folio-space-32);
         background: color-mix(in srgb, var(--folio-color-bg) 88%, transparent);
         opacity: 0;
         visibility: hidden;
@@ -1921,10 +2012,10 @@ j.styles = [
       }
       .close {
         position: absolute;
-        top: var(--folio-space-5);
-        right: var(--folio-space-5);
-        width: 40px;
-        height: 40px;
+        top: var(--folio-space-24);
+        right: var(--folio-space-24);
+        width: var(--folio-control-lg);
+        height: var(--folio-control-lg);
         display: grid;
         place-items: center;
         background: none;
@@ -1932,7 +2023,7 @@ j.styles = [
         border-radius: var(--folio-radius-none);
         color: var(--folio-color-text-muted);
         font-family: var(--folio-font-family-mono);
-        font-size: 1rem;
+        font-size: var(--folio-text-body);
         cursor: pointer;
         transition:
           color var(--folio-transition-fast),
@@ -1944,37 +2035,37 @@ j.styles = [
       }
     `
 ];
-it([
+rt([
   l({ type: Boolean })
-], j.prototype, "manual", 2);
-it([
-  F()
-], j.prototype, "src", 2);
-it([
-  F()
-], j.prototype, "alt", 2);
-it([
-  F()
-], j.prototype, "open", 2);
-j = it([
+], k.prototype, "manual", 2);
+rt([
+  I()
+], k.prototype, "src", 2);
+rt([
+  I()
+], k.prototype, "alt", 2);
+rt([
+  I()
+], k.prototype, "open", 2);
+k = rt([
   m("folio-lightbox")
-], j);
+], k);
 export {
   pt as FolioAccordion,
-  L as FolioAccordionItem,
-  ct as FolioBadge,
-  w as FolioButton,
+  B as FolioAccordionItem,
+  lt as FolioBadge,
+  $ as FolioButton,
   G as FolioChip,
   z as FolioContactRow,
-  D as FolioFigure,
-  j as FolioLightbox,
+  j as FolioFigure,
+  k as FolioLightbox,
   S as FolioLink,
   H as FolioLocalTime,
   A as FolioProjectRow,
-  Q as FolioSectionTitle,
-  N as FolioStat,
+  ct as FolioSectionTitle,
+  L as FolioStat,
   xt as FolioTag,
   ht as FolioThemeToggle,
-  B as FolioToast,
-  k as FolioTooltip
+  F as FolioToast,
+  N as FolioTooltip
 };
