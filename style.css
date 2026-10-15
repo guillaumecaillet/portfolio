@@ -2604,10 +2604,10 @@ body::after {
 
 .landing-title { font-size: var(--folio-text-hero); }
 
-/* ===== Typography — Folio DS 0.4.0: three voices =====
-   Jersey 15 (display) on the h1, Faculty Glyphic (body) on reading copy,
-   IBM Plex Mono (sans) on everything else — h2/h3, nav, buttons, chips,
-   labels — which it already gets from `body`.
+/* ===== Typography — Folio DS 0.5.0: two voices =====
+   Mozilla Headline on everything (h1 at 500, h2/h3, nav, buttons, chips,
+   labels — which it already gets from `body`), Faculty Glyphic (body) on
+   reading copy.
    Wins on source order (same specificity as the rules above) rather than
    duplicating every heading/body selector's font-size, so each component
    keeps its own tuned/responsive sizing and only the typeface, weight,

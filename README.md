@@ -21,7 +21,7 @@ Vanilla HTML, CSS, and JavaScript — no framework, no build step, no runtime de
   - **CTA buttons** with stepped `clip-path` corners and a grid that re-rolls random accent pixels on hover;
   - **case-study images** whose corners disintegrate into chunky blocks sampled from the image's own pixels, via a single overlay canvas;
   - a **process stream** canvas running Discovery → Ship, scattered on the left, gathered into a fine line from Design onward.
-- **Typography**: Pixelify Sans for display, Space Grotesk for text, IBM Plex Mono for labels — all self-hosted, latin + latin-ext subsets only.
+- **Typography**: Mozilla Headline for structure and display, Faculty Glyphic for reading copy — both self-hosted, latin + latin-ext subsets only.
 - **SEO**: `sitemap.xml` with `hreflang` alternates, `robots.txt`, `llms.txt`, JSON-LD `ProfilePage`, apex → `www` and HTTPS redirects.
 - Respects `prefers-reduced-motion` throughout; every canvas effect degrades to a static frame or is skipped.
 
