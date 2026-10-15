@@ -119,8 +119,7 @@
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'case-back case-top';
-        btn.dataset.i18n = 'case.top';
-        btn.textContent = '↑ Back to top';
+        btn.innerHTML = '<span data-i18n="case.top">↑ Back to top</span>';
         btn.addEventListener('click', () => {
             const page = cs.closest('.page');
             page.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });

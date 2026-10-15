@@ -17,7 +17,7 @@
 
     // --- CTA buttons: random pixel flicker ----------------------------
     (function ctaFlicker() {
-        const SELECTOR = '.landing-link-card, .who-link-card, .footer-cta-mail';
+        const SELECTOR = '.landing-link-card, .who-link-card, .footer-cta-mail, .case-back';
         const ACCENTS = ['#ffffff', '#eec26d', '#a7bdd6', '#1b1c1e'];
         const CELL = 9, DENSITY = 0.14, TICK = 130;
 

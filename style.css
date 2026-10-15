@@ -789,23 +789,29 @@ body.loading .nav {
     align-items: center;
     gap: var(--folio-space-8);
     font-size: var(--folio-text-small);
-    color: var(--folio-color-text-muted);
-    margin-bottom: var(--folio-space-48);
-    transition: color var(--folio-transition-fast);
+    font-weight: 500;
+    color: var(--folio-color-accent-strong);
+    /* Padding gives the hover shape room; the negative margin keeps the
+       label aligned with the column. */
+    padding: var(--folio-space-8) var(--folio-space-16);
+    margin: 0 0 var(--folio-space-48) calc(-1 * var(--folio-space-16));
+    transition: color var(--folio-transition-fast), background var(--folio-transition-fast);
     cursor: pointer;
 }
 
 .case-top {
     font: inherit;
     font-size: var(--folio-text-small);
+    font-weight: 500;
     background: none;
     border: 0;
-    padding: 0;
-    margin: var(--folio-space-64) 0 0;
+    margin-top: var(--folio-space-64);
+    margin-bottom: 0;
 }
 
 .case-back:hover {
-    color: var(--folio-color-text);
+    color: var(--folio-color-cta-ink);
+    background: var(--folio-color-cta);
 }
 
 .case-header {
@@ -2324,7 +2330,8 @@ html[data-theme="light"] .case-section .case-caption em {
    what gives it the live/glitchy feel. See src/js/pixel-hover.js. */
 .landing-link-card,
 .who-link-card,
-.footer-cta-mail {
+.footer-cta-mail,
+.case-back {
     position: relative;
     overflow: hidden;
     clip-path: polygon(
@@ -2344,7 +2351,8 @@ html[data-theme="light"] .case-section .case-caption em {
 /* clip-path eats an outer outline, so pixel CTAs draw their focus ring inside. */
 .landing-link-card:focus-visible,
 .who-link-card:focus-visible,
-.footer-cta-mail:focus-visible {
+.footer-cta-mail:focus-visible,
+.case-back:focus-visible {
     outline: 2px solid currentColor;
     outline-offset: -6px;
 }
@@ -2353,7 +2361,8 @@ html[data-theme="light"] .case-section .case-caption em {
 .landing-link-card svg,
 .who-link-card svg,
 .footer-cta-mail > span:not(.pxfx),
-.footer-cta-mail svg {
+.footer-cta-mail svg,
+.case-back > span:not(.pxfx) {
     position: relative;
     z-index: 2;
 }
@@ -2362,7 +2371,8 @@ html[data-theme="light"] .case-section .case-caption em {
    <span> inside these buttons. */
 .landing-link-card .pxfx,
 .who-link-card .pxfx,
-.footer-cta-mail .pxfx {
+.footer-cta-mail .pxfx,
+.case-back .pxfx {
     position: absolute;
     inset: 0;
     display: grid;
