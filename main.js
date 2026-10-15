@@ -98,6 +98,7 @@
     const navLinks = document.querySelectorAll('a[data-page]');
     let currentPage = 'landing';
     let isTransitioning = false;
+    const scrollPos = {};
 
     // Clone the footer template into each .page so it sits at the end of
     // the page's scroll area. The user has to scroll down to reveal it.
@@ -112,6 +113,21 @@
         };
         pages.forEach(page => page.appendChild(clone()));
     })();
+
+    // "Back to top" at the end of each case study (pages are their own scroll containers).
+    document.querySelectorAll('.case-study').forEach(cs => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'case-back case-top';
+        btn.dataset.i18n = 'case.top';
+        btn.textContent = '↑ Back to top';
+        btn.addEventListener('click', () => {
+            const page = cs.closest('.page');
+            page.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+            page.querySelector('.case-back')?.focus({ preventScroll: true });
+        });
+        cs.appendChild(btn);
+    });
 
     // Real URL per page (History API routing). Keys are page ids, values are paths.
     const ROUTES = {
@@ -299,7 +315,14 @@
         current.classList.add('page--exit');
         current.classList.remove('page--active');
         next.classList.add('page--active');
-        next.scrollTop = 0;
+        // Back to the landing from a case study: return to where the visitor
+        // left the project list (or to the list itself on a deep-linked visit).
+        scrollPos[currentPage] = current.scrollTop;
+        if (pageId === 'landing' && currentPage.startsWith('project-')) {
+            next.scrollTop = scrollPos.landing ?? (document.getElementById('projects')?.offsetTop || 0);
+        } else {
+            next.scrollTop = 0;
+        }
         currentPage = pageId;
         updateNav();           // landing-active toggled immediately
         updatePageTitle(pageId);
@@ -525,26 +548,10 @@
     document.addEventListener('keydown', (e) => {
         if (e.key === '1') navigateTo('landing');
         if (e.key === '2') navigateTo('who');
-        if (e.key === '3') navigateTo('projects');
         // Escape goes back to projects list from a case study
         if (e.key === 'Escape' && currentPage.startsWith('project-')) {
-            navigateTo('projects');
-        }
-    });
-
-    // --- External links handler (safety net) ---
-    document.addEventListener('click', (e) => {
-        const link = e.target.closest('a[href]');
-        if (!link) return;
-        const href = link.getAttribute('href');
-        // Skip internal SPA navigation links
-        if (link.hasAttribute('data-page')) return;
-        if (href.startsWith('#')) return;
-        // Handle external links
-        if (href.startsWith('mailto:') || href.startsWith('tel:')) {
-            window.location.href = href;
-        } else if (href.startsWith('http') || href.startsWith('//')) {
-            window.open(href, '_blank', 'noopener');
+            history.pushState({ page: 'landing' }, '', pathForPage('landing'));
+            navigateTo('landing');
         }
     });
 
@@ -744,6 +751,7 @@
 
             // Case studies - shared
             'case.back':             '← Back to projects',
+            'case.top':              '↑ Back to top',
             'case.label':            'Case Study',
             'case.section.situation':'Context',
             'case.section.tasks':    'Approach',
@@ -1114,6 +1122,7 @@
 
             // Case studies - shared
             'case.back':             '← Retour aux projets',
+            'case.top':              '↑ Retour en haut',
             'case.label':            'Étude de cas',
             'case.section.situation':'Contexte',
             'case.section.tasks':    'Approche',

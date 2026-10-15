@@ -795,6 +795,15 @@ body.loading .nav {
     cursor: pointer;
 }
 
+.case-top {
+    font: inherit;
+    font-size: var(--folio-text-small);
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: var(--folio-space-64) 0 0;
+}
+
 .case-back:hover {
     color: var(--folio-color-text);
 }
@@ -2332,6 +2341,14 @@ html[data-theme="light"] .case-section .case-caption em {
     );
 }
 
+/* clip-path eats an outer outline, so pixel CTAs draw their focus ring inside. */
+.landing-link-card:focus-visible,
+.who-link-card:focus-visible,
+.footer-cta-mail:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: -6px;
+}
+
 .landing-link-card-label,
 .landing-link-card svg,
 .who-link-card svg,
@@ -2506,7 +2523,7 @@ body::after {
     font-size: var(--folio-text-small);
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--folio-color-text-dim);
+    color: var(--folio-color-text-muted);
     margin-bottom: var(--folio-space-8);
 }
 
