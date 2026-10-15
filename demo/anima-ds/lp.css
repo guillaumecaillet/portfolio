@@ -192,12 +192,54 @@ strong { font-weight: 600; color: var(--folio-color-text); }
 .ia-body strong { color: var(--folio-color-accent); }
 
 /* ===================== Méthode ===================== */
-.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: var(--folio-color-border); border: 1px solid var(--folio-color-border); }
-.step { background: var(--folio-color-bg-card); padding: 22px; display: flex; flex-direction: column; gap: 6px; transition: background var(--folio-transition-fast); }
-.step:hover { background: var(--folio-color-bg-elevated); }
-.step-n { font-family: var(--folio-font-family-mono); color: var(--folio-color-accent); font-size: 13px; }
-.step strong { font-size: 15.5px; }
-.step span:last-child { color: var(--folio-color-text-muted); font-size: 14px; }
+/* Vertical timeline driven by scroll: lp.js sets --p (0 to 1) on each step
+   as the reading line crosses it. The square fills from the bottom and the
+   line draws down; at 1 the step is done and its number turns into a check. */
+.steps { max-width: 640px; margin-inline: auto; }
+.step {
+  --p: 0;
+  position: relative; display: grid; grid-template-columns: 40px 1fr;
+  column-gap: var(--folio-space-24); row-gap: var(--folio-space-8);
+  padding-bottom: var(--folio-space-64);
+}
+.step:last-child { padding-bottom: 0; }
+.step:not(:last-child)::before,
+.step:not(:last-child)::after {
+  content: ""; position: absolute; left: 20px; top: 40px; bottom: 0; width: 1px;
+  background: var(--folio-color-border);
+}
+.step:not(:last-child)::after {
+  background: var(--folio-color-accent);
+  transform: scaleY(var(--p)); transform-origin: top;
+}
+.step-n {
+  grid-row: span 2; width: 40px; height: 40px; display: grid; place-items: center;
+  position: relative; isolation: isolate;
+  font-family: var(--folio-font-family-mono); font-size: 13px; color: var(--folio-color-text-muted);
+  border: 1px solid var(--folio-color-border); background: var(--folio-color-bg);
+  transition: color var(--folio-transition-fast), border-color var(--folio-transition-fast), background var(--folio-transition-fast);
+}
+/* progressive fill */
+.step-n::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: color-mix(in srgb, var(--folio-color-accent) 35%, transparent);
+  transform: scaleY(var(--p)); transform-origin: bottom;
+}
+.step.is-active .step-n { color: var(--folio-color-text); border-color: var(--folio-color-accent); }
+/* done: solid square, number swapped for a drawn checkmark */
+.step.is-done .step-n { font-size: 0; background: var(--folio-color-accent); border-color: var(--folio-color-accent); }
+.step.is-done .step-n::after {
+  /* absolute: the hidden number is still a grid item and would push it down.
+     -60% on y offsets the L-shape's visual weight once rotated */
+  content: ""; position: absolute; left: 50%; top: 50%; translate: -50% -60%;
+  width: 7px; height: 13px;
+  border: solid var(--folio-color-bg); border-width: 0 2px 2px 0;
+  rotate: 45deg;
+  animation: stepCheck var(--folio-motion-duration-base) var(--folio-motion-ease-out-expo);
+}
+@keyframes stepCheck { from { opacity: 0; scale: 0.4; } }
+.step strong { font-size: 20px; font-weight: 500; padding-top: 6px; }
+.step span:last-child { color: var(--folio-color-text-muted); font-size: 16px; }
 
 /* ===================== Footer ===================== */
 .foot { padding: 84px 0; text-align: center; }
@@ -388,5 +430,6 @@ p,
 /* Reduced motion: everything visible, no transforms */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .step::after { transition: none !important; }
   [data-reveal], .hero-title .line { opacity: 1 !important; transform: none !important; filter: none !important; animation: none !important; transition: none !important; }
 }

@@ -32,6 +32,28 @@ if (reduced) {
   document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
 }
 
+/* ---- Method steps: scroll progress ----
+   --p = how far the reading line (55% of the viewport) has travelled
+   through each step. Scroll-linked, not time-based, so it also runs
+   under reduced motion. */
+const steps = document.querySelectorAll('.step');
+let stepsTick = false;
+function updateSteps() {
+  stepsTick = false;
+  const line = innerHeight * 0.55;
+  steps.forEach((el) => {
+    const r = el.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (line - r.top) / r.height));
+    el.style.setProperty('--p', p.toFixed(3));
+    el.classList.toggle('is-active', p > 0);
+    el.classList.toggle('is-done', p === 1);
+  });
+}
+addEventListener('scroll', () => {
+  if (!stepsTick) { stepsTick = true; requestAnimationFrame(updateSteps); }
+}, { passive: true });
+updateSteps();
+
 /* ---- Stat count-up ----
    Parses the numeric part of a <folio-stat value="…"> and animates it,
    preserving the surrounding glyphs (+, %, spaces). */
