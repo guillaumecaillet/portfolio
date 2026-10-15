@@ -69,7 +69,7 @@ a {
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.14;
+    opacity: 0.126;
 }
 
 /* --- Navigation --- */
@@ -599,7 +599,7 @@ body.loading .nav {
 .process-title {
     font-family: var(--folio-font-family-display);
     font-size: var(--folio-text-subtitle);
-    font-weight: 400;
+    font-weight: 500;
     line-height: 1.05;
     letter-spacing: -0.03em;
     margin-bottom: var(--folio-space-8);
@@ -640,7 +640,7 @@ body.loading .nav {
 .process-step-name {
     font-family: var(--folio-font-family-display);
     font-size: var(--folio-text-body);
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: -0.02em;
     margin-bottom: var(--folio-space-8);
 }
@@ -698,7 +698,7 @@ body.loading .nav {
     font-family: var(--folio-font-family-mono);
     font-size: var(--folio-text-small);
     font-weight: 400;
-    color: var(--folio-color-text-dim);
+    color: var(--folio-color-text-muted);
     min-width: 26px;
     font-variant-numeric: tabular-nums;
     transition: color var(--folio-transition-fast);
@@ -732,7 +732,7 @@ body.loading .nav {
 
 .project-arrow {
     font-size: var(--folio-text-body);
-    color: var(--folio-color-text-dim);
+    color: var(--folio-color-text-muted);
     align-self: center;
     transition: color var(--folio-transition-fast);
 }
@@ -1066,7 +1066,7 @@ body.loading .nav {
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--folio-color-text-dim);
+    color: var(--folio-color-text-muted);
     margin-bottom: var(--folio-space-8);
 }
 
@@ -1337,7 +1337,7 @@ body.loading .nav {
     font-size: var(--folio-text-small);
     font-weight: 500;
     letter-spacing: 0.06em;
-    color: var(--folio-color-text-dim);
+    color: var(--folio-color-text-muted);
     cursor: pointer;
     padding: 3px var(--folio-space-4);
     border-radius: 0;
@@ -1354,7 +1354,7 @@ body.loading .nav {
 }
 
 .lang-divider {
-    color: var(--folio-color-text-dim);
+    color: var(--folio-color-text-muted);
     font-size: var(--folio-text-small);
     pointer-events: none;
     user-select: none;
@@ -1522,7 +1522,7 @@ body.loading .nav {
     content: attr(data-placeholder);
     font-family: var(--folio-font-family-mono);
     font-size: var(--folio-text-small);
-    color: var(--folio-color-text-dim);
+    color: var(--folio-color-text-muted);
     text-align: center;
     max-width: 460px;
 }
@@ -1922,7 +1922,7 @@ body.loading .nav {
 }
 
 .footer-sep {
-    color: var(--folio-color-text-dim);
+    color: var(--folio-color-text-muted);
 }
 
 .footer-link {
@@ -2210,7 +2210,7 @@ html[data-theme="light"] .case-section .case-caption em {
     font-size: var(--folio-text-small);
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--folio-color-text-dim);
+    color: var(--folio-color-text-muted);
     pointer-events: none;
     user-select: none;
     opacity: 0;
@@ -2616,7 +2616,7 @@ body::after {
 /* h1 — the only pixel text on the page */
 .landing-title {
     font-family: var(--folio-font-family-display);
-    font-weight: 400;
+    font-weight: 500;
     line-height: 0.95;
     letter-spacing: 0;
 }
